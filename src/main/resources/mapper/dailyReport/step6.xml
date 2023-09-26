@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step6MapperForVehicleManageMileageViewer">
+
+    <select id="selectCarListByOption" parameterType="SearchOption" resultType="TDrive">
+        SELECT driveID,
+        drvclub,
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        rependchk,
+        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        repaddkm
+        FROM   tdrive
+        WHERE  carno = #{carNo}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="item !='전체'">
+            AND drvclub = #{selectOption}
+        </if>
+        <choose>
+            <when test="sortingCriteria == '0-date'">
+                ORDER BY drvdate DESC, drvclub ASC
+            </when>
+            <otherwise>
+                ORDER BY drvclub ASC, drvdate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="updateTDriveChk2ForProcess">
+        UPDATE tdrive
+        SET chk2 = 1
+        WHERE carno = #{carNo}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="item != '전체'">
+            AND drvclub = #{selectOption}
+        </if>
+        AND chk2 = 0
+    </update>
+
+    <update id="updateTDriveChk2ForCancel">
+        UPDATE tdrive
+        SET chk2 = 0
+        WHERE carno = #{carNo}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="item != '전체'">
+            AND drvclub = #{selectOption}
+        </if>
+        AND chk2 = 1
+    </update>
+
+
+
+</mapper>
