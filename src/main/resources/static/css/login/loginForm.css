@@ -1,0 +1,7 @@
+*, html, body {
+    font-family: GmarketSansTTF !important;
+}
+
+header {
+    display: none
+}
