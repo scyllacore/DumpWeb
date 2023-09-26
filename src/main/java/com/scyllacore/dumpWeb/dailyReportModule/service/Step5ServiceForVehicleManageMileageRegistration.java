@@ -3,16 +3,12 @@ package com.scyllacore.dumpWeb.dailyReportModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.dailyreport.Step5MapperForVehicleManageMileageRegistration;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5MapperForVehicleManageMileageRegistration;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.commonModule.db.mapper.dailyreport;
+package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
 import org.apache.ibatis.annotations.Mapper;
