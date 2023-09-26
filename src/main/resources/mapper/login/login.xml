@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpweb.commonModule.db.mapper.LoginMapper">
+
+    <!--  신규 사용자 등록  -->
+    <insert id="insertUserInfo" parameterType="Login">
+        INSERT INTO tsitepw(userId, userPW, userTel, userName, joinDate, userPosition <if test="userPosition == 'manager'.toString()">, userSS</if>) VALUES(#{userId}, SHA2(#{userPw}, 256), #{userTel}, #{userName}, NOW(), #{userPosition} <if test="userPosition == 'manager'.toString()">, #{userSS} </if>)
+    </insert>
+
+    <!--  ID 체크  -->
+    <select id="userIdValidChk" parameterType="Login" resultType="Login">
+        SELECT userId FROM tsitepw WHERE userId = #{userId}
+    </select>
+
+    <!--  로그인 정보 체크  -->
+    <select id="findUserInfo" parameterType="Login" resultType="Login">
+        SELECT * FROM tsitepw WHERE userId = #{userId} AND userPw = SHA2(#{userPw}, 256)
+    </select>
+
+    <!--  로그인 정보 체크  -->
+    <select id="findAdvUserInfo" parameterType="Login" resultType="Login">
+        SELECT * FROM tsitepw WHERE userId = #{userId}
+    </select>
+
+    <!--  ID 중복여부 체크  -->
+    <select id="userIdDuplicateChk" resultType="int" parameterType="Login">
+        SELECT COUNT(*) FROM tsitepw WHERE userId = #{userId}
+    </select>
+
+    <update id="updateUserPassword">
+        UPDATE tsitepw SET userPW = SHA2(#{userPw}, 256) WHERE uuserID = #{uuserID}
+    </update>
+</mapper>
+
+

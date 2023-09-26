@@ -1,0 +1,574 @@
+
+@media screen and (max-width: 280px){
+    .DrvSection{
+        max-width: 700px; width: 96%; margin: 0 auto; padding: 0 2%;
+    }
+    .DrvSection h2{
+        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+    }
+    .DrvSection form{
+        margin-bottom: 15px;
+    }
+    .DrvSection form fieldset > input{
+        display: none; width: 0; height: 0; padding: 0; margin: 0;
+    }
+    .DrvSection form fieldset > label{
+        font-size: 13px; border: 1px solid #d1d1d1; border-radius: 15px; padding: 8px 16px;
+        margin-bottom: 13px; display: inline-block; cursor: pointer; box-sizing: border-box;
+        color: #333;
+    }
+    .DrvSection form fieldset > #rdOli:checked + label ,
+    .DrvSection form fieldset > #rdDEF:checked + label,
+    .DrvSection form fieldset > #rdEngOil:checked + label ,
+    .DrvSection form fieldset > #rdFix:checked + label ,
+    .DrvSection form fieldset > #rdNote:checked + label {
+        color: rgb(0, 203, 230); border-color: rgb(0, 203, 230);
+    }
+    .DrvSection form fieldset > label:not(:first-of-type){
+        margin-left: 8px;
+    }
+    .DrvSection form fieldset ul{
+        max-width: 270px;
+        list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
+    }
+    .DrvSection form fieldset ul li{
+        margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
+        position: relative; font-weight: bold;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan{
+        padding-left: 100px; line-height: 1.4; font-size: 12px; width: 35%;
+        
+    }
+    .DrvSection form fieldset ul li .drvLabel{
+        position: absolute;
+    }
+    .DrvSection form fieldset ul li input[type=date]{
+        width: 75%; height: 25px; font-size: 18px;
+    }
+    .drvVoiceImg{
+        width: 20px; vertical-align: middle; border-radius: 25px;
+    }
+    .DrvSection form fieldset ul li img{
+        cursor: pointer;
+    }
+    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+        width: 11%;
+    }
+    .DrvSection form fieldset ul li input[type=text],
+    .DrvSection form fieldset ul li input[type=number]{
+        width: 144%; height: 25px; font-size: 16px;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan2{
+        padding-left: 35px;
+    }
+    .DrvSection form fieldset ul li textarea{
+        width: 144%; font-size: 16px;
+    }
+    .DrvSection > div:first-of-type{
+        text-align: center; margin-bottom: 30px;
+    }
+    .DrvSection > div:first-of-type button{
+        font-size: 14px; border: 1px solid #000; cursor: pointer;
+    }
+    .DrvSection > div:first-of-type button:nth-child(3){
+        width: 28%;
+    }
+    .DrvSection > div:first-of-type button:not(:first-child){
+        margin-left: 2px;
+    }
+    .DrvSection > div:first-of-type button:nth-child(2){
+        background-color: #0068b7; color: #fff;
+    }
+    .DrvSection > div:first-of-type button:not(:nth-child(2)){
+        background-color: #fff;
+    }
+    .DrvSection > div:first-of-type button:last-child{
+        width: 34%;
+    }
+
+    .DrvSection  [class ^='drvPopup']{
+        position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box; flex-shrink: 0; display: none;
+        align-items: center; justify-content: center;
+    }
+    .DrvSection  [class ^='drvPopup'].active{
+        display: flex;
+    }
+    .DrvSection  [class ^='drvPopup'] div{
+        width: 94%; background-color: #fff; position: relative;
+    }
+
+    .DrvSection  [class ^='drvPopup'] .material-symbols-outlined{
+        position: absolute; right: 15px; top: 15px; color: #fff; cursor: pointer;;
+    }
+
+    .DrvSection  [class ^='drvPopup'] p{
+        background-color: #0068b7; color: #fff; padding: 20px; margin-bottom: 15px; font-size: 12px;
+    }
+    .DrvSection  [class ^='drvPopup'] input{
+        margin: 0 0 20px 20px; background: none; border: none; font-size: 20px; border: 1px solid #0068b7;
+        padding: 8px; cursor: pointer;
+    }
+    .DrvSection  [class ^='drvPopup'] input:hover{
+        background-color: #0068b7; color: #fff;
+    }
+
+
+    .DrvSection table{
+        max-width: 1200px; width: 100%; margin: 0 auto 40px;
+        border-top: 2px solid #0068b7; box-sizing: border-box;
+    }
+    .DrvSection table thead{
+        background-color: #f2f2f2; 
+    }
+    .DrvSection table thead tr th{
+        font-size: 14px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr{
+        border-bottom: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th,
+    .DrvSection table tbody tr td{
+        border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th:last-child,
+    .DrvSection table tbody tr td:last-child{
+        border-right: 1px solid #ddd; width: 10%;
+    }
+    .DrvSection table tbody tr td{
+        font-size: 11px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr td:nth-child(2){
+        width: 12%;
+    }
+    .DrvSection table tbody tr td:nth-child(3),
+    .DrvSection table tbody tr td:nth-child(4){
+        width: 15%;
+    }
+    .DrvSection table tbody tr td:nth-child(5){
+        width: 38%;
+    }
+}
+
+
+/* ! mobile */
+@media screen and (min-width: 281px) and (max-width: 767px){
+    .DrvSection{
+        max-width: 700px; width: 96%; margin: 0 auto; padding: 0 2%;
+    }
+    .DrvSection h2{
+        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+    }
+    .DrvSection form{
+        margin-bottom: 15px;
+    }
+    .DrvSection form fieldset > input{
+        display: none; width: 0; height: 0; padding: 0; margin: 0;
+    }
+    .DrvSection form fieldset > label{
+        font-size: 13px; border: 1px solid #000; border-radius: 15px; padding: 8px 10px;
+        margin-bottom: 13px; display: inline-block; cursor: pointer; box-sizing: border-box;
+    }
+    .DrvSection form fieldset > #rdOli:checked + label ,
+    .DrvSection form fieldset > #rdDEF:checked + label,
+    .DrvSection form fieldset > #rdEngOil:checked + label ,
+    .DrvSection form fieldset > #rdFix:checked + label ,
+    .DrvSection form fieldset > #rdNote:checked + label {
+        color: rgb(0, 203, 230); border-color: rgb(0, 203, 230);
+    }
+    .DrvSection form fieldset > label:not(:first-of-type){
+        margin-left: 4px;
+    }
+    .DrvSection form fieldset ul{
+        list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
+    }
+    .DrvSection form fieldset ul li{
+        margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
+        position: relative; font-weight: bold;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan{
+        padding-left: 120px; line-height: 1.4; font-size: 12px; width: 70%;
+        
+    }
+    .DrvSection form fieldset ul li .drvLabel{
+        position: absolute;
+    }
+    .DrvSection form fieldset ul li input[type=date]{
+        width: 75%; height: 25px; font-size: 18px;
+    }
+    .drvVoiceImg{
+        width: 18%;
+    }
+    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+        width: 12%;
+    }
+    .DrvSection form fieldset ul li input[type=text],
+    .DrvSection form fieldset ul li input[type=number]{
+        width: 96%; height: 25px; font-size: 18px;
+    }
+    .DrvSection form fieldset ul li .drvVoiceImg{
+        border-radius: 25px; width: 12%; vertical-align: middle;
+    }
+    .DrvSection form fieldset ul li img{
+        cursor: pointer;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan2{
+        padding-left: 55px;
+    }
+    .DrvSection form fieldset ul li textarea{
+        width: 96%; font-size: 18px;
+    }
+    .DrvSection > div:first-of-type{
+        text-align: center; margin-bottom: 30px;
+    }
+    .DrvSection > div:first-of-type button{
+        font-size: 13px; width: 20%; border: 1px solid #000; cursor: pointer;
+    } 
+    .DrvSection > div:first-of-type button:not(:first-child){
+        margin-left: 3px;
+    }
+    .DrvSection > div:first-of-type button:nth-child(2){
+        background-color: #0068b7; color: #fff;
+    }
+    .DrvSection > div:first-of-type button:not(:nth-child(2)){
+        background-color: #fff;
+    }
+    .DrvSection > div:first-of-type button:last-child{
+        width: 30%;
+    }
+
+    .DrvSection  [class ^='drvPopup']{
+        position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box; flex-shrink: 0; display: none;
+        align-items: center; justify-content: center;
+    }
+    .DrvSection  [class ^='drvPopup'].active{
+        display: flex;
+    }
+    .DrvSection  [class ^='drvPopup'] div{
+        width: 94%; background-color: #fff; position: relative;
+    }
+
+    .DrvSection  [class ^='drvPopup'] .material-symbols-outlined{
+        position: absolute; right: 15px; top: 15px; color: #fff; cursor: pointer;;
+    }
+
+    .DrvSection  [class ^='drvPopup'] p{
+        background-color: #0068b7; color: #fff; padding: 20px; margin-bottom: 15px; font-size: 12px;
+    }
+    .DrvSection  [class ^='drvPopup'] input{
+        margin: 0 0 20px 20px; background: none; border: none; font-size: 20px; border: 1px solid #0068b7;
+        padding: 8px; cursor: pointer;
+    }
+    .DrvSection  [class ^='drvPopup'] input:hover{
+        background-color: #0068b7; color: #fff;
+    }
+
+
+    .DrvSection table{
+        max-width: 1200px; width: 100%; margin: 0 auto 40px;
+        border-top: 2px solid #0068b7; box-sizing: border-box;
+    }
+    .DrvSection table thead{
+        background-color: #f2f2f2; 
+    }
+    .DrvSection table thead tr th{
+        font-size: 14px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr{
+        border-bottom: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th,
+    .DrvSection table tbody tr td{
+        border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th:last-child,
+    .DrvSection table tbody tr td:last-child{
+        border-right: 1px solid #ddd;
+    }
+    .DrvSection table tbody tr td{
+        font-size: 16px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr td:nth-child(2){
+        width: 12%;
+    }
+    .DrvSection table tbody tr td:nth-child(3),
+    .DrvSection table tbody tr td:nth-child(4){
+        width: 15%;
+    }
+    .DrvSection table tbody tr td:nth-child(5){
+        width: 38%;
+    }
+}
+
+/* ! tablet */
+@media screen and (min-width: 768px) and (max-width: 1279px){
+    .DrvSection{
+        max-width: 1200px; width: 90%; margin: 0 auto; padding: 0 5%;
+    }
+    .DrvSection h2{
+        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+    }
+    .DrvSection form{
+        margin-bottom: 60px;
+    }
+    .DrvSection form fieldset > input{
+        display: none; width: 0; height: 0; padding: 0; margin: 0;
+    }
+    .DrvSection form fieldset > label{
+        font-size: 13px; border: 1px solid #000; border-radius: 15px; padding: 10px 20px;
+        margin-bottom: 30px; display: inline-block; cursor: pointer;
+    }
+    .DrvSection form fieldset > #rdOli:checked + label ,
+    .DrvSection form fieldset > #rdDEF:checked + label,
+    .DrvSection form fieldset > #rdEngOil:checked + label ,
+    .DrvSection form fieldset > #rdFix:checked + label ,
+    .DrvSection form fieldset > #rdNote:checked + label {
+        color: rgb(0, 203, 230); border-color: rgb(0, 203, 230);
+    }
+    .DrvSection form fieldset > label:not(:first-of-type){
+        margin-left: 20px;
+    }
+    .DrvSection form fieldset ul{
+        list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
+    }
+    .DrvSection form fieldset ul li{
+        margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
+        position: relative;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan{
+        padding-left: 150px; line-height: 1.4; font-size: 12px; width: 100%;
+        display: flex; align-items: center;
+    }
+    .DrvSection form fieldset ul li .drvLabel{
+        position: absolute;
+    }
+    .DrvSection form fieldset ul li input[type=date]{
+        width: 95%; height: 35px; font-size: 18px;
+    }
+    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+        width: 6%;
+    }
+    .DrvSection form fieldset ul li input[type=text],
+    .DrvSection form fieldset ul li input[type=number]{
+        width: 100%; height: 35px; font-size: 18px;
+    }
+    .DrvSection form fieldset ul li .drvVoiceImg{
+        border-radius: 25px; width: 12%; vertical-align: middle; cursor: pointer;
+    }
+    .DrvSection form fieldset ul li img{
+        cursor: pointer;
+    }
+    .DrvSection form fieldset ul li textarea{
+        width: 100%; font-size: 18px;
+    }
+    .DrvSection > div:first-of-type{
+        text-align: center; margin-bottom: 50px;
+    }
+    .DrvSection > div:first-of-type button{
+        font-size: 18px; width: 20%; border: 1px solid #000; line-height: 50px;
+        cursor: pointer;
+    } 
+    .DrvSection > div:first-of-type button:not(:first-child){
+        margin-left: 40px;
+    }
+    .DrvSection > div:first-of-type button:nth-child(2){
+        background-color: #0068b7; color: #fff;
+    }
+    .DrvSection > div:first-of-type button:not(:nth-child(2)){
+        background-color: #fff;
+    }
+
+    .DrvSection [class ^='drvPopup']{
+        position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box; flex-shrink: 0; display: none;
+        align-items: center; justify-content: center;
+    }
+    .DrvSection [class ^='drvPopup'].active{
+        display: flex;
+    }
+    .DrvSection [class ^='drvPopup'] div{
+        width: 30%; background-color: #fff; position: relative;
+    }
+
+    .DrvSection [class ^='drvPopup'] .material-symbols-outlined{
+        position: absolute; right: 15px; top: 15px; color: #fff; cursor: pointer;;
+    }
+
+    .DrvSection [class ^='drvPopup'] p{
+        background-color: #0068b7; color: #fff; padding: 20px; margin-bottom: 15px;
+    }
+    .DrvSection [class ^='drvPopup'] input{
+        margin: 0 0 20px 20px; background: none; border: none; font-size: 20px; border: 1px solid #0068b7;
+        padding: 8px; cursor: pointer;
+    }
+    .DrvSection [class ^='drvPopup'] input:hover{
+        background-color: #0068b7; color: #fff;
+    }
+
+
+    .DrvSection table{
+        max-width: 1200px; width: 100%; margin: 0 auto 60px;
+        border-top: 2px solid #0068b7; box-sizing: border-box;
+    }
+    .DrvSection table thead{
+        background-color: #f2f2f2; 
+    }
+    .DrvSection table thead tr th{
+        font-size: 16px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr{
+        border-bottom: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th,
+    .DrvSection table tbody tr td{
+        border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th:last-child,
+    .DrvSection table tbody tr td:last-child{
+        border-right: 1px solid #ddd;
+    }
+    .DrvSection table tbody tr td{
+        font-size: 16px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr td:nth-child(5){
+        width: 60%;
+    }
+}
+
+/* ! desktop */
+@media screen and (min-width:1280px){
+    .DrvSection{
+        max-width: 1200px; width: 100%; margin: 0 auto;
+    }
+    .DrvSection h2{
+        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+    }
+    .DrvSection form{
+        margin-bottom: 60px;
+    }
+    .DrvSection form fieldset > input{
+        display: none; width: 0; height: 0; padding: 0; margin: 0;
+    }
+    .DrvSection form fieldset > label{
+        font-size: 13px; border: 1px solid #000; border-radius: 15px; padding: 10px 20px;
+        margin-bottom: 30px; display: inline-block; cursor: pointer;
+    }
+    .DrvSection form fieldset > #rdOli:checked + label ,
+    .DrvSection form fieldset > #rdDEF:checked + label,
+    .DrvSection form fieldset > #rdEngOil:checked + label ,
+    .DrvSection form fieldset > #rdFix:checked + label ,
+    .DrvSection form fieldset > #rdNote:checked + label {
+        color: rgb(0, 203, 230); border-color: rgb(0, 203, 230);
+    }
+    .DrvSection form fieldset > label:not(:first-of-type){
+        margin-left: 30px;
+    }
+    
+    .DrvSection form fieldset ul{
+        list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
+    }
+    .DrvSection form fieldset ul li{
+        margin-bottom: 20px; font-size: 13px; display: flex; align-items: center;
+        position: relative;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan{
+        padding-left: 250px; line-height: 1.4; font-size: 12px; width: 100%;
+        display: flex; align-items: center;
+    }
+    .DrvSection form fieldset ul li .drvLabel{
+        position: absolute;
+    }
+    .DrvSection form fieldset ul li input[type=date]{
+        width: 50%; height: 35px; font-size: 18px;
+    }
+    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+        width: 8%;
+    }
+    .DrvSection form fieldset ul li input[type=text],
+    .DrvSection form fieldset ul li input[type=number]{
+        width: 100%; height: 35px; font-size: 18px;
+    }
+    .DrvSection form fieldset ul li img{
+        cursor: pointer;
+    }
+    .DrvSection form fieldset ul li .drvVoiceImg{
+        border-radius: 25px; width: 12%; vertical-align: middle; cursor: pointer;
+    }
+    .DrvSection form fieldset ul li textarea{
+        width: 100%; font-size: 18px;
+    }
+    .DrvSection > div:first-of-type{
+        text-align: center; margin-bottom: 50px;
+    }
+    .DrvSection > div:first-of-type button{
+        font-size: 25px; width: 15%; border: 1px solid #000; line-height: 60px;
+        cursor: pointer;
+    } 
+    .DrvSection > div:first-of-type button:not(:first-child){
+        margin-left: 50px;
+    }
+    .DrvSection > div:first-of-type button:nth-child(2){
+        background-color: #0068b7; color: #fff;
+    }
+    .DrvSection > div:first-of-type button:not(:nth-child(2)){
+        background-color: #fff;
+    }
+
+
+    .DrvSection  [class ^='drvPopup']{
+        position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+        box-sizing: border-box; flex-shrink: 0; display: none;
+        align-items: center; justify-content: center;
+    }
+    .DrvSection  [class ^='drvPopup'].active{
+        display: flex;
+    }
+    .DrvSection  [class ^='drvPopup'] div{
+        width: 30%; background-color: #fff; position: relative;
+    }
+
+    .DrvSection  [class ^='drvPopup'] .material-symbols-outlined{
+        position: absolute; right: 15px; top: 15px; color: #fff; cursor: pointer;;
+    }
+
+    .DrvSection  [class ^='drvPopup'] p{
+        background-color: #0068b7; color: #fff; padding: 20px; margin-bottom: 15px;
+    }
+    .DrvSection  [class ^='drvPopup'] input{
+        margin: 0 0 20px 20px; background: none; border: none; font-size: 20px; border: 1px solid #0068b7;
+        padding: 8px; cursor: pointer;
+    }
+    .DrvSection  [class ^='drvPopup'] input:hover{
+        background-color: #0068b7; color: #fff;
+    }
+
+
+    .DrvSection table{
+        max-width: 1200px; width: 100%; margin: 0 auto 60px;
+        border-top: 2px solid #0068b7; box-sizing: border-box;
+    }
+    .DrvSection table thead{
+        background-color: #f2f2f2; 
+    }
+    .DrvSection table thead tr th{
+        font-size: 16px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr{
+        border-bottom: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th,
+    .DrvSection table tbody tr td{
+        border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr th:last-child,
+    .DrvSection table tbody tr td:last-child{
+        border-right: 1px solid #ddd;
+    }
+    .DrvSection table tbody tr td{
+        font-size: 16px; padding: 20px 0; text-align: center;
+    }
+    .DrvSection table tbody tr td:nth-child(5){
+        width: 60%;
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scyllacore.dumpweb.commonModule.db.mapper.DailyReportStep2Mapper">
+
+    <select id="findDailyReportMainByCarSubmitTel" resultType="DailyReportStep2Main">
+        select sheetID, DATE_FORMAT(date, '%y-%m-%d') as date, carSubmit, salesman from tSheet where carSubmitTel = #{userId}
+    </select>
+
+    <select id="findDailyReportMainBySheetID2"  resultType="DailyReportStep2Sub">
+        select fromsite, tosite, item, Qty,Qtyup from tSheet_sub where sheetID2=#{sheetID2}
+    </select>
+
+
+
+
+</mapper>

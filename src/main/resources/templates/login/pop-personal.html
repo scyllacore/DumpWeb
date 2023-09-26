@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="personalFragment">
+
+<style>
+    .terms_title {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        line-height: 25px;
+        font-size: 16px;
+        font-weight: 700;}
+    .terms_text {
+        margin: 20px 0 30px; }
+
+    .terms_text_t2 {
+        padding-left: 10px; }
+
+    .terms_text_t1 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 700; }
+</style>
+
+<div class="layerMask dis-n pop-wrap" id="pop-personal" tabindex="0">
+    <div class="layerMask__inner" style="height: 450px">
+        <section class="layer-popup" style="height: 700px;">
+            <div class="pop-header modal-title">
+                <h3>개인정보취급방침</h3>
+
+                <button type="button" onclick="$.closeLayerPrivaryPopUp(this);" class="pop-close">
+                    <i class="ico-close-b"></i>
+                    <span class="offscreen">닫기버튼</span>
+                </button>
+            </div>
+
+            <div style="padding: 20px 10px;overflow-y: scroll;height: 400px;">
+                <p class="terms_title">개인정보 수집 및 이용에 대한 법률</p>
+
+                <p class="terms_text">
+                    이용자는 귀사에 개인정보를 제출함에 따라 개인정보 보호법 제15조 및 제17조에 따라 아래의 내용으로 개인정보를 수집, 이용 및 제공하는데 동의합니다.
+                </p>
+
+                <p class="terms_text_t1">1. 개인정보의 수집 및 이용에 관한 사항 </p>
+
+                <p>1) 수집 항목</p>
+
+                <p class="terms_text_t2">“㈜기원테크”는 고객의 영업문의 서비스 제공을 위하여 아래와 같은 개인정보를 수집하고 있습니다. </p>
+
+                <p class="terms_text_t2">수집하는 개인정보 항목 : 성명, 전화번호, 이메일, 주소, 아이피 등과 그 외 기재 내용 일체</p>
+
+                <p class="terms_text_t1">2. 개인정보의 이용 목적</p>
+
+                <p class="terms_text_t2">: 수집된 개인정보는 '운행일보 및 차량관리' 목적 외의 용도로는 사용하지 않습니다.</p>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+</th:block>
+</html>
