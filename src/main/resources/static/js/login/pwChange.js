@@ -10,12 +10,12 @@ $.pwChange = function(){
     console.log(/(\d)\1\1\1/.test("1111"));
 
     const repeatNumber = /(\d)\1\1\1/;
-    const Continuously = /(1234)|(2345)|(3456)|(4567)|(5678)|(6789)|(7890)/;
+    const Continuously = /(0123)|(2345)|(3456)|(4567)|(5678)|(6789)|(7890)/;
 
     // LINE :: 비밀번호 확인
-    if ($("[name=userPw]").val() == 0) {
+    if ($("[name=new_userPw]").val() == 0) {
         alert("비밀번호를 입력해주세요.");
-        $("[name=userPw]").focus();
+        $("[name=new_userPw]").focus();
         return false;
     }
 
@@ -28,34 +28,34 @@ $.pwChange = function(){
     }
 
     // LINE :: 비밀번호 유효성 검사
-    if($("[name=userPw]").val().length < 4){
+    if($("[name=new_userPw]").val().length < 4){
         alert("비밀번호는 4자리 이상이어야 합니다.");
         return false;
     }
 
     // LINE :: 비밀번호가 다를 경우
-    if($("[name=userPw]").val() != $("[name=re_userPw]").val()){
+    if($("[name=new_userPw]").val() != $("[name=re_userPw]").val()){
         alert("비밀번호가 서로 다릅니다.\n확인 후 다시 입력해주세요.");
         $("[name=re_userPw]").focus();
         return false;
     }
 
     //
-    if(repeatNumber.test($("[name=userPw]").val())) {
+    if(repeatNumber.test($("[name=new_userPw]").val())) {
         alert("비밀번호에 같은 숫자가 4자 이상 반복될 수 없습니다.");
-        $("[name=serPw]").focus();
+        $("[name=new_userPw]").focus();
         return false;
     }
 
-    if (Continuously.test($("[name=userPw]").val())) {
+    if (Continuously.test($("[name=new_userPw]").val())) {
         alert("비밀번호에 4회 이상 연속된 숫자를 입력할 수 없습니다.");
-        $("[name=userPw]").focus();
+        $("[name=new_userPw]").focus();
         return false;
     }
     
-    if (!Number($("[name=userPw]").val())) {
+    if (!Number($("[name=new_userPw]").val())) {
         alert("비밀번호는 숫자로만 설정할 수 있습니다.");
-        $("[name=userPw]").focus();
+        $("[name=new_userPw]").focus();
         return false;
     }
 
@@ -75,8 +75,6 @@ $.pwChange = function(){
 
                 if(json.httpCode == 200) {
                     // console.log(json.smsSample);
-                    alert("변경이 완료되었습니다. 다시 로그인 해주세요.");
-                    localStorage.removeItem("dailyReportPw");
                     location.href = "/";
                 } else {
                     modal({
@@ -112,6 +110,24 @@ $.closeLayerPrivaryPopUp = function(obj) {
     }
 }
 
-$.prevPage = function () {
-        location.replace("/dailyReport/list");
+$.prevPage = function (grade) {
+    if(grade == '1') {
+        location.replace("/slipStatus/list");
+    }
+    else if(grade == '2') {
+        location.replace("/dispatchMng/list");
+
+    }
+    else if(grade == '3') {
+        location.replace("/unspecifiedDispatch/list");
+
+    }
+    else if(grade == '4') {
+        location.replace("/carManage/list");
+
+    }
+    else if (grade == '5') {
+        location.replace("/unmanned/loader/list");
+
+    }
 }
