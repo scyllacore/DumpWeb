@@ -28,7 +28,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/**/*.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.scyllacore.dumpWeb.commonModule.db.dto, com.scyllacore.dumpWeb.commonModule.db.dao");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.scyllacore.dumpWeb.commonModule.db.dto");
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
@@ -36,8 +36,4 @@ public class DBConfig {
         return sqlSessionFactory;
     }
 
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory);
-    }
 }
