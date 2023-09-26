@@ -1,4 +1,4 @@
-package com.scyllacore.dumpweb.commonModule.controller;
+package com.scyllacore.dumpWeb.commonModule.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

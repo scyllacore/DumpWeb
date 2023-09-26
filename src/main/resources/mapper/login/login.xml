@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scyllacore.dumpweb.commonModule.db.mapper.LoginMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.login.LoginMapper">
 
     <!--  신규 사용자 등록  -->
     <insert id="insertUserInfo" parameterType="Login">

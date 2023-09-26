@@ -1,4 +1,4 @@
-package com.scyllacore.dumpweb.commonModule.service;
+package com.scyllacore.dumpWeb.commonModule.service;
 
 import org.springframework.stereotype.Service;
 

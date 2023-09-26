@@ -1,4 +1,4 @@
-package com.scyllacore.dumpweb.configModule.db;
+package com.scyllacore.dumpWeb.configModule.db;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,7 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan("com.scyllacore.dumpweb.commonModule.db.mapper")
+@MapperScan("com.scyllacore.dumpWeb.commonModule.db.mapper")
 public class DBConfig {
 
     @Bean
@@ -28,7 +28,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/**/*.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.scyllacore.dumpweb.commonModule.db.dto, com.scyllacore.dumpweb.commonModule.db.dao");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.scyllacore.dumpWeb.commonModule.db.dto, com.scyllacore.dumpWeb.commonModule.db.dao");
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);

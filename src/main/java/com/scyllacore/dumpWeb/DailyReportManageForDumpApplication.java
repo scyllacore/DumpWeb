@@ -1,4 +1,4 @@
-package com.scyllacore.dumpweb;
+package com.scyllacore.dumpWeb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

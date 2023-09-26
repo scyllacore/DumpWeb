@@ -11,6 +11,7 @@
     width: 100%
 }
 
+/* 스크린 사이즈에 따른 전체 화면 비율 조정 */
 @media screen and (min-width: 760px) {
     #dailyreport{
         width: 80%
@@ -23,22 +24,70 @@
     }
 }
 
-input[id="chk2"] {
-    position: relative;
-    top: 1.5px;
-    left: 40px;
+@media screen and (max-width: 320px) {
+    date {
+        width: none;
+    }
+}
+
+
+
+/* dailyreport 파트 조정*/
+#dailyreport {
+    --main-font-size: 13px;
+    --main-height: 28px;
+    --main-blue: #0068B7;
+    --sub-blue: #0068b778;
+}
+#dailyreport input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
+    padding-left: 5px;
+    height: var(--main-height) !important;
+    font-size: var(--main-font-size);
 }
 
 .datepicker {
-    margin-left: 40px;
+    margin-left: -20px;
 }
 
-td{
+#canvas label {
+    font-size : var(--main-font-size);
+    line-height: 25px;
+}
+
+#canvas th{
+    height: var(--main-height);
+    font-size: var( --main-font-size);
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+#canvas td{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: var(--main-font-size);
+    height: var(--main-height);
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
+#canvas td:nth-child(4) {
+    text-align: right;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title button {
+    width: 120px;
+    margin: 0 0 0 auto;
+    height: var(--main-height);
+}
 
 @media screen and (max-width: 280px) {
     .mtable__ul .content {
@@ -75,9 +124,9 @@ td{
 }
 
 .addBtn{
-    border: 1px solid #0068b778;
+    border: 1px solid var(--sub-blue);
     width: 100px;
-    color: #0068b7;
+    color: var(--main-blue);
     background: #fff;
     font-size: 13px;
 }
@@ -88,35 +137,16 @@ td{
     padding-top: 5px;
 }
 
-.xBtn{
-    width: 25px;
-    color:red;
-    padding-bottom: 3px;
-    border: 1px solid #ddd;
+#canvas .btn-white, #canvas .btn-blue {
+    line-height: 25px;
+    height: 30px;
+    font-weight: 600;
+    font-size: var(--main-font-size);
 }
 
-.empty {
-    width:20px;
-    height:20px;
-    display: block;
+#popup .btn-white, #canvas .btn-blue {
+    width: 80px;
 }
-
-.editedMsg{
-    background: #6CE16B;
-    padding: 1px 7px;
-    font-size: 13px;
-    color: #fff;
-    border-radius: 13px;
-}
-
-textarea::placeholder {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      padding-left: 5px;
-}
-
 
 .popup {
     display: none;
@@ -148,17 +178,16 @@ textarea::placeholder {
 .popBtns {
     display: flex;
     justify-content: space-evenly;
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 425px) {
     .addBtn{
-        width: 80px;
         font-size: 12px;
     }
 
     .btn-popup {
         height: 25px;
-        padding: 5px 5px 5px 5px;
         font-size: 12px;
         line-height: 12px;
         width: 50px;
@@ -166,20 +195,91 @@ textarea::placeholder {
 
 }
 
-.plusminus {
-    border: 1px solid pink;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #0068b778;
-    color: #0068b7;
-    background: #fff;
+#chk1 input{
+    margin-left: 30px;
+    margin-top: 6px;
+}
+
+.chk::last-child{
+    color: red;
+}
+
+#chk1 {
+    margin-left: 30px;
+    height: var(--main-height);
+}
+
+#chk2 {
+    margin-left: 5px;
+}
+
+@media screen and (max-width: 359px) {
+    .adjustMax359 {
+        flex-direction: column;
+    }
+    .haveTwo {
+        margin-top: 4px;
+    }
+    #chk1 {
+        margin-left: 0px;
+    }
+    #chk2 {
+        margin-left: 25%;
+    }
+
 }
 
 .datediv {
-    width: 80%;
+    width: 30%;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-left: 95px;
+}
+
+#dropdown {
+    height: var(--main-height);
+    margin-left: 30px;
+    line-height: 25px;
+}
+
+.haveTwo {
+    display: flex;
+}
+
+.btn-area {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.select {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  border: 1px solid #ddd;
+  font-size: var(--main-font-size);
+}
+
+.select ul {
+  font-size: var(--main-font-size);
+  border: 1px solid #ddd;
+  display: none;
+  position: absolute;
+  background: #fff;
+  border-top: none;
+  cursor: pointer;
+  width: 50px;
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.select.active ul {
+  display: initial;
+}
+
+.select ul li {
+  height: 23px;
+  display: flex;
+  justify-content: center;
+}
+
+.select ul li:hover {
+  background: #ddd;
 }

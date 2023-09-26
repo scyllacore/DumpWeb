@@ -4,19 +4,19 @@
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 600;
-  src: url(/fonts/GmarketSansTTFBold.ttf) format('woff');
+  src: url(/resources/fonts/GmarketSansTTFBold.ttf) format('woff');
 }
 @font-face {
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 500;
-  src: url(/fonts/GmarketSansTTFMedium.ttf) format('woff');
+  src: url(/resources/fonts/GmarketSansTTFMedium.ttf) format('woff');
 }
 @font-face {
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 400;
-  src: url(/fonts/GmarketSansTTFLight.ttf) format('woff');
+  src: url(/resources/fonts/GmarketSansTTFLight.ttf) format('woff');
 }
 
 /*
@@ -132,7 +132,7 @@ input::placeholder {
   background-color: #fff;
 }
 .b-loginM__inner{
-  background-image: url("/image/login/bg-login-m.png");
+  background-image: url("/resources/image/login/bg-login-m.png");
   background-repeat: no-repeat;
   width: 100%;
   max-width: 414px;
@@ -141,18 +141,18 @@ input::placeholder {
   background-size: 100% 736px;
 }
 .b-loginM__inner.join{
-  background-image: url("/image/login/bg-login-m3.png");
+  background-image: url("/resources/image/login/bg-login-m3.png");
 }
 .b-loginM__top{
   width: 100%;
   height: 230px;
-  background-image: url("/image/login/img-login-top3.png");
+  background-image: url("/resources/image/login/img-login-top3.png");
   background-repeat: no-repeat;
   background-position: 88% 16px;
   margin-top: 50px;
 }
 .b-loginM__top.join{
-  background-image: url("/image/login/img-login-top2.png");
+  background-image: url("/resources/image/login/img-login-top2.png");
   height: 210px;
   background-position: 88% 16px;
 }
@@ -176,6 +176,12 @@ input::placeholder {
   position: relative;
   padding-top: 30px;
 }
+
+.b-loginM__tit.add__none{
+  position: relative;
+  padding-top: 30px;
+}
+
 .b-loginM__tit.add::before{
   position: absolute;
   content: "/";
@@ -240,7 +246,7 @@ input::placeholder {
 .b-loginM__input select{
   padding-top: 4px;
   padding-right: 20px;
-  background: #fff url(/image/login/ico_selectbox.png) no-repeat 96% 50%;
+  background: #fff url(/resources/image/login/ico_selectbox.png) no-repeat 96% 50%;
   background-size: 8px;
   appearance: none;
 }
@@ -309,7 +315,7 @@ input::placeholder {
   margin: 0 25px;
   height: 40px;
   background-color: #f2f2f2;
-  /*background-image: url(/image/login/footer_tel.png);*/
+  /*background-image: url(/resources/image/login/footer_tel.png);*/
   display: flex;
   align-items: center;
   justify-content: center;

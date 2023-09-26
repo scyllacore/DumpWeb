@@ -1,6 +1,6 @@
-package com.scyllacore.dumpweb.configModule.aop;
+package com.scyllacore.dumpWeb.configModule.aop;
 
-import com.scyllacore.dumpweb.commonModule.db.dto.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Aspect
 @Component
@@ -21,7 +21,7 @@ public class AOPConfig {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Around("execution (* com.scyllacore.dumpweb..controller.*Controller.*(..))")
+    @Around("execution (* com.scyllacore.dumpWeb..controller.*Controller.*(..))")
     public Object loginChk(ProceedingJoinPoint pjp) throws Throwable {
         String type = pjp.getSignature().getDeclaringTypeName();
         String className = type.substring(type.lastIndexOf(".") + 1);

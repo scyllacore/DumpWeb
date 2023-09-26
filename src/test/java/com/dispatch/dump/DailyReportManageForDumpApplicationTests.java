@@ -1,5 +1,5 @@
 /*
-package com.scyllacore.dumpweb;
+package com.scyllacore.dumpWeb;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

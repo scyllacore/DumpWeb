@@ -1,7 +1,7 @@
-package com.scyllacore.dumpweb.loginModule.controller;
+package com.scyllacore.dumpWeb.loginModule.controller;
 
-import com.scyllacore.dumpweb.commonModule.db.dto.Login;
-import com.scyllacore.dumpweb.loginModule.service.LoginService;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.loginModule.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/")
@@ -33,10 +33,10 @@ public class LoginController {
         return loginService.loginForm();
     }
 
-    /** 
+    /**
      * FUNCTION :: 로그인 체크
      * @param loginData 로그인 정보
-     *                 
+     *
      * */
     @RequestMapping(value = "/ajax/login", method = RequestMethod.POST)
     @ResponseBody

@@ -1,16 +1,16 @@
-package com.scyllacore.dumpweb.loginModule.service;
+package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpweb.commonModule.db.dto.Login;
-import com.scyllacore.dumpweb.commonModule.db.mapper.LoginMapper;
-import com.scyllacore.dumpweb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.login.LoginMapper;
+import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
 @Service
