@@ -11,40 +11,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/dailyReport")
+@RequestMapping("/manage/step5")
 @RequiredArgsConstructor
 public class Step5ControllerForVehicleManageMileageRegistration {
 
     private final Step5ServiceForVehicleManageMileageRegistration step5Service;
 
-    @RequestMapping(value = "/carcareform", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String step5() {
-        return "/dailyReport/step5/carcareform";
+        return "/manage/step5/step5Index";
     }
 
     /* click.js */
-    @RequestMapping(value = "/carcareform/ajax/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/save", method = RequestMethod.POST)
     @ResponseBody
     public String tDriveSave(TDrive tDrive) {
         return step5Service.saveTDrive(tDrive);
     }
 
-    @RequestMapping(value = "/carcareform/ajax/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/list", method = RequestMethod.POST)
     @ResponseBody
     public List<TDrive> tDriveList(String date) {
         return step5Service.findTDriveList(date);
     }
 
-    @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/ajax/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public void tDriveRemove(int driveID) {
         step5Service.removeTDrive(driveID);
     }
 
     /* param.js */
-    @RequestMapping(value = "/carcareform/ajax/details", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/details", method = RequestMethod.POST)
     @ResponseBody
     public TDrive tDriveDetails(int driveID) {
         return step5Service.findTDriveDetails(driveID);
-
+    }
+    
 }
