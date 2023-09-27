@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
+<th:block th:replace="/include/header :: headerFragment"></th:block>
+
 <head>
     <title>Work&Sales</title>
-    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <link href="/css/login/login.css" rel="stylesheet" type="text/css">
     <link href="/css/login/trialSelect.css" rel="stylesheet" type="text/css">
     <script src="/js/login/trialSelect.js"></script>
-
 </head>
+
 <div id="page_loading_progressbar"
      style="z-index:9998; position:absolute; visibility:hidden; left:calc(100%/2); top:calc(100%/2);">
     <div class="closeMask" style="left:0px; top:0px;"></div>

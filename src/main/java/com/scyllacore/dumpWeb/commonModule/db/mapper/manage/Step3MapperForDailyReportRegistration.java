@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface Step3MapperForDailyReportRegistration {
 
-    int insertCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
+
 }

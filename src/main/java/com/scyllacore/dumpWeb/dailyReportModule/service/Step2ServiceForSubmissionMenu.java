@@ -1,8 +1,8 @@
 package com.scyllacore.dumpWeb.dailyReportModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.Summary;
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TSheetSub;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.Summary;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TSheetSub;
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step2MapperForSubmissionMenu;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;

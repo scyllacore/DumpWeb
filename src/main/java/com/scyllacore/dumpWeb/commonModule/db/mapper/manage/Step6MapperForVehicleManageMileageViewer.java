@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

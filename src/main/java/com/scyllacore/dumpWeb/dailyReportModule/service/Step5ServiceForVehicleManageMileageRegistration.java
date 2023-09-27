@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.dailyReportModule.service;
 
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5MapperForVehicleManageMileageRegistration;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;

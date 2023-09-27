@@ -36,37 +36,37 @@ $bg-green : #f2faf9;*/
   font-family: 'NotoSansKR';
   font-style: normal;
   font-weight: 400;
-  src: url(/resources/fonts/NotoSansKR-Regular.otf) format("woff"), url(../fonts/NotoSansKR-Regular.otf) format("opentype"); }
+  src: url(/fonts/NotoSansKR-Regular.otf) format("woff"), url(../fonts/NotoSansKR-Regular.otf) format("opentype"); }
 
 @font-face {
   font-family: 'NotoSansKR';
   font-style: normal;
   font-weight: 500;
-  src: url(/resources/fonts/NotoSansKR-Medium.otf) format("woff"), url(../fonts/NotoSansKR-Medium.otf) format("opentype"); }
+  src: url(/fonts/NotoSansKR-Medium.otf) format("woff"), url(../fonts/NotoSansKR-Medium.otf) format("opentype"); }
 
 @font-face {
   font-family: 'NotoSansKR';
   font-style: normal;
   font-weight: 700;
-  src: url(/resources/fonts/NotoSansKR-Bold.otf) format("woff"), url(../fonts/NotoSansKR-Bold.otf) format("opentype"); }
+  src: url(/fonts/NotoSansKR-Bold.otf) format("woff"), url(../fonts/NotoSansKR-Bold.otf) format("opentype"); }
 
 @font-face {
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 600;
-  src: url(/resources/fonts/GmarketSansTTFBold.ttf) format('woff');
+  src: url(/fonts/GmarketSansTTFBold.ttf) format('woff');
 }
 @font-face {
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 500;
-  src: url(/resources/fonts/GmarketSansTTFMedium.ttf) format('woff');
+  src: url(/fonts/GmarketSansTTFMedium.ttf) format('woff');
 }
 @font-face {
   font-family: 'GmarketSansTTF';
   font-style: normal;
   font-weight: 400;
-  src: url(/resources/fonts/GmarketSansTTFLight.ttf) format('woff');
+  src: url(/fonts/GmarketSansTTFLight.ttf) format('woff');
 }
 @font-face {
   font-family: 'SCDream';
@@ -187,7 +187,7 @@ select {
 
 /*
 select {padding-left:8px; height:35px;
-  background: #fff url("/resources/images/icons/ico_selecbox.png") no-repeat 96% 50%; background-size:8px}
+  background: #fff url("/images/icons/ico_selecbox.png") no-repeat 96% 50%; background-size:8px}
 */
 input[type=text], input[type=password], input[type=number], input[type=file] {
   padding-left: 5px;
@@ -552,7 +552,7 @@ b
   width: 120px;
   height: 40px;
   line-height: 38px;
-  background-image: url("/resources/image/icons/ico_search.png");
+  background-image: url("/image/icons/ico_search.png");
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px; }
@@ -568,7 +568,7 @@ b
   width: 120px;
   height: 40px;
   line-height: 38px;
-  background-image: url("/resources/image/icons/ico_search-b.png");
+  background-image: url("/image/icons/ico_search-b.png");
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
@@ -597,12 +597,12 @@ b
   width: 145px;
   height: 40px;
   line-height: 38px;
-  background-image: url("/resources/image/icons/ico_excel.png");
+  background-image: url("/image/icons/ico_excel.png");
   background-position: 14px 11px;
   background-repeat: no-repeat;
   background-size: initial; }
 .btn-excel.btn-excel-plus {
-  background-image: url("/resources/image/icons/ico_excel.png");
+  background-image: url("/image/icons/ico_excel.png");
   background-position: 10px 11px;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -618,7 +618,7 @@ b
   width: 145px;
   height: 40px;
   line-height: 38px;
-  background-image: url("/resources/image/icons/ico_down_blue.png");
+  background-image: url("/image/icons/ico_down_blue.png");
   background-position: 12px 13px;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -634,7 +634,7 @@ b
   width: 145px;
   height: 45px;
   line-height: 43px;
-  background-image: url("/resources/image/icons/ico_memo.png");
+  background-image: url("/image/icons/ico_memo.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -646,7 +646,7 @@ b
   width: 35px;
   height: 35px;
   line-height: 35px;
-  background-image: url("/resources/image/icons/ico_plus.png");
+  background-image: url("/image/icons/ico_plus.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -658,7 +658,7 @@ b
   width: 35px;
   height: 35px;
   line-height: 35px;
-  background-image: url("/resources/image/icons/ico_minus.png");
+  background-image: url("/image/icons/ico_minus.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -674,7 +674,7 @@ b
   width: 145px;
   height: 40px;
   line-height: 38px;
-  background-image: url("/resources/image/icons/ico_add.png");
+  background-image: url("/image/icons/ico_add.png");
   background-position: 14px 11px;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -783,7 +783,7 @@ i {
 .ico-lock {
   width: 26px;
   height: 35px;
-  background-image: url("/resources/image/icons/ico_lock_blue.png");
+  background-image: url("/image/icons/ico_lock_blue.png");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -791,70 +791,70 @@ i {
 .ico-download {
   width: 18px;
   height: 18px;
-  background-image: url("/resources/image/icons/ico_download.png");
+  background-image: url("/image/icons/ico_download.png");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: initial; }
 
 /*.ico-search{
   @include wh(26px, 35px);
-  @include background(false, "/resources/image/icons/ico_search.png");
+  @include background(false, "/image/icons/ico_search.png");
 }*/
 /*
 .ico-user{
   @include wh(25px, 25px);
-  @include background-hover(false, "/resources/images/job/icons/ico_user.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_user.png", center center, no-repeat);
 }
 
 .ico-plus{
   margin-top:-2px;
   @include wh(15px, 15px);
-  @include background-hover(false, "/resources/images/job/icons/ico_plus.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_plus.png", center center, no-repeat);
 }
 
 .ico-check{
   @include wh(15px, 15px);
 
   &.blue{
-    @include background-hover(false, "/resources/images/job/icons/ico_check_blue.png", center center, no-repeat);
+    @include background-hover(false, "/images/job/icons/ico_check_blue.png", center center, no-repeat);
   }
   &.green{
-    @include background-hover(false, "/resources/images/job/icons/ico_check_green.png", center center, no-repeat);
+    @include background-hover(false, "/images/job/icons/ico_check_green.png", center center, no-repeat);
   }
 }
 
 .ico-next{
   @include wh(14px, 14px);
-  @include background-hover(false, "/resources/images/job/icons/ico_next.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_next.png", center center, no-repeat);
 }
 
 .ico-prev{
   @include wh(14px, 14px);
-  @include background-hover(false, "/resources/images/job/icons/ico_prev.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_prev.png", center center, no-repeat);
 }
 
 .ico-tel{
   @include wh(30px, 20px);
-  @include background-hover(false, "/resources/images/job/icons/ico_tel.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_tel.png", center center, no-repeat);
 }
 
 
 .ico-must{
   @include wh(30px, 20px);
-  @include background-hover(false, "/resources/images/job/icons/ico_must.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_must.png", center center, no-repeat);
 }
 
 .ico-modify{
   margin-right:5px;
   @include wh(17px, 16px);
-  @include background-hover(false, "/resources/images/job/icons/ico_modify.png", center top, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_modify.png", center top, no-repeat);
 }
 
 
 .ico-more{
   margin-left:5px;
   @include wh(17px, 16px);
-  @include background-hover(false, "/resources/images/job/icons/ico_more.png", center center, no-repeat);
+  @include background-hover(false, "/images/job/icons/ico_more.png", center center, no-repeat);
 }
 
 
@@ -864,24 +864,24 @@ i {
   vertical-align:top;
   margin-top:2px;
   @include wh(16px, 15px);
-  @include background-hover(false, "/resources/images/icons/ico_new.png", center center, no-repeat);
+  @include background-hover(false, "/images/icons/ico_new.png", center center, no-repeat);
 }
 
 .ico-doctor{
   margin-right:7px;
   @include wh(20px, 21px);
-  @include background-hover(false, "/resources/images/icons/ico_doctor_g.png", center center, no-repeat);
+  @include background-hover(false, "/images/icons/ico_doctor_g.png", center center, no-repeat);
 }
 .ico-stu{
   margin-right:7px;
   @include wh(21px, 21px);
-  @include background-hover(false, "/resources/images/icons/ico_stu_g.png", center center, no-repeat);
+  @include background-hover(false, "/images/icons/ico_stu_g.png", center center, no-repeat);
 }
 
 .ico-arrow-right{
   margin-left:7px;
   @include wh(16px, 16px);
-  @include background-hover(false, "/resources/images/icons/ico_arrow_right.png", center center, no-repeat);
+  @include background-hover(false, "/images/icons/ico_arrow_right.png", center center, no-repeat);
   background-size:7px;
 }
 
@@ -889,26 +889,26 @@ i {
   margin-left:7px;
   border-radius:10px;
   @include wh(18px, 18px);
-  @include background-hover($c-main-blue1, "/resources/images/icons/ico_arrow_right_w.png", center center, no-repeat);
+  @include background-hover($c-main-blue1, "/images/icons/ico_arrow_right_w.png", center center, no-repeat);
 }
 
 
 .ico-up{
   @include wh(18px, 18px);
-  @include background-hover(false, "/resources/images/icons/ico_up.png", 0 0, no-repeat);
+  @include background-hover(false, "/images/icons/ico_up.png", 0 0, no-repeat);
 }
 
 .ico-comment{
   margin-right:3px;
   @include wh(18px, 15px);
-  @include background-hover(false, "/resources/images/icons/ico_comment.png", 0 0, no-repeat);
+  @include background-hover(false, "/images/icons/ico_comment.png", 0 0, no-repeat);
 }
 
 
 .ico-out{
   margin-right:7px;
   @include wh(18px, 18px);
-  @include background-hover(false, "/resources/images/icons/ico_out.png", center 0, no-repeat);
+  @include background-hover(false, "/images/icons/ico_out.png", center 0, no-repeat);
 }
 
 .ico-number{
@@ -916,10 +916,10 @@ i {
   @include wh(20px, 20px);
 
   &.num1{
-    @include background-hover(false, "/resources/images/icons/ico_number1.png", center 0, no-repeat);
+    @include background-hover(false, "/images/icons/ico_number1.png", center 0, no-repeat);
   }
   &.num2{
-    @include background-hover(false, "/resources/images/icons/ico_number2.png", center 0, no-repeat);
+    @include background-hover(false, "/images/icons/ico_number2.png", center 0, no-repeat);
   }
 
   @include media-mob(){
@@ -933,7 +933,7 @@ i {
 
 .ico-download-blue{
   @include wh(13px, 15px);
-  @include background(false, "/resources/images/icons/ico_download_blue.png", center 0, no-repeat);
+  @include background(false, "/images/icons/ico_download_blue.png", center 0, no-repeat);
 }
 
 
@@ -947,7 +947,7 @@ i {
   font-weight: 600; }
 
 #modal-window .modal-box .modal-title .modal-close-btn {
-  background-image: url("/resources/image/icons/ico_modal_close.png"); }
+  background-image: url("/image/icons/ico_modal_close.png"); }
 
 #modal-window .modal-box .modal-text {
   line-height: 20px; }
@@ -1270,14 +1270,14 @@ textarea.bg {
 .location__ul li {
   float: left;
   padding-left: 20px;
-  background-image: url("/resources/image/icons/ico_arrow_right_gray.png");
+  background-image: url("/image/icons/ico_arrow_right_gray.png");
   background-position: 5px 8px;
   background-repeat: no-repeat;
   background-size: initial; }
 .location__ul li:first-child {
   width: 20px;
   height: 28px;
-  background-image: url("/resources/image/icons/ico_home.png");
+  background-image: url("/image/icons/ico_home.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -2212,7 +2212,7 @@ input[type="text"].readonly {
   left: 0;
   background-position: center;
   background-size: cover;
-  background-image: url("/resources/image/login/visual_login.png");
+  background-image: url("/image/login/visual_login.png");
   background-repeat: no-repeat; }
 
 .login-card-form-bg {
@@ -2225,7 +2225,7 @@ input[type="text"].readonly {
   right: 0;
   width: 50%;
   height: 120px;
-  background-image: url("/resources/image/login/visual_login_welcome.png");
+  background-image: url("/image/login/visual_login_welcome.png");
   background-position: right 0;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -2271,7 +2271,7 @@ input[type="text"].readonly {
     padding: 50px 20px 20px;
     background-position: center;
     background-size: cover;
-    background-image: url("/resources/image/login/visual_login.png");
+    background-image: url("/image/login/visual_login.png");
     background-repeat: no-repeat; }
   .login-card-visual h1 {
     font-size: 18px; }
@@ -2610,7 +2610,7 @@ input[type="text"].readonly {
   word-break: break-all; }
 .plan-list__ul p.date {
   padding: 5px 0 5px 25px;
-  background-image: url("/resources/image/icons/ico_calendar_green.png");
+  background-image: url("/image/icons/ico_calendar_green.png");
   background-position: left center;
   background-repeat: no-repeat;
   background-size: initial;
@@ -2688,7 +2688,7 @@ input[type="text"].readonly {
 .calendar__table tbody .bg-gray {
   background: #f5f5f5; }
 .calendar__table tbody .bg-plan {
-  background-image: url("/resources/image/icons/bul_circle_green.png");
+  background-image: url("/image/icons/bul_circle_green.png");
   background-position: center 10px;
   background-repeat: no-repeat;
   background-size: initial; }
@@ -2931,7 +2931,7 @@ input[type="text"].readonly {
   width: 14px;
   height: 14px;
   right: 15px;
-  background-image: url(/resources/image/icons/ico_close.png);
+  background-image: url(/image/icons/ico_close.png);
   top: 50%;
   transform: translateY(-50%);
   background-repeat: no-repeat;
@@ -3136,7 +3136,7 @@ input[type="text"].readonly {
   bottom: 30px;
   width: 40px;
   height: 40px;
-  /*background: url("/resources/image/icons/ico-top.png");*/
+  /*background: url("/image/icons/ico-top.png");*/
   background-size: cover;
   /*border-radius: 5px;*/
   /*box-shadow: 3px 3px 10px 1px #ddd;*/

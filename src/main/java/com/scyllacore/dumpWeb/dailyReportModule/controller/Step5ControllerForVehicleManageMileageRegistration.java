@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.dailyReportModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import com.scyllacore.dumpWeb.dailyReportModule.service.Step5ServiceForVehicleManageMileageRegistration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

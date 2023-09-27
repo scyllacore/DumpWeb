@@ -251,16 +251,16 @@ input[type=number].default-input__tb{
 
 }
 .b-step01 .cnt1{
-    background-image: url(/resources/image/img-step01-01.png);
+    background-image: url(/image/img-step01-01.png);
 
 }
 .b-step01 .cnt2{
-    background-image: url(/resources/image/img-step01-02.png);
+    background-image: url(/image/img-step01-02.png);
     background-position: 15px center;
     padding-left: 20px;
 }
 .b-step01 .cnt3{
-    background-image: url(/resources/image/img-step01-03.png);
+    background-image: url(/image/img-step01-03.png);
     background-position: 40px center;
 
 }
@@ -323,7 +323,7 @@ table{
 }
 table.table-list{ margin-bottom: 30px; }
 table tr td:first-of-type.active{
-    background-image: url(/resources//image/ico-check.png);
+    background-image: url(//image/ico-check.png);
     background-repeat: no-repeat;
     background-position: 10px center;
 }

@@ -18,5 +18,4 @@ public class DailyReportManageForDumpApplication extends SpringBootServletInitia
 		SpringApplication.run(DailyReportManageForDumpApplication.class, args);
 	}
 
-
 }

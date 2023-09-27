@@ -55,7 +55,7 @@ public class LoginController {
 
     @RequestMapping("/join/step1")
     public String joinSelect() {
-        return loginService.joinSelect();
+        return "/login/join_select";
     }
 
     @RequestMapping("/join/step2")
@@ -64,7 +64,8 @@ public class LoginController {
         response.setHeader("Pragma","no-cache");
         response.setDateHeader("Expires",0);
 
-        return loginService.joinForm(joinData, model);
+        model.addAttribute("type", joinData.getType());
+        return "/login/join_form";
     }
 
     /**

@@ -1,7 +1,11 @@
 *,html,body{
     font-family: GmarketSansTTF!important;
 }
-header{display: none}
+
+header{
+    display: none
+}
+
 .select_area {
     padding: 0 25px;
     margin-top: 30px;

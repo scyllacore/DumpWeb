@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.dailyReportModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6MapperForVehicleManageMileageViewer;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;

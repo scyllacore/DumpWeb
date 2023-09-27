@@ -27,7 +27,7 @@ public class LoginService {
      * @return
      */
     public String loginForm() {
-        return "/login/loginForm";
+        return "/login/login_form";
     }
 
     /**
@@ -50,9 +50,9 @@ public class LoginService {
 
                     rtnMap.put("httpCode", 200);
                     if (loginInfo.getUserPosition().equals("driver")) {
-                        rtnUrl = "/dailyReport/driver";
+                        rtnUrl = "/manage/step1/step1Index";
                     } else {
-                        rtnUrl = "/dailyReport/manager";
+                        rtnUrl = "/manage/step1/step2Index";
                     }
                     rtnMap.put("rtnUrl", rtnUrl);
                 } else {
@@ -72,13 +72,6 @@ public class LoginService {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    public String joinForm(Login joinData, Model model) {
-        model.addAttribute("type", joinData.getType());
-        return "/login/joinForm";
-    }
-    public String joinSelect() {
-        return "/login/joinSelect";
-    }
 
     public String join(Login loginData) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
@@ -112,7 +105,7 @@ public class LoginService {
     }
 
     public String pwChangeForm() {
-        return "/login/password_changeForm";
+        return "/login/password_change_form";
     }
 
     public String pwChange(Login login) {
@@ -129,7 +122,7 @@ public class LoginService {
     }
 
     public String trialPage() {
-        return "/login/trialSelect";
+        return "/login/trial_select";
     }
 
     public String trialLogin(HttpServletRequest request, Login login) {
@@ -138,10 +131,10 @@ public class LoginService {
         try {
             if (login.getType().equals("driver") ) {
                 login.setUserId("08호7313");
-                rtnUrl = "/dailyReport/driver";
+                rtnUrl = "/manage/step1/step1Index";
             } else {
                 login.setUserId("010-3717-7406");
-                rtnUrl = "/dailyReport/manager";
+                rtnUrl = "/manage/step2/step2Index";
 
             }
 
@@ -157,8 +150,6 @@ public class LoginService {
         } catch (Exception e) {
             log.error("Exception[" + e.getMessage() + "]");
         }
-
-
 
 
         return commonUtil.jsonFormatTransfer(rtnMap);
