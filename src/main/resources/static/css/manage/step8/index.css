@@ -1,0 +1,217 @@
+.ui-datepicker .ui-datepicker-title select {
+    margin: 1px 7px;
+}
+
+.agreement_container button {
+    font-size: 12px;
+    line-height: 15px;
+    width: 80px;
+}
+
+.common_btn {
+    border: 1px solid #0068b7;
+    cursor: pointer;
+    background: #fff;
+    font-size: 16px;
+    color: #0064c1;
+    font-weight: 600;
+    width: 120px;
+    height: 40px;
+    line-height: 38px;
+}
+
+.agreement_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+    font-size: 12px;
+}
+
+@media screen and (min-width: 280px) and (max-width: 1024px) {
+    .search-form-major label {
+        width: initial;
+        margin-bottom: 8px;
+    }
+}
+
+.ui-datepicker-trigger {
+    display: none;
+}
+
+@media screen and (min-width: 280px) and (max-width: 1980px) {
+    .sub-title {
+        padding-bottom: initial;
+        border-bottom: initial;
+    }
+
+    .search-form {
+        margin: 15px 0 10px;
+    }
+
+    .table-btn {
+        text-align: center;
+        float: none;
+    }
+}
+
+.default-tab__ul.cnt8 li {
+    width: 12.5%;
+}
+
+.wp70 {
+    width: 70%;
+}
+
+.wp90 {
+    width: 90%;
+}
+
+@media screen and (min-width: 1025px) {
+    .onlyMobileFunction {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .workplan_select {
+        width: 23px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .search-form-details label {
+        position: absolute;
+        left: 0;
+        font-size: 13px;
+        width: 35%;
+    }
+
+    .search-form-details li {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .search-form-details .input-group {
+        width: 100%;
+        padding-left: 120px;
+    }
+}
+
+.opacity_0_5 {
+    opacity: 0.5;
+}
+
+.ui-datepicker {
+    font-size: 12px;
+    width: 250px
+}
+
+.ui-datepicker select.ui-datepicker-month {
+    width: 35%;
+    font-size: 11px;
+    margin-left: 5%;
+    height: 20px
+}
+
+.ui-datepicker select.ui-datepicker-year {
+    width: 35%;
+    font-size: 11px;
+    height: 20px
+}
+
+.lineFirstBold:first-line {
+    color: #6f1111;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+    .onlyPCFunction {
+        display: none;
+    }
+
+    .mobile-fw-300 {
+        font-weight: 300;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.list-table th.center {
+    text-align: center;
+}
+
+@media screen and (max-width: 280px) {
+    .search-form-major .date-wrap {
+        margin-top: initial;
+        margin-left: initial;
+    }
+
+    .list-table {
+        table-layout: initial;
+    }
+
+    .list-table td {
+        padding: 10px 1px;
+    }
+
+    .btnWraaper {
+        display: inline-flex;
+        margin: 0 5px;
+        gap: 0 5px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .list-table th {
+        padding: 10px 4px;
+    }
+
+    .table-btn {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .list-table th {
+        padding: 1px 10px;
+    }
+
+    .btn {
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .search-form-major .date-wrap .unit {
+        margin-top: 5px;
+        margin-left: -1px;
+    }
+
+    .search-form-major .date-wrap .fst {
+        font-size: 13px;
+    }
+
+    .search-form-major .date-wrap .last {
+        font-size: 13px;
+    }
+}
+
+.popSearch-listWrap {
+    border-top: none;
+    max-height: inherit;
+    padding-top: 10px;
+}
+
+.red-line-divider {
+    border-top: 2px solid red; /* 그룹 헤더 아래쪽 경계선 추가 */
+    border-bottom: 1px solid #ddd;
+}
