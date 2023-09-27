@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step2MapperForSubmissionMenu">
+    <sql id="res_table">
+        WITH r1 AS
+            (
+                SELECT sheetid, carNo
+                FROM tsheet
+                WHERE carsubmittel = ${userId}
+                  AND date BETWEEN ${startDate} AND ${endDate}
+            ),
+            r2 AS
+           (
+        SELECT *
+        FROM tsheet_sub
+            ),r3 AS(
+        SELECT *
+        FROM r1
+            INNER JOIN r2
+        ON r1.sheetid = r2.sheetid2
+            )
+    </sql>
+
+    <select id="selectCalSummary" parameterType="SearchOption" resultType="Summary">
+        <include refid="res_table">
+            <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{option.startDate}"/>
+            <property name="endDate" value="#{option.endDate}"/>
+        </include>
+
+        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
+        SUM(Qty) as 'totalTrips'
+        from tSheet_sub
+        where sheetID2 in (select sheetid2 from r3)
+    </select>
+
+    <select id="selectDispatchStatusList" resultType="TSheetSub">
+        <include refid="res_table">
+            <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+
+        select * from r3
+    </select>
+
+</mapper>

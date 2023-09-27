@@ -1,35 +1,39 @@
 package com.scyllacore.dumpWeb.dailyReportModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TSheet;
-import com.scyllacore.dumpWeb.commonModule.db.dao.DailyReportStep2Sub;
-import com.scyllacore.dumpWeb.dailyReportModule.service.DailyReportService;
+import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.SearchOption;
+import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.Summary;
+import com.scyllacore.dumpWeb.commonModule.db.dto.dailyreport.TSheetSub;
 import com.scyllacore.dumpWeb.dailyReportModule.service.Step2ServiceForSubmissionMenu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/dailyReport")
+@RequestMapping("/manage/step2")
 @RequiredArgsConstructor
 public class Step2ControllerForSubmissionMenu {
 
-    private final DailyReportService dailyReportService;
     private final Step2ServiceForSubmissionMenu step2Service;
 
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
-    public String step2(Model model, TSheet dailyReport) {
-        return "/dailyReport/step2/manager";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String step2() {
+        return "/manage/step2/step2Index";
     }
 
+    @RequestMapping(value = "/ajax/summary", method = RequestMethod.POST)
+    @ResponseBody
+    public Summary tDriveSummary(SearchOption option) {
+        return step2Service.findCalSummary(option);
+    }
 
-    @RequestMapping(value = "/step2/getCarAndExpense", method = RequestMethod.GET)
-    @ModelAttribute("carAndExpense")
-    public List<DailyReportStep2Sub> getCarAndExpense() {
-        List<DailyReportStep2Sub> carAndExpense = step2Service.getSummary();
-        return carAndExpense;
+    @RequestMapping(value = "/ajax/dispatchStatusList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TSheetSub> todayDispatchStatusList() {
+        return step2Service.findTodayDispatchStatusList();
     }
 }
 
