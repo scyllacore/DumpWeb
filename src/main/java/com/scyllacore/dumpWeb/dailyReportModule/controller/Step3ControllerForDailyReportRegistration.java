@@ -12,7 +12,7 @@ public class Step3ControllerForDailyReportRegistration {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step3() {
-        return "/manage/step3/step3Index";
+        return "/manage/step3/step3_index";
     }
 
 }

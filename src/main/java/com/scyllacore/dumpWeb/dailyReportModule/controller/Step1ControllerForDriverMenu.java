@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Step1ControllerForDriverMenu {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step1() {
-        return "/manage/step1/step1Index";
+        return "/manage/step1/step1_index";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Step4ControllerForDailyReportViewer {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step4() {
-        return "/manage/step4/step4Index";
+        return "/manage/step4/step4_index";
     }
 
 }

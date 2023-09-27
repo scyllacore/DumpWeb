@@ -21,7 +21,7 @@ public class Step2ControllerForSubmissionMenu {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step2() {
-        return "/manage/step2/step2Index";
+        return "/manage/step2/step2_index";
     }
 
     @RequestMapping(value = "/ajax/summary", method = RequestMethod.POST)

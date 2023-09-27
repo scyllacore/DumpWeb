@@ -21,7 +21,7 @@ public class Step6ControllerForVehicleManageMileageViewer {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step6() {
-        return "manage/step6/step6Index";
+        return "/manage/step6/step6_index";
     }
 
     @RequestMapping(value = "/ajax/list", method = RequestMethod.POST)

@@ -19,7 +19,7 @@ public class Step5ControllerForVehicleManageMileageRegistration {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String step5() {
-        return "manage/step5/step5Index";
+        return "/manage/step5/step5_index";
     }
 
     /* click.js */
