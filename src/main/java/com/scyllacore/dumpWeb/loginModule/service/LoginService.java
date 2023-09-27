@@ -50,9 +50,9 @@ public class LoginService {
 
                     rtnMap.put("httpCode", 200);
                     if (loginInfo.getUserPosition().equals("driver")) {
-                        rtnUrl = "/manage/step1/step1Index";
+                        rtnUrl = "/manage/step1";
                     } else {
-                        rtnUrl = "/manage/step1/step2Index";
+                        rtnUrl = "/manage/step2";
                     }
                     rtnMap.put("rtnUrl", rtnUrl);
                 } else {
@@ -131,10 +131,10 @@ public class LoginService {
         try {
             if (login.getType().equals("driver") ) {
                 login.setUserId("08호7313");
-                rtnUrl = "/manage/step1/step1Index";
+                rtnUrl = "/manage/step1";
             } else {
                 login.setUserId("010-3717-7406");
-                rtnUrl = "/manage/step2/step2Index";
+                rtnUrl = "/manage/step2";
 
             }
 

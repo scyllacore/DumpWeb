@@ -19,7 +19,7 @@ public class Step2ControllerForSubmissionMenu {
 
     private final Step2ServiceForSubmissionMenu step2Service;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String step2() {
         return "/manage/step2/step2Index";
     }
