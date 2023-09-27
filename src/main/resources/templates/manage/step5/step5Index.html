@@ -13,7 +13,7 @@
 <section class="DrvSection">
     <h2>차량관리 차계부 등록</h2> <span></span>
     <form name="entry_form">
-        <input type="hidden" name="driveID" type="number" value = "0">
+        <input type="hidden" name="driveID" value = "0">
         <fieldset>
             <div class="item" name="item">
                 <input type="radio" name="drvClub" id="rdOli" value="주유">
@@ -51,7 +51,7 @@
                     <span class="drvInputSpan"><input id="useOil" name="useOil" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="주유량"></span>
                 </li>
                 <li>
-                    <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
+                    <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
                     <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
@@ -129,13 +129,13 @@
 
 <th:block th:replace="/include/footer :: footerFragment"></th:block>
 
-<script src="/js/dailyReport/step5/datepicker.js"></script>
-<script src="/js/dailyReport/step5/CheckDisabled.js"></script>
-<script src="/js/dailyReport/step5/tabpage.js"></script>
-<script src="/js/dailyReport/step5/voice.js"></script>
-<script src="/js/dailyReport/step5/list.js"></script>
-<script src="/js/dailyReport/step5/click.js"></script>
-<script src="/js/dailyReport/step5/popup.js"></script>
-<script src="/js/dailyReport/step5/param.js"></script>
+<script src="/js/manage/step5/datepicker.js"></script>
+<script src="/js/manage/step5/CheckDisabled.js"></script>
+<script src="/js/manage/step5/tabpage.js"></script>
+<script src="/js/manage/step5/voice.js"></script>
+<script src="/js/manage/step5/list.js"></script>
+<script src="/js/manage/step5/click.js"></script>
+<script src="/js/manage/step5/popup.js"></script>
+<script src="/js/manage/step5/param.js"></script>
 
 </html>
