@@ -2,87 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="menuFragment">
 
-<nav class="mobile-navi-wrap">
-    <h1 class="offscreen">모바일 웹 네비게이션</h1>
+    <nav class="menu-wrap">
 
-    <div class="mobile-navi-top">
-        <span>
-            sessionScope.loginInfo.userId 값 뜨게 할 것
-        </span>
-        <span class="bar"></span>
-        <span class="app-dis-n">
-            <span onclick="$.moveChangeForm();">
-                암호변경
-            </span>
-        </span>
-        <span class="bar"></span>
-        <span class="app-dis-n">
-            <span onclick="$.logout()">종료</span>
-        </span>
-        <a href="javascript:$.toggleLeftMenu()" class="close-btn" title="메뉴창 닫힘">
-            <img src="/image/icons/ico_close.png" alt="닫기">.
-        </a>
-    </div>
+        <div class="top-area">
+            <span>[[${session.loginInfo.userId}]]</span>
+            <span class="bar"></span>
+            <button class="change-password-button" onclick="$.moveChangeForm();">
+            암호변경
+            </button>
+            <span class="bar"></span>
+            <button class="logout-button" onclick="$.logout()">종료</button>
 
-    <ul class="mobile-navi-dept1">
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step1">
-                    <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step2">
-                    <span style="font-weight: bold; color: blue;">②</span> 제출처용 메뉴
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step3">
-                    <span style="font-weight: bold; color: blue;">③</span> 운행일보 등록
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step4">
-                    <span style="font-weight: bold; color: blue;">④</span> 운행일보 조회
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step5">
-                    <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 등록
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step6">
-                    <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 조회
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step7">
-                    <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/manage/step8">
-                    <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
-                </a>
-            </p>
-        </li>
-    </ul>
-</nav>
+            <button href="javascript:$.toggleLeftMenu()" class="close-button" title="메뉴창 닫힘">
+                <img src="/image/icons/ico_close.png" alt="닫기">.
+            </button>
+        </div>
+
+        <ul class="category">
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step1">
+                        <span>①</span> 기사용 메뉴
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step2">
+                        <span>②</span> 제출처용 메뉴
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step3">
+                        <span>③</span> 운행일보 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step4">
+                        <span >④</span> 운행일보 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step5">
+                        <span>⑤</span> 차량관리 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step6">
+                        <span>⑥</span> 차량관리 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step7">
+                        <span>⑦</span> 제출처 주문 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="step-item" href="/manage/step8">
+                        <span>⑧</span> 제출처 전표 조회
+                    </a>
+                </p>
+            </li>
+        </ul>
+    </nav>
 
 </th:block>
 </html>
