@@ -15,6 +15,7 @@
     display: none;
   }
 }
+
 @media screen and (max-width: 1024px) {
   .workplan_select {
     width: 23px;
@@ -24,24 +25,30 @@
     border-left: none;
     padding-left: 0;
   }
-  .search-form-details label {
-    position: absolute;
-    left: 0;
-    font-size: 13px;
-    width: 35%;
-  }
-  .search-form-details li {
-    width: 100%;
-    float: none;
-    margin-right: 0;
-    position: relative;
-    padding-bottom: 10px;
-  }
-  .search-form-details .input-group {
-    width: 100%;
-    padding-left: 120px;
+
+  .search-form-details {
+    label {
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+      width: 35%;
+    }
+
+    li {
+      width: 100%;
+      float: none;
+      margin-right: 0;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .input-group {
+      width: 100%;
+      padding-left: 120px;
+    }
   }
 }
+
 .po-re {
   position: relative;
 }
@@ -64,14 +71,19 @@
 
 .pre_text_word {
   white-space: pre-wrap;
+
   /* CSS3*/
   white-space: -moz-pre-wrap;
+
   /* Mozilla, since 1999 */
   white-space: -pre-wrap;
+
   /* Opera 4-6 */
   white-space: -o-pre-wrap;
+
   /* Opera 7 */
   word-wrap: break-all;
+
   /* Internet Explorer 5.5+ */
 }
 
@@ -87,17 +99,21 @@
 .ui-datepicker {
   font-size: 12px;
   width: 250px;
-}
-.ui-datepicker select.ui-datepicker-month {
-  width: 30%;
-  font-size: 11px;
-  margin-left: 5%;
-  height: 20px;
-}
-.ui-datepicker select.ui-datepicker-year {
-  width: 30%;
-  font-size: 11px;
-  height: 20px;
+
+  select {
+    &.ui-datepicker-month {
+      width: 30%;
+      font-size: 11px;
+      margin-left: 5%;
+      height: 20px;
+    }
+
+    &.ui-datepicker-year {
+      width: 30%;
+      font-size: 11px;
+      height: 20px;
+    }
+  }
 }
 
 #banner_wrap {
@@ -122,9 +138,10 @@
   border: 1px solid rgba(51, 86, 123, 0.8);
   border-width: 5px;
   background-color: #002c5a;
-}
-#banner_quick a {
-  color: white;
+
+  a {
+    color: white;
+  }
 }
 
 #banner_container {
@@ -158,10 +175,12 @@
   .onlyPCFunction {
     display: none;
   }
+
   .mobile-fw-300 {
     font-weight: 300;
   }
 }
+
 #graph_donut_title {
   width: 40%;
   text-align: center;
@@ -176,11 +195,13 @@
 }
 
 /* LINE :: focus mouse change */
+
 .pointer {
   cursor: pointer;
 }
 
 /* LINE :: th align center */
+
 .list-table th.center {
   text-align: center;
 }
@@ -197,5 +218,3 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-
-/*# sourceMappingURL=header.css.map */
