@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="headerFragment">
+
+    <th:block th:replace="/include/head :: headFragment"></th:block>
+
+    <head>
+        <link href="/css/common/manage_header.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <div class="layer-mask"></div>
+    <header class="header">
+        <div class="header-top">
+            <div class="maxwrap">
+                <div class="header-topWrap">
+					<span class="call-button">
+						<img src="/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
+					</span>
+
+                    <span class="comp-name" th:if="${session.loginInfo} != null">
+					[[${session.loginInfo.userId}]]
+				</span>
+
+                    <div class="header-top-right">
+                        <ul class="header-top__ul">
+                            <li><a href="#" onclick="$.logout();"
+                                   style="width: auto; font-size: 17px; font-weight: bold;">로그아웃</a></li>
+                            <li>
+                                <button class="header__btn-menu" onclick="$.toggleLeftMenu()"
+                                        style="width: 35px; font-size: 17px; font-weight: bold;">
+                                    메뉴
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:replace="/include/menu :: menuFragment"></th:block> <!-- 모바일 웹 메뉴 -->
+    </header>
+
+</th:block>
+</html>
