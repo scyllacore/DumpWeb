@@ -198,4 +198,10 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
+.call-button {
+  font-weight: bold;
+  font-size: 0;
+  display: inline-block;
+}
+
 /*# sourceMappingURL=header.css.map */
