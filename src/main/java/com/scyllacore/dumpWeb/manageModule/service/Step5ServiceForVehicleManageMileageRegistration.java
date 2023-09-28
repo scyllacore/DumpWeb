@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.dailyReportModule.service;
+package com.scyllacore.dumpWeb.manageModule.service;
 
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;

@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.dailyReportModule.service;
+package com.scyllacore.dumpWeb.manageModule.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

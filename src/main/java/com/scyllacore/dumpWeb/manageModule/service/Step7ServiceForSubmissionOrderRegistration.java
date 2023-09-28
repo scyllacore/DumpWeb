@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.dailyReportModule.service;
+package com.scyllacore.dumpWeb.manageModule.service;
 
 public class Step7ServiceForSubmissionOrderRegistration {
 }

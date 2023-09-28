@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.dailyReportModule.controller;
+package com.scyllacore.dumpWeb.manageModule.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.dailyReportModule.controller;
+package com.scyllacore.dumpWeb.manageModule.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/manage/step3")
+@RequestMapping("/manage/step4")
 @RequiredArgsConstructor
-public class Step3ControllerForDailyReportRegistration {
-
+public class Step4ControllerForDailyReportViewer {
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String step3() {
-        return "/manage/step3/step3_index";
+    public String step4() {
+        return "/manage/step4/step4_index";
     }
 
 }
