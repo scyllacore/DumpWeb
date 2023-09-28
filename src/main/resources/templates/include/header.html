@@ -2,77 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="headerFragment">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="description" content="">
-	<meta name="keyword" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="">
+        <meta name="keyword" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-	<meta name="msapplication-TileImage" content="/image/favicon/favicon.png">
-	<link rel="shortcut icon" href="/image/favicon/favicon.png">
+        <meta name="msapplication-TileImage" content="/image/favicon/favicon.png">
+        <link rel="shortcut icon" href="/image/favicon/favicon.png">
 
-	<link href="/js/jquery.modal-master/css/jquery.modal.css" type="text/css" rel="stylesheet" />
-	<link href="/js/jquery.modal-master/css/jquery.modal.theme-xenon.css"  type="text/css" rel="stylesheet" />
-	<link href="/js/jquery.modal-master/css/jquery.modal.theme-atlant.css"  type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="/js/jquery.modal-master/js/jquery.modal.js" ></script>
+        <link href="/js/jquery.modal-master/css/jquery.modal.css" type="text/css" rel="stylesheet"/>
+        <link href="/js/jquery.modal-master/css/jquery.modal.theme-xenon.css" type="text/css" rel="stylesheet"/>
+        <link href="/js/jquery.modal-master/css/jquery.modal.theme-atlant.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="/js/jquery.modal-master/js/jquery.modal.js"></script>
 
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-	<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 
-	<link href="/css/common/style.css" rel="stylesheet" type="text/css">
-	<link href="/css/common/loading.css" rel="stylesheet" type="text/css">
-	<link href="/css/common/header.css" rel="stylesheet" type="text/css">
-	<script src="/js/include/header.js"></script>
+        <link href="/css/common/style.css" rel="stylesheet" type="text/css">
+        <link href="/css/common/loading.css" rel="stylesheet" type="text/css">
+        <link href="/css/common/header.css" rel="stylesheet" type="text/css">
+        <script src="/js/include/header.js"></script>
 
-	<title>일보관리시스템</title>
-</head>
+        <title>일보관리시스템</title>
+    </head>
 
-
-<header class="header">
-	<div class="header-top">
-		<div class="maxwrap">
-			<div class="header-topWrap">
+    <div class="layer-mask"></div>
+    <header class="header">
+        <div class="header-top">
+            <div class="maxwrap">
+                <div class="header-topWrap">
 					<span class="call-button">
 						<img src="/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
 					</span>
 
-				<span class="comp-name" th:if="${session.loginInfo} != null">
+                    <span class="comp-name" th:if="${session.loginInfo} != null">
 					[[${session.loginInfo.userId}]]
 				</span>
 
-				<div class="header-top-right">
-					<ul class="header-top__ul">
-						<li><a href="#" onclick="$.logout();" style="width: auto; font-size: 17px; font-weight: bold;">로그아웃</a></li>
-						<li>
-							<button class="header__btn-menu" onclick="$.toggleLeftMenu()" style="width: 35px; font-size: 17px; font-weight: bold;">
-								메뉴
-							</button>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div><!--header-top-->
+                    <div class="header-top-right">
+                        <ul class="header-top__ul">
+                            <li><a href="#" onclick="$.logout();"
+                                   style="width: auto; font-size: 17px; font-weight: bold;">로그아웃</a></li>
+                            <li>
+                                <button class="header__btn-menu" onclick="$.toggleLeftMenu()"
+                                        style="width: 35px; font-size: 17px; font-weight: bold;">
+                                    메뉴
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!--header-top-->
 
-	<th:block th:replace="/include/mobile_left_menu :: menuFragment"></th:block> <!-- 모바일 웹 메뉴 -->
+        <th:block th:replace="/include/mobile_left_menu :: menuFragment"></th:block> <!-- 모바일 웹 메뉴 -->
 
-</header>
+    </header>
 
-<div id="page_loading_progressbar" style="z-index:9998; position:fixed; visibility:hidden; left:calc(100%/2); top:calc(100%/2);">
-	<div class="closeMask" style="left:0px; top:0px;"></div>
+    <div id="page_loading_progressbar"
+         style="z-index:9998; position:fixed; visibility:hidden; left:calc(100%/2); top:calc(100%/2);">
+        <div class="closeMask" style="left:0px; top:0px;"></div>
 
-	<div id="ajaxloader2">
-		<div class="outer"></div>
-		<div class="inner" style="top: -40px;"></div>
-		<p style="color:#fff; text-align:center;">Checking...</p>
-	</div>
-</div>
+        <div id="ajaxloader2">
+            <div class="outer"></div>
+            <div class="inner" style="top: -40px;"></div>
+            <p style="color:#fff; text-align:center;">Checking...</p>
+        </div>
+    </div>
 
 
-<th:block th:replace="/include/pop-question :: questionFragment"></th:block>
+    <th:block th:replace="/include/pop-question :: questionFragment"></th:block>
 
 </th:block>
 </html>
