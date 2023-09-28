@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 
 $.moveChangeForm = function () {
-    modal({
+    $.modal({
         title: '알림메시지',
         type: 'confirm',
         text: '암호를 변경 하시겠습니까?',
@@ -67,7 +67,7 @@ $.moveChangeForm = function () {
 
 
 $.logout = function() {
-    modal({
+    $(this).modal({
         title: '알림메시지',
         type: 'confirm',
         text: '로그아웃 하시겠습니까?',
