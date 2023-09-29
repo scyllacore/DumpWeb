@@ -75,8 +75,6 @@
   appearance: none;
   vertical-align: middle;
   box-sizing: border-box;
-  padding-block: 1px;
-  padding-inline: 2px;
 }
 .login .login-inner .login-label {
   padding: 0 25px;
