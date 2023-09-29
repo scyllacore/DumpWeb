@@ -2,36 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="headerFragment">
 
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/manage/manageHeader.css">
+    </head>
+
     <th:block th:replace="/include/head :: headFragment"></th:block>
 
     <header class="manage-header">
         <div class="menu-pop-up"></div>
-        <div class="top-area">
-            <div class="base-wrap">
-                <div class="inner">
-					<button class="call-btn">
-						<img src="/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
-					</button>
+        <div class="base-wrap">
+            <div class="inner">
+                <div class="inner-left">
+                    <button class="call-btn">
+                        <img src="/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
+                    </button>
+                </div>
 
-                    <span class="user-id-line" th:if="${session.loginInfo} != null">
-					[[${session.loginInfo.userId}]]
-				    </span>
 
-                    <div class="inner-right">
-                        <ul>
-                            <li>
-                                <button class="logout-btn" href="#" onclick="logout();">로그아웃</button>
-                            </li>
-                            <li>
-                                <button class="menu-btn" onclick="toggleLeftMenu()">메뉴</button>
-                            </li>
-                        </ul>
-                    </div>
+                <span class="user-id-line" th:if="${session.loginInfo} != null">
+                        [[${session.loginInfo.userId}]]
+                </span>
+
+                <div class="inner-right">
+                    <button class="logout-btn" href="#" onclick="logout();">로그아웃</button>
+                    <button class="menu-btn" onclick="toggleLeftMenu()">메뉴</button>
                 </div>
             </div>
         </div>
 
-        <th:block th:replace="/include/manage_menu :: menuFragment"></th:block>
+        <!--        <th:block th:replace="/manage/manage_menu :: menuFragment"></th:block>-->
 
     </header>
 
