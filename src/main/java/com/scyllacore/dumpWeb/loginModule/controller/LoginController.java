@@ -63,6 +63,11 @@ public class LoginController {
         return "/login/join_form";
     }
 
+    @RequestMapping("/join/personalPopUp")
+    public String personalPopUp() {
+        return "/login/personal_info_pop_up";
+    }
+
     /**
      * FUNCTION :: 회원가입
      * @param loginData 회원 정보
