@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
-</head>
+<th:block th:replace="/include/head :: headFragment"></th:block>
 
+<head>
+    <link href="/css/login/typeSelection.css" rel="stylesheet" type="text/css">
+</head>
 
 <body>
 <div class="trial">
-    <section class="login-inner join ">
+    <section class="login-inner">
         <div class="wrap">
             <h2>체험 유형을 선택해주세요.</h2>
             <div class="select_area">
-                <div class="select_box driver" onclick="setTrial(this);">
-                    <img src="/image/login/driver_btn.png" style="width: 100%; height: 95%;">
+                <div class="select-box-driver">
+                    <img src="/image/login/driver_btn.png">
                 </div>
-                <div class="select_box manager" onclick="setTrial(this);">
-                    <img src="/image/login/manager_btn.png" style="width: 100%; height: 95%;">
-
+                <div class="select-box-manager">
+                    <img src="/image/login/manager_btn.png">
                 </div>
             </div>
         </div>

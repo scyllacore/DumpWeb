@@ -122,7 +122,7 @@ public class LoginService {
     }
 
     public String trialPage() {
-        return "/login/trial_select";
+        return "/login/trial";
     }
 
     public String trialLogin(HttpServletRequest request, Login login) {

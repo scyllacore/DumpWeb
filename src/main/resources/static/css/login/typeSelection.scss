@@ -1,0 +1,67 @@
+* {
+  font-family: GmarketSansTTF !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+
+
+.trial {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+
+  .login-inner {
+
+    background-image: url(/image/login/bg-login-m3.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    max-width: 414px;
+    height: 736px;
+    padding: 0 15px;
+    background-size: 100% 736px;
+    display: block;
+    box-sizing: border-box;
+
+    .wrap {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+
+      h2 {
+        text-align: center;
+        font-size: 18px;
+        box-sizing: border-box;
+        display: block;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+
+      }
+
+      .select_area {
+        padding: 0 25px;
+        box-sizing: border-box;
+        display: block;
+
+        .select-box-driver, .select-box-manager {
+          margin: 10px 0;
+          box-sizing: border-box;
+
+          img{
+            width: 100%;
+            height: 145px;
+          }
+
+        }
+
+      }
+    }
+  }
+}
