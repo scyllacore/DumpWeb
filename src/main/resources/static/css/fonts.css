@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'NotoSansKR';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/NotoSansKR-Regular.otf) format("woff"), url(/fonts/NotoSansKR-Regular.otf) format("opentype"); }
+
+@font-face {
+    font-family: 'NotoSansKR';
+    font-style: normal;
+    font-weight: 500;
+    src: url(/fonts/NotoSansKR-Medium.otf) format("woff"), url(/fonts/NotoSansKR-Medium.otf) format("opentype"); }
+
+@font-face {
+    font-family: 'NotoSansKR';
+    font-style: normal;
+    font-weight: 700;
+    src: url(/fonts/NotoSansKR-Bold.otf) format("woff"), url(/fonts/NotoSansKR-Bold.otf) format("opentype"); }
+
+@font-face {
+    font-family: 'GmarketSansTTF';
+    font-style: normal;
+    font-weight: 600;
+    src: url(/fonts/GmarketSansTTFBold.ttf) format('woff');
+}
+@font-face {
+    font-family: 'GmarketSansTTF';
+    font-style: normal;
+    font-weight: 500;
+    src: url(/fonts/GmarketSansTTFMedium.ttf) format('woff');
+}
+@font-face {
+    font-family: 'GmarketSansTTF';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/GmarketSansTTFLight.ttf) format('woff');
+}
+@font-face {
+    font-family: 'SCDream';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/SCDream4.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-style: normal;
+    font-weight: 500;
+    src: url(/fonts/SCDream5.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'SCDream';
+    font-style: normal;
+    font-weight: 600;
+    src: url(/fonts/SCDream6.otf) format('opentype');
+}

@@ -4,18 +4,17 @@
 <th:block th:replace="/include/head :: headFragment"></th:block>
 
 <head>
+    <link href="/css/login/loginForm.css" rel="stylesheet" type="text/css">
 </head>
-
 
 <body>
 <div class="login">
     <section class="login-inner">
         <div class="login-top"></div>
         <h1 class="login-titie">
-            덤프트럭관리<span>시스템</span>
+            배차.일보관리<span>시스템</span>
         </h1>
         <form method="post" name="loginForm">
-
             <div class="login-form">
                 <h2>로그인</h2>
                 <div class="login-input">
@@ -26,10 +25,11 @@
                     <label>비밀번호</label>
                     <input type="password" name="userPw">
                 </div>
+
             </div>
-            <div class="login-label clear" style="padding: 0 25px;">
+            <div class="login-label">
                 <input type="button" class="reg-btn" value="회원가입" onclick="moveJoin();">
-                <label style="margin: 0;">
+                <label>
                     <input type="checkbox" name="id_save">
                     <span>아이디/패스워드 저장</span>
                 </label>
@@ -39,11 +39,10 @@
                 <button class="login-btn" type="button" onclick="loginCheck()">로그인</button>
             </div>
         </form>
-        <div class="question" >
-			<span class="">
+        <div class="question">
+			<span class="ask_text">
 				문의
 			</span>
-            <img src="/image/icons/ico_que.png" alt="" class="">
             <span>02-6012-7406 / 010-3717-7406</span>
         </div>
 
