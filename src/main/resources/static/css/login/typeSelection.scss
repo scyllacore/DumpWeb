@@ -7,7 +7,7 @@
 
 
 
-.trial {
+.trial, .join {
   width: 100%;
   height: auto;
   display: flex;
@@ -15,7 +15,7 @@
   justify-content: center;
   background-color: #fff;
 
-  .login-inner {
+  .trial-inner, .join-inner {
 
     background-image: url(/image/login/bg-login-m3.png);
     background-repeat: no-repeat;

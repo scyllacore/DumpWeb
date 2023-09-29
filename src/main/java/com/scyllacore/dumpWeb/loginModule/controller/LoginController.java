@@ -55,7 +55,7 @@ public class LoginController {
 
     @RequestMapping("/join/step1")
     public String joinSelect() {
-        return "/login/join_select";
+        return "/login/join";
     }
 
     @RequestMapping("/join/step2")
