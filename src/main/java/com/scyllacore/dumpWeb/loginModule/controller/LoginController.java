@@ -59,12 +59,7 @@ public class LoginController {
     }
 
     @RequestMapping("/join/step2")
-    public String joinForm(Login joinData, Model model,HttpServletResponse response) {
-        response.setHeader("Cache-Control","no-cache");
-        response.setHeader("Pragma","no-cache");
-        response.setDateHeader("Expires",0);
-
-        model.addAttribute("type", joinData.getType());
+    public String joinForm() {
         return "/login/join_form";
     }
 
