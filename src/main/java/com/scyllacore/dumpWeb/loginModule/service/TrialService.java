@@ -21,7 +21,7 @@ public class TrialService {
             login.setUserId("010-3717-7406");
         }
 
-        Login trialLoginInfo = trialMapper.findAdvUserInfo(login);
+        Login trialLoginInfo = trialMapper.selectTrialUserInfo(login);
 
         if (trialLoginInfo != null) {
             trialLoginInfo.setTestUserChk(true);

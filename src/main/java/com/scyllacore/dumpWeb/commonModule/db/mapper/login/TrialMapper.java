@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TrialMapper {
-    Login findAdvUserInfo(Login login);
+    Login selectTrialUserInfo(Login login);
 }

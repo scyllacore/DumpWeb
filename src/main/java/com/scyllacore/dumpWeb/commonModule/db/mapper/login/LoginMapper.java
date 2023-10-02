@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface LoginMapper {
-     Login userIdValidChk(Login login);
-     Login findUserInfo(Login login);
+     Login selectUserInfoForValidCheck(Login login);
+     Login selectUserInfo(Login login);
 }

@@ -15,13 +15,13 @@ public class LoginService {
 
     public String tryLogin(Login loginInfo, HttpServletRequest request) {
 
-        Login idInfo = loginMapper.userIdValidChk(loginInfo);
+        Login login = loginMapper.selectUserInfoForValidCheck(loginInfo);
 
-        if (idInfo == null) {
+        if (login == null) {
             return "등록되지 않은 ID 입니다.";
         }
 
-        Login login = loginMapper.findUserInfo(loginInfo);
+        login = loginMapper.selectUserInfo(loginInfo);
 
         if (login == null) {
             return "패스워드가 일치하지 않습니다.";

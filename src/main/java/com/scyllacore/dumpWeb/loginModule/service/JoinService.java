@@ -17,7 +17,7 @@ public class JoinService {
             loginInfo.setUserTel("010" + loginInfo.getUserId());
         }
 
-        if (joinMapper.checkUserIdForDuplicate(loginInfo) > 0) {
+        if (joinMapper.selectUserIdForDuplicateCheck(loginInfo) > 0) {
             return "이미 사용 중인 ID 입니다.";
         }
 

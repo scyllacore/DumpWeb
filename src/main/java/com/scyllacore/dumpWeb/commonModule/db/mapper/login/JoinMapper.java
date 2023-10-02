@@ -8,6 +8,6 @@ public interface JoinMapper {
 
      int insertUserInfo(Login login);
 
-     int checkUserIdForDuplicate(Login login);
+     int selectUserIdForDuplicateCheck(Login login);
 
 }
