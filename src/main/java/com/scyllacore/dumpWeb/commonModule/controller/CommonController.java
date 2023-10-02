@@ -2,14 +2,16 @@ package com.scyllacore.dumpWeb.commonModule.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/common")
+@RequestMapping("/")
 public class CommonController {
 
-    @RequestMapping("/")
-    public String commonPage() {
-        return "";
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String loginPage() {
+        return "redirect:/login";
     }
+
 
 }

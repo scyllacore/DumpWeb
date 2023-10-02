@@ -4,7 +4,6 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface LoginMapper {
-     Login userIdValidChk(Login login);
-     Login findUserInfo(Login login);
+public interface PasswordChangeMapper {
+    int updateUserPassword(Login loginInfo);
 }
