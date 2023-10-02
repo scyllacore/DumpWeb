@@ -2,19 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="menuFragment">
 
-    <nav class="menu-wrap">
+    <link rel="stylesheet" type="text/css" href="/css/manage/manageMenu.css">
+
+    <nav class="manage-menu">
 
         <div class="top-area">
-            <span>[[${session.loginInfo.userId}]]</span>
+
+            <!--/* <span>[[${session.loginInfo.userId}]]</span> */-->
+
+            <span>test</span>
             <span class="bar"></span>
             <button class="change-password-btn" onclick="moveChangeForm();">
-            암호변경
+                암호변경
             </button>
             <span class="bar"></span>
             <button class="logout-btn" onclick="logout()">종료</button>
 
             <button href="javascript:$.toggleLeftMenu()" class="close-btn" title="메뉴창 닫힘">
-                <img src="/image/icons/ico_close.png" alt="닫기">.
+                <img src="/image/icons/ico_close.png" alt="닫기">
             </button>
         </div>
 
@@ -43,7 +48,7 @@
             <li>
                 <p>
                     <a class="category-item" href="/manage/step4">
-                        <span >④</span> 운행일보 조회
+                        <span>④</span> 운행일보 조회
                     </a>
                 </p>
             </li>
