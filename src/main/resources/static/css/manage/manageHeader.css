@@ -41,7 +41,10 @@
   z-index: -1;
 }
 .manage-header .base-wrap .inner .inner-right {
-  float: right;
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  transform: translate(50%, -50%);
   display: inline-block;
 }
 .manage-header .base-wrap .inner .inner-right button {
