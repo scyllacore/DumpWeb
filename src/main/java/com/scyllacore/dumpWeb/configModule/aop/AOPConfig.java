@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.configModule.aop;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,9 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Aspect
 @Component
@@ -26,24 +24,27 @@ public class AOPConfig {
         String type = pjp.getSignature().getDeclaringTypeName();
         String className = type.substring(type.lastIndexOf(".") + 1);
         String method_name = pjp.getSignature().getName();
-        Object result;
+
         log.info("----- AOP Check -----");
         log.info(method_name);
         log.info("---------------------");
-        if (className.equals("LoginController") && !method_name.equals("pwchangeForm")) {
+
+        Object result;
+
+        if (className.equals("LoginController") && !method_name.equals("passwordChange")) {
             return pjp.proceed();
-        } else {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
-            HttpSession session = request.getSession();
-            Login loginInfo = (Login) session.getAttribute("loginInfo");
-
-            if (loginInfo == null) {
-                result = "redirect:/";
-            } else {
-                result = pjp.proceed();
-            }
         }
-                return result;
+
+        HttpServletRequest request =
+                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Login loginInfo = (Login)  request.getSession().getAttribute("loginInfo");
+
+        if (loginInfo == null) {
+            result = "redirect:/";
+        } else {
+            result = pjp.proceed();
+        }
+
+        return result;
     }
 }
