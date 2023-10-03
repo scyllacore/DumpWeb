@@ -34,7 +34,6 @@ public class Step5ControllerForVehicleManageMileageRegistration {
     }
 
     @DeleteMapping(value = "/ajax/delete")
-    @ResponseBody
     public void mileageRemove(int driveID) {
         step5Service.removeMileage(driveID);
     }
