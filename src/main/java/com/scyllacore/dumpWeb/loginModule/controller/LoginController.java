@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.loginModule.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,15 +25,17 @@ public class LoginController {
         return "/login/login_form";
     }
 
-    @PostMapping(value = "/ajax/loginTry")
+    @PostMapping(value = "/ajax/login")
     @ResponseBody
-    public String login(LoginDTO loginInfo, HttpServletRequest request) {
-        String loginType = loginService.login(loginInfo, request);
+    public ResponseDTO<String> login(LoginDTO loginInfo, HttpServletRequest request) {
+        ResponseDTO<String> loginType = loginService.login(loginInfo, request);
 
-        if (loginType.equals("driver")) {
-            return "/dailyReport/driver";
+        if (loginType.getStatus() != 200) {
+            return loginType;
         }
-        return "/dailyReport/manager";
+
+        loginType.setData("/dailyReport/" + loginType.getData());
+        return loginType;
     }
 
     @GetMapping("/logout")

@@ -22,7 +22,7 @@ public class TrialController {
         return "/login/trial";
     }
 
-    @PostMapping("/ajax/trialLoginTry")
+    @PostMapping("/ajax/trialLogin")
     @ResponseBody
     public String trialLogin(HttpServletRequest request, LoginDTO loginInfo) {
         return trialService.loginForTrial(request, loginInfo);
