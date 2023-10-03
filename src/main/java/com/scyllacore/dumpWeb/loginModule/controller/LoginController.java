@@ -26,8 +26,8 @@ public class LoginController {
 
     @PostMapping(value = "/ajax/loginTry")
     @ResponseBody
-    public String loginTry(Login loginInfo, HttpServletRequest request) {
-        String loginType = loginService.tryLogin(loginInfo, request);
+    public String login(Login loginInfo, HttpServletRequest request) {
+        String loginType = loginService.login(loginInfo, request);
 
         if (loginType.equals("driver")) {
             return "/dailyReport/driver";

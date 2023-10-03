@@ -13,7 +13,7 @@ public class LoginService {
 
     private final LoginMapper loginMapper;
 
-    public String tryLogin(Login loginInfo, HttpServletRequest request) {
+    public String login(Login loginInfo, HttpServletRequest request) {
 
         Login login = loginMapper.selectUserInfoForValidCheck(loginInfo);
 

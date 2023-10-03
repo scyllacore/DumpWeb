@@ -26,7 +26,7 @@ public class JoinController {
 
     @PostMapping(value = "/ajax/joinFormSubmit")
     @ResponseBody
-    public String joinFormSubmit(Login loginInfo) {
+    public String join(Login loginInfo) {
         return joinService.join(loginInfo);
     }
 }

@@ -13,7 +13,7 @@ public class TrialService {
 
     private final TrialMapper trialMapper;
 
-    public String tryLoginForTrial(HttpServletRequest request, Login login) {
+    public String loginForTrial(HttpServletRequest request, Login login) {
 
         if (login.getType().equals("driver")) {
             login.setUserId("08호7313");

@@ -25,6 +25,6 @@ public class TrialController {
     @PostMapping("/ajax/trialLoginTry")
     @ResponseBody
     public String trialLogin(HttpServletRequest request, Login login) {
-        return trialService.tryLoginForTrial(request, login);
+        return trialService.loginForTrial(request, login);
     }
 }
