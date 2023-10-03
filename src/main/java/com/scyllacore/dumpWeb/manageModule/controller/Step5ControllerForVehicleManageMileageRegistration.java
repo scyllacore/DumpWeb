@@ -21,25 +21,25 @@ public class Step5ControllerForVehicleManageMileageRegistration {
     }
 
     /* click.js */
-    @PostMapping(value = "/ajax/save")
+    @PostMapping(value = "/ajax/mileageSave")
     @ResponseBody
     public String mileageSave(TDrive mileage) {
         return step5Service.saveMileage(mileage);
     }
 
-    @PostMapping(value = "/ajax/list")
+    @PostMapping(value = "/ajax/mileageList")
     @ResponseBody
     public List<TDrive> mileageList(String date) {
         return step5Service.findMileageList(date);
     }
 
-    @DeleteMapping(value = "/ajax/delete")
+    @DeleteMapping(value = "/ajax/mileageRemove")
     public void mileageRemove(int driveID) {
         step5Service.removeMileage(driveID);
     }
 
     /* param.js */
-    @PostMapping(value = "/ajax/details")
+    @PostMapping(value = "/ajax/mileageDetails")
     @ResponseBody
     public TDrive mileageDetails(int driveID) {
         return step5Service.findMileage(driveID);

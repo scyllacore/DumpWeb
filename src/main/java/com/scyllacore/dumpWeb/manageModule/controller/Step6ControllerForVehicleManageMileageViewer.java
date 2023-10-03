@@ -21,18 +21,18 @@ public class Step6ControllerForVehicleManageMileageViewer {
         return "/manage/step6/step6_index";
     }
 
-    @PostMapping(value = "/ajax/list")
+    @PostMapping(value = "/ajax/mileageList")
     @ResponseBody
     public List<TDrive> mileageList(SearchOption option) {
         return step6Service.findMileageListByOption(option);
     }
 
-    @PostMapping(value = "/ajax/approve")
+    @PostMapping(value = "/ajax/paymentApproval")
     public void paymentApproval(@RequestBody SearchOption option) {
         step6Service.approvePaymentByTDriveChk2(option);
     }
 
-    @PostMapping(value = "/ajax/cancel")
+    @PostMapping(value = "/ajax/paymentCancel")
     public void paymentCancel(@RequestBody SearchOption option) {
         step6Service.cancelPaymentByTDriveChk2(option);
     }
