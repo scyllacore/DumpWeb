@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/login")
@@ -27,7 +24,7 @@ public class LoginController {
         return "/login/login_form";
     }
 
-    @RequestMapping(value = "/ajax/loginTry", method = RequestMethod.POST)
+    @PostMapping(value = "/ajax/loginTry")
     @ResponseBody
     public String loginTry(Login loginInfo, HttpServletRequest request) {
         String loginType = loginService.tryLogin(loginInfo, request);
@@ -38,7 +35,7 @@ public class LoginController {
         return "/dailyReport/manager";
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         loginService.logout(request);
 
