@@ -31,7 +31,7 @@ public class AOPConfig {
 
         Object result;
 
-        if (className.equals("LoginController") && !method_name.equals("passwordChange")) {
+        if (!className.contains("Step") && !method_name.equals("passwordChange")) {
             return pjp.proceed();
         }
 
