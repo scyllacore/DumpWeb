@@ -23,20 +23,20 @@
                 </div>
                 <div class="login-input">
                     <label>비밀번호</label>
-                    <input type="password" name="userPw">
+                    <input type="password" name="userPwd">
                 </div>
 
             </div>
             <div class="login-label">
-                <input type="button" class="reg-btn" value="회원가입" onclick="moveJoin();">
+                <input type="button" class="reg-btn" value="회원가입" onclick="location.href='/join/step1';">
                 <label>
-                    <input type="checkbox" name="id_save">
+                    <input type="checkbox" name="accountSave">
                     <span>아이디/패스워드 저장</span>
                 </label>
             </div>
             <div class="login-btnGroup">
                 <button class="login-btn" type="button" onclick="location.href='/trial'">체험, 둘러보기</button>
-                <button class="login-btn" type="button" onclick="loginCheck()">로그인</button>
+                <button class="login-btn" type="button" onclick="login()">로그인</button>
             </div>
         </form>
         <div class="question">
@@ -49,6 +49,8 @@
     </section>
 </div>
 </body>
+
+<script src="/js/login/loginForm.js"></script>
 
 </html>
 
