@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.JoinMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ public class JoinService {
 
     private final JoinMapper joinMapper;
 
-    public String join(Login loginInfo) {
+    public String join(LoginDTO loginInfo) {
 
-        if (loginInfo.getUserPosition().equals("manager")) {
+        if (loginInfo.getUserType().equals("manager")) {
             loginInfo.setUserTel("010" + loginInfo.getUserId());
         }
 

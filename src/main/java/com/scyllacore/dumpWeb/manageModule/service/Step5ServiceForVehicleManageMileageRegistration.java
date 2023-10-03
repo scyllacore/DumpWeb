@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5MapperForVehicleManageMileageRegistration;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,28 +19,28 @@ public class Step5ServiceForVehicleManageMileageRegistration {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 
-    public String saveMileage(TDrive tDrive) {
+    public String saveMileage(MileageDTO mileage) {
 
-        tDrive.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
+        mileage.setUserId_IDX_FK(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserId_IDX()));
 
-        if (tDrive.getDriveID() == 0) {
-            step5Mapper.insertTDrive(tDrive);
+        if (mileage.getDriveId() == 0) {
+            step5Mapper.insertMileage(mileage);
         } else {
-            step5Mapper.updateTDrive(tDrive);
+            step5Mapper.updateMileage(mileage);
         }
 
         return "저장 완료.";
     }
 
-    public List<TDrive> findMileageList(String date) {
-        return step5Mapper.selectTDriveList(commonUtil.getLoginInfoBySession().getUserId(), date);
+    public List<MileageDTO> findMileageList(String date) {
+        return step5Mapper.selectMileageList(commonUtil.getLoginInfoBySession().getUserId(), date);
     }
 
-    public void removeMileage(int driveID) {
-        step5Mapper.deleteTDrive(commonUtil.getLoginInfoBySession().getUserId(), driveID);
+    public void removeMileage(int driveId) {
+        step5Mapper.deleteMileage(commonUtil.getLoginInfoBySession().getUserId(), driveId);
     }
 
-    public TDrive findMileage(int driveID) {
-        return step5Mapper.selectTDriveDetails(commonUtil.getLoginInfoBySession().getUserId(), driveID);
+    public MileageDTO findMileage(int driveId) {
+        return step5Mapper.selectMileage(commonUtil.getLoginInfoBySession().getUserId(), driveId);
     }
 }

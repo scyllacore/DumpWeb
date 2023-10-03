@@ -4,97 +4,95 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.Step5MapperForVehicleManageMileageRegistration">
 
-    <insert id="insertTDrive" parameterType="TDrive">
-        INSERT INTO tdrive
-        (
-        carno,
-        drvdate,
-        lastkm,
-        drvclub,
-        useamt,
-        useoil,
-        drvrem,
-        chk2,
-        rependdate,
-        repaddkm,
-        rependchk,
-        drivess)
-        VALUES      (
-                      #{carNo},
-                      #{drvDate},
-                      #{lastKm},
-                      #{drvClub},
-                      #{useAmt},
-                      #{useOil},
-                      #{drvRem},
-                      #{chk2},
-                      #{rependdate},
-                      #{repaddkm},
-                      #{rependchk},
-                      (SELECT uuserid
-                       FROM   tsitepw
-                       WHERE  userid = #{carNo}))
+    <insert id="insertMileage" parameterType="MileageDTO">
+        INSERT INTO mileage_tb
+        (CAR_NO,
+         DRIVE_DATE,
+         TYPE,
+         LAST_KM,
+         USED_AMOUNT,
+         USED_OIL,
+         MEMO,
+         PAYMENT_CHK,
+         SCHD_REPL_KM,
+         SCHD_REPL_DATE,
+         REPL_CHK,
+         USER_ID_IDX_FK)
+        VALUES (#{carNo},
+                #{driveDate},
+                #{type},
+                #{lastKm},
+                #{usedAmount},
+                #{usedOil},
+                #{memo},
+                #{paymentChk},
+                #{replKM},
+                #{replDate},
+                #{replChk},
+                (SELECT USER_ID_IDX
+                 FROM user_info_tb
+                 WHERE USER_ID = #{carNo}))
     </insert>
 
 
-    <update id="updateTDrive" parameterType="TDrive">
-        UPDATE tdrive
-        SET drvdate = #{drvDate},
-            drvclub = #{drvClub},
-            lastkm = #{lastKm},
-            useAmt = #{useAmt},
-            useoil = #{useOil},
-            drvrem = #{drvRem},
-            chk2   = #{chk2},
-            rependdate = #{rependdate},
-            repaddkm = #{repaddkm},
-            rependchk = #{rependchk}
-        WHERE carno = #{carNo}
-          AND driveid = #{driveID}
+    <update id="updateMileage" parameterType="MileageDTO">
+        UPDATE mileage_tb
+        SET DRIVE_DATE = #{driveDate},
+            TYPE = #{type},
+            LAST_KM = #{lastKm},
+            USED_AMOUNT = #{usedAmount},
+            USED_OIL = #{usedOil},
+            MEMO = #{memo},
+            PAYMENT_CHK   = #{paymentChk},
+            SCHD_REPL_KM = #{replKM},
+            SCHD_REPL_DATE = #{replDate},
+            REPL_CHK = #{replChk}
+        WHERE CAR_NO = #{carNo}
+          AND DRIVE_ID = #{driveId}
     </update>
 
 
-    <select id="selectTDriveList" resultType="TDrive">
-        SELECT driveID,
-        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
-        drvclub,
-        chk2,
-        lastkm,
-        useamt,
-        useOil,
-        drvrem,
-        rependchk,
-        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-        repaddkm
-        FROM   tdrive
-        WHERE  carno = #{userID}
-        AND drvdate LIKE CONCAT(#{date}, '%')
-        ORDER BY drvclub ASC
+    <select id="selectMileageList" resultType="MileageDTO">
+        SELECT DRIVE_ID,
+               DATE_FORMAT(DRIVE_DATE, '%m.%d')                         AS driveDate,
+               TYPE,
+               PAYMENT_CHK,
+               LAST_KM,
+               USED_AMOUNT,
+               USED_OIL,
+               MEMO,
+               PAYMENT_CHK,
+               SCHD_REPL_KM,
+               IF(SCHD_REPL_DATE IS NULL, '1999-01-01', SCHD_REPL_DATE) AS replDate,
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userId_IDX_FK}
+          AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
+        ORDER BY TYPE ASC
     </select>
 
 
-    <delete id="deleteTDrive">
+    <delete id="deleteMileage">
         DELETE
-        FROM   tdrive
-        WHERE  carno = #{userID}
+        FROM   mileage_tb
+        WHERE  USER_ID_IDX_FK = #{userId_IDX_FK}
           AND driveID = #{driveID}
     </delete>
 
 
-    <select id="selectTDriveDetails" resultType="TDrive">
+    <select id="selectMileage" resultType="MileageDTO">
         SELECT driveID,
-               DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
-               drvclub,
-               chk2,
-               lastkm,
-               useamt,
-               useOil,
-               drvrem,
-               IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-               repaddkm,
-               rependchk
-        FROM   tdrive
-        WHERE  carno = #{userID}
+               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d')              AS driveDate,
+               TYPE,
+               PAYMENT_CHK,
+               LAST_KM,
+               USED_AMOUNT,
+               USED_OIL,
+               MEMO,
+               IF(SCHD_REPL_DATE IS NULL, '1999-01-01', SCHD_REPL_DATE) AS replDate,
+               SCHD_REPL_KM,
+               REPL_CHK
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userId_IDX_FK}
           AND driveID = #{driveID}
     </select>
 

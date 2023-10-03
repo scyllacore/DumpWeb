@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.PasswordChangeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ public class PasswordChangeService {
 
     private final PasswordChangeMapper passwordChangeMapper;
 
-    public String changePassword(Login loginInfo) {
+    public String changePassword(LoginDTO loginInfo) {
         passwordChangeMapper.updateUserPassword(loginInfo);
 
         return "비밀번호가 정상적으로 변경되었습니다.";

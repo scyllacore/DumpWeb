@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.loginModule.service.TrialService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class TrialController {
 
     @PostMapping("/ajax/trialLoginTry")
     @ResponseBody
-    public String trialLogin(HttpServletRequest request, Login login) {
-        return trialService.loginForTrial(request, login);
+    public String trialLogin(HttpServletRequest request, LoginDTO loginInfo) {
+        return trialService.loginForTrial(request, loginInfo);
     }
 }

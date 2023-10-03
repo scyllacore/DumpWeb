@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.LoginMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,9 +13,9 @@ public class LoginService {
 
     private final LoginMapper loginMapper;
 
-    public String login(Login loginInfo, HttpServletRequest request) {
+    public String login(LoginDTO loginInfo, HttpServletRequest request) {
 
-        Login login = loginMapper.selectUserInfoForValidCheck(loginInfo);
+        LoginDTO login = loginMapper.selectUserInfoForValidCheck(loginInfo);
 
         if (login == null) {
             return "등록되지 않은 ID 입니다.";
@@ -30,7 +30,7 @@ public class LoginService {
         HttpSession session = request.getSession();
         session.setAttribute("loginInfo", login);
 
-        return login.getUserPosition();
+        return login.getUserType();
     }
 
 

@@ -6,38 +6,36 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step2MapperForSubmissionMenu">
     <sql id="res_table">
         WITH r1 AS
-            (
-                SELECT sheetid, carNo
-                FROM tsheet
-                WHERE carsubmittel = ${userId}
-                  AND date BETWEEN ${startDate} AND ${endDate}
-            ),
-            r2 AS
-           (
+            (SELECT REPORT_ID,
+                    CAR_NO
+             FROM drive_report_tb
+             WHERE SRC_SUBMIT_TEL = ${userId}
+               AND
+            date BETWEEN ${startDate} AND ${endDate})
+           , r2 AS (
         SELECT *
-        FROM tsheet_sub
-            ),r3 AS(
+        FROM drive_report_sub_tb )
+                , r3 AS (
         SELECT *
         FROM r1
             INNER JOIN r2
-        ON r1.sheetid = r2.sheetid2
-            )
+        ON r1.REPORT_ID = r2.REPORT_ID_FK )
     </sql>
 
-    <select id="selectCalSummary" parameterType="SearchOption" resultType="Summary">
+    <select id="selectComputedSummary" parameterType="SearchOptionDTO" resultType="SummaryDTO">
         <include refid="res_table">
             <property name="userId" value="#{userId}"/>
             <property name="startDate" value="#{option.startDate}"/>
             <property name="endDate" value="#{option.endDate}"/>
         </include>
 
-        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
-        SUM(Qty) as 'totalTrips'
-        from tSheet_sub
-        where sheetID2 in (select sheetid2 from r3)
+        select IF(sum(QUANTITY * UNIT_PRICE) IS NULL , 0 , sum(QUANTITY * UNIT_PRICE)) as 'totalTransportationCost',
+        SUM(QUANTITY) as 'totalTrips'
+        from drive_report_sub_tb
+        where REPORT_ID_FK in (select REPORT_ID_FK from r3)
     </select>
 
-    <select id="selectDispatchStatusList" resultType="TSheetSub">
+    <select id="selectTodayDispatchStatusList" resultType="DriveReportSubDTO">
         <include refid="res_table">
             <property name="userId" value="#{userId}"/>
             <property name="startDate" value="#{today}"/>

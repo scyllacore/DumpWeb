@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Summary {
+public class SummaryDTO {
 
     double totalTransportationCost; //  LINE :: 총 운반 금액
     double totalTrips; // LINE :: 총 운행 대수

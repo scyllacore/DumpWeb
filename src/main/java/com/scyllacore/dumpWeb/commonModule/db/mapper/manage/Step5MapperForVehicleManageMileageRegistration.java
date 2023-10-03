@@ -1,19 +1,19 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface Step5MapperForVehicleManageMileageRegistration {
-    void insertTDrive(TDrive tDrive);
+    void insertMileage(MileageDTO mileage);
 
-    void updateTDrive(TDrive tDrive);
+    void updateMileage(MileageDTO mileage);
 
-    List<TDrive> selectTDriveList(String userID, String date);
+    List<MileageDTO> selectMileageList(String userID, String date);
 
-    void deleteTDrive(String userID, int driveID);
+    void deleteMileage(String userID, int driveID);
 
-    TDrive selectTDriveDetails(String userID, int driveID);
+    MileageDTO selectMileage(String userID, int driveID);
 }

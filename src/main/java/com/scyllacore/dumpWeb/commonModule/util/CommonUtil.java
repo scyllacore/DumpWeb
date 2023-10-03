@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.commonModule.util;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,8 @@ public class CommonUtil {
         return request.getSession(true);
     }
 
-    public Login getLoginInfoBySession() {
-        return (Login) request.getSession(true).getAttribute("loginInfo");
+    public LoginDTO getLoginInfoBySession() {
+        return (LoginDTO) request.getSession(true).getAttribute("loginInfo");
     }
 
 

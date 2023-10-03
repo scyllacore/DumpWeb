@@ -4,28 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.login.JoinMapper">
 
-    <insert id="insertUserInfo" parameterType="Login">
-        INSERT INTO tsitepw(userId
-        , userPW
-        , userTel
-        , userName
-        , joinDate
-        , userPosition
-        <if test="userPosition == 'manager'.toString()">, userSS </if>)
-        VALUES(#{userId}
-        , SHA2(#{userPw}, 256)
-        , #{userTel}
-        , #{userName}
-        , NOW()
-        , #{userPosition}
-        <if test="userPosition == 'manager'.toString()">, #{userSS} </if>)
+    <insert id="insertUserInfo" parameterType="LoginDTO">
+        INSERT INTO user_info_tb( USER_ID
+                                , USER_PWD
+                                , USERNAME
+                                , USER_TYPE
+                                , USER_TEL
+                                , JOIN_DATE)
+        VALUES ( #{userId}
+               , SHA2(#{userPwd}, 256)
+               , #{userName}
+               , #{userType}
+               , #{userTel}
+               , NOW())
     </insert>
 
-    <!--  ID 체크  -->
-    <select id="selectUserIdForDuplicateCheck" parameterType="Login" resultType="Login">
-        SELECT userId
-        FROM tsitepw
-        WHERE userId = #{userId}
+    <select id="selectUserIdForDuplicateCheck" parameterType="LoginDTO" resultType="LoginDTO">
+        SELECT USER_ID
+        FROM user_info_tb
+        WHERE USER_ID = #{userId}
     </select>
 
 </mapper>

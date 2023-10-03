@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SearchOption {
+public class SearchOptionDTO {
     //공통
     String carNo;
     String startDate;
@@ -14,7 +14,7 @@ public class SearchOption {
 
     //step 4,6,8
     String fromSite;
-    String toStie;
+    String toSite;
     String item;
     String searchCarNo;
 

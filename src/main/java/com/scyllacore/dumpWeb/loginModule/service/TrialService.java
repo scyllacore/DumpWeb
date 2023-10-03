@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.TrialMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,18 +13,18 @@ public class TrialService {
 
     private final TrialMapper trialMapper;
 
-    public String loginForTrial(HttpServletRequest request, Login login) {
+    public String loginForTrial(HttpServletRequest request, LoginDTO login) {
 
-        if (login.getType().equals("driver")) {
+        if (login.getUserType().equals("driver")) {
             login.setUserId("08호7313");
         } else {
             login.setUserId("010-3717-7406");
         }
 
-        Login trialLoginInfo = trialMapper.selectTrialUserInfo(login);
+        LoginDTO trialLoginInfo = trialMapper.selectTrialUserInfo(login);
 
         if (trialLoginInfo != null) {
-            trialLoginInfo.setTestUserChk(true);
+            trialLoginInfo.setTrialChk(true);
             HttpSession session = request.getSession();
             session.setAttribute("loginInfo", trialLoginInfo);
         }

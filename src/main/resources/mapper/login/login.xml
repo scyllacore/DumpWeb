@@ -5,13 +5,13 @@
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.login.LoginMapper">
 
     <!--  ID 체크  -->
-    <select id="selectUserInfoForValidCheck" parameterType="Login" resultType="Login">
-        SELECT userId FROM tsitepw WHERE userId = #{userId}
+    <select id="selectUserInfoForValidCheck" parameterType="LoginDTO" resultType="LoginDTO">
+        SELECT USER_ID FROM user_info_tb WHERE USER_ID = #{userId}
     </select>
 
     <!--  로그인 정보 체크  -->
-    <select id="selectUserInfo" parameterType="Login" resultType="Login">
-        SELECT * FROM tsitepw WHERE userId = #{userId} AND userPw = SHA2(#{userPw}, 256)
+    <select id="selectUserInfo" parameterType="LoginDTO" resultType="LoginDTO">
+        SELECT * FROM user_info_tb WHERE USER_ID = #{userId} AND USER_PWD = SHA2(#{userPwd}, 256)
     </select>
 
 </mapper>

@@ -1,8 +1,8 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.Summary;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TSheetSub;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SummaryDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSubDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step2ServiceForSubmissionMenu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,13 +24,13 @@ public class Step2ControllerForSubmissionMenu {
 
     @PostMapping(value = "/ajax/summary")
     @ResponseBody
-    public Summary summary(SearchOption option) {
+    public SummaryDTO summary(SearchOptionDTO option) {
         return step2Service.summarize(option);
     }
 
     @GetMapping(value = "/ajax/todayDispatchStatus")
     @ResponseBody
-    public List<TSheetSub> todayDispatchStatus() {
+    public List<DriveReportSubDTO> todayDispatchStatus() {
         return step2Service.findTodayDispatchStatus();
     }
 }

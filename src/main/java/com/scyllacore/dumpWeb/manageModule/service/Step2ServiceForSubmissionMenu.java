@@ -1,9 +1,8 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.Summary;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TSheetSub;
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SummaryDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSubDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step2MapperForSubmissionMenu;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +25,11 @@ public class Step2ServiceForSubmissionMenu {
         return formatter.format(date);
     }
 
-    public Summary summarize(SearchOption option) {
+    public SummaryDTO summarize(SearchOptionDTO option) {
         return step2Mapper.selectComputedSummary(option, commonUtil.getLoginInfoBySession().getUserId());
     }
 
-    public List<TSheetSub> findTodayDispatchStatus() {
+    public List<DriveReportSubDTO> findTodayDispatchStatus() {
         return step2Mapper.selectTodayDispatchStatusList(commonUtil.getLoginInfoBySession().getUserId(), getToday());
     }
 

@@ -4,9 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.login.TrialMapper">
 
-    <!--  로그인 정보 체크  -->
-    <select id="selectTrialUserInfo" parameterType="Login" resultType="Login">
-        SELECT * FROM tsitepw WHERE userId = #{userId}
+    <select id="selectTrialUserInfo" parameterType="LoginDTO" resultType="LoginDTO">
+        SELECT * FROM user_info_tb WHERE USER_ID = #{userId}
     </select>
 </mapper>
 

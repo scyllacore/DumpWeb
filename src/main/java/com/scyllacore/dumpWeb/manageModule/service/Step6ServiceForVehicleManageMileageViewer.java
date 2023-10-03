@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6MapperForVehicleManageMileageViewer;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,18 +16,18 @@ public class Step6ServiceForVehicleManageMileageViewer {
     private final CommonUtil commonUtil;
 
 
-    public List<TDrive> findMileageListByOption(SearchOption option) {
+    public List<MileageDTO> findMileageListByOption(SearchOptionDTO option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
         return step6Mapper.selectMileageListByOption(option);
     }
 
-    public void approvePaymentByMileageChk2(SearchOption option) {
+    public void approvePaymentByMileageChk2(SearchOptionDTO option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
-        step6Mapper.updateMileageChk2ForApprove(option);
+        step6Mapper.updateMileagePaymentChkForApprove(option);
     }
 
-    public void cancelPaymentByMileageChk2(SearchOption option) {
+    public void cancelPaymentByMileageChk2(SearchOptionDTO option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
-        step6Mapper.updateMileageChk2ForCancel(option);
+        step6Mapper.updateMileagePaymentChkForCancel(option);
     }
 }

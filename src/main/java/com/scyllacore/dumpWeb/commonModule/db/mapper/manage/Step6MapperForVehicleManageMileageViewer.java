@@ -1,17 +1,17 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface Step6MapperForVehicleManageMileageViewer {
-    List<TDrive> selectMileageListByOption(SearchOption option);
+    List<MileageDTO> selectMileageListByOption(SearchOptionDTO option);
 
-    void updateMileageChk2ForApprove(SearchOption option);
+    void updateMileagePaymentChkForApprove(SearchOptionDTO option);
 
 
-    void updateMileageChk2ForCancel(SearchOption option);
+    void updateMileagePaymentChkForCancel(SearchOptionDTO option);
 }

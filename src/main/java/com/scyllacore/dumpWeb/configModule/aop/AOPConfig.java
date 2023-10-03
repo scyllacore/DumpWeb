@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.configModule.aop;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
+import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -37,7 +37,7 @@ public class AOPConfig {
 
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Login loginInfo = (Login)  request.getSession().getAttribute("loginInfo");
+        LoginDTO loginInfo = (LoginDTO)  request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null) {
             result = "redirect:/login";
