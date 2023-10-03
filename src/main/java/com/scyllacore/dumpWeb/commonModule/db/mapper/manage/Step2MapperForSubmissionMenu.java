@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface Step2MapperForSubmissionMenu {
 
-    Summary selectCalSummary(SearchOption option, String userId);
+    Summary selectComputedSummary(SearchOption option, String userId);
 
     List<TSheetSub> selectTodayDispatchStatusList(String userId, String today);
 }

@@ -8,10 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface Step6MapperForVehicleManageMileageViewer {
-    List<TDrive> selectCarListByOption(SearchOption option);
+    List<TDrive> selectMileageListByOption(SearchOption option);
 
-    void updateTDriveChk2ForApprove(SearchOption option);
+    void updateMileageChk2ForApprove(SearchOption option);
 
 
-    void updateTDriveChk2ForCancel(SearchOption option);
+    void updateMileageChk2ForCancel(SearchOption option);
 }

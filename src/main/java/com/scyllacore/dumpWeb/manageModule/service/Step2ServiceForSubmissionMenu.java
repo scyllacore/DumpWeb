@@ -19,24 +19,19 @@ public class Step2ServiceForSubmissionMenu {
     private final Step2MapperForSubmissionMenu step2Mapper;
     private final CommonUtil commonUtil;
 
-    public Login getSessionLoginData() {
-        return (Login) commonUtil.getSession().getAttribute("loginInfo");
-    }
-
-    public String getToday(){
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+    public String getToday() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
 
         return formatter.format(date);
     }
 
-    public Summary findCalSummary(SearchOption option) {
-        return step2Mapper.selectCalSummary(option, getSessionLoginData().getUserId());
+    public Summary summarize(SearchOption option) {
+        return step2Mapper.selectComputedSummary(option, commonUtil.getLoginInfoBySession().getUserId());
     }
 
-    public List<TSheetSub> findTodayDispatchStatusList() {
-        return step2Mapper.selectTodayDispatchStatusList(getSessionLoginData().getUserId(),getToday());
+    public List<TSheetSub> findTodayDispatchStatus() {
+        return step2Mapper.selectTodayDispatchStatusList(commonUtil.getLoginInfoBySession().getUserId(), getToday());
     }
-
 
 }

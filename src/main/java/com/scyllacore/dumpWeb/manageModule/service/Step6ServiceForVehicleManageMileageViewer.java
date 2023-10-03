@@ -2,7 +2,6 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOption;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.Login;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6MapperForVehicleManageMileageViewer;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +18,16 @@ public class Step6ServiceForVehicleManageMileageViewer {
 
     public List<TDrive> findMileageListByOption(SearchOption option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
-        return step6Mapper.selectCarListByOption(option);
+        return step6Mapper.selectMileageListByOption(option);
     }
 
-    public void approvePaymentByTDriveChk2(SearchOption option) {
+    public void approvePaymentByMileageChk2(SearchOption option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
-        step6Mapper.updateTDriveChk2ForApprove(option);
+        step6Mapper.updateMileageChk2ForApprove(option);
     }
 
-    public void cancelPaymentByTDriveChk2(SearchOption option) {
+    public void cancelPaymentByMileageChk2(SearchOption option) {
         option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
-        step6Mapper.updateTDriveChk2ForCancel(option);
+        step6Mapper.updateMileageChk2ForCancel(option);
     }
 }

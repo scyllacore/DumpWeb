@@ -29,12 +29,12 @@ public class Step6ControllerForVehicleManageMileageViewer {
 
     @PostMapping(value = "/ajax/paymentApproval")
     public void paymentApproval(@RequestBody SearchOption option) {
-        step6Service.approvePaymentByTDriveChk2(option);
+        step6Service.approvePaymentByMileageChk2(option);
     }
 
     @PostMapping(value = "/ajax/paymentCancel")
     public void paymentCancel(@RequestBody SearchOption option) {
-        step6Service.cancelPaymentByTDriveChk2(option);
+        step6Service.cancelPaymentByMileageChk2(option);
     }
 
 
