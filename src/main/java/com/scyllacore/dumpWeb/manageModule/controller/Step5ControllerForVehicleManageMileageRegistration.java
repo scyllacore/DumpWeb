@@ -4,9 +4,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import com.scyllacore.dumpWeb.manageModule.service.Step5ServiceForVehicleManageMileageRegistration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,35 +15,35 @@ public class Step5ControllerForVehicleManageMileageRegistration {
 
     private final Step5ServiceForVehicleManageMileageRegistration step5Service;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String step5() {
         return "/manage/step5/step5_index";
     }
 
     /* click.js */
-    @RequestMapping(value = "/ajax/save", method = RequestMethod.POST)
+    @PostMapping(value = "/ajax/save")
     @ResponseBody
-    public String tDriveSave(TDrive tDrive) {
-        return step5Service.saveTDrive(tDrive);
+    public String mileageSave(TDrive mileage) {
+        return step5Service.saveMileage(mileage);
     }
 
-    @RequestMapping(value = "/ajax/list", method = RequestMethod.POST)
+    @PostMapping(value = "/ajax/list")
     @ResponseBody
-    public List<TDrive> tDriveList(String date) {
-        return step5Service.findTDriveList(date);
+    public List<TDrive> mileageList(String date) {
+        return step5Service.findMileageList(date);
     }
 
-    @RequestMapping(value = "/ajax/delete", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/ajax/delete")
     @ResponseBody
-    public void tDriveRemove(int driveID) {
-        step5Service.removeTDrive(driveID);
+    public void mileageRemove(int driveID) {
+        step5Service.removeMileage(driveID);
     }
 
     /* param.js */
-    @RequestMapping(value = "/ajax/details", method = RequestMethod.POST)
+    @PostMapping(value = "/ajax/details")
     @ResponseBody
-    public TDrive tDriveDetails(int driveID) {
-        return step5Service.findTDriveDetails(driveID);
+    public TDrive mileageDetails(int driveID) {
+        return step5Service.findMileage(driveID);
     }
-    
+
 }
