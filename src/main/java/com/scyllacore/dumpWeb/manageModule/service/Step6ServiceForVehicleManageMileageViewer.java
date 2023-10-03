@@ -16,22 +16,19 @@ public class Step6ServiceForVehicleManageMileageViewer {
     private final Step6MapperForVehicleManageMileageViewer step6Mapper;
     private final CommonUtil commonUtil;
 
-    public Login getSessionLoginData() {
-        return (Login) commonUtil.getSession().getAttribute("loginInfo");
-    }
 
-    public List<TDrive> findCarListByOption(SearchOption option) {
-        option.setCarNo(getSessionLoginData().getUserId());
+    public List<TDrive> findMileageListByOption(SearchOption option) {
+        option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
         return step6Mapper.selectCarListByOption(option);
     }
 
-    public void processTDriveChk2(SearchOption option) {
-        option.setCarNo(getSessionLoginData().getUserId());
-        step6Mapper.updateTDriveChk2ForProcess(option);
+    public void approvePaymentByTDriveChk2(SearchOption option) {
+        option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
+        step6Mapper.updateTDriveChk2ForApprove(option);
     }
 
-    public void cancelTDriveChk2(SearchOption option) {
-        option.setCarNo(getSessionLoginData().getUserId());
+    public void cancelPaymentByTDriveChk2(SearchOption option) {
+        option.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
         step6Mapper.updateTDriveChk2ForCancel(option);
     }
 }

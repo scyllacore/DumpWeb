@@ -32,7 +32,7 @@
         </choose>
     </select>
 
-    <update id="updateTDriveChk2ForProcess">
+    <update id="updateTDriveChk2ForApprove">
         UPDATE tdrive
         SET chk2 = 1
         WHERE carno = #{carNo}

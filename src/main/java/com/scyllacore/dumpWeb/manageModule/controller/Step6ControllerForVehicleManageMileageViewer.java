@@ -5,10 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.TDrive;
 import com.scyllacore.dumpWeb.manageModule.service.Step6ServiceForVehicleManageMileageViewer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,27 +16,25 @@ public class Step6ControllerForVehicleManageMileageViewer {
 
     private final Step6ServiceForVehicleManageMileageViewer step6Service;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String step6() {
         return "/manage/step6/step6_index";
     }
 
-    @RequestMapping(value = "/ajax/list", method = RequestMethod.POST)
+    @PostMapping(value = "/ajax/list")
     @ResponseBody
-    public List<TDrive> tDriveList(SearchOption option) {
-        return step6Service.findCarListByOption(option);
+    public List<TDrive> mileageList(SearchOption option) {
+        return step6Service.findMileageListByOption(option);
     }
 
-    @RequestMapping(value = "/ajax/process", method = RequestMethod.POST)
-    @ResponseBody
-    public void tDriveChk2Process(@RequestBody SearchOption option) {
-        step6Service.processTDriveChk2(option);
+    @PostMapping(value = "/ajax/approve")
+    public void paymentApproval(@RequestBody SearchOption option) {
+        step6Service.approvePaymentByTDriveChk2(option);
     }
 
-    @RequestMapping(value = "/ajax/cancel", method = RequestMethod.POST)
-    @ResponseBody
-    public void tDriveChk2Cancel(@RequestBody SearchOption option) {
-        step6Service.cancelTDriveChk2(option);
+    @PostMapping(value = "/ajax/cancel")
+    public void paymentCancel(@RequestBody SearchOption option) {
+        step6Service.cancelPaymentByTDriveChk2(option);
     }
 
 
