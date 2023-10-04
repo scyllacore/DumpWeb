@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.loginModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.TrialMapper;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -13,22 +14,20 @@ public class TrialService {
 
     private final TrialMapper trialMapper;
 
-    public String loginForTrial(HttpServletRequest request, LoginDTO login) {
+    public ResponseDTO<String> loginForTrial(HttpServletRequest request, LoginDTO trialLoginInfo) {
 
-        if (login.getUserType().equals("driver")) {
-            login.setUserId("08호7313");
+        if (trialLoginInfo.getUserType().equals("driver")) {
+            trialLoginInfo.setUserId("08호7313");
         } else {
-            login.setUserId("010-3717-7406");
+            trialLoginInfo.setUserId("010-3717-7406");
         }
 
-        LoginDTO trialLoginInfo = trialMapper.selectTrialUserInfo(login);
+        trialLoginInfo = trialMapper.selectTrialUserInfo(trialLoginInfo);
 
-        if (trialLoginInfo != null) {
-            trialLoginInfo.setTrialChk(true);
-            HttpSession session = request.getSession();
-            session.setAttribute("loginInfo", trialLoginInfo);
-        }
+        trialLoginInfo.setTrialChk(true);
+        HttpSession session = request.getSession();
+        session.setAttribute("loginInfo", trialLoginInfo);
 
-        return "체험판으로 접속했습니다.";
+        return new ResponseDTO<String>(200, trialLoginInfo.getUserType());
     }
 }
