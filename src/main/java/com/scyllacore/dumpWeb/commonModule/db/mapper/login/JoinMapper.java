@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface JoinMapper {
 
-     int insertUserInfo(LoginDTO loginInfo);
+     int insertUserInfo(LoginDTO joinInfo);
 
-     int selectUserIdForDuplicateCheck(LoginDTO loginInfo);
+     int selectUserIdForDuplicateCheck(LoginDTO joinInfo);
 
 }

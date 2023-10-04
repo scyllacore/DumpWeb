@@ -19,8 +19,8 @@
                , NOW())
     </insert>
 
-    <select id="selectUserIdForDuplicateCheck" parameterType="LoginDTO" resultType="LoginDTO">
-        SELECT USER_ID
+    <select id="selectUserIdForDuplicateCheck" parameterType="LoginDTO">
+        SELECT COUNT(*)
         FROM user_info_tb
         WHERE USER_ID = #{userId}
     </select>

@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.loginModule.service.JoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class JoinController {
 
     @PostMapping(value = "/ajax/join")
     @ResponseBody
-    public String join(LoginDTO loginInfo) {
-        return joinService.join(loginInfo);
+    public ResponseDTO<String> join(LoginDTO joinInfo) {
+        return joinService.join(joinInfo);
     }
 }

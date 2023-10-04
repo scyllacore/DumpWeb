@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.loginModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.login.JoinMapper;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +12,18 @@ public class JoinService {
 
     private final JoinMapper joinMapper;
 
-    public String join(LoginDTO loginInfo) {
+    public ResponseDTO<String> join(LoginDTO joinInfo) {
 
-        if (loginInfo.getUserType().equals("manager")) {
-            loginInfo.setUserTel("010" + loginInfo.getUserId());
+        if (joinInfo.getUserType().equals("manager")) {
+            joinInfo.setUserTel("010" + joinInfo.getUserId());
         }
 
-        if (joinMapper.selectUserIdForDuplicateCheck(loginInfo) > 0) {
-            return "이미 사용 중인 ID 입니다.";
+        if (joinMapper.selectUserIdForDuplicateCheck(joinInfo) > 0) {
+            return new ResponseDTO<String>(403,"이미 사용 중인 ID 입니다.");
         }
 
-        joinMapper.insertUserInfo(loginInfo);
-        return "정상적으로 회원가입 되었습니다.";
+        joinMapper.insertUserInfo(joinInfo);
+        return new ResponseDTO<String>(200,"정상적으로 회원가입 되었습니다.");
     }
 
 }
