@@ -13,4 +13,14 @@ public class CommonController {
         return "redirect:/login";
     }
 
+    @GetMapping("/manage/driver")
+    public String driverPage(){
+        return "redirect:/manage/step1";
+    }
+
+    @GetMapping("/manage/manager")
+    public String managerPage(){
+        return "redirect:/manage/step2";
+    }
+
 }

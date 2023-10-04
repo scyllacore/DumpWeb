@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const userInfo = getCookie("kiwonDumpManageUserAccount");
+    const userInfo = getCookie();
 
-    if (userInfo.length <= 0 || userInfo === 'false') {
+    if (userInfo['userId'] == undefined) {
         return;
     }
 
-    const userInfoMap = userInfo;
-
-    document.userId.value = userInfoMap[id];
-    document.userPwd.value = userInfoMap[pwd];
-    document.accountSave.checked = true;
+    document.querySelector('input[name = "userId"]').value = userInfo['userId'];
+    document.querySelector('input[name = "userPwd"]').value = userInfo['userPwd'];
+    document.querySelector('input[name = "accountSave"]').checked = true;
 });
 
 
@@ -38,10 +36,14 @@ function login() {
                 return false;
             }
 
-            if (document.accountSave.checked === true) {
-                setCookie("kiwonDumpManageUserAccount", $("form[name=loginForm]").serialize(), 30);
+            const data = $("form[name=loginForm]").serialize().split('&');
+
+            if (document.querySelector('input[name = "accountSave"]').checked === true) {
+                setCookie('userId', data[0], 30);
+                setCookie('userPwd', data[1], 30);
             } else {
-                deleteCookie("kiwonDumpManageUserAccount");
+                deleteCookie('userId');
+                deleteCookie('userPwd');
             }
 
             location.href = response.data;
@@ -57,31 +59,32 @@ function login() {
 
 }
 
-function getCookie(cookieName) {
-    const cookies = document.cookie.split(';');
+function getCookie() {
+    let cookieMap = {};
 
-    cookieName += '=';
-    var cookieData = document.cookie;
-    var start = cookieData.indexOf(cookieName);
-    var cookieValue = '';
-    if (start != -1) {
-        start += cookieName.length;
-        var end = cookieData.indexOf(';', start);
-        if (end == -1) end = cookieData.length;
-        cookieValue = cookieData.substring(start, end);
-    }
-    return unescape(cookieValue);
+    let cookieData = document.cookie.split('; ');
+
+    cookieData.forEach(data => {
+        const parsingData = data.split('=');
+        cookieMap[parsingData[0]] = decodeURI(decodeURI(parsingData[1]));
+    })
+
+    return cookieMap;
 }
 
-function setCookie(cookieName, value, exdays) {
-    var exdate = new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var cookieValue = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toLocaleString() + "; path=/login");
-    document.cookie = cookieName + "=" + cookieValue;
+function setCookie(cookieName, data, addDay) {
+    const expDate = new Date();
+    expDate.setDate(expDate.getDate() + addDay);
+
+    let parsingData = data.split('=');
+
+    const cookieData = encodeURI(parsingData[1]) + ((addDay == null) ? "" : "; expires=" + expDate.toLocaleString() + "; path=/login");
+    document.cookie = cookieName + "=" + cookieData;
+
 }
 
 function deleteCookie(cookieName) {
-    var expireDate = new Date();
+    const expireDate = new Date();
     expireDate.setDate(expireDate.getDate() - 1);
-    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString() + "; path=/login";
+    document.cookie = cookieName + "=" + "; expires=" + expireDate.toGMTString() + "; path=/login";
 }

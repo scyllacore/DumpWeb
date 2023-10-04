@@ -10,13 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/login")
     public String loginFormPage(HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "no-cache");
@@ -34,7 +33,7 @@ public class LoginController {
             return loginType;
         }
 
-        loginType.setData("/dailyReport/" + loginType.getData());
+        loginType.setData("/manage/" + loginType.getData());
         return loginType;
     }
 
