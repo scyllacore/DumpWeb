@@ -16,18 +16,18 @@
             <div class="line"></div>
             <div class="input-form">
                 <form method="post" name="joinForm">
-                    <input type="hidden" name="userPosition" value="driver">
+                    <input type="hidden" name="userType">
                     <div class="join-input">
                         <label>아이디</label>
                         <input type="text" name="userId" placeholder="차량번호 전체" autocomplete=off>
                     </div>
                     <div class="join-input">
                         <label>비밀번호</label>
-                        <input type="password" name="userPw" placeholder="4자리 이상">
+                        <input type="password" name="userPwd" placeholder="4자리 이상">
                     </div>
                     <div class="join-input">
                         <label>비밀번호<br>확인</label>
-                        <input type="password" id="userPwChk2" placeholder="4자리 이상">
+                        <input type="password" id="userPwChk" placeholder="4자리 이상">
                     </div>
                     <div class="join-input">
                         <label>휴대폰번호</label>
@@ -46,9 +46,12 @@
                         <span class="check-mark"></span>
                         <span>개인정보 수집 및 이용에 동의합니다.</span>
                     </div>
-                    <button class="info-pop-up-btn" onclick="openLayerPrivaryPopUp('pop-personal', this);">
+                    <button class="info-pop-up-btn" onclick="openPersonalInfoNoticePopUp('pop-up-wrap')">
                         [ 개인정보취급방침 보기 ]
                     </button>
+
+                    <th:block th:replace="/login/personal_info_pop_up :: personalPopUpFragment"></th:block>
+
                 </label>
             </div>
             <div class="join-btnGroup">
@@ -66,4 +69,7 @@
 </div>
 
 </body>
+
+<script src="/js/login/joinForm.js"></script>
+
 </html>
