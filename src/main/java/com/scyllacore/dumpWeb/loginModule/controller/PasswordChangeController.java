@@ -3,6 +3,7 @@ package com.scyllacore.dumpWeb.loginModule.controller;
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.loginModule.service.PasswordChangeService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class PasswordChangeController {
 
     @PostMapping(value = "/ajax/changePassword")
     @ResponseBody
-    public ResponseDTO<String> passwordChange(LoginDTO loginInfo) {
-        return passwordChangeService.changePassword(loginInfo);
+    public ResponseDTO<String> passwordChange(HttpServletRequest request,LoginDTO loginInfo) {
+        return passwordChangeService.changePassword(request,loginInfo);
     }
 }

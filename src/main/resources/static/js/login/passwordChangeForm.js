@@ -1,8 +1,3 @@
-getUserIdIDX();
-function getUserIdIDX(){
-    document.querySelector('input[name="userIdIDX"]').value = userIdIDX;
-}
-
 function changePassword(){
 
     const passwordChangeForm = document.querySelector('form[name = "passwordChangeForm"]');
