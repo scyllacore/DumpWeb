@@ -18,24 +18,21 @@
                     </button>
                 </div>
 
-                <span class="user-id-line">
-                    test
-                </span>
-
                 <span class="user-id-line" th:if="${session.loginInfo} != null">
                         [[${session.loginInfo.userId}]]
                 </span>
 
                 <div class="inner-right">
-                    <button class="logout-btn" href="#" onclick="logout();">로그아웃</button>
-                    <button class="menu-btn" onclick="toggleLeftMenu()">메뉴</button>
+                    <button class="menu-btn" onclick="openMenuPopUp('menu-wrap')">메뉴</button>
                 </div>
             </div>
         </div>
 
-        <!--        <th:block th:replace="/manage/manage_menu :: menuFragment"></th:block>-->
+        <th:block th:replace="/manage/manage_menu :: menuFragment"></th:block>
 
     </header>
+
+    <script src="/js/manage/manage_header.js"></script>
 
 </th:block>
 </html>

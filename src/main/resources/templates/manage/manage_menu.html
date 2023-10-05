@@ -4,84 +4,84 @@
 
     <link rel="stylesheet" type="text/css" href="/css/manage/manageMenu.css">
 
-    <nav class="manage-menu">
 
-        <div class="top-area">
+    <div class="menu-wrap">
+        <nav class="manage-menu">
 
-            <!--/* <span>[[${session.loginInfo.userId}]]</span> */-->
+            <div class="top-area">
+                <span th:if="${session.loginInfo} != null">[[${session.loginInfo.userId}]]</span>
+                <span class="bar"></span>
+                <button class="change-password-btn" onclick="moveChangeForm();">
+                    암호변경
+                </button>
+                <span class="bar"></span>
+                <button class="logout-btn" onclick="">로그아웃</button>
 
-            <span>test</span>
-            <span class="bar"></span>
-            <button class="change-password-btn" onclick="moveChangeForm();">
-                암호변경
-            </button>
-            <span class="bar"></span>
-            <button class="logout-btn" onclick="logout()">종료</button>
+                <button class="close-btn" title="메뉴창 닫힘" onclick="closeMenuPopUp('menu-wrap')">
+                    <img src="/image/icons/ico_close.png" alt="닫기">
+                </button>
+            </div>
 
-            <button href="javascript:$.toggleLeftMenu()" class="close-btn" title="메뉴창 닫힘">
-                <img src="/image/icons/ico_close.png" alt="닫기">
-            </button>
-        </div>
-
-        <ul class="category">
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step1">
-                        <span>①</span> 기사용 메뉴
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step2">
-                        <span>②</span> 제출처용 메뉴
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step3">
-                        <span>③</span> 운행일보 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step4">
-                        <span>④</span> 운행일보 조회
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step5">
-                        <span>⑤</span> 차량관리 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step6">
-                        <span>⑥</span> 차량관리 조회
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step7">
-                        <span>⑦</span> 제출처 주문 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="category-item" href="/manage/step8">
-                        <span>⑧</span> 제출처 전표 조회
-                    </a>
-                </p>
-            </li>
-        </ul>
-    </nav>
+            <ul class="category">
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step1">
+                            <span>①</span> 기사용 메뉴
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step2">
+                            <span>②</span> 제출처용 메뉴
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step3">
+                            <span>③</span> 운행일보 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step4">
+                            <span>④</span> 운행일보 조회
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step5">
+                            <span>⑤</span> 차량관리 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step6">
+                            <span>⑥</span> 차량관리 조회
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step7">
+                            <span>⑦</span> 제출처 주문 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step8">
+                            <span>⑧</span> 제출처 전표 조회
+                        </a>
+                    </p>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
 </th:block>
 </html>
