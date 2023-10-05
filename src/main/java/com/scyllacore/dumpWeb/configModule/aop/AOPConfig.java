@@ -31,7 +31,7 @@ public class AOPConfig {
 
         Object result;
 
-        if (!className.contains("Step") && !method_name.equals("passwordChange")) {
+        if (!className.contains("Step") && !method_name.contains("passwordChange")) {
             return pjp.proceed();
         }
 
