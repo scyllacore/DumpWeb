@@ -11,11 +11,11 @@
             <div class="top-area">
                 <span th:if="${session.loginInfo} != null">[[${session.loginInfo.userId}]]</span>
                 <span class="bar"></span>
-                <button class="change-password-btn" onclick="moveChangeForm();">
+                <button class="change-password-btn" onclick="location.href='/passwordChange'">
                     암호변경
                 </button>
                 <span class="bar"></span>
-                <button class="logout-btn" onclick="">로그아웃</button>
+                <button class="logout-btn" onclick="location.href='/logout'">로그아웃</button>
 
                 <button class="close-btn" title="메뉴창 닫힘" onclick="closeMenuPopUp('menu-wrap')">
                     <img src="/image/icons/ico_close.png" alt="닫기">

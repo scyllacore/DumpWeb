@@ -1,4 +1,15 @@
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+
 .menu-wrap {
+  animation: slideInFromRight 0.5s ease-in-out;
   display: none;
   position: fixed;
   width: 100%;
