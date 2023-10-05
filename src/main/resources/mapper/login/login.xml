@@ -6,12 +6,23 @@
 
     <!--  ID 체크  -->
     <select id="selectUserInfoForValidCheck" parameterType="LoginDTO" resultType="LoginDTO">
-        SELECT USER_ID FROM user_info_tb WHERE USER_ID = #{userId}
+        SELECT USER_ID AS userId
+        FROM user_info_tb
+        WHERE USER_ID = #{userId}
     </select>
 
     <!--  로그인 정보 체크  -->
     <select id="selectUserInfo" parameterType="LoginDTO" resultType="LoginDTO">
-        SELECT * FROM user_info_tb WHERE USER_ID = #{userId} AND USER_PWD = SHA2(#{userPwd}, 256)
+        SELECT USER_ID_IDX AS userIdIDX,
+               USER_ID     AS userId,
+               USER_PWD    AS userPwd,
+               USERNAME    AS userName,
+               USER_TYPE   AS userType,
+               USER_TEL    AS userTel,
+               JOIN_DATE   AS joinDate
+        FROM user_info_tb
+        WHERE USER_ID = #{userId}
+          AND USER_PWD = SHA2(#{userPwd}, 256)
     </select>
 
 </mapper>

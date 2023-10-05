@@ -21,7 +21,7 @@ public class Step5ServiceForVehicleManageMileageRegistration {
 
     public String saveMileage(MileageDTO mileage) {
 
-        mileage.setUserId_IDX_FK(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserId_IDX()));
+        mileage.setUserId_IDX_FK(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIDX()));
 
         if (mileage.getDriveId() == 0) {
             step5Mapper.insertMileage(mileage);
