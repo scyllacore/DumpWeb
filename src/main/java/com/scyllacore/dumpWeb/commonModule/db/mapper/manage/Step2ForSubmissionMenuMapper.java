@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface Step2MapperForSubmissionMenu {
+public interface Step2ForSubmissionMenuMapper {
 
     SummaryDTO selectComputedSummary(SearchOptionDTO option, String userId);
 

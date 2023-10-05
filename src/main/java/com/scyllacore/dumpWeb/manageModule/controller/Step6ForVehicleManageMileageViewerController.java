@@ -2,7 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import com.scyllacore.dumpWeb.manageModule.service.Step6ServiceForVehicleManageMileageViewer;
+import com.scyllacore.dumpWeb.manageModule.service.Step6ForVehicleManageMileageViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/manage/step6")
 @RequiredArgsConstructor
-public class Step6ControllerForVehicleManageMileageViewer {
+public class Step6ForVehicleManageMileageViewerController {
 
-    private final Step6ServiceForVehicleManageMileageViewer step6Service;
+    private final Step6ForVehicleManageMileageViewerService step6Service;
 
     @GetMapping(value = "")
     public String step6() {

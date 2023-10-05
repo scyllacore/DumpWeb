@@ -1,17 +1,18 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/manage/step4")
+@RequestMapping("/manage/step1")
 @RequiredArgsConstructor
-public class Step4ControllerForDailyReportViewer {
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String step4() {
-        return "/manage/step4/step4_index";
-    }
+public class Step1ForDriverMenuController {
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String step1() {
+        return "/manage/step1/step1_index";
+    }
 }

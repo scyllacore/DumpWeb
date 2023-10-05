@@ -3,6 +3,6 @@ package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface Step7MapperForSubmissionOrderRegistration {
+public interface Step4ForDailyReportViewerMapper {
 
 }

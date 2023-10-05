@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/manage/step3")
+@RequestMapping("/manage/step8")
 @RequiredArgsConstructor
-public class Step3ControllerForDailyReportRegistration {
-
+public class Step8ForSubmissionReceiptViewerController {
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String step3() {
-        return "/manage/step3/step3_index";
+    public String step8() {
+        return "/manage/step8/step8_index";
     }
-
 }

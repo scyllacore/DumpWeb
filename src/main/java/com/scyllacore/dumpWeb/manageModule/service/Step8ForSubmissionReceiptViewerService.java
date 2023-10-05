@@ -1,4 +1,4 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-public class Step1ServiceForDriverMenu {
+public class Step8ForSubmissionReceiptViewerService {
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dispatch.dump.commonModule.db.mapper.Step5MapperForVehicleManageMileageRegistration">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.Step5ForVehicleManageMileageRegistrationMapper">
 
     <insert id="insertMileage" parameterType="MileageDTO">
         INSERT INTO mileage_tb

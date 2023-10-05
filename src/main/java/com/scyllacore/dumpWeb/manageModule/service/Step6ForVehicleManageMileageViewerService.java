@@ -2,7 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6MapperForVehicleManageMileageViewer;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class Step6ServiceForVehicleManageMileageViewer {
-    private final Step6MapperForVehicleManageMileageViewer step6Mapper;
+public class Step6ForVehicleManageMileageViewerService {
+    private final Step6ForVehicleManageMileageViewerMapper step6Mapper;
     private final CommonUtil commonUtil;
 
 

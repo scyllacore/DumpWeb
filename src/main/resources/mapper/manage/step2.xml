@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step2MapperForSubmissionMenu">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step2ForSubmissionMenuMapper">
     <sql id="res_table">
         WITH r1 AS
             (SELECT REPORT_ID,

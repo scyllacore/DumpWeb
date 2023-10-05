@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface Step5MapperForVehicleManageMileageRegistration {
+public interface Step5ForVehicleManageMileageRegistrationMapper {
     void insertMileage(MileageDTO mileage);
 
     void updateMileage(MileageDTO mileage);

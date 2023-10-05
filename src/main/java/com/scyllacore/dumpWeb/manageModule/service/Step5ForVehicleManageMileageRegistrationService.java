@@ -2,7 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5MapperForVehicleManageMileageRegistration;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -13,9 +13,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class Step5ServiceForVehicleManageMileageRegistration {
+public class Step5ForVehicleManageMileageRegistrationService {
     private final CommonUtil commonUtil;
-    private final Step5MapperForVehicleManageMileageRegistration step5Mapper;
+    private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 

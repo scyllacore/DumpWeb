@@ -3,7 +3,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SummaryDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSubDTO;
-import com.scyllacore.dumpWeb.manageModule.service.Step2ServiceForSubmissionMenu;
+import com.scyllacore.dumpWeb.manageModule.service.Step2ForSubmissionMenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/manage/step2")
 @RequiredArgsConstructor
-public class Step2ControllerForSubmissionMenu {
+public class Step2ForSubmissionMenuController {
 
-    private final Step2ServiceForSubmissionMenu step2Service;
+    private final Step2ForSubmissionMenuService step2Service;
 
     @GetMapping(value = "")
     public String step2() {
