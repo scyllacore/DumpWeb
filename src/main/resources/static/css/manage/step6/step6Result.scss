@@ -10,7 +10,9 @@
 
   .search-result-wrapper {
     width: 90%;
-    max-width: 600px;
+    max:{
+      width: 600px;
+    }
     height: 90%;
     top: 50%;
     left: 50%;
