@@ -1,31 +1,36 @@
 .line {
   width: 100%;
-  height: 2px;
+  height: 1.5px;
   margin: 15px 0px;
   background: #0068b7;
 }
 
-
-
 .step6 {
   display: flex;
-  justify-content: center;
+  justify: {
+    content: center;
+  }
   background: #d1d1d1;
   color: #333536;
 
   .step6_wrapper {
-
-    padding: 20px 10px 50px;
+    padding: 20px 10px 10px;
     background: #ffffff;
 
     .sub_title {
 
-      h1 {
+      h2 {
         display: flex;
-        justify-content: center;
-        font-size: 21px;
-        font-weight: bold;
-        align-items: center;
+        justify: {
+          content: center;
+        }
+        align: {
+          items: center;
+        }
+        font: {
+          size: 21px;
+          weight: bold;
+        }
         gap: 5px;
 
         img {
@@ -35,60 +40,66 @@
     }
 
     .option-form {
-
-      .period-wrapper {
-        padding: 5px 5px;
+      div {
+        padding: 15px 10px;
         margin: 20px;
-        overflow: auto;
-
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-
-        h1 {
-          width: 50px;
-          font-size: 14px;
+        justify: {
+          content: space-between;
+        }
+        align: {
+          items: center;
+        }
+        box: {
+          shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
         }
 
+        h3 {
+          width: 70px;
+          font: {
+            size: 14px;
+          }
+        }
+      }
+
+      .period-wrapper {
+
         .period-inner {
+          display: flex;
+
           input {
-            font-family: "Noto Sans KR", sans-serif;
-            font-size: 13px;
-            border: 1px solid #ddd;
-            padding: 5px 10px;
-            cursor: pointer;
             width: 120px;
-            text-align: center;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            text: {
+              align: center;
+            }
+            font: {
+              size: 13px;
+              family: "Noto Sans KR", sans-serif;
+            }
+            cursor: pointer;
           }
 
           span {
-
+            margin: 7px 5px;
           }
         }
       }
 
-      .item-wrapper {
-        padding: 5px 5px;
-        margin: 20px;
-        overflow: auto;
+      .item-wrapper, .sorting-wrapper {
 
-        display: flex;
-        align-items: center;
-        position: relative;
-
-        h1 {
-          width: 50px;
-          font-size: 14px;
-        }
-
-        .item-inner {
-          margin-left: 75px;
+        .item-inner, .sorting-inner {
+          width: 400px;
+          padding: 5px;
           border: 1px solid #ddd;
-          padding: 5px 10px;
+          margin: {
+            left: 25px;
+          }
+          text: {
+            align: center;
+          }
           cursor: pointer;
-          width: 260px;
-          text-align: center;
 
           option {
 
@@ -96,61 +107,45 @@
         }
       }
 
-      .sorting-wrapper {
-        padding: 5px 5px;
-        margin: 20px;
-        overflow: auto;
-
-        display: flex;
-        align-items: center;
-        position: relative;
-
-
-        h1 {
-          width: 50px;
-          font-size: 14px;
-        }
-
-        .sorting-inner {
-          margin-left: 75px;
-          border: 1px solid #ddd;
-          padding: 5px 10px;
-          cursor: pointer;
-          width: 260px;
-          text-align: center;
-
-          option {
-
-          }
-        }
-      }
 
       .search-btn-wrapper {
+        display: flex;
+        justify:{
+          content: center;
+        }
+        text:{
+          align: center;
+        }
 
-        padding-top: 30px;
-
-        text-align: center;
+        box:{
+          shadow: none;
+        }
 
         button {
-
-          text-align: center;
-          border: 1px solid #0068b7;
-          cursor: pointer;
-          background: #fff;
-          font-size: 16px;
-          color: #0064c1;
-          font-weight: 600;
           width: 120px;
           height: 40px;
-          line-height: 38px;
+          border: 1px solid #0068b7;
+          text:{
+            align: center;
+            indent: 20px;
+          }
+          color: #0064c1;
+          background: #fff;
+          font:{
+            size: 16px;
+            weight: 600;
+          }
+          line:{
+            height: 40px;
+          }
+          cursor: pointer;
 
-          line-height: 38px;
-          background-image: url(/image/icons/ico_search-b.png);
-          background-position: 25px 9px;
-          background-repeat: no-repeat;
-          background-size: 23px;
-          text-indent: 20px;
-
+          background:{
+            image: url(/image/icons/ico_search-b.png);
+            size: 23px;
+            position: 25px 9px;
+            repeat: no-repeat;
+          }
         }
       }
     }

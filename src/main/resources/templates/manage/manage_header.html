@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="headerFragment">
 
+    <th:block th:replace="/include/head :: headFragment"></th:block>
+
     <head>
         <link rel="stylesheet" type="text/css" href="/css/manage/manageHeader.css">
     </head>
 
-    <th:block th:replace="/include/head :: headFragment"></th:block>
 
     <header class="manage-header">
         <div class="menu-pop-up"></div>
