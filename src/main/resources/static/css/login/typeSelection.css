@@ -2,47 +2,41 @@
   width: 100%;
   height: auto;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #fff;
 }
 .trial .trial-inner, .trial .join-inner, .join .trial-inner, .join .join-inner {
-  background-image: url(/image/login/bg-login-m3.png);
-  background-repeat: no-repeat;
   width: 100%;
   max-width: 414px;
   height: 736px;
   padding: 0 15px;
+  background-image: url(/image/login/bg-login-m3.png);
   background-size: 100% 736px;
-  display: block;
-  box-sizing: border-box;
 }
 .trial .trial-inner .wrap, .trial .join-inner .wrap, .join .trial-inner .wrap, .join .join-inner .wrap {
-  position: relative;
   top: 50%;
+  position: relative;
   transform: translateY(-50%);
 }
 .trial .trial-inner .wrap h2, .trial .join-inner .wrap h2, .join .trial-inner .wrap h2, .join .join-inner .wrap h2 {
+  display: block;
   text-align: center;
   font-size: 18px;
-  box-sizing: border-box;
-  display: block;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
 }
-.trial .trial-inner .wrap .select_area, .trial .join-inner .wrap .select_area, .join .trial-inner .wrap .select_area, .join .join-inner .wrap .select_area {
+.trial .trial-inner .wrap .select-area, .trial .join-inner .wrap .select-area, .join .trial-inner .wrap .select-area, .join .join-inner .wrap .select-area {
   padding: 0 25px;
-  box-sizing: border-box;
   display: block;
 }
-.trial .trial-inner .wrap .select_area .select-box-driver, .trial .trial-inner .wrap .select_area .select-box-manager, .trial .join-inner .wrap .select_area .select-box-driver, .trial .join-inner .wrap .select_area .select-box-manager, .join .trial-inner .wrap .select_area .select-box-driver, .join .trial-inner .wrap .select_area .select-box-manager, .join .join-inner .wrap .select_area .select-box-driver, .join .join-inner .wrap .select_area .select-box-manager {
+.trial .trial-inner .wrap .select-area .select-box-driver, .trial .trial-inner .wrap .select-area .select-box-manager, .trial .join-inner .wrap .select-area .select-box-driver, .trial .join-inner .wrap .select-area .select-box-manager, .join .trial-inner .wrap .select-area .select-box-driver, .join .trial-inner .wrap .select-area .select-box-manager, .join .join-inner .wrap .select-area .select-box-driver, .join .join-inner .wrap .select-area .select-box-manager {
   margin: 10px 0;
-  box-sizing: border-box;
 }
-.trial .trial-inner .wrap .select_area .select-box-driver img, .trial .trial-inner .wrap .select_area .select-box-manager img, .trial .join-inner .wrap .select_area .select-box-driver img, .trial .join-inner .wrap .select_area .select-box-manager img, .join .trial-inner .wrap .select_area .select-box-driver img, .join .trial-inner .wrap .select_area .select-box-manager img, .join .join-inner .wrap .select_area .select-box-driver img, .join .join-inner .wrap .select_area .select-box-manager img {
+.trial .trial-inner .wrap .select-area .select-box-driver img, .trial .trial-inner .wrap .select-area .select-box-manager img, .trial .join-inner .wrap .select-area .select-box-driver img, .trial .join-inner .wrap .select-area .select-box-manager img, .join .trial-inner .wrap .select-area .select-box-driver img, .join .trial-inner .wrap .select-area .select-box-manager img, .join .join-inner .wrap .select-area .select-box-driver img, .join .join-inner .wrap .select-area .select-box-manager img {
   width: 100%;
   height: 145px;
 }
