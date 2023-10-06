@@ -46,7 +46,9 @@
         background: #0068b7;
 
         h3 {
-          font-size: 14px;
+          font:{
+            size: 14px;
+          }
         }
 
         .pop-up-close {

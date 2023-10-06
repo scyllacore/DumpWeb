@@ -1,6 +1,8 @@
 .join-form {
   display: flex;
-  justify-content: center;
+  justify:{
+    content: center;
+  }
 
   .join-form-inner {
     width: 100%;
@@ -166,8 +168,9 @@
         ext:{
           align: center;
         }
-        font-size: 0;
-
+        font:{
+          size: 0;
+        }
 
         .join-btn, .redirect-login-btn {
           width: calc(50% - 5px);
