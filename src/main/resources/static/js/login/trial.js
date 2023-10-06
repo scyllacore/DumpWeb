@@ -1,5 +1,4 @@
 function accessInDriveMode(_this) {
-
     document.querySelector('input[name = "userType"]').value = _this.getAttribute("name");
 
     $.ajax({

@@ -1,5 +1,7 @@
+//함수 호출
 assignUserTypeText();
 
+//함수 정의
 function assignUserTypeText() {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -14,14 +16,6 @@ function assignUserTypeText() {
 
     TypeTextTag.innerHTML = userType[paramUserType];
     document.querySelector('input[name = "userType"]').value = paramUserType;
-}
-
-function openPersonalInfoNoticePopUp(page) {
-    document.querySelector('.' + page).style.display = 'block';
-}
-
-function closePersonalInfoNoticePopUp(page) {
-    document.querySelector('.' + page).style.display = 'none';
 }
 
 function join() {
