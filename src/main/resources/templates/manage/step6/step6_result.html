@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="resultFragment">
+
+    <head>
+        <link href="/css/manage/step6/step6Result.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <div class="search-result">
+        <div class="search-result-wrapper">
+
+            <div class="pop-up-close-wrapper">
+                <button class="pop-up-close" type="button" onclick="closeResultPopUp('search-result')">
+                    <i class="close-icon"></i>
+                    <span class="screen-off">닫기버튼</span>
+                </button>
+            </div>
+
+            <div class="summary-wrapper">
+                test
+            </div>
+            <div class="payment-wrapper">
+                <button class="payment_btn" onclick="approveInBulk()">일괄결재</button>
+                <button class="payment_btn" onclick="cancelInBulk()">일괄취소</button>
+            </div>
+            <div class="line"></div>
+
+            <div class="table_wrapper">
+                <table>
+                    <thead>
+                    <tr class="table-key">
+                        <th>날짜</th>
+                        <th>품목</th>
+                        <th>최종주행(km)</th>
+                        <th>사용금액(원)</th>
+                        <th>기타 (설명)</th>
+                        <th>교환 주기</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-tuple">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>
