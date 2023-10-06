@@ -1,61 +1,62 @@
+@charset "UTF-8";
 * {
-  font-family: "NotoSansKR" !important;
+  font-family: "NotoSansKR";
 }
 
 .manage-header {
+  height: 100px;
+  border-bottom: 2px solid #0071b8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #fff;
-  padding: 5px 0;
-  border-bottom: 2px solid #003e6d;
-  position: relative;
 }
 .manage-header .base-wrap {
-  padding: 5px 20px;
-  overflow: hidden;
+  width: 90%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.manage-header .base-wrap .inner * {
-  background: #ffffff;
-}
-.manage-header .base-wrap .inner .inner-left {
+.manage-header .base-wrap .inner-left {
+  flex: 1;
   float: left;
-  display: inline-block;
 }
-.manage-header .base-wrap .inner .inner-left .call-btn {
-  margin: 20px;
-  width: auto;
+.manage-header .base-wrap .inner-left .call-btn {
+  background: #fff;
 }
-.manage-header .base-wrap .inner .user-id-line {
-  max-width: 310px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0px 15px;
+.manage-header .base-wrap .user-id-line {
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center; /* 좌우 중앙 배치 */
+  align-items: center; /* 상하 중앙 배치 */
   font-size: 24px;
   font-weight: 900;
 }
-.manage-header .base-wrap .inner .user-id-line::after {
+.manage-header .base-wrap .user-id-line::after {
+  top: 55px;
   content: "";
   width: 140px;
   position: absolute;
   bottom: 0px;
-  background-color: #cce0f3;
+  background: #cce0f3;
   height: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
 }
-.manage-header .base-wrap .inner .inner-right {
-  position: absolute;
-  top: 50%;
-  right: 6%;
-  transform: translate(50%, -50%);
-  display: inline-block;
+.manage-header .base-wrap .inner-right {
+  flex: 1;
+  display: flex;
+  justify-content: right;
 }
-.manage-header .base-wrap .inner .inner-right button {
-  margin: 20px;
+.manage-header .base-wrap .inner-right button {
+  margin: 20px 0px;
   width: auto;
   font-size: 17px;
   font-weight: bold;
+  background-color: #fff;
 }
 
 /*# sourceMappingURL=manageHeader.css.map */
