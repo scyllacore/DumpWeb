@@ -1,3 +1,12 @@
+const itemList = {
+    "주유": 0
+    , "요소수": 1
+    , "엔진오일": 2
+    , "정비(수리)": 3,
+    "기타": 4
+};
+
+
 function printList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("table tbody");
@@ -30,3 +39,24 @@ function printList(searchResultData) {
     });
 
 };
+
+function inputDataByParams(data) {
+
+    for (const key in data) {
+
+        if (data[key] == null) {
+            continue;
+        }
+
+        if (key === "drvClub") {
+            const itemList = document.querySelectorAll('input[name="drvClub"]');
+            itemList[drvClubList[data[key]]].checked = true;
+        } else if (typeof data[key] === "boolean") {
+            document.getElementById(key).checked = data[key];
+        } else {
+            document.querySelector('[name=' + key + ']').value = data[key];
+        }
+    }
+
+    bindList();
+}
