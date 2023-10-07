@@ -21,6 +21,8 @@
         <div class="line"></div>
 
         <form class="option-form" name="optionForm">
+            <input type="hidden" name="driveId" value = "0">
+
             <div class="period-wrapper">
                 <h3>날짜</h3>
                 <input id="reg-date" name="driveDate" readonly/>
@@ -94,7 +96,7 @@
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 
-<script src="/js/manage/datePicker.js"></script>
+<script src="/js/include/datePicker.js"></script>
 <script src="/js/manage/step6/list.js"></script>
 <script src="/js/manage/step6/click.js"></script>
 <script src="/js/manage/step6/DOMContentLoaded.js"></script>
