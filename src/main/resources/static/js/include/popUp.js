@@ -1,7 +1,7 @@
-function openPersonalInfoNoticePopUp(page) {
+function openPopUp(page) {
     document.querySelector('.' + page).style.display = 'block';
 }
 
-function closePersonalInfoNoticePopUp(page) {
+function closePopUp(page) {
     document.querySelector('.' + page).style.display = 'none';
 }
