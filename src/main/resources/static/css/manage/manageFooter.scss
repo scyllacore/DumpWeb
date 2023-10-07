@@ -1,59 +1,77 @@
-.manage-footer{
-  background-color: #84b8e8;
+.manage-footer {
   padding: 10px;
+  background: {
+    color: #84b8e8;
+  }
 
-  .content-area{
-    margin-top: 10px;
+  .content-area {
+    margin: {
+      top: 10px;
+    }
 
-    .base-wrap{
+    .base-wrap {
       display: flex;
 
-      .content-item{
-        flex-grow: 1;
+      .content-item {
+        flex: 1;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        a{
-          color: #333;
-          text-decoration: none;
-
-
-          .logo-img{
-            border-radius: 50%;
-          }
-
-          img{
-            width: 60px;
-            display: block;
-            vertical-align: middle;
-            border: 0 none;
-          }
-
-          span{
-            font-weight: 600;
-          }
-
+        justify: {
+          content: center;
+        }
+        align: {
+          items: center;
+        }
+        text: {
+          align: center;
         }
 
+        a {
+          color: #333;
+          display: flex;
+          flex:{
+            direction: column; /* 세로 방향으로 요소를 나란히 배치 */
+          }
+          text: {
+            decoration: none;
+          }
+
+          img {
+            width: 60px;
+            border: 0 none;
+            margin: 0 auto;
+          }
+
+          .logo-img {
+            border: {
+              radius: 50%;
+            }
+          }
+
+          span {
+            font-weight: 600;
+          }
+        }
       }
     }
-
   }
 
-  .company-info{
+  .company-info {
+    margin:{
+      top: 20px;
+    }
+    text:{
+      align: center;
+    }
     color: #fff;
-    text-align: center;
-    margin-top: 20px;
-    font-style: normal;
-
-    a{
-      color: #fff;
-      text-decoration: none;
+    font:{
+      style: normal;
     }
 
+    a {
+      color: #fff;
+      text:{
+        decoration: none;
+      }
+    }
   }
-
 }
