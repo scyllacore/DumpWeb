@@ -16,6 +16,8 @@ public class SearchOptionDTO {
     String fromSite;
     String toSite;
     String item;
+    String tel;
+    String state;
     String searchCarNo;
 
 }

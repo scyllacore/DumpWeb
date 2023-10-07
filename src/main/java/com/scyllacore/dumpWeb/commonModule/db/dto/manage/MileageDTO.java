@@ -14,7 +14,7 @@ public class MileageDTO {
     private int usedOil;             // LINE :: 주유량
     private String memo;          // LINE :: 비고란
     private boolean paymentChk;           // LINE :: 결제여부
-    private int replKM;           // LINE :: 교환주행거리
+    private int replKm;           // LINE :: 교환주행거리
     private String replDate;      // LINE :: 교환예정일
     private boolean replChk;      // LINE :: 교환확인여부
 
