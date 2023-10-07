@@ -1,4 +1,4 @@
-$("#start-date, #end-date").datepicker({
+$("#start-date, #end-date, #reg-date, #replace-date").datepicker({
     dateFormat: 'yy-mm-dd' //달력 날짜 형태
     , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
     , showMonthAfterYear: true // 월- 년 순서가아닌 년도 - 월 순서
@@ -16,3 +16,8 @@ $("#start-date, #end-date").datepicker({
 $("#start-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
 $("#end-date").datepicker('setDate', 'today');
+
+$("#reg-date").datepicker('setDate', 'today');
+
+$("#exchange-date").datepicker('setDate', 'today');
+

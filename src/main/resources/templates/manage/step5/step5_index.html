@@ -1,141 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<th:block th:replace="/include/manage_header :: headerFragment"></th:block>
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/manage/step5/import.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link href="/css/manage/step5/step5Index.css" rel="stylesheet" type="text/css">
 </head>
 
+<container class="step5">
+    <div class="step5_wrapper">
+        <div class="sub_title">
+            <h2>
+                차량관리 차계부 등록
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
 
-<section class="DrvSection">
-    <h2>차량관리 차계부 등록</h2> <span></span>
-    <form name="entry_form">
-        <input type="hidden" name="driveID" value = "0">
-        <fieldset>
-            <div class="item" name="item">
-                <input type="radio" name="drvClub" id="rdOli" value="주유">
-                <label for="rdOli" class="active">주유</label>
+        <div class="line"></div>
 
-                <input type="radio" name="drvClub" id="rdDEF" value="요소수">
-                <label for="rdDEF">요소수</label>
-
-                <input type="radio" name="drvClub" id="rdEngOil" value="엔진오일">
-                <label for="rdEngOil">엔진오일</label>
-
-                <input type="radio" name="drvClub" id="rdFix" value="정비(수리)">
-                <label for="rdFix">정비(수리)</label>
-
-                <input type="radio" name="drvClub" id="rdNote" value="기타">
-                <label for="rdNote">기타</label>
+        <form class="option-form" name="optionForm">
+            <div class="period-wrapper">
+                <h3>날짜</h3>
+                <input id="reg-date" name="driveDate" readonly/>
+                <button class="retrieval-btn">조회</button>
             </div>
-            <ul class="CarUl">
-                <li>
-                    <label class="drvLabel" for="reg-date">날짜</label>
-                    <span class="drvInputSpan"><input id="reg-date" inputmode="none" name="drvDate" onchange="bindList()"></span>
-                    <label class="chk2" for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                    <input id="chk2" type="checkbox">
-                </li>
-                <li>
-                    <label class="drvLabel" for="lastKm">최종 주행거리 km</label>
-                    <span class="drvInputSpan"><input id="lastKm" name="lastKm" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="차량계기판의 최종 주행거리"></span>
-                </li>
-                <li>
-                    <label class="drvLabel" for="useAmt">사용금액</label>
-                    <span class="drvInputSpan"><input id="useAmt" name="useAmt" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="사용금액"></span>
-                </li>
-                <li>
-                    <label class="drvLabel" for="useOil">주유량 L</label>
-                    <span class="drvInputSpan"><input id="useOil" name="useOil" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="주유량"></span>
-                </li>
-                <li>
-                    <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
-                </li>
-                <li class="tabBtn" data-tab="hiddenPart">
-                    <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox"></span>
-                </li>
-            </ul>
-            <ul class="bdnUl" id="hiddenPart">
-                <li>
-                    <label class="drvLabel" for="exchange-date">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate"></span>
-                </li>
-                <li>
-                    <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
-                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
-                </li>
-                <li>
-                    <label for="rependchk">교환 확인</label>
-                    <span class="drvInputSpan3"><input id="rependchk" type="checkbox"></span>
-                </li>
-            </ul>
-        </fieldset>
-    </form>
 
-    <div>
-        <button class="openBtn" data-popName="drvpop1">삭제</button>
-        <button onclick="save()">저장</button>
-        <button class="openBtn" data-popName="drvpop2">입력취소</button>
-        <button class="openBtn" data-popName="drvpop3">이전화면</button>
-    </div>
-
-    <div id="drvpop1" class="drvPopup1">
-        <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>정말 삭제하시겠습니까?</p>
-            <input type="button" value="확인" onclick="deleteData()">
-        </div>
-    </div>
-
-    <div id="drvpop2" class="drvPopup3">
-        <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>입력값을 초기화 하시겠습니까?</p>
-            <input type="button" value="확인" onclick="location.reload()">
-        </div>
-    </div>
-
-    <div id="drvpop3" class="drvPopup3">
-            <div>
-                <span class="material-symbols-outlined closeBtn">close</span>
-                <p>이전 화면으로 돌아가시겠습니까?</p>
-                <input type="button" value="확인" onClick="history.go(-1)">
+            <div class="item-wrapper">
+                <h3>품목</h3>
+                <select class="item-inner" name="item">
+                    <option value="주유">주유</option>
+                    <option value="요소수">요소수</option>
+                    <option value="엔진오일">엔진오일</option>
+                    <option value="정비(수리)">정비(수리)</option>
+                    <option value="기타">기타</option>
+                </select>
             </div>
-        </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>날짜</th>
-            <th>분류</th>
-            <th class="Drvth2">최종주행(km)</th>
-            <th class="Drvth2">사용금액</th>
-            <th>기타(설명)</th>
-            <th>교환 주기</th>
-        </tr>
-        </thead>
-        <tbody>
+            <div class="last-km-wrapper">
+                <h3>최종 주행 거리 (Km)</h3>
+                <input name="lastKm" type="number" placeholder="최종 주행 거리">
+            </div>
 
-        </tbody>
-    </table>
-</section>
+            <div class="used-amount-wrapper">
+                <h3>사용 금액</h3>
+                <input name="usedAmount" type="number" placeholder="사용 금액">
+            </div>
+
+            <div class="used-oil-wrapper">
+                <h3>주유량 (L)</h3>
+                <input name="usedOil" type="number" placeholder="주유량">
+            </div>
+
+            <div class="memo-wrapper">
+                <h3>메모</h3>
+                <textarea name="memo"></textarea>
+            </div>
+
+            <div class="payment-chk-wrapper">
+                <h3>교환 주기 입력</h3>
+                <input name="paymentChk" type="checkbox">
+            </div>
+
+            <div class="repl-date-wrapper">
+                <h3>교환 예정일</h3>
+                <input name="replDate" id="replace-date" readonly/>
+            </div>
+
+            <div class="repl-km-wrapper">
+                <h3>교환 주행 거리</h3>
+                <input name="replKm" type="number" placeholder="교환 주행 거리">
+            </div>
+
+            <div class="repl-chk-wrapper">
+                <h3>교환 완료 확인</h3>
+                <input name="replChk" type="checkbox">
+            </div>
+
+            <div class="bottom-btn-wrapper">
+                <button type="button" class="save-btn">저장</button>
+                <button type="button" class="delete-btn">삭제</button>
+                <button type="button" class="input-init-btn">입력 초기화</button>
+                <button type="button" class="prev-page-btn">이전 화면</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step5/step5_retrieval :: resultFragment"></th:block>
+
+    </div>
+</container>
 
 
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 
-
-<th:block th:replace="/include/manage_footer :: footerFragment"></th:block>
-
-<script src="/js/manage/step5/datepicker.js"></script>
-<script src="/js/manage/step5/CheckDisabled.js"></script>
-<script src="/js/manage/step5/tabpage.js"></script>
-<script src="/js/manage/step5/voice.js"></script>
-<script src="/js/manage/step5/list.js"></script>
-<script src="/js/manage/step5/click.js"></script>
-<script src="/js/manage/step5/popup.js"></script>
-<script src="/js/manage/step5/param.js"></script>
+<script src="/js/manage/datePicker.js"></script>
+<script src="/js/manage/step6/list.js"></script>
+<script src="/js/manage/step6/click.js"></script>
+<script src="/js/manage/step6/DOMContentLoaded.js"></script>
 
 </html>
+
