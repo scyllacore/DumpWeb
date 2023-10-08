@@ -1,9 +1,9 @@
-function getUrlCheckParam(id){
+function getUrlCheckParam(id) {
     const checkBox = document.getElementById(id);
-    return  "&" + id + "=" + checkBox.checked;
+    return "&" + id + "=" + checkBox.checked;
 }
 
-function redirectByDriveId(){
+function redirectByDriveId() {
     const listRow = document.querySelector("table tbody");
 
     listRow.addEventListener("click", (event) => {
@@ -11,6 +11,22 @@ function redirectByDriveId(){
         let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
         window.location.href = url;
     });
+}
+
+function setInputActiveByCheckBox(activeInput) {
+
+    const checkBoxElement = document.querySelector('input[name="' + activeInput.checkBoxName + '"]');
+
+    checkBoxElement.addEventListener('change', (event) => {
+        activeInput.inputName.forEach(tagName => {
+            const inputElement = document.querySelector('input[name="' + tagName + '"]');
+
+            inputElement.value = "";
+            inputElement.checked = false;
+            inputElement.disabled = !inputElement.disabled;
+        })
+    })
+
 }
 
 
