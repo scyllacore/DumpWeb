@@ -7,4 +7,9 @@
   background-repeat: no-repeat;
 }
 
+::-webkit-calendar-picker-indicator {
+  position: absolute;
+  padding-left: 312px;
+}
+
 /*# sourceMappingURL=base.css.map */
