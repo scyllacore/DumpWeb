@@ -15,7 +15,7 @@ public class PasswordChangeService {
 
     public ResponseDTO<String> changePassword(HttpServletRequest request, LoginDTO loginInfo) {
         LoginDTO sessionLoginInfo = (LoginDTO) request.getSession().getAttribute("loginInfo");
-        loginInfo.setUserIdIDX(sessionLoginInfo.getUserIdIDX());
+        loginInfo.setUserIdIdx(sessionLoginInfo.getUserIdIdx());
 
         passwordChangeMapper.updateUserPassword(loginInfo);
 

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LoginDTO {
 
-    private String userIdIDX;         // LINE :: 사용자 고유번호
+    private String userIdIdx;         // LINE :: 사용자 고유번호
     private String userId;          // LINE :: 사용자 ID
     private String userPwd;          // LINE :: 사용자 패스워드
     private String userName;        // LINE :: 사용자명
