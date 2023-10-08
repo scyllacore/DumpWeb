@@ -82,10 +82,13 @@ function addCheckParam(inputData, names) {
 function checkInputValidation(form) {
 
     const formElement = document.querySelector('form[name="' + form + '"]');
-    const formInput = formElement.getElementsByTagName('input');
+    const formInput = formElement.querySelectorAll('input');
 
-    for (let i = 0; formInput.length; i++) {
+    console.log(formInput);
+
+    for (let i = 0; i < formInput.length; i++) {
         let name = formInput[i].getAttribute('name');
+        console.log(name);
         let value = formInput[i].value;
         let require = formInput[i].required;
 

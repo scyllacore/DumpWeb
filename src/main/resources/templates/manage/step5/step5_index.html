@@ -21,11 +21,11 @@
         <div class="line"></div>
 
         <form class="option-form" name="optionForm">
-            <input type="hidden" name="driveId" value = "0" required>
+            <input type="hidden" name="driveId" value="0" required>
 
             <div class="payment-chk-wrapper">
                 <h3>결재</h3>
-                <input name="paymentChk" type="checkbox">
+                <input type="checkbox" name="paymentChk">
             </div>
 
             <div class="period-wrapper">
@@ -47,17 +47,17 @@
 
             <div class="last-km-wrapper">
                 <h3>최종 주행 거리 (Km)</h3>
-                <input name="lastKm" type="number" placeholder="최종 주행 거리">
+                <input type="number" name="lastKm" placeholder="최종 주행 거리">
             </div>
 
             <div class="used-amount-wrapper">
                 <h3>사용 금액</h3>
-                <input name="usedAmount" type="number" placeholder="사용 금액">
+                <input type="number" name="usedAmount" placeholder="사용 금액">
             </div>
 
             <div class="used-oil-wrapper">
                 <h3>주유량 (L)</h3>
-                <input name="usedOil" type="number" placeholder="주유량">
+                <input type="number" name="usedOil" placeholder="주유량">
             </div>
 
             <div class="memo-wrapper">
@@ -67,7 +67,7 @@
 
             <div class="repl-active-wrapper">
                 <h3>교환 주기 입력</h3>
-                <input name="replActive" type="checkbox">
+                <input type="checkbox" name="replActive">
             </div>
 
             <div class="repl-date-wrapper">
@@ -77,12 +77,12 @@
 
             <div class="repl-km-wrapper">
                 <h3>교환 주행 거리</h3>
-                <input name="replKm" type="number" placeholder="교환 주행 거리" disabled>
+                <input type="number" name="replKm" placeholder="교환 주행 거리" disabled>
             </div>
 
             <div class="repl-chk-wrapper">
                 <h3>교환 완료 확인</h3>
-                <input name="replChk" type="checkbox" required disabled>
+                <input type="checkbox" name="replChk" required disabled>
             </div>
 
             <div class="bottom-btn-wrapper">
@@ -99,8 +99,10 @@
 </container>
 
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
-<script src="/js/manage/step5/click.js"></script>
-<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+<script src="/js/manage/step5/params.js"></script>
+<script src="/js/manage/step5/loading.js"></script>
+<script src="/js/manage/step5/requestByClick.js"></script>
 
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 </html>
 

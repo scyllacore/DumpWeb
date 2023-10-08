@@ -1,27 +1,24 @@
-function getJsonForm(form,addingParams) {
+function getFormJson(form, addingParams) {
     const entry = new FormData(document.querySelector('form[name="' + form + '"]')).entries();
 
     const obj = Object.fromEntries(entry);
-    addCheckParam(obj,addingParams);
+    addCheckParam(obj, addingParams);
 
     return JSON.stringify(obj);
 }
 
-function createFetchRequest(argUrl, argOptions) {
-    const url = argUrl;
-    const options = argOptions;
-
-    const req = new Request(url, options);
-    return req.requestData();
-}
-
-function handleRequest(argUrl, argMethod, argInputData, argHeaderContentType = 'application/json') {
-    return createFetchRequest(
-        argUrl,
-        {
+class RequestHandler {
+    constructor(argUrl, argMethod, argInputData, argHeaderContentType = 'application/json') {
+        const options = {
             method: argMethod,
             body: argInputData,
             headers: {'Content-Type': argHeaderContentType}
         }
-    )
+
+        this.request = new Request(argUrl, options);
+    }
+
+    fetchRequest() {
+        return this.request.requestData();
+    }
 }
