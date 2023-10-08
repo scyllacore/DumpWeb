@@ -26,7 +26,14 @@ function setInputActiveByCheckBox(activeInput) {
             inputElement.disabled = !inputElement.disabled;
         })
     })
+}
 
+function addCheckParam(inputData, names) {
+    names.forEach(name => {
+            const checkBox = document.querySelector('input[name="' + name + '"]');
+            inputData[name] = checkBox.checked;
+        }
+    )
 }
 
 

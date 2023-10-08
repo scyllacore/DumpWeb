@@ -1,7 +1,10 @@
-function getJsonForm(form) {
-    const inputEntry = new FormData(document.querySelector('form[name="' + form + '"]')).entries();
-    const JsonForm = JSON.stringify(Object.fromEntries(inputEntry));
-    return JsonForm;
+function getJsonForm(form,addingParams) {
+    const entry = new FormData(document.querySelector('form[name="' + form + '"]')).entries();
+
+    const obj = Object.fromEntries(entry);
+    addCheckParam(obj,addingParams);
+
+    return JSON.stringify(obj);
 }
 
 function createFetchRequest(argUrl, argOptions) {
