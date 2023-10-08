@@ -36,6 +36,27 @@ function addCheckParam(inputData, names) {
     )
 }
 
+function checkInputValidation(form){
+
+    const formElement=document.querySelector('form[name="' + form + '"]');
+    const formInput= formElement.getElementsByTagName('input');
+
+    for(let i=0; formInput.length; i++){
+        let name = formInput[i].getAttribute('name');
+        let value = formInput[i].value;
+        let require = formInput[i].required;
+
+        if(formInput[i].required && value === ''){
+            alert(formInput[i].parentElement.querySelector('h3').innerHTML +'를 다시 확인해주세요');
+            formInput[i].focus();
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const queryString = window.location.search;

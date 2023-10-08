@@ -12,6 +12,11 @@ setInputActiveByCheckBox(activeInput);
 
 //함수 선언
 function save() {
+
+    if(checkInputValidation(defaultForm)){
+        return;
+    }
+
     let inputData = getJsonForm(defaultForm,chkParams);
     const responseData = handleRequest(defaultUrl + 'mileageSave'
         , 'POST'
