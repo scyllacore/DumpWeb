@@ -13,19 +13,36 @@ function redirectByDriveId() {
     });
 }
 
-function setInputActiveByCheckBox(activeInput) {
+const type ={
+    reverse : -1
+}
 
-    const checkBoxElement = document.querySelector('input[name="' + activeInput.checkBoxName + '"]');
+function setInputActiveByCheckBox(activeInputs) {
 
-    checkBoxElement.addEventListener('change', (event) => {
-        activeInput.inputName.forEach(tagName => {
-            const inputElement = document.querySelector('input[name="' + tagName + '"]');
+    for (const key in activeInputs) {
+        const checkBoxElement = document.querySelector('input[name="' + activeInputs[key].checkBoxName + '"]');
 
-            inputElement.value = "";
-            inputElement.checked = false;
-            inputElement.disabled = !inputElement.disabled;
+        checkBoxElement.addEventListener('click', (event) => {
+            let disable = checkBoxElement.checked;
+            activeInputs[key].inputNames.forEach(tagName => {
+                const inputElement = document.querySelector('[name="' + tagName + '"]');
+
+                if (activeInputs[key].type === type.reverse) {
+                    inputElement.disabled = !disable;
+                } else {
+                    inputElement.disabled = disable;
+                }
+            })
+
+            activeInputs[key].initNames.forEach(tagName => {
+                const inputElement = document.querySelector('input[name="' + tagName + '"]');
+                inputElement.value = "";
+                inputElement.checked = false;
+            })
         })
-    })
+
+
+    }
 }
 
 function addCheckParam(inputData, names) {
@@ -36,18 +53,18 @@ function addCheckParam(inputData, names) {
     )
 }
 
-function checkInputValidation(form){
+function checkInputValidation(form) {
 
-    const formElement=document.querySelector('form[name="' + form + '"]');
-    const formInput= formElement.getElementsByTagName('input');
+    const formElement = document.querySelector('form[name="' + form + '"]');
+    const formInput = formElement.getElementsByTagName('input');
 
-    for(let i=0; formInput.length; i++){
+    for (let i = 0; formInput.length; i++) {
         let name = formInput[i].getAttribute('name');
         let value = formInput[i].value;
         let require = formInput[i].required;
 
-        if(formInput[i].required && value === ''){
-            alert(formInput[i].parentElement.querySelector('h3').innerHTML +'를 다시 확인해주세요');
+        if (formInput[i].required && value === '') {
+            alert(formInput[i].parentElement.querySelector('h3').innerHTML + '를 다시 확인해주세요');
             formInput[i].focus();
             return true;
         }

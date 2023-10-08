@@ -1,23 +1,32 @@
 const defaultUrl = '/manage/step5/fetch/';
 const defaultForm = 'optionForm';
-const activeInput = {
-    checkBoxName: 'paymentChk',
-    inputName: ['replDate', 'replKm', 'replChk']
-}
-const chkParams =['replChk'];
+const step5inputNames = ['driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActive', 'replDate', 'replKm', 'replChk']
 
-//함수 호출
-setInputActiveByCheckBox(activeInput);
+const activeInputs = {
+    paymentActive: {
+        checkBoxName: 'paymentChk',
+        inputNames: step5inputNames,
+        exceptRange : [7,10],
+        initNames: []
+    },
+    replActive: {
+        checkBoxName: 'replActive',
+        inputNames: step5inputNames.slice(7,10),
+        initNames: step5inputNames.slice(7,10),
+        type : -1
+    }
+}
+const chkParams = ['paymentChk', 'replChk'];
 
 
 //함수 선언
 function save() {
 
-    if(checkInputValidation(defaultForm)){
+    if (checkInputValidation(defaultForm)) {
         return;
     }
 
-    let inputData = getJsonForm(defaultForm,chkParams);
+    let inputData = getJsonForm(defaultForm, chkParams);
     const responseData = handleRequest(defaultUrl + 'mileageSave'
         , 'POST'
         , inputData);
@@ -25,6 +34,10 @@ function save() {
     console.log(responseData);
 }
 
-function retrieval(){
+function retrieval() {
 
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    setInputActiveByCheckBox(activeInputs);
+})
