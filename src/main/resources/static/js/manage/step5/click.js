@@ -1,23 +1,27 @@
 const defaultUrl = '/manage/step5/fetch/';
 const defaultForm = 'optionForm';
-const step5inputNames = ['driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActive', 'replDate', 'replKm', 'replChk']
+const step5inputNames = ['paymentChk','driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActive', 'replDate', 'replKm', 'replChk']
 
 const activeInputs = {
+    replActive: {
+        checkBoxName: 'replActive',
+        inputNames: step5inputNames,
+        range:[step5inputNames.length-3,step5inputNames.length],
+        initRange:[step5inputNames.length-3,step5inputNames.length]
+    }
+}
+
+const LockedInput ={
     paymentActive: {
         checkBoxName: 'paymentChk',
         inputNames: step5inputNames,
-        exceptRange : [7,10],
-        initNames: []
+        range:[1,step5inputNames.length],
+        exceptCheckBox : 'replActive',
+        exceptRange : [8,11]
     },
-    replActive: {
-        checkBoxName: 'replActive',
-        inputNames: step5inputNames.slice(7,10),
-        initNames: step5inputNames.slice(7,10),
-        type : -1
-    }
 }
-const chkParams = ['paymentChk', 'replChk'];
 
+const chkParams = ['paymentChk', 'replChk'];
 
 //함수 선언
 function save() {
@@ -39,5 +43,6 @@ function retrieval() {
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-    setInputActiveByCheckBox(activeInputs);
+    setActiveByCheckBox(activeInputs);
+    setDisableByCheckBox(LockedInput);
 })

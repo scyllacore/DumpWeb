@@ -13,37 +13,63 @@ function redirectByDriveId() {
     });
 }
 
-const type ={
-    reverse : -1
-}
-
-function setInputActiveByCheckBox(activeInputs) {
-
+function setActiveByCheckBox(activeInputs) {
     for (const key in activeInputs) {
         const checkBoxElement = document.querySelector('input[name="' + activeInputs[key].checkBoxName + '"]');
 
         checkBoxElement.addEventListener('click', (event) => {
-            let disable = checkBoxElement.checked;
-            activeInputs[key].inputNames.forEach(tagName => {
-                const inputElement = document.querySelector('[name="' + tagName + '"]');
+            let active = checkBoxElement.checked;
 
-                if (activeInputs[key].type === type.reverse) {
-                    inputElement.disabled = !disable;
-                } else {
-                    inputElement.disabled = disable;
-                }
-            })
+            let start = activeInputs[key].range[0];
+            let end = activeInputs[key].range[1];
+            for (let i = start; i < end; i++) {
+                const inputElement = document.querySelector('[name="' + activeInputs[key].inputNames[i] + '"]');
+                inputElement.disabled = !active;
+            }
 
-            activeInputs[key].initNames.forEach(tagName => {
-                const inputElement = document.querySelector('input[name="' + tagName + '"]');
+            let initStart = activeInputs[key].initRange[0];
+            let initEnd = activeInputs[key].initRange[1];
+            for (let i = initStart; i < initEnd; i++) {
+                const inputElement = document.querySelector('[name="' + activeInputs[key].inputNames[i] + '"]');
                 inputElement.value = "";
                 inputElement.checked = false;
-            })
+            }
         })
-
-
     }
 }
+
+function setDisableByCheckBox(LockedInput) {
+    for (const key in LockedInput) {
+        const checkBoxElement = document.querySelector('input[name="' + LockedInput[key].checkBoxName + '"]');
+
+        checkBoxElement.addEventListener('click', (event) => {
+            let active = checkBoxElement.checked;
+
+            let start = LockedInput[key].range[0];
+            let end = LockedInput[key].range[1];
+
+            for (let i = start; i < end; i++) {
+                const inputElement = document.querySelector('[name="' + LockedInput[key].inputNames[i] + '"]');
+                inputElement.disabled = active;
+            }
+
+            const exceptActive = document.querySelector('input[name="' + LockedInput[key].exceptCheckBox + '"]').checked;
+
+            if (active || exceptActive) {
+                return;
+            }
+
+            let exceptStart = LockedInput[key].exceptRange[0];
+            let exceptEnd = LockedInput[key].exceptRange[1];
+
+            for (let i = exceptStart; i < exceptEnd; i++) {
+                const inputElement = document.querySelector('[name="' + LockedInput[key].inputNames[i] + '"]');
+                inputElement.disabled = true;
+            }
+        })
+    }
+}
+
 
 function addCheckParam(inputData, names) {
     names.forEach(name => {
