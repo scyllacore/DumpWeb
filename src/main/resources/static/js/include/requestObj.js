@@ -1,32 +1,29 @@
 class Request {
-    constructor(url, method, body) {
-        this.url = url;
-        this.method = method;
-        this.body = body;
+
+    constructor(argUrl, argOptions) {
+        this.fetchUrl = argUrl;
+        this.fetchOptions = argOptions;
     }
 
     async tryRequest() {
-        const res = await fetch(this.url,
-            {
-                method: this.method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: this.body
-            }
-        )
+        const result = await fetch(this.fetchUrl, this.fetchOptions);
+        return await result.json();
+    }
 
-        let resData;
-        res.json().then(data => {
-            if (data.status !== 200) {
-                throw new Error(res.data);
-                alert(res.data);
-            }
-            resData = res.data;
-        }).catch(error => {
-            alert("예기치 못한 오류가 발생했습니다.");
-        });
+    requestData() {
+        const json = this.tryRequest();
 
-        return resData;
+        return json.json()
+            .then(jsonData => {
+                if (jsonData.status !== 200) {
+                    throw new Error(jsonData.data);
+                }
+            })
+            .then(jsonData => {
+                return jsonData.data;
+            })
+            .catch(error => {
+                alert("예기치 못한 오류가 발생했습니다.");
+            });
     }
 }

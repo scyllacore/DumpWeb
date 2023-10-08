@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dispatch.dump.commonModule.db.mapper.Step5ForVehicleManageMileageRegistrationMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper">
 
     <insert id="insertMileage" parameterType="MileageDTO">
         INSERT INTO mileage_tb
         (CAR_NO,
          DRIVE_DATE,
-         TYPE,
+         ITEM,
          LAST_KM,
          USED_AMOUNT,
          USED_OIL,
@@ -20,18 +20,16 @@
          USER_ID_IDX_FK)
         VALUES (#{carNo},
                 #{driveDate},
-                #{type},
+                #{item},
                 #{lastKm},
                 #{usedAmount},
                 #{usedOil},
                 #{memo},
                 #{paymentChk},
-                #{replKM},
+                #{replKm},
                 #{replDate},
                 #{replChk},
-                (SELECT USER_ID_IDX
-                 FROM user_info_tb
-                 WHERE USER_ID = #{carNo}))
+                #{userIdIdxFk})
     </insert>
 
 
@@ -44,7 +42,7 @@
             USED_OIL = #{usedOil},
             MEMO = #{memo},
             PAYMENT_CHK   = #{paymentChk},
-            SCHD_REPL_KM = #{replKM},
+            SCHD_REPL_KM = #{replKm},
             SCHD_REPL_DATE = #{replDate},
             REPL_CHK = #{replChk}
         WHERE CAR_NO = #{carNo}
@@ -65,7 +63,7 @@
                SCHD_REPL_KM,
                IF(SCHD_REPL_DATE IS NULL, '1999-01-01', SCHD_REPL_DATE) AS replDate,
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userId_IDX_FK}
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
           AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
         ORDER BY TYPE ASC
     </select>
@@ -74,7 +72,7 @@
     <delete id="deleteMileage">
         DELETE
         FROM   mileage_tb
-        WHERE  USER_ID_IDX_FK = #{userId_IDX_FK}
+        WHERE  USER_ID_IDX_FK = #{userIdIdxFk}
           AND driveID = #{driveID}
     </delete>
 
@@ -92,7 +90,7 @@
                SCHD_REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userId_IDX_FK}
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
           AND driveID = #{driveID}
     </select>
 

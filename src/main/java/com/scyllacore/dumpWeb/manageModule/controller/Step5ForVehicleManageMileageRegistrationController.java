@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step5ForVehicleManageMileageRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,25 +22,25 @@ public class Step5ForVehicleManageMileageRegistrationController {
     }
 
     /* click.js */
-    @PostMapping(value = "/ajax/mileageSave")
+    @PostMapping(value = "/fetch/mileageSave")
     @ResponseBody
-    public String mileageSave(MileageDTO mileage) {
+    public ResponseDTO<String> mileageSave(@RequestBody MileageDTO mileage) {
         return step5Service.saveMileage(mileage);
     }
 
-    @PostMapping(value = "/ajax/mileageList")
+    @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
     public List<MileageDTO> mileageList(String date) {
         return step5Service.findMileageList(date);
     }
 
-    @DeleteMapping(value = "/ajax/mileageRemove")
+    @DeleteMapping(value = "/fetch/mileageRemove")
     public void mileageRemove(int driveID) {
         step5Service.removeMileage(driveID);
     }
 
     /* param.js */
-    @PostMapping(value = "/ajax/mileageDetails")
+    @PostMapping(value = "/fetch/mileageDetails")
     @ResponseBody
     public MileageDTO mileageDetails(int driveID) {
         return step5Service.findMileage(driveID);

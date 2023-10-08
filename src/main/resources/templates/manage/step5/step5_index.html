@@ -25,8 +25,8 @@
 
             <div class="period-wrapper">
                 <h3>날짜</h3>
-                <input id="reg-date" name="driveDate" readonly/>
-                <button class="retrieval-btn">조회</button>
+                <input type="date" id="reg-date" name="driveDate"/>
+                <button type="button" class="retrieval-btn" onclick="clickRetrieval()">조회</button>
             </div>
 
             <div class="item-wrapper">
@@ -81,7 +81,7 @@
             </div>
 
             <div class="bottom-btn-wrapper">
-                <button type="button" class="save-btn">저장</button>
+                <button type="button" class="save-btn" onclick="clickRetrieval()">저장</button>
                 <button type="button" class="delete-btn">삭제</button>
                 <button type="button" class="input-init-btn">입력 초기화</button>
                 <button type="button" class="prev-page-btn">이전 화면</button>
@@ -93,12 +93,9 @@
     </div>
 </container>
 
-
+<script src="/js/manage/step5/click.js"></script>
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
-
-<script src="/js/manage/step5/step5Base.js.js"></script>
-<script src="/js/include/requestHandling.js"></script>
-<script src="/js/include/responseHandling.js"></script>
 
 </html>
 
