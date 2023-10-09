@@ -3,6 +3,11 @@ function setActiveByCheckBox(activeInputs) {
         const activeConfigParams = activeInputs[idx];
         const checkBoxElement = document.querySelector('input[name="' + activeConfigParams.checkBoxName + '"]');
 
+        if(checkBoxElement.checked){
+            console.log(checkBoxElement);
+            setDisabled(checkBoxElement,activeConfigParams,checkBoxElement.checked);
+        }
+
         checkBoxElement.addEventListener('change', (event) => {
             let active = checkBoxElement.checked;
 
@@ -131,7 +136,6 @@ async function inputDataByParams(url,idName) {
         , 'POST'
         , JSON.stringify(data))
     const responseData = await request.fetchRequest();
-    console.log(responseData);
     fillInput(responseData);
 }
 
@@ -143,8 +147,6 @@ function getUrlIdParam(idName) {
 
 function fillInput(data) {
     for (const key in data) {
-
-        console.log(key,data[key]);
 
         if (data[key] === null || key === 'userIdIdxFk') {
             continue;

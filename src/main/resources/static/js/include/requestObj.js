@@ -6,8 +6,6 @@ class Request {
     }
 
     async tryRequest() {
-        console.log(this.fetchUrl,this.fetchOptions);
-
         const result = await fetch(this.fetchUrl, this.fetchOptions);
         return result.json()
             .catch(error => {
