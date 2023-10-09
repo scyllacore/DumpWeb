@@ -19,11 +19,18 @@ public class Step5ForVehicleManageMileageRegistrationService {
     private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    public int getUserIdFK() {
+        return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
+    }
+
+    public String getUserId(){
+        return commonUtil.getLoginInfoBySession().getUserId();
+    }
 
     public ResponseDTO<String> saveMileage(MileageDTO mileage) {
 
-        mileage.setUserIdIdxFk(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx()));
-        mileage.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
+        mileage.setUserIdIdxFk(getUserIdFK());
+        mileage.setCarNo(getUserId());
 
         if (mileage.getMileageId() == 0) {
             step5Mapper.insertMileage(mileage);
@@ -34,16 +41,24 @@ public class Step5ForVehicleManageMileageRegistrationService {
         return new ResponseDTO<>(200, "저장 완료.");
     }
 
-    public List<MileageDTO> findMileageList(String date) {
-        return step5Mapper.selectMileageList(commonUtil.getLoginInfoBySession().getUserId(), date);
+    public ResponseDTO<List<MileageDTO>> findMileageList(MileageDTO mileage) {
+        mileage.setUserIdIdxFk(getUserIdFK());
+
+        return new ResponseDTO<>(200,
+                step5Mapper.selectMileageList(mileage));
     }
 
-    public void removeMileage(int driveId) {
-        step5Mapper.deleteMileage(commonUtil.getLoginInfoBySession().getUserId(), driveId);
+    public ResponseDTO<String> removeMileage(MileageDTO mileage) {
+        mileage.setUserIdIdxFk(getUserIdFK());
+
+        step5Mapper.deleteMileage(mileage);
+
+        return new ResponseDTO<>(200, "정상적으로 삭제되었습니다.");
     }
 
     public ResponseDTO<MileageDTO> findMileage(MileageDTO mileage) {
-        return new ResponseDTO<MileageDTO>(200,
-                step5Mapper.selectMileage(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx()), mileage.getMileageId()));
+        mileage.setUserIdIdxFk(getUserIdFK());
+
+        return new ResponseDTO<>(200, step5Mapper.selectMileage(mileage));
     }
 }

@@ -87,9 +87,9 @@
 
             <div class="bottom-btn-wrapper">
                 <button type="button" class="save-btn" onclick="save()">저장</button>
-                <button type="button" class="delete-btn">삭제</button>
-                <button type="button" class="input-init-btn">입력 초기화</button>
-                <button type="button" class="prev-page-btn">이전 화면</button>
+                <button type="button" class="delete-btn" onclick="remove()">삭제</button>
+                <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
+                <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
             </div>
         </form>
 

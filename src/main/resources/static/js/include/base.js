@@ -4,7 +4,6 @@ function setActiveByCheckBox(activeInputs) {
         const checkBoxElement = document.querySelector('input[name="' + activeConfigParams.checkBoxName + '"]');
 
         if(checkBoxElement.checked){
-            console.log(checkBoxElement);
             setDisabled(checkBoxElement,activeConfigParams,checkBoxElement.checked);
         }
 
@@ -134,7 +133,7 @@ async function inputDataByParams(url,idName) {
 
     const request = new RequestHandler(url
         , 'POST'
-        , JSON.stringify(data))
+        , getRequestJson(data))
     const responseData = await request.fetchRequest();
     fillInput(responseData);
 }

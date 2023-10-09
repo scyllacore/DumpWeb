@@ -1,8 +1,19 @@
-function getFormJson(form, addingParams) {
-    const entry = new FormData(document.querySelector('form[name="' + form + '"]')).entries();
+function getRequestJson(element, addingParams) {
 
-    const obj = Object.fromEntries(entry);
-    addCheckParam(obj, addingParams);
+    if (typeof element === 'object') {
+        return JSON.stringify(element);
+    }
+
+    const el = document.querySelector('[name="' + element + '"]');
+    let obj = {};
+
+    if (el.tagName === 'FORM') {
+        const entry = new FormData(el).entries();
+        obj = Object.fromEntries(entry);
+        addCheckParam(obj, addingParams);
+    } else if (el.tagName === 'INPUT') {
+        obj[el.getAttribute('name')] = el.value;
+    }
 
     return JSON.stringify(obj);
 }

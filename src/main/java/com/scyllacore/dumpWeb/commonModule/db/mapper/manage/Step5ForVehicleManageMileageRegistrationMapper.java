@@ -11,9 +11,9 @@ public interface Step5ForVehicleManageMileageRegistrationMapper {
 
     void updateMileage(MileageDTO mileage);
 
-    List<MileageDTO> selectMileageList(String userID, String date);
+    void deleteMileage(MileageDTO mileage);
 
-    void deleteMileage(String userID, int driveID);
+    List<MileageDTO> selectMileageList(MileageDTO mileage);
 
-    MileageDTO selectMileage(int userId, int mileageId);
+    MileageDTO selectMileage(MileageDTO mileage);
 }

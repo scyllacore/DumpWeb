@@ -21,7 +21,6 @@ public class Step5ForVehicleManageMileageRegistrationController {
         return "/manage/step5/step5_index";
     }
 
-    /* click.js */
     @PostMapping(value = "/fetch/mileageSave")
     @ResponseBody
     public ResponseDTO<String> mileageSave(@RequestBody MileageDTO mileage) {
@@ -30,20 +29,19 @@ public class Step5ForVehicleManageMileageRegistrationController {
 
     @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public List<MileageDTO> mileageList(String date) {
-        return step5Service.findMileageList(date);
+    public ResponseDTO<List<MileageDTO>> mileageList(@RequestBody MileageDTO mileage) {
+        return step5Service.findMileageList(mileage);
     }
 
     @DeleteMapping(value = "/fetch/mileageRemove")
-    public void mileageRemove(int driveID) {
-        step5Service.removeMileage(driveID);
+    @ResponseBody
+    public ResponseDTO<String> mileageRemove(@RequestBody MileageDTO mileage) {
+        return step5Service.removeMileage(mileage);
     }
 
-    /* param.js */
     @PostMapping(value = "/fetch/mileageDetails")
     @ResponseBody
     public ResponseDTO<MileageDTO> mileageDetails(@RequestBody MileageDTO mileage) {
-        System.out.println(mileage);
         return step5Service.findMileage(mileage);
     }
 

@@ -4,7 +4,6 @@ function insertTitleThInFront(arr, idx) {
     arr.splice(0, 0, firstTh);
 }
 
-// radio 버튼에 따라 테이블 열 순서 변경 함수
 function changeTableColumnOrder() {
     const searchTypeRadio = document.querySelectorAll('input[name="sortingCriteria"]');
     const header = Array.from(document.querySelectorAll(".th_header"));
@@ -28,7 +27,6 @@ function changeTableColumnOrder() {
     return firstThFlag;
 }
 
-// 검색 버튼 클릭 이벤트를 처리.
 function printList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("table tbody");
@@ -101,16 +99,4 @@ function printSummary(searchResultData) {
     // 결과를 result_search 요소에 출력
     const resultSearch = document.querySelector("#total");
     resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
-}
-
-
-function getDriveIDDataByParams(driveID) {
-    $.ajax({
-        url: "/dailyReport/carcareform/ajax/details",
-        type: "POST",
-        data: {driveID: driveID},
-        success: function (data) {
-            inputDataByParams(data);
-        }
-    })
 }
