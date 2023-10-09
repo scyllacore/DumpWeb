@@ -12,4 +12,9 @@
   padding-left: 325px;
 }
 
+.red-line-divider {
+  border-top: 2px solid red;
+  border-bottom: 1px solid #ddd;
+}
+
 /*# sourceMappingURL=base.css.map */

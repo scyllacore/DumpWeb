@@ -109,12 +109,12 @@ function checkInputValidation(form) {
 
 /* */
 
-function redirectById(url, idName) {
+function redirectById(originUrl, idName) {
     const listRow = document.querySelector("table tbody");
 
     listRow.addEventListener("click", (event) => {
-        let Id = event.target.parentElement.getAttribute('data-' + idName + '-id');
-        let url = url + '?' + idName + '=' + Id;
+        let Id = event.target.parentElement.getAttribute('data-' + idName);
+        let url = originUrl + '?' + idName + '=' + Id;
         window.location.href = url;
     });
 }
