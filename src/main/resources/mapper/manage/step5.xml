@@ -14,8 +14,9 @@
          USED_OIL,
          MEMO,
          PAYMENT_CHK,
-         SCHD_REPL_KM,
-         SCHD_REPL_DATE,
+         REPL_ACTIVE_CHK,
+         REPL_KM,
+         REPL_DATE,
          REPL_CHK,
          USER_ID_IDX_FK)
         VALUES (#{carNo},
@@ -26,6 +27,7 @@
                 #{usedOil},
                 #{memo},
                 #{paymentChk},
+                #{replActiveChk},
                 #{replKm},
                 #{replDate},
                 #{replChk},
@@ -78,20 +80,21 @@
 
 
     <select id="selectMileage" resultType="MileageDTO">
-        SELECT driveID,
-               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d')              AS driveDate,
-               TYPE,
+        SELECT MILEAGE_ID,
+               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+               ITEM,
                PAYMENT_CHK,
                LAST_KM,
                USED_AMOUNT,
                USED_OIL,
                MEMO,
-               IF(SCHD_REPL_DATE IS NULL, '1999-01-01', SCHD_REPL_DATE) AS replDate,
-               SCHD_REPL_KM,
+               REPL_ACTIVE_CHK,
+               DATE_FORMAT(REPL_DATE, '%Y-%m-%d') AS replDate,
+               REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
-          AND driveID = #{driveID}
+        WHERE USER_ID_IDX_FK = #{userId}
+          AND MILEAGE_ID = #{mileageId}
     </select>
 
 </mapper>

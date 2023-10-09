@@ -42,8 +42,9 @@ public class Step5ForVehicleManageMileageRegistrationController {
     /* param.js */
     @PostMapping(value = "/fetch/mileageDetails")
     @ResponseBody
-    public MileageDTO mileageDetails(int driveID) {
-        return step5Service.findMileage(driveID);
+    public ResponseDTO<MileageDTO> mileageDetails(@RequestBody MileageDTO mileage) {
+        System.out.println(mileage);
+        return step5Service.findMileage(mileage);
     }
 
 }

@@ -1,14 +1,15 @@
 /* requestByClick */
 const defaultUrl = '/manage/step5/fetch/';
 const defaultForm = 'optionForm';
-const chkParams = ['paymentChk', 'replChk'];
+const chkParams = ['replChk','paymentChk'];
+const idName = 'mileageId';
 
 
 /* Base */
-const step5inputNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActive', 'replDate', 'replKm', 'replChk']
+const step5inputNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
 const activeInputs = {
     0: {
-        checkBoxName: 'replActive',
+        checkBoxName: 'replActiveChk',
         type : 'active',
         inputNames: step5inputNames,
         range: [step5inputNames.length - 3, step5inputNames.length],
@@ -19,7 +20,7 @@ const activeInputs = {
         type : 'disable',
         inputNames: step5inputNames,
         range: [1, step5inputNames.length],
-        exceptCheckBox: 'replActive',
-        exceptRange: [8, 11]
+        exceptCheckBox: 'replActiveChk',
+        exceptRange: [step5inputNames.length - 3, step5inputNames.length]
     }
 }

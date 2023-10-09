@@ -1,3 +1,5 @@
+setActiveByCheckBox(activeInputs);
 document.addEventListener("DOMContentLoaded", () => {
-    setActiveByCheckBox(activeInputs);
+    inputDataByParams(defaultUrl + 'mileageDetails', idName);
+    redirectById(defaultUrl + 'mileageDetails', idName);
 })

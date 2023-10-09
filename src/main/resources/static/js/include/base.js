@@ -1,16 +1,9 @@
-function checkUndefined(val){
-    if(typeof val === 'undefined'){
-        return true;
-    }
-    return false;
-}
-
 function setActiveByCheckBox(activeInputs) {
     for (const idx in activeInputs) {
         const activeConfigParams = activeInputs[idx];
         const checkBoxElement = document.querySelector('input[name="' + activeConfigParams.checkBoxName + '"]');
 
-        checkBoxElement.addEventListener('click', (event) => {
+        checkBoxElement.addEventListener('change', (event) => {
             let active = checkBoxElement.checked;
 
             setDisabled(checkBoxElement, activeConfigParams, active);
@@ -22,7 +15,7 @@ function setActiveByCheckBox(activeInputs) {
 
 function setDisabled(checkBoxElement, activeConfigParams, active) {
 
-    if(checkUndefined(activeConfigParams.range)){
+    if (checkUndefined(activeConfigParams.range)) {
         return;
     }
 
@@ -30,9 +23,9 @@ function setDisabled(checkBoxElement, activeConfigParams, active) {
     let end = activeConfigParams.range[1];
     for (let i = start; i < end; i++) {
         const inputElement = document.querySelector('[name="' + activeConfigParams.inputNames[i] + '"]');
-        if(activeConfigParams.type === 'active'){
+        if (activeConfigParams.type === 'active') {
             inputElement.disabled = !active;
-        }else{
+        } else {
             inputElement.disabled = active;
         }
     }
@@ -40,12 +33,12 @@ function setDisabled(checkBoxElement, activeConfigParams, active) {
 
 function initInput(activeConfigParams) {
 
-    if(checkUndefined(activeConfigParams.initRange)){
+    if (checkUndefined(activeConfigParams.initRange)) {
         return;
     }
 
     let initStart = activeConfigParams.initRange[0];
-    let initEnd =  activeConfigParams.initRange[1];
+    let initEnd = activeConfigParams.initRange[1];
     for (let i = initStart; i < initEnd; i++) {
         const inputElement = document.querySelector('[name="' + activeConfigParams.inputNames[i] + '"]');
         inputElement.value = "";
@@ -55,7 +48,7 @@ function initInput(activeConfigParams) {
 
 function setExceptInitInput(checkBoxElement, activeConfigParams, active) {
 
-    if(checkUndefined(activeConfigParams.exceptRange)){
+    if (checkUndefined(activeConfigParams.exceptRange)) {
         return;
     }
 
@@ -74,6 +67,15 @@ function setExceptInitInput(checkBoxElement, activeConfigParams, active) {
     }
 }
 
+function checkUndefined(val) {
+    if (typeof val === 'undefined') {
+        return true;
+    }
+    return false;
+}
+
+
+/* */
 function addCheckParam(inputData, names) {
     names.forEach(name => {
             const checkBox = document.querySelector('input[name="' + name + '"]');
@@ -87,13 +89,8 @@ function checkInputValidation(form) {
     const formElement = document.querySelector('form[name="' + form + '"]');
     const formInput = formElement.querySelectorAll('input');
 
-    console.log(formInput);
-
     for (let i = 0; i < formInput.length; i++) {
-        let name = formInput[i].getAttribute('name');
-        console.log(name);
         let value = formInput[i].value;
-        let require = formInput[i].required;
 
         if (formInput[i].required && value === '') {
             alert(formInput[i].parentElement.querySelector('h3').innerHTML + '를 다시 확인해주세요');
@@ -106,28 +103,62 @@ function checkInputValidation(form) {
     return false;
 }
 
+/* */
 
-function redirectByDriveId() {
+function redirectById(url, idName) {
     const listRow = document.querySelector("table tbody");
 
     listRow.addEventListener("click", (event) => {
-        let driveID = event.target.parentElement.getAttribute("data-drive-id")
-        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
+        let Id = event.target.parentElement.getAttribute('data-' + idName + '-id');
+        let url = url + '?' + idName + '=' + Id;
         window.location.href = url;
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+/* */
 
-    let driveId = params.get("driveId");
+async function inputDataByParams(url,idName) {
+    const idParam = getUrlIdParam(idName);
 
-    if (driveId !== null) {
-        requestDetailsByDriveID(driveId);
+    if (idParam === null) {
+        return;
     }
 
-    redirectByDriveId();
-});
+    const data={};
+    data[idName] = idParam;
+
+    const request = new RequestHandler(url
+        , 'POST'
+        , JSON.stringify(data))
+    const responseData = await request.fetchRequest();
+    console.log(responseData);
+    fillInput(responseData);
+}
+
+function getUrlIdParam(idName) {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    return params.get(idName);
+}
+
+function fillInput(data) {
+    for (const key in data) {
+
+        console.log(key,data[key]);
+
+        if (data[key] === null || key === 'userIdIdxFk') {
+            continue;
+        }
+
+        if (key === "item") {
+            const optionList = document.querySelector('select[name="' + key + '"]');
+            optionList.querySelector('option[value="' + data[key] + '"]').selected = true;
+        } else if (typeof data[key] === "boolean") {
+            document.querySelector('input[name="' + key + '"]').checked = data[key];
+        } else {
+            document.querySelector('[name=' + key + ']').value = data[key];
+        }
+    }
+}
 
 

@@ -25,13 +25,13 @@ public class Step5ForVehicleManageMileageRegistrationService {
         mileage.setUserIdIdxFk(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx()));
         mileage.setCarNo(commonUtil.getLoginInfoBySession().getUserId());
 
-        if (mileage.getDriveId() == 0) {
+        if (mileage.getMileageId() == 0) {
             step5Mapper.insertMileage(mileage);
         } else {
             step5Mapper.updateMileage(mileage);
         }
 
-        return new ResponseDTO<>(200,"저장 완료.");
+        return new ResponseDTO<>(200, "저장 완료.");
     }
 
     public List<MileageDTO> findMileageList(String date) {
@@ -42,7 +42,8 @@ public class Step5ForVehicleManageMileageRegistrationService {
         step5Mapper.deleteMileage(commonUtil.getLoginInfoBySession().getUserId(), driveId);
     }
 
-    public MileageDTO findMileage(int driveId) {
-        return step5Mapper.selectMileage(commonUtil.getLoginInfoBySession().getUserId(), driveId);
+    public ResponseDTO<MileageDTO> findMileage(MileageDTO mileage) {
+        return new ResponseDTO<MileageDTO>(200,
+                step5Mapper.selectMileage(Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx()), mileage.getMileageId()));
     }
 }
