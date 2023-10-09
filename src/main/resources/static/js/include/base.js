@@ -1,75 +1,78 @@
-function getUrlCheckParam(id) {
-    const checkBox = document.getElementById(id);
-    return "&" + id + "=" + checkBox.checked;
-}
-
-function redirectByDriveId() {
-    const listRow = document.querySelector("table tbody");
-
-    listRow.addEventListener("click", (event) => {
-        let driveID = event.target.parentElement.getAttribute("data-drive-id")
-        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
-        window.location.href = url;
-    });
+function checkUndefined(val){
+    if(typeof val === 'undefined'){
+        return true;
+    }
+    return false;
 }
 
 function setActiveByCheckBox(activeInputs) {
-    for (const key in activeInputs) {
-        const checkBoxElement = document.querySelector('input[name="' + activeInputs[key].checkBoxName + '"]');
+    for (const idx in activeInputs) {
+        const activeConfigParams = activeInputs[idx];
+        const checkBoxElement = document.querySelector('input[name="' + activeConfigParams.checkBoxName + '"]');
 
         checkBoxElement.addEventListener('click', (event) => {
             let active = checkBoxElement.checked;
 
-            let start = activeInputs[key].range[0];
-            let end = activeInputs[key].range[1];
-            for (let i = start; i < end; i++) {
-                const inputElement = document.querySelector('[name="' + activeInputs[key].inputNames[i] + '"]');
-                inputElement.disabled = !active;
-            }
-
-            let initStart = activeInputs[key].initRange[0];
-            let initEnd = activeInputs[key].initRange[1];
-            for (let i = initStart; i < initEnd; i++) {
-                const inputElement = document.querySelector('[name="' + activeInputs[key].inputNames[i] + '"]');
-                inputElement.value = "";
-                inputElement.checked = false;
-            }
+            setDisabled(checkBoxElement, activeConfigParams, active);
+            initInput(activeConfigParams, active);
+            setExceptInitInput(checkBoxElement, activeConfigParams, active);
         })
     }
 }
 
-function setDisableByCheckBox(LockedInput) {
-    for (const key in LockedInput) {
-        const checkBoxElement = document.querySelector('input[name="' + LockedInput[key].checkBoxName + '"]');
+function setDisabled(checkBoxElement, activeConfigParams, active) {
 
-        checkBoxElement.addEventListener('click', (event) => {
-            let active = checkBoxElement.checked;
+    if(checkUndefined(activeConfigParams.range)){
+        return;
+    }
 
-            let start = LockedInput[key].range[0];
-            let end = LockedInput[key].range[1];
-
-            for (let i = start; i < end; i++) {
-                const inputElement = document.querySelector('[name="' + LockedInput[key].inputNames[i] + '"]');
-                inputElement.disabled = active;
-            }
-
-            const exceptActive = document.querySelector('input[name="' + LockedInput[key].exceptCheckBox + '"]').checked;
-
-            if (active || exceptActive) {
-                return;
-            }
-
-            let exceptStart = LockedInput[key].exceptRange[0];
-            let exceptEnd = LockedInput[key].exceptRange[1];
-
-            for (let i = exceptStart; i < exceptEnd; i++) {
-                const inputElement = document.querySelector('[name="' + LockedInput[key].inputNames[i] + '"]');
-                inputElement.disabled = true;
-            }
-        })
+    let start = activeConfigParams.range[0];
+    let end = activeConfigParams.range[1];
+    for (let i = start; i < end; i++) {
+        const inputElement = document.querySelector('[name="' + activeConfigParams.inputNames[i] + '"]');
+        if(activeConfigParams.type === 'active'){
+            inputElement.disabled = !active;
+        }else{
+            inputElement.disabled = active;
+        }
     }
 }
 
+function initInput(activeConfigParams) {
+
+    if(checkUndefined(activeConfigParams.initRange)){
+        return;
+    }
+
+    let initStart = activeConfigParams.initRange[0];
+    let initEnd =  activeConfigParams.initRange[1];
+    for (let i = initStart; i < initEnd; i++) {
+        const inputElement = document.querySelector('[name="' + activeConfigParams.inputNames[i] + '"]');
+        inputElement.value = "";
+        inputElement.checked = false;
+    }
+}
+
+function setExceptInitInput(checkBoxElement, activeConfigParams, active) {
+
+    if(checkUndefined(activeConfigParams.exceptRange)){
+        return;
+    }
+
+    const exceptActive = document.querySelector('input[name="' + activeConfigParams.exceptCheckBox + '"]').checked;
+
+    if (active || exceptActive) {
+        return;
+    }
+
+    let exceptStart = activeConfigParams.exceptRange[0];
+    let exceptEnd = activeConfigParams.exceptRange[1];
+
+    for (let i = exceptStart; i < exceptEnd; i++) {
+        const inputElement = document.querySelector('[name="' + activeConfigParams.inputNames[i] + '"]');
+        inputElement.disabled = true;
+    }
+}
 
 function addCheckParam(inputData, names) {
     names.forEach(name => {
@@ -104,6 +107,16 @@ function checkInputValidation(form) {
 }
 
 
+function redirectByDriveId() {
+    const listRow = document.querySelector("table tbody");
+
+    listRow.addEventListener("click", (event) => {
+        let driveID = event.target.parentElement.getAttribute("data-drive-id")
+        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
+        window.location.href = url;
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -116,4 +129,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     redirectByDriveId();
 });
+
 
