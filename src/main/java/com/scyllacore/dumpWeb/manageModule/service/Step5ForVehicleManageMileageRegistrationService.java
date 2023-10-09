@@ -29,6 +29,9 @@ public class Step5ForVehicleManageMileageRegistrationService {
 
     public ResponseDTO<String> saveMileage(MileageDTO mileage) {
 
+
+        System.out.println(mileage);
+
         mileage.setUserIdIdxFk(getUserIdFK());
         mileage.setCarNo(getUserId());
 

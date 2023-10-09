@@ -7,31 +7,35 @@
     <insert id="insertMileage" parameterType="MileageDTO">
         INSERT INTO mileage_tb
         (CAR_NO,
-         DRIVE_DATE,
-         ITEM,
-         LAST_KM,
-         USED_AMOUNT,
-         USED_OIL,
-         MEMO,
-         PAYMENT_CHK,
-         REPL_ACTIVE_CHK,
-         REPL_KM,
-         REPL_DATE,
-         REPL_CHK,
-         USER_ID_IDX_FK)
+        DRIVE_DATE,
+        ITEM,
+        LAST_KM,
+        USED_AMOUNT,
+        USED_OIL,
+        MEMO,
+        PAYMENT_CHK,
+        REPL_ACTIVE_CHK,
+        REPL_KM,
+        <if test="replDate != null">
+            REPL_DATE,
+        </if>
+        REPL_CHK,
+        USER_ID_IDX_FK)
         VALUES (#{carNo},
-                #{driveDate},
-                #{item},
-                #{lastKm},
-                #{usedAmount},
-                #{usedOil},
-                #{memo},
-                #{paymentChk},
-                #{replActiveChk},
-                #{replKm},
-                #{replDate},
-                #{replChk},
-                #{userIdIdxFk})
+        #{driveDate},
+        #{item},
+        #{lastKm},
+        #{usedAmount},
+        #{usedOil},
+        #{memo},
+        #{paymentChk},
+        #{replActiveChk},
+        #{replKm},
+        <if test="replDate != null">
+            #{replDate},
+        </if>
+        #{replChk},
+        #{userIdIdxFk})
     </insert>
 
 

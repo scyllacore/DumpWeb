@@ -1,7 +1,7 @@
 /* requestByClick */
 const defaultUrl = '/manage/step5';
 const defaultForm = 'optionForm';
-const chkParams = ['replChk','paymentChk'];
+const chkParams = [ 'replActiveChk','replChk','paymentChk'];
 const idName = 'mileageId';
 
 

@@ -162,4 +162,17 @@ function fillInput(data) {
     }
 }
 
+function setDisabledFalse(form){
+    const formElement = document.querySelector('form[name="' + form + '"]');
+    const formInput = formElement.querySelectorAll('input');
+    const formSelector = formElement.querySelectorAll('select');
+
+    for (let i = 0; i < formInput.length; i++) {
+        formInput[i].disabled = false;
+    }
+
+    for (let i = 0; i < formSelector.length; i++) {
+        formSelector[i].disabled = false;
+    }
+}
 
