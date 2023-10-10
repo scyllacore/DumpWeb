@@ -16,7 +16,7 @@
         PAYMENT_CHK,
         REPL_ACTIVE_CHK,
         REPL_KM,
-        <if test="replDate != null">
+        <if test="replDate != null and replDate != ''">
             REPL_DATE,
         </if>
         REPL_CHK,
@@ -31,7 +31,7 @@
         #{paymentChk},
         #{replActiveChk},
         #{replKm},
-        <if test="replDate != null">
+        <if test="replDate != null and replDate != ''">
             #{replDate},
         </if>
         #{replChk},
