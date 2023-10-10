@@ -8,18 +8,9 @@
 }
 
 ::-webkit-calendar-picker-indicator {
-  width: 39%;
+  width: 22%;
   height: 3%;
-  display: flex;
-  justify: {
-    content: center;
-  }
-  align: {
-    items: center;
-  }
   position: absolute;
-  color: transparent;
-  background: transparent;
   cursor: pointer;
 }
 
