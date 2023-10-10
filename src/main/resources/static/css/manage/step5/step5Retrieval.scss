@@ -51,11 +51,15 @@
       }
     }
 
-    .summary-wrapper {
+    .title-wrapper {
+      margin: 50px;
       text:{
         align: center;
       }
-      margin: 50px;
+      font:{
+        size: 30px;
+        weight: bold;
+      }
     }
 
     .payment-wrapper {

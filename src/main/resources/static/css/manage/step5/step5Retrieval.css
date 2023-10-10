@@ -40,9 +40,11 @@
 .search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off {
   z-index: -9999;
 }
-.search-result .search-result-wrapper .summary-wrapper {
-  text-align: center;
+.search-result .search-result-wrapper .title-wrapper {
   margin: 50px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }
 .search-result .search-result-wrapper .payment-wrapper {
   display: flex;
