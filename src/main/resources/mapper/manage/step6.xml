@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
+
+    <select id="selectMileageListByOption" parameterType="SearchOptionDTO" resultType="MileageDTO">
+        SELECT MILEAGE_ID,
+        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        ITEM,
+        LAST_KM,
+        USED_AMOUNT,
+        MEMO,
+        REPL_ACTIVE_CHK
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="item !='전체'">
+            AND ITEM = #{item}
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'driveDate'">
+                ORDER BY driveDate DESC, ITEM ASC
+            </when>
+            <otherwise>
+                ORDER BY ITEM ASC, driveDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="updateMileagePaymentChk" parameterType="SearchOptionDTO">
+        UPDATE mileage_tb
+        SET PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="item != '전체'">
+            AND ITEM = #{item}
+        </if>
+        AND PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,151 @@
+.line {
+  width: 100%;
+  height: 1.5px;
+  margin: 15px 0px;
+  background: #0068b7;
+}
+
+input[type=checkbox] {
+  zoom: 1.5;
+}
+
+.step5 {
+  display: flex;
+  justify: {
+    content: center;
+  }
+  background: #d1d1d1;
+  color: #333536;
+
+  .step5_wrapper {
+    width: 100%;
+    max: {
+      width: 600px;
+    }
+    padding: 20px 10px 10px;
+    background: #ffffff;
+
+    .sub_title {
+
+      h2 {
+        display: flex;
+        justify: {
+          content: center;
+        }
+        align: {
+          items: center;
+        }
+        font: {
+          size: 21px;
+          weight: bold;
+        }
+        gap: 5px;
+
+        img {
+
+        }
+      }
+    }
+
+
+    .option-form {
+      padding: {
+        top: 15px;
+        bottom: 10px;
+      };
+      background-color: #fafafa;
+      box: {
+        shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+      }
+
+      div {
+        padding: 10px 10px;
+        margin: 10px;
+        display: flex;
+        justify: {
+          content: space-between;
+        }
+        align: {
+          items: center;
+        }
+        box: {
+          shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+        }
+        background-color: #ffffff;
+
+        h3 {
+          width: 80px;
+          font: {
+            size: 13px;
+          }
+        }
+
+        input, .item-inner, textarea {
+          width: 65%;
+          padding: 5px;
+          border: 1px solid #ddd;
+          margin: 0 15px;
+          text: {
+            align: center;
+          }
+          cursor: pointer;
+        }
+      }
+
+
+      .retrieval-btn {
+        width: 35px;
+        margin: 0 12px;
+      }
+
+
+      .bottom-btn-wrapper {
+        padding: 25px 15px;
+        margin: {
+          top: 30px;
+        }
+        border-radius: 10px;
+        text: {
+          align: center;
+        }
+        box: {
+          shadow: rgba(0.1, 0.1, 0.1, 0.1) 1.5px 1.5px 1.5px 1.5px, rgba(0.1, 0.1, 0.1, 0.1) 1.5px 1.5px 1.5px 1.5px;
+        }
+
+        button {
+          width: 65px;
+          height: 30px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          text: {
+            align: center;
+          }
+          color: #555;
+          background: #fff;
+          font: {
+            size: 12px;
+            weight: 600;
+          }
+          cursor: pointer;
+        }
+
+        .save-btn {
+          border:{
+            color: #0068b7;
+          }
+          background: #0068b7;
+          color: #fff;
+        }
+
+        .delete-btn {
+          border:{
+            color: #ff3636;
+          }
+          background: #ff3636;
+          color: #fff;
+        }
+
+      }
+    }
+  }
+}

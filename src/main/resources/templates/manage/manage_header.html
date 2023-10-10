@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="headerFragment">
+
+    <th:block th:replace="/include/head :: headFragment"></th:block>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/common/animation.css">
+        <link rel="stylesheet" type="text/css" href="/css/manage/manageHeader.css">
+    </head>
+
+
+    <header class="manage-header">
+        <div class="menu-pop-up"></div>
+        <div class="base-wrap">
+            <div class="inner-left">
+                <button class="call-btn">
+                    <img src="/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
+                </button>
+            </div>
+
+            <span class="user-id-line" th:if="${session.loginInfo} != null">
+                        [[${session.loginInfo.userId}]]
+                </span>
+
+            <div class="inner-right">
+                <button class="menu-btn" onclick="openPopUp('menu-wrap')">메뉴</button>
+            </div>
+        </div>
+
+        <th:block th:replace="/manage/manage_menu :: menuFragment"></th:block>
+
+    </header>
+
+</th:block>
+</html>

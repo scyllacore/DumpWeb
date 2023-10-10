@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step6/step6Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step6">
+    <div class="step6_wrapper">
+        <div class="sub_title">
+            <h2>
+                차량관리 차계부 조회
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <form class="option-form" name="optionForm">
+            <div class="period-wrapper">
+                <h3>기간</h3>
+                <label class="period-inner">
+                    <input type="date" name="startDate">
+                    <span>~</span>
+                    <input type="date" name="endDate">
+                </label>
+            </div>
+            <div class="item-wrapper">
+                <h3>품목</h3>
+                <select class="item-inner" name="item">
+                    <option value="전체" selected>전체</option>
+                    <option value="주유">주유</option>
+                    <option value="요소수">요소수</option>
+                    <option value="엔진오일">엔진오일</option>
+                    <option value="정비(수리)">정비(수리)</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
+
+            <div class="sorting-wrapper">
+                <h3>정렬<br>기준</h3>
+                <select class="sorting-inner" name="sortingCriteria">
+                    <option value="driveDate" selected>날짜순</option>
+                    <option value="item">품목순</option>
+                </select>
+            </div>
+
+            <div class="search-btn-wrapper">
+                <button type="button" class="search-btn" onclick="openPopUp('search-result'); retrieval()">검색</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step6/step6_retrieval :: resultFragment"></th:block>
+
+    </div>
+</container>
+
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step6/params.js"></script>
+<script src="/js/manage/step6/requestByClick.js"></script>
+<script src="/js/manage/step6/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+
+</html>
+

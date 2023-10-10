@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/include/head :: headFragment"></th:block>
+
+<head>
+    <link href="/css/login/typeSelection.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="trial">
+    <section class="trial-inner">
+        <div class="wrap">
+            <h2>체험 유형을 선택해주세요.</h2>
+            <div class="select-area">
+                <form name="trialInfo" method="post">
+                    <input type="hidden" name="userType">
+                </form>
+
+                <div class="select-box-driver" name="driver" onclick = "accessInDriveMode(this)">
+                    <img src="/image/login/driver_btn.png">
+                </div>
+                <div class="select-box-manager" name="manager" onclick = "accessInDriveMode(this)">
+                    <img src="/image/login/manager_btn.png">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+
+<script src="/js/login/trial.js"></script>
+
+</html>
+

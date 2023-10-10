@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper">
+
+    <insert id="insertMileage" parameterType="MileageDTO">
+        INSERT INTO mileage_tb
+        (CAR_NO,
+        DRIVE_DATE,
+        ITEM,
+        LAST_KM,
+        USED_AMOUNT,
+        USED_OIL,
+        MEMO,
+        PAYMENT_CHK,
+        REPL_ACTIVE_CHK,
+        REPL_KM,
+        <if test="replDate != ''">
+            REPL_DATE,
+        </if>
+        REPL_CHK,
+        USER_ID_IDX_FK)
+        VALUES (#{carNo},
+        #{driveDate},
+        #{item},
+        #{lastKm},
+        #{usedAmount},
+        #{usedOil},
+        #{memo},
+        #{paymentChk},
+        #{replActiveChk},
+        #{replKm},
+        <if test="replDate != ''">
+            #{replDate},
+        </if>
+        #{replChk},
+        #{userIdIdxFk})
+    </insert>
+
+
+    <update id="updateMileage" parameterType="MileageDTO">
+        UPDATE mileage_tb
+        SET DRIVE_DATE     = #{driveDate},
+            TYPE           = #{type},
+            LAST_KM        = #{lastKm},
+            USED_AMOUNT    = #{usedAmount},
+            USED_OIL       = #{usedOil},
+            MEMO           = #{memo},
+            PAYMENT_CHK    = #{paymentChk},
+            SCHD_REPL_KM   = #{replKm},
+            SCHD_REPL_DATE = #{replDate},
+            REPL_CHK       = #{replChk}
+        WHERE CAR_NO = #{carNo}
+          AND DRIVE_ID = #{driveId}
+    </update>
+
+
+    <select id="selectMileageList" resultType="MileageDTO">
+        SELECT MILEAGE_ID,
+               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+               ITEM,
+               PAYMENT_CHK,
+               LAST_KM,
+               USED_AMOUNT,
+               USED_OIL,
+               MEMO,
+               REPL_ACTIVE_CHK,
+               DATE_FORMAT(REPL_DATE, '%Y-%m-%d')  AS replDate,
+               REPL_KM,
+               REPL_CHK
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+          AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
+        ORDER BY DRIVE_DATE ASC
+    </select>
+
+
+    <delete id="deleteMileage">
+        DELETE
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+          AND MILEAGE_ID = #{mileageId}
+    </delete>
+
+
+    <select id="selectMileage" resultType="MileageDTO">
+        SELECT MILEAGE_ID,
+               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+               ITEM,
+               PAYMENT_CHK,
+               LAST_KM,
+               USED_AMOUNT,
+               USED_OIL,
+               MEMO,
+               REPL_ACTIVE_CHK,
+               DATE_FORMAT(REPL_DATE, '%Y-%m-%d')  AS replDate,
+               REPL_KM,
+               REPL_CHK
+        FROM mileage_tb
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+          AND MILEAGE_ID = #{mileageId}
+    </select>
+
+</mapper>

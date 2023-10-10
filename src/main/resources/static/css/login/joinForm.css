@@ -1,0 +1,147 @@
+.join-form {
+  display: flex;
+  justify-content: center;
+}
+.join-form .join-form-inner {
+  width: 100%;
+  max-width: 414px;
+  height: 736px;
+  padding: 0 15px;
+  background-image: url(/image/login/bg-login-m3.png);
+  background-size: 100% 736px;
+}
+.join-form .join-form-inner .wrap {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+.join-form .join-form-inner .wrap .join-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #0064c1;
+}
+.join-form .join-form-inner .wrap .join-title span {
+  color: #bbbbbb;
+}
+.join-form .join-form-inner .wrap .join-title-add {
+  padding-top: 30px;
+  position: relative;
+  text-align: center;
+  color: #0064c1;
+  font-size: 32px;
+  font-weight: 600;
+}
+.join-form .join-form-inner .wrap .join-title-add::before {
+  top: 6px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #bbb;
+  content: "/";
+}
+.join-form .join-form-inner .wrap .line {
+  border-top: 1px solid #0064c1;
+  margin: 15px 25px;
+}
+.join-form .join-form-inner .wrap .input-form label {
+  min-width: 70px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+.join-form .join-form-inner .wrap .input-form .join-input {
+  padding: 0 25px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.join-form .join-form-inner .wrap .input-form .join-input input {
+  width: 100%;
+  max-width: 205px;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+.join-form .join-form-inner .wrap .personal-info-collection-agreement {
+  margin: 30px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+.join-form .join-form-inner .wrap .personal-info-collection-agreement .agreement-checkbox input {
+  border: 1px solid #ddd;
+  margin-top: 0px;
+  margin-bottom: 4px;
+  margin-right: 5px;
+  vertical-align: middle;
+  color: #616161;
+  background: #fff;
+}
+.join-form .join-form-inner .wrap .personal-info-collection-agreement .info-pop-up-btn {
+  margin-top: 4px;
+  border: 0 none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0064c1;
+  background-color: transparent;
+  cursor: pointer;
+}
+.join-form .join-form-inner .wrap .join-btnGroup {
+  padding: 0 25px;
+  margin: 10px 0 25px;
+  display: flex;
+  ext-align: center;
+  font-size: 0;
+}
+.join-form .join-form-inner .wrap .join-btnGroup .join-btn, .join-form .join-form-inner .wrap .join-btnGroup .redirect-login-btn {
+  width: calc(50% - 5px);
+  height: 50px;
+  border: 1px solid #0064c1;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 500;
+  font-font-size: 16px;
+  color: #0064c1;
+  box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.join-form .join-form-inner .wrap .join-btnGroup .join-btn {
+  color: #fff;
+  background-color: #0064c1;
+}
+.join-form .join-form-inner .wrap .join-btnGroup .redirect-login-btn {
+  color: #0064c1;
+  background-color: #f5f5f5;
+}
+.join-form .join-form-inner .wrap .question {
+  width: calc(100% - 50px);
+  height: 40px;
+  margin: 0 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+.join-form .join-form-inner .wrap .question .ask_text {
+  margin-top: 3px;
+  margin-right: 10px;
+  color: #0064c1;
+}
+.join-form .join-form-inner .wrap .question span {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+/*# sourceMappingURL=joinForm.css.map */

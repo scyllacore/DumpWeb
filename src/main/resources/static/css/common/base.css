@@ -1,0 +1,30 @@
+* {
+  font-family: GmarketSansTTF;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+
+::-webkit-calendar-picker-indicator {
+  width: 85px;
+  height: 25px;
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+}
+
+.red-line-divider {
+  border-top: 2px solid red;
+  border-bottom: 1px solid #ddd;
+}
+
+table tbody tr td {
+  border: 1px solid #ddd;
+  padding: 10px 0px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=base.css.map */

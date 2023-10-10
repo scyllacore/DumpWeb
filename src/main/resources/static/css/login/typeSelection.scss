@@ -1,0 +1,67 @@
+.trial, .join {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify: {
+    content: center;
+  }
+  align: {
+    items: center;
+  }
+  background:{
+    color: #fff;
+  }
+
+  .trial-inner, .join-inner {
+    width: 100%;
+    max-width: 414px;
+    height: 736px;
+    padding: 0 15px;
+    background: {
+      image: url(/image/login/bg-login-m3.png);
+      size: 100% 736px;
+    }
+
+    .wrap {
+      top: 50%;
+      position: relative;
+      transform: translateY(-50%);
+
+      h2 {
+        display: block;
+        text: {
+          align: center;
+        }
+        font-size: 18px;
+        margin: {
+          block: {
+            start: 0.83em;
+            end: 0.83em;
+          }
+          inline: {
+            start: 0px;
+            end: 0px;
+          }
+        }
+        font: {
+          weight: bold;
+        }
+
+      }
+
+      .select-area {
+        padding: 0 25px;
+        display: block;
+
+        .select-box-driver, .select-box-manager {
+          margin: 10px 0;
+
+          img {
+            width: 100%;
+            height: 145px;
+          }
+        }
+      }
+    }
+  }
+}

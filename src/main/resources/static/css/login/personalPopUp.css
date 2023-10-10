@@ -1,0 +1,83 @@
+.pop-up-wrap {
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+.pop-up-wrap .pop-up-inner {
+  width: 90%;
+  height: 450px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0px 7px rgba(0, 0, 0, 0.3);
+}
+.pop-up-wrap .pop-up-inner border {
+  radius: 4px;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer {
+  display: block;
+  background-color: #fff;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  font-size: 20px;
+  color: #fff;
+  background: #0068b7;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-header h3 {
+  font-size: 14px;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-header .pop-up-close {
+  width: 14px;
+  height: 14px;
+  top: 50%;
+  right: 15px;
+  border: 0 none;
+  display: block;
+  position: absolute;
+  transform: translateY(-50%);
+  background-image: url(/image/icons/ico_close.png);
+  background-size: 14px, 14px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-header .pop-up-close .close-icon {
+  display: inline-block;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-header .pop-up-close .screen-off {
+  position: absolute;
+  z-index: -9999;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-content {
+  height: 400px;
+  padding: 20px 10px;
+  overflow-y: scroll;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-content .title {
+  padding: 1px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 25px;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-content .title-description {
+  margin: 20px 0 30px;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-content .chapter {
+  margin: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.pop-up-wrap .pop-up-inner .pop-up-layer .pop-up-content .chap-description {
+  padding: 5px 10px;
+}
+
+/*# sourceMappingURL=personalPopUp.css.map */
