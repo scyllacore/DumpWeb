@@ -11,6 +11,7 @@ public class SearchOptionDTO {
     private String startDate;
     private String endDate;
     private String sortingCriteria;
+    private boolean paymentBtnFlag;
 
     //step 4,6,8
     private String fromSite;

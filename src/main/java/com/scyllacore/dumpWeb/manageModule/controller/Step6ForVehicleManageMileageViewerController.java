@@ -32,13 +32,13 @@ public class Step6ForVehicleManageMileageViewerController {
     @PostMapping(value = "/fetch/paymentApproval")
     @ResponseBody
     public ResponseDTO<String> paymentApproval(@RequestBody SearchOptionDTO option) {
-        return step6Service.approvePaymentByMileageChk2(option);
+        return step6Service.approvePayment(option);
     }
 
     @PostMapping(value = "/fetch/paymentCancel")
     @ResponseBody
     public ResponseDTO<String> paymentCancel(@RequestBody SearchOptionDTO option) {
-        return step6Service.cancelPaymentByMileageChk2(option);
+        return step6Service.cancelPayment(option);
     }
 
 
