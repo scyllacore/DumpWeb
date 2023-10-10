@@ -63,15 +63,15 @@
   font-weight: 600;
   cursor: pointer;
 }
-.search-result .search-result-wrapper .table_wrapper {
+.search-result .search-result-wrapper .table-wrapper {
   display: flex;
   justify-content: center;
 }
-.search-result .search-result-wrapper .table_wrapper table {
+.search-result .search-result-wrapper .table-wrapper table {
   border-spacing: 0;
   border-collapse: collapse;
 }
-.search-result .search-result-wrapper .table_wrapper table .table-key th {
+.search-result .search-result-wrapper .table-wrapper table .table-key th {
   padding: 8px 7px;
   border: 1px solid #ddd;
   text-align: center;

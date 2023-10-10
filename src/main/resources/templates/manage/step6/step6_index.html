@@ -24,9 +24,9 @@
             <div class="period-wrapper">
                 <h3>기간</h3>
                 <label class="period-inner">
-                    <input id="start-date" name="startDate" readonly/>
+                    <input type="date" name="startDate">
                     <span>~</span>
-                    <input id="end-date" name="endDate" readonly/>
+                    <input type="date" name="endDate">
                 </label>
             </div>
             <div class="item-wrapper">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="search-btn-wrapper">
-                <button type="button" class="search-btn" onclick=bindList()>검색</button>
+                <button type="button" class="search-btn" onclick="openPopUp('search-result'); retrieval()">검색</button>
             </div>
         </form>
 
@@ -59,13 +59,12 @@
     </div>
 </container>
 
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step6/params.js"></script>
+<script src="/js/manage/step6/requestByClick.js"></script>
+<script src="/js/manage/step6/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
-
-<script src="/js/manage/datePicker.js"></script>
-<script src="/js/manage/step6/list.js"></script>
-<script src="/js/manage/step6/click.js"></script>
-<script src="/js/manage/step6/DOMContentLoaded.js"></script>
 
 </html>
 

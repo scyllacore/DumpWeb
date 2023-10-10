@@ -2,28 +2,24 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
     <select id="selectMileageListByOption" parameterType="SearchOptionDTO" resultType="MileageDTO">
-        SELECT DRIVE_ID,
+        SELECT MILEAGE_ID,
         DATE_FORMAT(DRIVE_DATE, '%m.%d')                         AS driveDate,
         ITEM,
-        PAYMENT_CHK,
         LAST_KM,
         USED_AMOUNT,
-        USED_OIL,
         MEMO,
-        PAYMENT_CHK,
-        SCHD_REPL_KM,
-        IF(SCHD_REPL_DATE IS NULL, '1999-01-01', SCHD_REPL_DATE) AS replDate,
+        REPL_ACTIVE_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userId_IDX_FK}
+        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="item !='전체'">
             AND ITEM = #{item}
         </if>
         <choose>
-            <when test="sortingCriteria == '0-date'">
+            <when test="sortingCriteria == 'driveDate'">
                 ORDER BY driveDate DESC, ITEM ASC
             </when>
             <otherwise>

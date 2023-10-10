@@ -7,17 +7,16 @@ import lombok.Data;
 @AllArgsConstructor
 public class SearchOptionDTO {
     //공통
-    String carNo;
-    String startDate;
-    String endDate;
-    String sortingCriteria;
+    private int userIdIdxFk;
+    private String startDate;
+    private String endDate;
+    private String sortingCriteria;
 
     //step 4,6,8
-    String fromSite;
-    String toSite;
-    String item;
-    String tel;
-    String state;
-    String searchCarNo;
-
+    private String fromSite;
+    private String toSite;
+    private String item;
+    private String tel;
+    private String state;
+    private String searchCarNo;
 }

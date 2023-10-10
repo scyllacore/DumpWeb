@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step6ForVehicleManageMileageViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,20 +22,23 @@ public class Step6ForVehicleManageMileageViewerController {
         return "/manage/step6/step6_index";
     }
 
-    @PostMapping(value = "/ajax/mileageList")
+    @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public List<MileageDTO> mileageList(SearchOptionDTO option) {
+    public ResponseDTO<List<MileageDTO>> mileageList(@RequestBody SearchOptionDTO option) {
+        System.out.println(option);
         return step6Service.findMileageListByOption(option);
     }
 
-    @PostMapping(value = "/ajax/paymentApproval")
-    public void paymentApproval(@RequestBody SearchOptionDTO option) {
-        step6Service.approvePaymentByMileageChk2(option);
+    @PostMapping(value = "/fetch/paymentApproval")
+    @ResponseBody
+    public ResponseDTO<String> paymentApproval(@RequestBody SearchOptionDTO option) {
+        return step6Service.approvePaymentByMileageChk2(option);
     }
 
-    @PostMapping(value = "/ajax/paymentCancel")
-    public void paymentCancel(@RequestBody SearchOptionDTO option) {
-        step6Service.cancelPaymentByMileageChk2(option);
+    @PostMapping(value = "/fetch/paymentCancel")
+    @ResponseBody
+    public ResponseDTO<String> paymentCancel(@RequestBody SearchOptionDTO option) {
+        return step6Service.cancelPaymentByMileageChk2(option);
     }
 
 
