@@ -10,12 +10,20 @@ function getRequestJson(element, addingParams) {
     if (el.tagName === 'FORM') {
         const entry = new FormData(el).entries();
         obj = Object.fromEntries(entry);
-        addCheckParam(obj, addingParams);
+        addCheckedInput(obj, addingParams);
     } else if (el.tagName === 'INPUT') {
         obj[el.getAttribute('name')] = el.value;
     }
 
     return JSON.stringify(obj);
+}
+
+function addCheckBoxInput(inputData, names = []) {
+    names.forEach(name => {
+            const checkBox = document.querySelector('input[name="' + name + '"]');
+            inputData[name] = checkBox.checked;
+        }
+    )
 }
 
 class RequestHandler {

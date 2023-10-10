@@ -7,8 +7,6 @@ async function save() {
 
     let inputData = getRequestJson(defaultForm, chkParams);
 
-    console.log(inputData);
-
     const request = new RequestHandler(defaultUrl + '/fetch/mileageSave'
         , 'POST'
         , inputData);
