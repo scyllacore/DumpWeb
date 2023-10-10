@@ -30,13 +30,13 @@ function printList(searchResultData,startTh,dataIdName) {
 
 };
 
-function printSummary(searchResultData) {
-    const dataCount = searchResultData.length;
-    const totalCount = searchResultData.reduce((total, data) => total + (data.qty * data.qtyup), 0);
+function printListSummary(searchResultData,className) {
+    const count = searchResultData.length;
+    const amountSum = searchResultData.reduce((total, data) => total + data.usedAmount, 0);
 
-    const costButton = document.querySelector("#receiptsCnt");
-    costButton.innerHTML = `${totalCount.toLocaleString()}`;
-
-    const resultSearch = document.querySelector("#total");
-    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
+    const resultElement = document.querySelector("." + className);
+    resultElement.innerHTML = `
+            <h1>데이터 <span class="blue">${count}</span>건이 검색되었습니다.</h1>
+            <span>사용금액은 총 ${amountSum.toLocaleString()}원 입니다.</span>
+            `;
 }

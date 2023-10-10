@@ -8,6 +8,7 @@ async function retrieval() {
 
     let inputObj = JSON.parse(inputData);
 
+    printListSummary(responseData,'summary-wrapper');
     printList(responseData,inputObj.sortingCriteria,idName);
 }
 
