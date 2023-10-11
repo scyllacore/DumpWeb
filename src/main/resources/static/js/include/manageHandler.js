@@ -18,9 +18,24 @@ class ManageHandler {
         this.dataIdNames = dataIdNames;
         this.listElementClassNames = listElementClassNames;
 
-        this.inputHandler.inputDataByUrlParams(defaultUrl + '/fetch/' + dataIdNames + 'Details', dataIdNames + 'Id');
+        this.dataIdNamesAddingSuffix = [];
+        for (let idx in this.dataIdNames) {
+            this.dataIdNamesAddingSuffix.push(dataIdNames[idx] + 'Id');
+        }
+
+        for (let idx in this.dataIdNamesAddingSuffix) {
+            this.inputHandler.inputDataByUrlParams(defaultUrl + '/fetch/' + dataIdNames[idx] + 'Details'
+                , this.dataIdNamesAddingSuffix[idx]);
+        }
+
+        for (let idx in this.dataIdNamesAddingSuffix) {
+            this.inputHandler.urlHandler.redirectByElementValue(defaultUrl
+                , this.dataIdNamesAddingSuffix[idx]);
+        }
+
         this.activeInputHandler.activateInput();
-        this.inputHandler.urlHandler.redirectByElementValue(defaultUrl, dataIdNames + 'Id');
+
+
     }
 
     async save() {
@@ -71,7 +86,10 @@ class ManageHandler {
         }
 
         for (let idx in this.listElementClassNames) {
-            this.responseHandler.printList(responseData, this.listElementClassNames[idx], inputObj.sortingCriteria, this.dataIdNames);
+            this.responseHandler.printList(responseData
+                , this.listElementClassNames[idx]
+                , inputObj.sortingCriteria
+                , this.dataIdNamesAddingSuffix[idx]);
         }
     }
 }

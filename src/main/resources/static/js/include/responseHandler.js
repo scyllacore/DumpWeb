@@ -1,5 +1,5 @@
 class ResponseHandler {
-    printList(searchResultData,listElementClassName, startTh, dataIdName) {
+    printList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
 
         const tableThChild = document.querySelector('.th-' + startTh);
         const tableThParent = tableThChild.parentNode;
@@ -25,7 +25,7 @@ class ResponseHandler {
                 row.classList.add("red-line-divider");
             }
 
-            row.setAttribute('data-' + dataIdName+'Id', data[dataIdName + 'Id']);
+            row.setAttribute('data-' + dataIdNamesAddingSuffix, data[dataIdNamesAddingSuffix]);
             tableBody.appendChild(row);
         });
 
@@ -34,7 +34,7 @@ class ResponseHandler {
     printListSummary(searchResultData, className) {
         const resultElement = document.querySelector("." + className);
 
-        if(resultElement === null){
+        if (resultElement === null) {
             return;
         }
 

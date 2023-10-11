@@ -21,3 +21,5 @@ const activeInputParams = {
 
 const listElementClassNames = ['table-tuple'];
 const defaultSortingCriteria = ['driveDate'];
+
+//idx 순서대로 적는것 생각할 것.. dataIdNames : 'mileage'와 listElementClassNames : 'table-tuple'이 한 세트!
