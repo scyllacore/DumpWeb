@@ -1,5 +1,4 @@
 class Request {
-
     constructor(argUrl, argOptions) {
         this.fetchUrl = argUrl;
         this.fetchOptions = argOptions;

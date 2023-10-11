@@ -1,5 +1,8 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    await inputDataByParams(defaultUrl + '/fetch/mileageDetails', idName);
-    setActiveByCheckBox(activeInputs);
-    redirectById(defaultUrl, idName);
-})
+const manageHandler = new ManageHandler(
+    defaultUrl
+    , defaultForm
+    , new ActiveInputInfo(inputElementNames, activeInputParams)
+    , checkBoxElement
+    , dataIdNames
+    , listElementClassNames
+)

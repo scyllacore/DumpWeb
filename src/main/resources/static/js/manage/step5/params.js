@@ -1,26 +1,23 @@
-/* requestByClick */
 const defaultUrl = '/manage/step5';
 const defaultForm = 'optionForm';
-const chkParams = [ 'replActiveChk','replChk','paymentChk'];
-const idName = 'mileageId';
-
-
-/* Base */
-const step5inputNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
-const activeInputs = {
+const inputElementNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk'];
+const checkBoxElement = ['replActiveChk', 'replChk', 'paymentChk'];
+const dataIdNames = ['mileage'];
+const activeInputParams = {
     0: {
-        checkBoxName: 'replActiveChk',
-        type : 'active',
-        inputNames: step5inputNames,
-        range: [step5inputNames.length - 3, step5inputNames.length],
-        initRange: [step5inputNames.length - 3, step5inputNames.length]
+        mainTrigger: 'replActiveChk',
+        type: 'active',
+        range: [inputElementNames.length - 3, inputElementNames.length],
+        initRange: [inputElementNames.length - 3, inputElementNames.length]
     },
     1: {
-        checkBoxName: 'paymentChk',
-        type : 'disable',
-        inputNames: step5inputNames,
-        range: [1, step5inputNames.length],
-        exceptCheckBox: 'replActiveChk',
-        exceptRange: [step5inputNames.length - 3, step5inputNames.length]
+        mainTrigger: 'paymentChk',
+        type: 'disable',
+        range: [1, inputElementNames.length],
+        exceptTrigger: 'replActiveChk',
+        exceptRange: [inputElementNames.length - 3, inputElementNames.length]
     }
 }
+
+const listElementClassNames = ['table-tuple'];
+const defaultSortingCriteria = ['driveDate'];
