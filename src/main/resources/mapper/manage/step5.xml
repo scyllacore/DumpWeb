@@ -41,19 +41,22 @@
 
     <update id="updateMileage" parameterType="MileageDTO">
         UPDATE mileage_tb
-        SET DRIVE_DATE     = #{driveDate},
-            ITEM           = #{item},
-            LAST_KM        = #{lastKm},
-            USED_AMOUNT    = #{usedAmount},
-            USED_OIL       = #{usedOil},
-            MEMO           = #{memo},
-            PAYMENT_CHK    = #{paymentChk},
-            REPL_ACTIVE_CHK = #{replActiveChk},
-            REPL_KM   = #{replKm},
+        SET DRIVE_DATE = #{driveDate},
+        ITEM = #{item},
+        LAST_KM = #{lastKm},
+        USED_AMOUNT = #{usedAmount},
+        USED_OIL = #{usedOil},
+        MEMO = #{memo},
+        PAYMENT_CHK = #{paymentChk},
+
+        REPL_ACTIVE_CHK = #{replActiveChk},
+        REPL_KM = #{replKm},
+        <if test="replDate != ''">
             REPL_DATE = #{replDate},
-            REPL_CHK       = #{replChk}
+        </if>
+        REPL_CHK = #{replChk}
         WHERE USER_ID_IDX_FK = #{userIdIdxFk}
-          AND MILEAGE_ID = #{mileageId}
+        AND MILEAGE_ID = #{mileageId}
     </update>
 
 
