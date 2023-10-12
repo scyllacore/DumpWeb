@@ -13,27 +13,27 @@ class ManageHandler {
         for (const key in this.paramContainer) {
             const paramObj = this.paramContainer[key];
 
-            paramObj.dataIdNamesAddingSuffix = paramObj.dataIdNames + 'Id';
+            if(typeof paramObj.dataIdNames !== 'undefined') {
+                paramObj.dataIdNamesAddingSuffix = paramObj.dataIdNames + 'Id';
+            }
 
-            const activeInputInfo = new ActiveInputInfo(paramObj.inputElementNames, paramObj.activeInputParams);
-            this.activeInputHandler[key] = new ActiveInputHandler(activeInputInfo);
+            await this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
+                , paramObj.dataIdNamesAddingSuffix);
 
-            for (let idx in paramObj.dataIdNamesAddingSuffix) {
-                await this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
+            if(typeof paramObj.redirectUrl !== 'undefined') {
+                this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
                     , paramObj.dataIdNamesAddingSuffix);
             }
 
-            for (let idx in paramObj.dataIdNamesAddingSuffix) {
-                this.inputHandler.urlHandler.redirectByElementValue(paramObj.url
-                    , paramObj.dataIdNamesAddingSuffix);
+            if (typeof paramObj.inputElementNames !== 'undefined') {
+                const activeInputInfo = new ActiveInputInfo(paramObj.inputElementNames, paramObj.activeInputConfigParams);
+                this.activeInputHandler[key] = new ActiveInputHandler(activeInputInfo);
+                this.activeInputHandler[key].activateInput();
             }
-
-            this.activeInputHandler[key].activateInput();
         }
     }
 
     async save(containerKey) {
-
         const paramObj = this.paramContainer[containerKey];
 
         if (this.inputHandler.checkValidation(paramObj.form)) {
@@ -58,7 +58,7 @@ class ManageHandler {
 
         const inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.dataIdNames + 'Id');
 
-        const requestHandler = new RequestHandler(defaultUrl + '/fetch/' + paramObj.dataIdNames + 'Remove'
+        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Remove'
             , 'DELETE'
             , inputData);
 
@@ -91,5 +91,24 @@ class ManageHandler {
             , inputObj.sortingCriteria
             , paramObj.dataIdNamesAddingSuffix);
 
+    }
+
+    async modifyPaymentChkInBulk(containerKey, type) {
+        const paramObj = this.paramContainer[containerKey];
+
+        if (type === 'approve') {
+            type = true;
+        } else {
+            type = false;
+        }
+
+        let inputData = this.inputHandler.jsonHandler.getRequestJson('optionForm');
+        inputData.push(JSON.stringify({paymentBtnFlag: type}));
+
+        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + 'paymentInBulk'
+            , 'POST'
+            , inputData)
+        const responseData = await requestHandler.fetchRequest();
+        alert(responseData);
     }
 }

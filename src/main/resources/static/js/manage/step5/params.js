@@ -1,35 +1,31 @@
-const inputElementLength = 12;
+const step5InputElementLength = 12;
+const defaultUrl ='/manage/step5';
 
 const paramContainer = {
     step5: {
-        url: '/manage/step5'
-        ,
-        form: 'optionForm'
-        ,
-        inputElementNames: ['paymentChk','retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
-        ,
-        checkBoxElement: ['replActiveChk', 'replChk', 'paymentChk']
-        ,
-        dataIdNames: 'mileage'
-        ,
-        listElementClassNames: 'table-tuple'
-        ,
-        activeInputParams : {
+        url: defaultUrl
+        , redirectUrl: defaultUrl
+        , form: 'optionForm'
+        , dataIdNames: 'mileage'
+        , listElementClassNames: 'table-tuple'
+        , inputElementNames: ['paymentChk', 'retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
+        , checkBoxElement: ['replActiveChk', 'replChk', 'paymentChk']
+        , activeInputConfigParams: {
             0: {
                 mainTrigger: 'replActiveChk',
                 type: 'active',
-                range:  [inputElementLength-3, inputElementLength],
-                initRange: [inputElementLength - 3, inputElementLength]
+                range: [step5InputElementLength - 3, step5InputElementLength],
+                initRange: [step5InputElementLength - 3, step5InputElementLength]
             },
             1: {
                 mainTrigger: 'paymentChk',
                 type: 'disable',
-                range: [1,inputElementLength],
+                range: [1, step5InputElementLength],
                 exceptTrigger: 'replActiveChk',
-                exceptRange: [inputElementLength - 3, inputElementLength]
+                exceptRange: [step5InputElementLength - 3, step5InputElementLength]
             }
         },
-        defaultSortingCriteria : 'driveDate'
+        defaultSortingCriteria: 'driveDate'
     }
 }
 

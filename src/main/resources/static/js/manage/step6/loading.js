@@ -1,3 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    redirectById('/manage/step5', idName);
+let manageHandler;
+document.addEventListener("DOMContentLoaded", () =>{
+    manageHandler = new ManageHandler(paramContainer);
 })

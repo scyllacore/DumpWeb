@@ -1,11 +1,11 @@
 class UrlHandler {
-    redirectByElementValue(defaultUrl, paramName) {
+    redirectByElementValue(url, paramName) {
         const listRow = document.querySelector("table tbody");
 
         listRow.addEventListener("click", (event) => {
             let val = event.target.parentElement.getAttribute('data-' + paramName);
-            let url = defaultUrl + '?' + paramName + '=' + val;
-            window.location.href = url;
+            let href = url + '?' + paramName + '=' + val;
+            window.location.href = href;
         });
     }
 

@@ -41,6 +41,7 @@
   display: flex;
 }
 .step6 .step6_wrapper .option-form .period-wrapper .period-inner input {
+  position: relative;
   width: 120px;
   padding: 5px 10px;
   border: 1px solid #ddd;
