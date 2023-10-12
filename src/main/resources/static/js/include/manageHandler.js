@@ -6,7 +6,10 @@ class ManageHandler {
 
     constructor(paramContainer) {
         this.paramContainer = paramContainer;
+        this.run();
+    }
 
+    async run() {
         for (const key in this.paramContainer) {
             const paramObj = this.paramContainer[key];
 
@@ -16,7 +19,7 @@ class ManageHandler {
             this.activeInputHandler[key] = new ActiveInputHandler(activeInputInfo);
 
             for (let idx in paramObj.dataIdNamesAddingSuffix) {
-                this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
+                await this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
                     , paramObj.dataIdNamesAddingSuffix);
             }
 
@@ -67,7 +70,7 @@ class ManageHandler {
     async listRetrieval(containerKey) {
         const paramObj = this.paramContainer[containerKey];
 
-        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.form);
+        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.form, paramObj.checkBoxElement);
 
         const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List'
             , 'POST'

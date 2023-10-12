@@ -1,4 +1,4 @@
-let manageHandler = new ManageHandler(paramContainer);
+let manageHandler;
 document.addEventListener("DOMContentLoaded", () =>{
-    manageHandler.activeInputHandler[0].activateInput();
+    manageHandler = new ManageHandler(paramContainer);
 })
