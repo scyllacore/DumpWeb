@@ -1,25 +1,33 @@
-const defaultUrl = '/manage/step5';
-const defaultForm = 'optionForm';
-const inputElementNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk'];
-const checkBoxElement = ['replActiveChk', 'replChk', 'paymentChk'];
-const dataIdNames = ['mileage'];
-const activeInputParams = {
-    0: {
-        mainTrigger: 'replActiveChk',
-        type: 'active',
-        range: [inputElementNames.length - 3, inputElementNames.length],
-        initRange: [inputElementNames.length - 3, inputElementNames.length]
-    },
-    1: {
-        mainTrigger: 'paymentChk',
-        type: 'disable',
-        range: [1, inputElementNames.length],
-        exceptTrigger: 'replActiveChk',
-        exceptRange: [inputElementNames.length - 3, inputElementNames.length]
+const paramContainer = {
+    step5: {
+        url: '/manage/step5'
+        ,
+        form: 'optionForm'
+        ,
+        inputElementNames: ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
+        ,
+        checkBoxElement: ['replActiveChk', 'replChk', 'paymentChk']
+        ,
+        dataIdNames: 'mileage'
+        ,
+        listElementClassNames: 'table-tuple'
+        ,
+        activeInputParams : {
+            0: {
+                mainTrigger: 'replActiveChk',
+                type: 'active',
+                range:  [11-3, 11],
+                initRange: [11 - 3, 11]
+            },
+            1: {
+                mainTrigger: 'paymentChk',
+                type: 'disable',
+                range: [1,11],
+                exceptTrigger: 'replActiveChk',
+                exceptRange: [11 - 3, 11]
+            }
+        },
+        defaultSortingCriteria : 'driveDate'
     }
 }
 
-const listElementClassNames = ['table-tuple'];
-const defaultSortingCriteria = ['driveDate'];
-
-//idx 순서대로 적는것 생각할 것.. dataIdNames : 'mileage'와 listElementClassNames : 'table-tuple'이 한 세트!

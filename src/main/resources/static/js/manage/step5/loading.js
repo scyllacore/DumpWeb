@@ -1,8 +1,4 @@
-const manageHandler = new ManageHandler(
-    defaultUrl
-    , defaultForm
-    , new ActiveInputInfo(inputElementNames, activeInputParams)
-    , checkBoxElement
-    , dataIdNames
-    , listElementClassNames
-)
+let manageHandler = new ManageHandler(paramContainer);
+document.addEventListener("DOMContentLoaded", () =>{
+    manageHandler.activeInputHandler[0].activateInput();
+})

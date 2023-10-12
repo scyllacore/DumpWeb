@@ -21,7 +21,6 @@ class ActiveInputHandler {
 
                 if (checkBoxElement.checked) {
                     setDisabled(activeInputInfo, activeConfigParams, checkBoxElement.checked);
-                    return;
                 }
 
                 checkBoxElement.addEventListener('change', (event) => {
@@ -39,6 +38,7 @@ class ActiveInputHandler {
             if (checkUndefined(activeConfigParams.range)) {
                 return;
             }
+
 
             let start = activeConfigParams.range[0];
             let end = activeConfigParams.range[1];
