@@ -1,5 +1,5 @@
 class JsonHandler {
-    getRequestJson(element, addingParams) {
+    getRequestJson(element, elementName =[], properties = {}) {
 
         if (typeof element === 'object') {
             return JSON.stringify(element);
@@ -11,7 +11,7 @@ class JsonHandler {
         if (el.tagName === 'FORM') {
             const entry = new FormData(el).entries();
             obj = Object.fromEntries(entry);
-            this.addParamsToObject(obj, addingParams);
+            this.addPropertyToObject(obj, elementName, properties);
         } else if (el.tagName === 'INPUT') {
             obj[el.getAttribute('name')] = el.value;
         }
@@ -19,10 +19,14 @@ class JsonHandler {
         return JSON.stringify(obj);
     }
 
-    addParamsToObject(obj, params = []) {
-        params.forEach(param => {
-            const element = document.querySelector('input[name="' + param + '"]');
+    addPropertyToObject(obj, elementName, properties) {
+        elementName.forEach(param => {
+            const element = document.querySelector('[name="' + elementName + '"]');
             obj[param] = element.checked;
         })
+
+        for (const key in properties) {
+            obj[key] = properties[key];
+        }
     }
 }
