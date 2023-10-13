@@ -35,11 +35,8 @@ class InputHandler {
 
         const inputData = this.jsonHandler.getRequestJson(data);
 
-        const request = new RequestHandler(url
-            , 'POST'
-            , inputData);
-
-        const responseData = await request.fetchRequest();
+        const responseData = await  new RequestHandler()
+            .post(url, inputData);
 
         this.fillInput(responseData);
     }

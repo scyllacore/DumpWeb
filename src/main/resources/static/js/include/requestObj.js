@@ -1,10 +1,10 @@
 class Request {
-    constructor(argUrl, argOptions) {
-        this.fetchUrl = argUrl;
-        this.fetchOptions = argOptions;
+    constructor(url, options) {
+        this.fetchUrl = url;
+        this.fetchOptions = options;
     }
 
-    async tryRequest() {
+    async tryFetch() {
         const result = await fetch(this.fetchUrl, this.fetchOptions);
         return result.json()
             .catch(error => {
@@ -12,8 +12,8 @@ class Request {
             });
     }
 
-    async requestData() {
-        const jsonData = await this.tryRequest();
+    async tryRequest() {
+        const jsonData = await this.tryFetch();
 
         if (jsonData.status !== 200) {
             throw new Error(jsonData.data);
