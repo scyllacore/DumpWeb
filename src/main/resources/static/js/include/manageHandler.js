@@ -2,8 +2,8 @@ class ManageHandler {
 
     inputHandler = new InputHandler();
     activeInputHandler = {};
-    responseHandler = new ResponseHandler();
     requestHandler = new RequestHandler();
+    responseHandler = new ResponseHandler();
 
     constructor(paramContainer) {
         this.paramContainer = paramContainer;
@@ -21,16 +21,22 @@ class ManageHandler {
             await this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
                 , paramObj.dataIdNamesAddingSuffix);
 
-            if (typeof paramObj.redirectUrl !== 'undefined') {
-                this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
-                    , paramObj.dataIdNamesAddingSuffix);
+
+            this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
+                , paramObj.dataIdNamesAddingSuffix);
+
+            activateInput(this.activeInputHandler, key, paramObj);
+        }
+
+        function activateInput(activeInputHandler, key, paramObj) {
+            if (typeof paramObj.inputElementNames === 'undefined') {
+                return;
             }
 
-            if (typeof paramObj.inputElementNames !== 'undefined') {
-                const activeInputInfo = new ActiveInputInfo(paramObj.inputElementNames, paramObj.activeInputConfigParams);
-                this.activeInputHandler[key] = new ActiveInputHandler(activeInputInfo);
-                this.activeInputHandler[key].activateInput();
-            }
+            const activeInputInfo =
+                new ActiveInputInfo(paramObj.inputElementNames, paramObj.activeInputConfigParams);
+            activeInputHandler[key] = new ActiveInputHandler(activeInputInfo);
+            activeInputHandler[key].activateInput();
         }
     }
 
@@ -43,7 +49,7 @@ class ManageHandler {
         this.activeInputHandler[containerKey].setDisabledFalse(paramObj.form);
 
         let inputData = this.inputHandler.jsonHandler
-            .getRequestJson(paramObj.form, paramObj.checkBoxElement);
+            .getRequestJson(paramObj.form, paramObj.checkBoxElements);
 
         const responseData = await this.requestHandler
             .post(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Save', inputData);
@@ -67,14 +73,14 @@ class ManageHandler {
     async listRetrieval(containerKey) {
         const paramObj = this.paramContainer[containerKey];
 
-        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.form, paramObj.checkBoxElement);
+        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.form, paramObj.checkBoxElements);
 
         const responseData = await this.requestHandler
             .post(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List', inputData);
 
         let inputObj = JSON.parse(inputData);
 
-        const summaryElementClassName = 'summary-wrapper';
+        const summaryElementClassName = 'list-summary-wrapper';
         this.responseHandler.printListSummary(responseData, summaryElementClassName);
 
         if (typeof inputObj.sortingCriteria === 'undefined') {

@@ -1,5 +1,9 @@
 class UrlHandler {
     redirectByElementValue(url, paramName) {
+        if (typeof url === 'undefined') {
+            return;
+        }
+
         const listRow = document.querySelector("table tbody");
 
         listRow.addEventListener("click", (event) => {

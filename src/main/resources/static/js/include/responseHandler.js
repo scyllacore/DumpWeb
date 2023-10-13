@@ -1,6 +1,10 @@
 class ResponseHandler {
     printList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
 
+        if (searchResultData.length === 0) {
+            return;
+        }
+
         const tableThChild = document.querySelector('.th-' + startTh);
         const tableThParent = tableThChild.parentNode;
         tableThParent.insertBefore(tableThChild, tableThParent.firstChild);

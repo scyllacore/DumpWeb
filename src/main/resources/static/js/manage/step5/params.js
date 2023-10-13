@@ -9,7 +9,7 @@ const paramContainer = {
         , dataIdNames: 'mileage'
         , listElementClassNames: 'table-tuple'
         , inputElementNames: ['paymentChk', 'retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
-        , checkBoxElement: ['replActiveChk', 'replChk', 'paymentChk']
+        , checkBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
         , activeInputConfigParams: {
             0: {
                 mainTrigger: 'replActiveChk',
