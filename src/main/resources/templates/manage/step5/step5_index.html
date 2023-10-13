@@ -31,7 +31,7 @@
             <div class="period-wrapper">
                 <h3>날짜</h3>
                 <input type="date" id="reg-date" name="driveDate" required>
-                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); manageHandler.listRetrieval('step5')" required>조회</button>
+                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
             </div>
 
             <div class="item-wrapper">
@@ -86,8 +86,8 @@
             </div>
 
             <div class="bottom-btn-wrapper">
-                <button type="button" class="save-btn" onclick="manageHandler.save('step5')">저장</button>
-                <button type="button" class="delete-btn" onclick="manageHandler.remove('step5')">삭제</button>
+                <button type="button" class="save-btn" onclick="func.save()">저장</button>
+                <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
                 <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
                 <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
             </div>
