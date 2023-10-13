@@ -40,7 +40,7 @@
 .search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off {
   z-index: -9999;
 }
-.search-result .search-result-wrapper .summary-wrapper {
+.search-result .search-result-wrapper .list-summary-wrapper {
   text-align: center;
   margin: 50px;
 }

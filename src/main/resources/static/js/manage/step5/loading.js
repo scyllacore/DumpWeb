@@ -1,5 +1,16 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    await inputDataByParams(defaultUrl + '/fetch/mileageDetails', idName);
-    setActiveByCheckBox(activeInputs);
-    redirectById(defaultUrl, idName);
+let manageHandler;
+document.addEventListener("DOMContentLoaded", () => {
+    manageHandler = new ManageHandler(paramContainer);
 })
+
+const func = {
+    async save() {
+        await manageHandler.save('step5');
+    },
+    async remove() {
+        await manageHandler.remove('step5')
+    },
+    async listRetrieval() {
+        await manageHandler.listRetrieval('step5')
+    }
+}

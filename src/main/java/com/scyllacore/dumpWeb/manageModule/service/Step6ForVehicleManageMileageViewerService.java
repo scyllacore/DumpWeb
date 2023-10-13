@@ -25,19 +25,14 @@ public class Step6ForVehicleManageMileageViewerService {
         return new ResponseDTO<>(200, step6Mapper.selectMileageListByOption(option));
     }
 
-    public ResponseDTO<String> approvePayment(SearchOptionDTO option) {
+    public ResponseDTO<String> modifyPaymentInBulk(SearchOptionDTO option) {
         option.setUserIdIdxFk(getUserIdFK());
-        option.setPaymentBtnFlag(true);
-
         step6Mapper.updateMileagePaymentChk(option);
-        return new ResponseDTO<>(200, "일괄 결재 되었습니다");
-    }
 
-    public ResponseDTO<String> cancelPayment(SearchOptionDTO option) {
-        option.setUserIdIdxFk(getUserIdFK());
-        option.setPaymentBtnFlag(false);
+        if (option.isPaymentBtnFlag()) {
+            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+        }
 
-        step6Mapper.updateMileagePaymentChk(option);
         return new ResponseDTO<>(200, "일괄 취소 되었습니다");
     }
 }

@@ -1,26 +1,31 @@
-/* requestByClick */
-const defaultUrl = '/manage/step5';
-const defaultForm = 'optionForm';
-const chkParams = [ 'replActiveChk','replChk','paymentChk'];
-const idName = 'mileageId';
+const step5InputElementLength = 12;
+const defaultUrl ='/manage/step5';
 
-
-/* Base */
-const step5inputNames = ['paymentChk', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
-const activeInputs = {
-    0: {
-        checkBoxName: 'replActiveChk',
-        type : 'active',
-        inputNames: step5inputNames,
-        range: [step5inputNames.length - 3, step5inputNames.length],
-        initRange: [step5inputNames.length - 3, step5inputNames.length]
-    },
-    1: {
-        checkBoxName: 'paymentChk',
-        type : 'disable',
-        inputNames: step5inputNames,
-        range: [1, step5inputNames.length],
-        exceptCheckBox: 'replActiveChk',
-        exceptRange: [step5inputNames.length - 3, step5inputNames.length]
+const paramContainer = {
+    step5: {
+        url: defaultUrl
+        , redirectUrl: defaultUrl
+        , form: 'optionForm'
+        , dataIdNames: 'mileage'
+        , listElementClassNames: 'table-tuple'
+        , inputElementNames: ['paymentChk', 'retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
+        , checkBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
+        , activeInputConfigParams: {
+            0: {
+                mainTrigger: 'replActiveChk',
+                type: 'active',
+                range: [step5InputElementLength - 3, step5InputElementLength],
+                initRange: [step5InputElementLength - 3, step5InputElementLength]
+            },
+            1: {
+                mainTrigger: 'paymentChk',
+                type: 'disable',
+                range: [1, step5InputElementLength],
+                exceptTrigger: 'replActiveChk',
+                exceptRange: [step5InputElementLength - 3, step5InputElementLength]
+            }
+        },
+        defaultSortingCriteria: 'driveDate'
     }
 }
+
