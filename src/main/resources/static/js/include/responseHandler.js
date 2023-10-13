@@ -1,16 +1,16 @@
 class ResponseHandler {
     printList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
 
-        if (searchResultData.length === 0) {
-            return;
-        }
+        const tableBody = document.querySelector('.' + listElementClassName);
+        tableBody.innerHTML = "";
 
         const tableThChild = document.querySelector('.th-' + startTh);
         const tableThParent = tableThChild.parentNode;
         tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
 
-        const tableBody = document.querySelector('.' + listElementClassName);
-        tableBody.innerHTML = "";
+        if (searchResultData.length === 0) {
+            return;
+        }
 
         const firstTh = tableThChild.className.split('-')[1];
         let start = searchResultData[0][firstTh];
