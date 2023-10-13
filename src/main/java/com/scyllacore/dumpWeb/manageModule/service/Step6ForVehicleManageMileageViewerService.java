@@ -29,6 +29,10 @@ public class Step6ForVehicleManageMileageViewerService {
         option.setUserIdIdxFk(getUserIdFK());
         step6Mapper.updateMileagePaymentChk(option);
 
-        return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+        if (option.isPaymentBtnFlag()) {
+            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+        }
+
+        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
     }
 }

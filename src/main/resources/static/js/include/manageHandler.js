@@ -3,6 +3,7 @@ class ManageHandler {
     inputHandler = new InputHandler();
     activeInputHandler = {};
     responseHandler = new ResponseHandler();
+    requestHandler = new RequestHandler();
 
     constructor(paramContainer) {
         this.paramContainer = paramContainer;
@@ -13,14 +14,14 @@ class ManageHandler {
         for (const key in this.paramContainer) {
             const paramObj = this.paramContainer[key];
 
-            if(typeof paramObj.dataIdNames !== 'undefined') {
+            if (typeof paramObj.dataIdNames !== 'undefined') {
                 paramObj.dataIdNamesAddingSuffix = paramObj.dataIdNames + 'Id';
             }
 
             await this.inputHandler.inputDataByUrlParams(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Details'
                 , paramObj.dataIdNamesAddingSuffix);
 
-            if(typeof paramObj.redirectUrl !== 'undefined') {
+            if (typeof paramObj.redirectUrl !== 'undefined') {
                 this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
                     , paramObj.dataIdNamesAddingSuffix);
             }
@@ -44,12 +45,10 @@ class ManageHandler {
         let inputData = this.inputHandler.jsonHandler
             .getRequestJson(paramObj.form, paramObj.checkBoxElement);
 
-
-        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Save'
-            , 'POST', inputData);
-        const responseData = await requestHandler.fetchRequest();
-
+        const responseData = await this.requestHandler
+            .post(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Save', inputData);
         alert(responseData);
+
         location.href = paramObj.url;
     }
 
@@ -58,11 +57,9 @@ class ManageHandler {
 
         const inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.dataIdNames + 'Id');
 
-        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Remove'
-            , 'DELETE'
-            , inputData);
+        const responseData = await this.requestHandler
+            .delete(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'Remove', inputData);
 
-        const responseData = await requestHandler.fetchRequest();
         alert(responseData);
         location.href = paramObj.url;
     }
@@ -72,10 +69,8 @@ class ManageHandler {
 
         let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.form, paramObj.checkBoxElement);
 
-        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List'
-            , 'POST'
-            , inputData);
-        const responseData = await requestHandler.fetchRequest();
+        const responseData = await this.requestHandler
+            .post(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List', inputData);
 
         let inputObj = JSON.parse(inputData);
 
@@ -102,13 +97,13 @@ class ManageHandler {
             type = false;
         }
 
-        let inputData = this.inputHandler.jsonHandler.getRequestJson('optionForm');
-        inputData.push(JSON.stringify({paymentBtnFlag: type}));
+        const property = {paymentBtnFlag: type};
 
-        const requestHandler = new RequestHandler(paramObj.url + '/fetch/' + 'paymentInBulk'
-            , 'POST'
-            , inputData)
-        const responseData = await requestHandler.fetchRequest();
+        let inputData = this.inputHandler.jsonHandler.getRequestJson('optionForm', undefined, property);
+
+        const responseData = await this.requestHandler
+            .put(paramObj.url + '/fetch/' + 'paymentInBulk', inputData);
+
         alert(responseData);
     }
 }

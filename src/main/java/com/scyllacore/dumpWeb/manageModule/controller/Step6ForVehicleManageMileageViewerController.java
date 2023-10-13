@@ -29,7 +29,7 @@ public class Step6ForVehicleManageMileageViewerController {
         return step6Service.findMileageListByOption(option);
     }
 
-    @PostMapping(value = "/fetch/paymentInBulk")
+    @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
     public ResponseDTO<String> paymentInBulk(@RequestBody SearchOptionDTO option) {
         return step6Service.modifyPaymentInBulk(option);
