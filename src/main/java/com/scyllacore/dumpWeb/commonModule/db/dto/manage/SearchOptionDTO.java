@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class SearchOptionDTO {
     //공통
-    private int userIdIdxFk;
+    private int writerIdIdxFk;
     private String startDate;
     private String endDate;
     private String sortingCriteria;

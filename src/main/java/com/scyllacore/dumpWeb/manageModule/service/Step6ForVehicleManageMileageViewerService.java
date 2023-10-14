@@ -21,12 +21,12 @@ public class Step6ForVehicleManageMileageViewerService {
     }
 
     public ResponseDTO<List<MileageDTO>> findMileageListByOption(SearchOptionDTO option) {
-        option.setUserIdIdxFk(getUserIdFK());
+        option.setWriterIdIdxFk(getUserIdFK());
         return new ResponseDTO<>(200, step6Mapper.selectMileageListByOption(option));
     }
 
     public ResponseDTO<String> modifyPaymentInBulk(SearchOptionDTO option) {
-        option.setUserIdIdxFk(getUserIdFK());
+        option.setWriterIdIdxFk(getUserIdFK());
         step6Mapper.updateMileagePaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {

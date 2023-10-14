@@ -13,7 +13,7 @@
         MEMO,
         REPL_ACTIVE_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="item !='전체'">
             AND ITEM = #{item}
@@ -31,7 +31,7 @@
     <update id="updateMileagePaymentChk" parameterType="SearchOptionDTO">
         UPDATE mileage_tb
         SET PAYMENT_CHK = #{paymentBtnFlag}
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="item != '전체'">
             AND ITEM = #{item}

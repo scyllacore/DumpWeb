@@ -4,45 +4,5 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.manage.Step2ForSubmissionMenuMapper">
-    <sql id="res_table">
-        WITH r1 AS
-            (SELECT REPORT_ID,
-                    CAR_NO
-             FROM drive_report_tb
-             WHERE SRC_SUBMIT_TEL = ${userId}
-               AND
-            date BETWEEN ${startDate} AND ${endDate})
-           , r2 AS (
-        SELECT *
-        FROM drive_report_sub_tb )
-                , r3 AS (
-        SELECT *
-        FROM r1
-            INNER JOIN r2
-        ON r1.REPORT_ID = r2.REPORT_ID_FK )
-    </sql>
-
-    <select id="selectComputedSummary" parameterType="SearchOptionDTO" resultType="SummaryDTO">
-        <include refid="res_table">
-            <property name="userId" value="#{userId}"/>
-            <property name="startDate" value="#{option.startDate}"/>
-            <property name="endDate" value="#{option.endDate}"/>
-        </include>
-
-        select IF(sum(QUANTITY * UNIT_PRICE) IS NULL , 0 , sum(QUANTITY * UNIT_PRICE)) as 'totalTransportationCost',
-        SUM(QUANTITY) as 'totalTrips'
-        from drive_report_sub_tb
-        where REPORT_ID_FK in (select REPORT_ID_FK from r3)
-    </select>
-
-    <select id="selectTodayDispatchStatusList" resultType="DriveReportSubDTO">
-        <include refid="res_table">
-            <property name="userId" value="#{userId}"/>
-            <property name="startDate" value="#{today}"/>
-            <property name="endDate" value="#{today}"/>
-        </include>
-
-        select * from r3
-    </select>
 
 </mapper>
