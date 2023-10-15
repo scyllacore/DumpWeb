@@ -93,4 +93,9 @@
           AND REPORT_IDX = #{reportIdx}
     </select>
 
+    <select id="selectSubmitterList" resultType="SubmitterDTO">
+        SELECT *
+        FROM submitter_tb
+    </select>
+
 </mapper>

@@ -112,4 +112,21 @@ class ManageHandler {
 
         alert(responseData);
     }
+
+    async submitterListRetrieval(containerKey) {
+        const paramObj = this.paramContainer[containerKey];
+
+        const responseData = await this.requestHandler
+            .get(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List');
+
+
+        const summaryElementClassName = 'list-summary-wrapper';
+        this.responseHandler.printListSummary(responseData, summaryElementClassName);
+
+        this.responseHandler.printSubmitterList(responseData
+            , paramObj.listElementClassNames
+            , paramObj.defaultSortingCriteria
+            , paramObj.dataIdNamesAddingSuffix);
+    }
+
 }

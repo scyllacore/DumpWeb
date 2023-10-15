@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
@@ -26,9 +27,9 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdIdxFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFK());
 
-        if(driveReport.getReportIdx() == 0){
+        if(driveReport.getReportId() == 0){
             step3Mapper.insertDriveReport(driveReport);
         }else{
             step3Mapper.updateDriveReport(driveReport);
@@ -38,20 +39,24 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport){
-        driveReport.setWriterIdIdxFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFK());
 
         return new ResponseDTO<>(200,step3Mapper.selectDriveReportList(driveReport));
     }
 
+    public ResponseDTO<List<SubmitterDTO>> findSubmitterList(){
+        return new ResponseDTO<>(200,step3Mapper.selectSubmitterList());
+    }
+
     public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdIdxFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFK());
 
         return new ResponseDTO<>(200,step3Mapper.selectDriveReport(driveReport));
     }
 
 
     public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdIdxFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFK());
 
         step3Mapper.deleteDriveReport(driveReport);
 

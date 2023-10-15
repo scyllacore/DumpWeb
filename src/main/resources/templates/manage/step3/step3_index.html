@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step3/step3Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step3">
+    <div class="step3_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 등록
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <form class="drive-report-form" name="driveReportForm">
+            <input type="hidden" name="reportId" value="0" required>
+            <input type="hidden" name="driverIdFk" th:value="${session.loginInfo.userIdIdx}" required>
+
+
+            <div class="payment-chk-wrapper">
+                <h3>결재</h3>
+                <input type="checkbox" name="driverPaymentChk">
+            </div>
+
+            <div class="submitter-wrapper">
+                <h3>제출처</h3>
+                <input type="hidden" name="submitterIdFk" required>
+                <input type="number" name="submitterTel" disabled required>
+                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn" onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회</button>
+            </div>
+
+            <div class="period-wrapper">
+                <h3>운행일</h3>
+                <input type="date" id="reg-date" name="driveDate" required>
+                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+            </div>
+
+            <div class="from-site-wrapper">
+                <h3>상차지</h3>
+                <input name="fromSite" placeholder="상차지">
+            </div>
+
+            <div class="to-site-wrapper">
+                <h3>하차지</h3>
+                <input name="toSite" placeholder="하차지">
+            </div>
+
+            <div class="item-wrapper">
+                <h3>품목</h3>
+                <input name="item" placeholder="품목">
+            </div>
+
+            <div class="quantity-wrapper">
+                <h3>대수</h3>
+                <input type="number" name="quantity" placeholder="대수">
+            </div>
+
+            <div class="unit-price-wrapper">
+                <h3>운반 단가</h3>
+                <input type="number" name="unitPrice" placeholder="운반 단가">
+            </div>
+
+            <div class="memo-wrapper">
+                <h3>비고</h3>
+                <textarea name="memo"></textarea>
+            </div>
+
+
+            <div class="bottom-btn-wrapper">
+                <button type="button" class="save-btn" onclick="func.save()">저장</button>
+                <button type="button" class="save-btn" onclick="func.submit()">제출</button>
+                <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
+                <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
+                <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step3/step3_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step3/step3_submitter_retrieval :: resultFragment"></th:block>
+
+    </div>
+</container>
+
+<script src="/js/manage/step3/params.js"></script>
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step3/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+</html>
+

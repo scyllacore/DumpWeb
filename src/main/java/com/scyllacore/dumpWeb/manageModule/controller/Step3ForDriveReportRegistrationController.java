@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step3ForDriveReportRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,12 @@ public class Step3ForDriveReportRegistrationController {
     @ResponseBody
     public ResponseDTO<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport){
         return step3Service.findDriveReportList(driveReport);
+    }
+
+    @GetMapping(value = "/fetch/submitterList")
+    @ResponseBody
+    public ResponseDTO<List<SubmitterDTO>> submitterList(){
+        return step3Service.findSubmitterList();
     }
 
     @PostMapping(value = "/fetch/driveReportDetails")
