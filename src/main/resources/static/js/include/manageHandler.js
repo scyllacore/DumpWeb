@@ -119,10 +119,6 @@ class ManageHandler {
         const responseData = await this.requestHandler
             .get(paramObj.url + '/fetch/' + paramObj.dataIdNames + 'List');
 
-
-        const summaryElementClassName = 'list-summary-wrapper';
-        this.responseHandler.printListSummary(responseData, summaryElementClassName);
-
         this.responseHandler.printSubmitterList(responseData
             , paramObj.listElementClassName
             , paramObj.defaultSortingCriteria

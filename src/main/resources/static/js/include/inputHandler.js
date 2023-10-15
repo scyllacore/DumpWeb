@@ -61,8 +61,6 @@ class InputHandler {
                 continue;
             }
 
-            console.log(key,data[key]);
-
             if (selectKeys.includes(key)) {
                 const optionList = document.querySelector('select[name="' + key + '"]');
                 optionList.querySelector('option[value="' + data[key] + '"]').selected = true;

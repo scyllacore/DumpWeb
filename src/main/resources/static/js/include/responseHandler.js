@@ -52,8 +52,6 @@ class ResponseHandler {
 
     printSubmitterList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix){
 
-        console.log(searchResultData);
-
         const tableBody = document.querySelector('.' + listElementClassName);
         tableBody.innerHTML = "";
 
@@ -80,13 +78,11 @@ class ResponseHandler {
         tableBody.addEventListener("click", (event) => {
             const id = event.target.parentElement.getAttribute('data-' + dataIdNamesAddingSuffix);
             const tel = event.target.parentElement.children[0].innerHTML;
-            console.log(tel);
 
             document.querySelector('[name="submitterIdFk"]').value = id;
             document.querySelector('[name="submitterTel"]').value = tel;
 
             closePopUp('submitter-search-result');
         });
-
     }
 }

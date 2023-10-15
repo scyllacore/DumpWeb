@@ -1,4 +1,4 @@
-const step3InputElementLength = 9;
+const step3InputElementLength = 11;
 const defaultUrl = '/manage/step3';
 
 const paramContainer = {
@@ -13,7 +13,7 @@ const paramContainer = {
         ,
         listElementClassName: 'table-tuple'
         ,
-        inputElementNames: ['driveReportId', 'driverPaymentChk', 'submitterRetrievalBtn', 'driveDate', 'fromSite', 'item', 'quantity', 'unitPrice', 'memo']
+        inputElementNames: ['driveReportId', 'driverPaymentChk', 'submitterRetrievalBtn','retrievalBtn', 'driveDate', 'fromSite', 'item', 'quantity', 'unitPrice','progress', 'memo']
         ,
         checkBoxElements: ['driverPaymentChk']
         ,
@@ -31,7 +31,6 @@ const paramContainer = {
         , form: 'driveReportForm'
         , dataIdNames: 'submitter'
         , listElementClassName: 'table-submitter-tuple'
-        , checkBoxElements: ['driverPaymentChk']
         , defaultSortingCriteria: 'tel'
     }
 }
