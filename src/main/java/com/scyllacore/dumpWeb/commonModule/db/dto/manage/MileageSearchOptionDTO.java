@@ -5,19 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SearchOptionDTO {
-    //공통
+public class MileageSearchOptionDTO {
     private int writerIdFk;
     private String startDate;
     private String endDate;
+    private String item;
     private String sortingCriteria;
     private boolean paymentBtnFlag;
-
-    //step 4,6,8
-    private String fromSite;
-    private String toSite;
-    private String item;
-    private String tel;
-    private String state;
-    private String searchCarNo;
 }

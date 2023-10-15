@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
@@ -20,12 +20,12 @@ public class Step6ForVehicleManageMileageViewerService {
         return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
     }
 
-    public ResponseDTO<List<MileageDTO>> findMileageListByOption(SearchOptionDTO option) {
+    public ResponseDTO<List<MileageDTO>> findMileageListByOption(MileageSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFK());
         return new ResponseDTO<>(200, step6Mapper.selectMileageListByOption(option));
     }
 
-    public ResponseDTO<String> modifyPaymentInBulk(SearchOptionDTO option) {
+    public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFK());
         step6Mapper.updateMileagePaymentChk(option);
 
