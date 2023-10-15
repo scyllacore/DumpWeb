@@ -20,7 +20,7 @@
             REPL_DATE,
         </if>
         REPL_CHK,
-        WRITER_ID_IDX_FK)
+        WRITER_ID_FK)
         VALUES (#{carNo},
         #{driveDate},
         #{item},
@@ -35,7 +35,7 @@
             #{replDate},
         </if>
         #{replChk},
-        #{writerIdIdxFk})
+        #{writerIdFk})
     </insert>
 
 
@@ -55,7 +55,7 @@
             REPL_DATE = #{replDate},
         </if>
         REPL_CHK = #{replChk}
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
         AND MILEAGE_ID = #{mileageId}
     </update>
 
@@ -74,7 +74,7 @@
                REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
         ORDER BY DRIVE_DATE ASC
     </select>
@@ -83,7 +83,7 @@
     <delete id="deleteMileage">
         DELETE
         FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND MILEAGE_ID = #{mileageId}
     </delete>
 
@@ -102,7 +102,7 @@
                REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND MILEAGE_ID = #{mileageId}
     </select>
 

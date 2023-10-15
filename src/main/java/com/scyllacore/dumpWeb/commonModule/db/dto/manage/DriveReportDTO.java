@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class DriveReportDTO {
-    private int reportIdx;
+    private int reportId;
     private String driveDate;            // LINE :: 운행일
-    private String CarNo;           // LINE :: 차량번호
+    private String carNo;           // LINE :: 차량번호
+    private String submitterTel;           // LINE :: 제출처 번호
 
     private String fromSite;         // LINE :: 상차지
     private String toSite;           // LINE :: 하차지
@@ -16,9 +17,9 @@ public class DriveReportDTO {
     private String memo;              // LINE :: 비고
     private String progress;
 
-    private int driverIdIdxFk;
-    private int submitterIdIdxFk;
-    private int writerIdIdxFk;            // LINE :: 회원 idx
+    private int driverIdFk;
+    private int submitterIdFk;
+    private int writerIdFk;            // LINE :: 회원 idx
 
     private boolean driverPaymentChk;
     private boolean submitterPaymentChk;

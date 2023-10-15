@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class DriveReportSearchOptionDTO {
     //공통
-    private int writerIdIdxFk;
+    private int writerIdFk;
     private String startDate;
     private String endDate;
     private String sortingCriteria;

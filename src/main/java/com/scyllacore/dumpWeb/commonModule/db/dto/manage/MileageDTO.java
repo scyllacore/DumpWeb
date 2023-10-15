@@ -19,6 +19,6 @@ public class MileageDTO {
     private String replDate;      // LINE :: 교환예정일
     private boolean replChk;      // LINE :: 교환확인여부
 
-    private int writerIdIdxFk;            // LINE :: 회원 idx
+    private int writerIdFk;            // LINE :: 회원 idx
 
 }
