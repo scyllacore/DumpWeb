@@ -1,10 +1,8 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +27,7 @@ public class Step3ForDriveReportRegistrationService {
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport){
         driveReport.setWriterIdFk(getUserIdFK());
 
-        if(driveReport.getReportId() == 0){
+        if(driveReport.getDriveReportId() == 0){
             step3Mapper.insertDriveReport(driveReport);
         }else{
             step3Mapper.updateDriveReport(driveReport);
@@ -42,10 +40,6 @@ public class Step3ForDriveReportRegistrationService {
         driveReport.setWriterIdFk(getUserIdFK());
 
         return new ResponseDTO<>(200,step3Mapper.selectDriveReportList(driveReport));
-    }
-
-    public ResponseDTO<List<SubmitterDTO>> findSubmitterList(){
-        return new ResponseDTO<>(200,step3Mapper.selectSubmitterList());
     }
 
     public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport){
@@ -63,4 +57,7 @@ public class Step3ForDriveReportRegistrationService {
         return new ResponseDTO<String>(200,"삭제 완료.");
     }
 
+    public ResponseDTO<List<SubmitterDTO>> findSubmitterList(){
+        return new ResponseDTO<>(200,step3Mapper.selectSubmitterList());
+    }
 }

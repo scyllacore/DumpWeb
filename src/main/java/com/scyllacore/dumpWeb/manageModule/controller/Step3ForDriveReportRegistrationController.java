@@ -34,12 +34,6 @@ public class Step3ForDriveReportRegistrationController {
         return step3Service.findDriveReportList(driveReport);
     }
 
-    @GetMapping(value = "/fetch/submitterList")
-    @ResponseBody
-    public ResponseDTO<List<SubmitterDTO>> submitterList(){
-        return step3Service.findSubmitterList();
-    }
-
     @PostMapping(value = "/fetch/driveReportDetails")
     @ResponseBody
     public ResponseDTO<DriveReportDTO> driveReportDetails(@RequestBody DriveReportDTO driveReport){
@@ -50,5 +44,11 @@ public class Step3ForDriveReportRegistrationController {
     @ResponseBody
     public ResponseDTO<String> driveReportRemove(@RequestBody DriveReportDTO driveReport){
         return step3Service.removeDriveReport(driveReport);
+    }
+
+    @GetMapping(value = "/fetch/submitterList")
+    @ResponseBody
+    public ResponseDTO<List<SubmitterDTO>> submitterList(){
+        return step3Service.findSubmitterList();
     }
 }

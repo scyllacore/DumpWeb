@@ -7,7 +7,6 @@
     <insert id="insertDriveReport" parameterType="DriveReportDTO">
         INSERT INTO drive_report_tb
         (DRIVE_DATE,
-         CAR_NO,
          FROM_SITE,
          TO_SITE,
          ITEM,
@@ -20,7 +19,6 @@
          SUBMITTER_ID_FK,
          WRITER_ID_FK)
         VALUES (#{driveDate},
-                #{carNo},
                 #{fromSite},
                 #{toSite},
                 #{item},
@@ -44,9 +42,10 @@
         QUANTITY = #{quantity},
         MEMO = #{memo},
         DRIVER_PAYMENT_CHK = #{driverPaymentChk},
-        PROGRESS = #{progress}
+        PROGRESS = #{progress},
+        SUBMITTER_ID_FK = #{submitterIdFk}
         WHERE WRITER_ID_FK = #{writerIdFk}
-        AND REPORT_ID = #{reportId}
+        AND DRIVE_REPORT_ID = #{driveReportId}
         AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
@@ -55,42 +54,71 @@
         DELETE
         FROM drive_report_tb
         WHERE WRITER_ID_FK = #{writerIdFk}
-          AND REPORT_ID = #{reportId}
+          AND DRIVE_REPORT_ID = #{driveReportId}
           AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 
-    <select id="selectDriveReportList" resultType="DriveReportDTO">
-        SELECT DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
-               FROM_SITE,
-               TO_SITE,
-               ITEM,
-               UNIT_PRICE,
-               QUANTITY,
-               MEMO,
-               DRIVER_PAYMENT_CHK,
-               PROGRESS,
-               SUBMITTER_ID_FK
+    <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        SELECT
+        DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        UNIT_PRICE,
+        QUANTITY,
+        MEMO,
+        DRIVER_PAYMENT_CHK,
+        PROGRESS,
+        SUBMITTER_ID_FK
         FROM drive_report_tb
-        WHERE DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
-          AND REPORT_ID = #{reportId}
+        WHERE
+        <if test="driveDate != ''">
+            DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
+            AND
+        </if>
+        WRITER_ID_FK = #{writerIdFk}
     </select>
 
+    <sql id="r1">
+        WITH r1 AS(
+            SELECT DRIVE_REPORT_ID,
+                   DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS DRIVE_DATE,
+                   FROM_SITE,
+                   TO_SITE,
+                   ITEM,
+                   UNIT_PRICE,
+                   QUANTITY,
+                   MEMO,
+                   SUBMITTER_ID_FK,
+                   DRIVER_PAYMENT_CHK,
+                   PROGRESS
+            FROM drive_report_tb
+            WHERE WRITER_ID_FK = ${writerIdFk}
+              AND DRIVE_REPORT_ID = ${driveReportId}
+        )
+    </sql>
 
 
-    <select id="selectDriveReport" resultType="DriveReportDTO">
-        SELECT DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
-               FROM_SITE,
-               TO_SITE,
-               ITEM,
-               UNIT_PRICE,
-               QUANTITY,
-               MEMO,
-               DRIVER_PAYMENT_CHK,
-               PROGRESS,
-               SUBMITTER_ID_IDX
-        FROM drive_report_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
-          AND REPORT_IDX = #{reportIdx}
+    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="driveReportId" value="#{driveReportId}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+        (SELECT TEL FROM submitter_tb where SUBMITTER_ID = r1.SUBMITTER_ID_FK) AS submitterTel,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        UNIT_PRICE,
+        QUANTITY,
+        MEMO,
+        SUBMITTER_ID_FK,
+        DRIVER_PAYMENT_CHK,
+        PROGRESS
+        FROM r1
     </select>
 
     <select id="selectSubmitterList" resultType="SubmitterDTO">

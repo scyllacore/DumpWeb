@@ -21,7 +21,7 @@
         <div class="line"></div>
 
         <form class="drive-report-form" name="driveReportForm">
-            <input type="hidden" name="reportId" value="0" required>
+            <input type="hidden" name="driveReportId" value="0" required>
             <input type="hidden" name="driverIdFk" th:value="${session.loginInfo.userIdIdx}" required>
 
 
@@ -39,7 +39,7 @@
 
             <div class="period-wrapper">
                 <h3>운행일</h3>
-                <input type="date" id="reg-date" name="driveDate" required>
+                <input type="date" name="driveDate" required>
                 <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
             </div>
 
@@ -66,6 +66,16 @@
             <div class="unit-price-wrapper">
                 <h3>운반 단가</h3>
                 <input type="number" name="unitPrice" placeholder="운반 단가">
+            </div>
+
+            <div class="progress-wrapper">
+                <h3>진행</h3>
+                <select class="progress-inner" name="progress" required>
+                    <option value="배차">배차</option>
+                    <option value="상차">상차</option>
+                    <option value="하차">하차</option>
+                    <option value="제출">제출</option>
+                </select>
             </div>
 
             <div class="memo-wrapper">

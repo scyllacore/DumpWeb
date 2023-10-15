@@ -35,23 +35,35 @@ class InputHandler {
 
         const inputData = this.jsonHandler.getRequestJson(data);
 
-        const responseData = await  new RequestHandler()
+        const responseData = await new RequestHandler()
             .post(url, inputData);
 
         this.fillInput(responseData);
+
     }
 
     fillInput(data) {
 
-        const itemKeys = ["item"];
+        let selectKeys;
+
+        if (typeof data.mileageId !== 'undefined') {
+            selectKeys = ["item"];
+        }else{
+            selectKeys = ["progress"];
+            delete data.submitterPaymentChk;
+            delete data.driverIdFk;
+            delete data.writerIdFk;
+        }
 
         for (const key in data) {
 
-            if (data[key] === null || key.includes('IdIdxFk')) {
+            if (data[key] === null) {
                 continue;
             }
 
-            if (itemKeys.includes(key)) {
+            console.log(key,data[key]);
+
+            if (selectKeys.includes(key)) {
                 const optionList = document.querySelector('select[name="' + key + '"]');
                 optionList.querySelector('option[value="' + data[key] + '"]').selected = true;
             } else if (typeof data[key] === "boolean") {

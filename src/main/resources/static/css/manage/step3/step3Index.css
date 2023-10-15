@@ -48,7 +48,7 @@ input[type=checkbox] {
   width: 80px;
   font-size: 13px;
 }
-.step3 .step3_wrapper .drive-report-form div input, .step3 .step3_wrapper .drive-report-form div .item-inner, .step3 .step3_wrapper .drive-report-form div textarea {
+.step3 .step3_wrapper .drive-report-form div input, .step3 .step3_wrapper .drive-report-form div .progress-inner, .step3 .step3_wrapper .drive-report-form div textarea {
   position: relative;
   width: 65%;
   padding: 5px;
