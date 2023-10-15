@@ -10,7 +10,7 @@ const paramContainer = {
         url: defaultUrl
         , form: 'optionForm'
         , dataIdNames: 'mileage'
-        , listElementClassNames: 'table-tuple'
+        , listElementClassName: 'table-tuple'
         , defaultSortingCriteria: 'driveDate'
     }
 }

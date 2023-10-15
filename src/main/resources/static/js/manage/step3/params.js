@@ -11,7 +11,7 @@ const paramContainer = {
         ,
         dataIdNames: 'driveReport'
         ,
-        listElementClassNames: 'table-tuple'
+        listElementClassName: 'table-tuple'
         ,
         inputElementNames: ['driveReportId', 'driverPaymentChk', 'submitterRetrievalBtn', 'driveDate', 'fromSite', 'item', 'quantity', 'unitPrice', 'memo']
         ,
@@ -30,7 +30,7 @@ const paramContainer = {
         url: defaultUrl
         , form: 'driveReportForm'
         , dataIdNames: 'submitter'
-        , listElementClassNames: 'table-submitter-tuple'
+        , listElementClassName: 'table-submitter-tuple'
         , checkBoxElements: ['driverPaymentChk']
         , defaultSortingCriteria: 'tel'
     }

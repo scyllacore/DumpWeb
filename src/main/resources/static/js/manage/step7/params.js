@@ -7,7 +7,7 @@ const paramContainer = {
         , redirectUrl: defaultUrl
         , form: 'optionForm'
         , dataIdNames: 'mileage'
-        , listElementClassNames: 'table-tuple'
+        , listElementClassName: 'table-tuple'
         , inputElementNames: ['paymentChk', 'retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
         , checkBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
         , activeInputConfigParams: {

@@ -88,7 +88,7 @@ class ManageHandler {
         }
 
         this.responseHandler.printList(responseData
-            , paramObj.listElementClassNames
+            , paramObj.listElementClassName
             , inputObj.sortingCriteria
             , paramObj.dataIdNamesAddingSuffix);
 
@@ -124,7 +124,7 @@ class ManageHandler {
         this.responseHandler.printListSummary(responseData, summaryElementClassName);
 
         this.responseHandler.printSubmitterList(responseData
-            , paramObj.listElementClassNames
+            , paramObj.listElementClassName
             , paramObj.defaultSortingCriteria
             , paramObj.dataIdNamesAddingSuffix);
     }
