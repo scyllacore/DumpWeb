@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper">
+
+    <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
+        SELECT MILEAGE_ID,
+        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        ITEM,
+        LAST_KM,
+        USED_AMOUNT,
+        MEMO,
+        REPL_ACTIVE_CHK
+        FROM mileage_tb
+        WHERE WRITER_ID_FK = #{writerIdFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="item !='전체'">
+            AND ITEM = #{item}
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'driveDate'">
+                ORDER BY driveDate DESC, ITEM ASC
+            </when>
+            <otherwise>
+                ORDER BY ITEM ASC, driveDate DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO">
+        UPDATE mileage_tb
+        SET PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE WRITER_ID_FK = #{writerIdFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="item != '전체'">
+            AND ITEM = #{item}
+        </if>
+        AND PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
+
+
+    <sql id="r1">
+        WITH r1 AS (SELECT DRIVE_REPORT_ID,
+                           SUBMITTER_ID_FK,
+                           FROM_SITE,
+                           TO_SITE,
+                           ITEM
+                    FROM drive_report_tb
+                    WHERE WRITER_ID_FK = ${writerIdFk}
+                    ORDER BY DRIVE_REPORT_ID DESC
+            LIMIT 50
+            )
+    </sql>
+
+    <select id="selectCompanyNameSearchOption">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT COMPANY_NAME
+        FROM submitter_tb
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM r1)
+        GROUP BY COMPANY_NAME
+        LIMIT 10
+    </select>
+
+    <select id="selectFromSiteSearchOption">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT FROM_SITE
+        FROM r1
+        GROUP BY FROM_SITE
+        HAVING FROM_SITE != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectToSiteSearchOption">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT TO_SITE
+        FROM r1
+        GROUP BY TO_SITE
+        HAVING TO_SITE != ''
+        LIMIT 10
+
+    </select>
+
+
+    <select id="selectItemSearchOption">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT ITEM
+        FROM r1
+        GROUP BY ITEM
+        HAVING ITEM != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectSubmitterTelSearchOption">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT TEL
+        FROM submitter_tb
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM r1)
+        GROUP BY TEL
+        LIMIT 10
+
+    </select>
+
+
+
+
+
+
+</mapper>

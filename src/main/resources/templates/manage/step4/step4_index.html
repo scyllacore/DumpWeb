@@ -1,194 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<th:block th:replace="/include/manage_header :: headerFragment"></th:block>
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
+
 <head>
-    <link rel="stylesheet" href="/css/manage/step4/step4.css" type="text/css">
+    <link href="/css/manage/step4/step4Index.css" rel="stylesheet" type="text/css">
 </head>
 
-
-    <section class="sub-contents-wrap maxwrap">
-        <div>
-            <h1 class="subtitle" >
-                <span style="font-size: 18px;">운행일보 조회</span>
-                <img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick="">
-            </h1>
+<container class="step4">
+    <div class="step4_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 조회
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
         </div>
-        <form name="data_frm">
-            <div class="search_form">
-                <input type="hidden" name="carNo" value="${sessionScope.loginInfo.userId}">
-                <div class="data_Area">
-                    <div>
-                        <label style="font-size: 13px; font-weight: 600;">▪운행기간</label>
-                        <input class="fromDate" id="datepicker1" name="fromDate" readonly>
-                        <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 9px;">~</span>
-                        <input class="toDate" id="datepicker2" name="toDate" readonly>
+
+        <div class="line"></div>
+
+        <form class="option-form" name="optionForm">
+            <div class="period-wrapper">
+                <h3>기간</h3>
+                <label class="period-inner">
+                    <input type="date" name="startDate">
+                    <span>~</span>
+                    <input type="date" name="endDate">
+                </label>
+            </div>
+
+            <div class="sorting-wrapper">
+                <h3>정렬<br>기준</h3>
+                <select class="sorting-inner" name="sortingCriteria">
+                    <option value="driveDate" selected>날짜순</option>
+                    <option value="item">품목순</option>
+                </select>
+            </div>
+
+            <div class="detail-search-wrapper">
+                <button type="button">
+                    상세 검색 열기
+                </button>
+
+                <div class="detail-search-inner">
+                    <input name="fromSite" placeholder="상차지">
+                    <div name="fromSite">
                     </div>
-                    <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
-
                 </div>
-                <ul class="search_ul" hidden>
-                    <li>
-                        <div class="input_select">
-                            <input type="text" placeholder="제출처" name="club" class="club_input">
-                            <select class="club_slect" id="club_select"
-                                    onchange="document.querySelector('.club_input').value=
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
 
-                        <div class="input_select">
-                            <input type="text" placeholder="상차지" name="fromSite" class="fromSite_input">
-                            <select class="club_slect"
-                                    onchange="document.querySelector('.fromSite_input').value =
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
 
-                        <div class="input_select">
-                            <input type="text" placeholder="하차지" name="toSite" class="toSite_input">
-                            <select class="club_slect"
-                                    onchange="document.querySelector('.toSite_input').value =
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input_select">
-                            <input type="text" placeholder="품목" name="item" class="things_input">
-                            <select class="club_slect"
-                                    onchange="document.querySelector('.things_input').value =
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input_select">
-                            <input type="tel" placeholder="휴대폰 번호" name="tel" class="tel_input">
-                            <select class="club_slect"
-                                    onchange="document.querySelector('.tel_input').value=
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="input_select">
-                            <input type="text" placeholder="진행상태" name="state" class="state_input">
-                            <select class="club_slect"
-                                    onchange="document.querySelector('.state_input').value =
-                                    this.options[this.selectedIndex].value"
-                            >
-                                <option value="전체" selected>전체</option>
-                                <option value="배차">배차</option>
-                                <option value="제출">제출</option>
-                                <option value="취소">취소</option>
-                            </select>
-                        </div>
-                    </li>
-                </ul>
             </div>
-            <div class="search_form_bottom_detail">
-                <div style="width: 50%; float: left;">
-                    <label>
-                        <input type="radio" name="searchType" value="0-submit" checked>
-                        제출처 기준
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="searchType" value="1-date">
-                        운행일 기준
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="searchType" value="2-item">
-                        품목 기준
-                    </label>
-                </div>
-                <div style="margin-left: 50%;">
-                    <label>
-                        <input type="radio" name="searchType" value="3-fromSite">
-                        상차지 기준
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="searchType" value="4-toSite">
-                        하차지 기준
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="searchType" value="6-cost">
-                        운반비 기준
-                    </label>
-                </div>
-            </div>
-            <div class="btn_area">
-                <input type="button" value="검색" onclick="getList()">
+
+
+            <div class="search-btn-wrapper">
+                <button type="button" class="search-btn" onclick="openPopUp('search-result'); func.listRetrieval()">검색
+                </button>
             </div>
         </form>
-        <div class="bottom_table">
-            <div class="table_top" style="margin: 10px 0;">
-                <p class="total">
-                    데이터
-                    <span>0</span>건(총대수:
-                    <span>
-                    0
-                </span>대)이 검색되었습니다.
-                </p>
-            </div>
-            <div class="cashNbtns">
-                <p>운반금액(원)<br>0</p>
-                <input type="button" value="일괄결재" onclick="submitBtn()">
-                <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
-            </div>
-            <div>
-                <table class="list-table">
-                    <colgroup>
-                        <col width="16%">
-                        <col width="15%">
-                        <col width="15%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="10%">
-                        <col width="19%">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th class="th_header">제출처</th>
-                        <th class="th_header">운행일</th>
-                        <th class="th_header">품목</th>
-                        <th class="th_header">상차지</th>
-                        <th class="th_header">하차지</th>
-                        <th class="th_header">대수</th>
-                        <th class="th_header">운반단가</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
 
-<th:block th:replace="/include/manage_footer :: footerFragment"></th:block>
+        <th:block th:replace="/manage/step4/step4_retrieval :: resultFragment"></th:block>
 
-<script src="/js/manage/step4/click.js"></script>
-<script src="/js/manage/step4/step4.js"></script>
-<script src="/js/manage/step4/calendar.js"></script>
-<script src="/js/manage/step4/AJAX.js"></script>
-<script src="/js/manage/step4/DOMContentLoaded.js"></script>
+    </div>
+</container>
+
+<script src="/js/manage/step4/params.js"></script>
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step4/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 
 </html>
+
