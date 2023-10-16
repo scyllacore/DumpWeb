@@ -39,16 +39,41 @@
             </div>
 
             <div class="detail-search-wrapper">
-                <button type="button">
+                <button type="button" onclick="openAndCloseDetailSearch('detail-search-inner',this)">
                     상세 검색 열기
                 </button>
 
                 <div class="detail-search-inner">
-                    <input name="fromSite" placeholder="상차지">
-                    <div name="fromSite">
+                    <div class="company-name">
+                        <input name="companyName" placeholder="제출처" autocomplete="off">
+                        <div name="companyNames"></div>
+                    </div>
+                    <div class="from-site">
+                        <input name="fromSite" placeholder="상차지" autocomplete="off">
+                        <div name="fromSites"></div>
+                    </div>
+                    <div class="to-site">
+                        <input name="toSite" placeholder="하차지" autocomplete="off">
+                        <div name="toSites"></div>
+                    </div>
+                    <div class="item">
+                        <input name="item" placeholder="품목" autocomplete="off">
+                        <div name="items"></div>
+                    </div>
+                    <div class="submitter-tel">
+                        <input name="submitterTel" placeholder="휴대폰 번호" autocomplete="off">
+                        <div name="submitterTels"></div>
+                    </div>
+                    <div class="progress">
+                        <input name="progress" placeholder="진행 상태" autocomplete="off">
+                        <div name="progressType">
+                            <option>전체</option>
+                            <option>배차</option>
+                            <option>제출</option>
+                            <option>취소</option>
+                        </div>
                     </div>
                 </div>
-
 
             </div>
 

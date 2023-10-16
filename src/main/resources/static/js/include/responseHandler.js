@@ -50,7 +50,7 @@ class ResponseHandler {
             `;
     }
 
-    printSubmitterList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix){
+    printSubmitterList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
 
         const tableBody = document.querySelector('.' + listElementClassName);
         tableBody.innerHTML = "";
@@ -85,4 +85,54 @@ class ResponseHandler {
             closePopUp('submitter-search-result');
         });
     }
+
+
+    printRecommendKeywordList(data) {
+        const details = document.querySelector('.detail-search-inner');
+        const input = details.querySelectorAll('input');
+
+        data.progressType = ['배차','상차','하차','제출']
+
+        for (let i = 0; i < input.length; i++) {
+            input[i].addEventListener('click', (event) => {
+                const divElement = input[i].parentElement.children[1];
+
+                divElement.style.display = 'block';
+
+               for (let j = 0; j < details.children.length; j++) {
+                    if (i !== j) {
+                        details.children[j].children[1].style.display = 'none';
+                    }
+                }
+
+                const name = divElement.getAttribute('name');
+
+                divElement.innerHTML = ``;
+
+                for (const val of data[name]) {
+                    divElement.innerHTML += `<option>` + val + `</option>`
+                }
+
+                event.stopPropagation();
+            })
+        }
+
+        details.addEventListener("click", (event) =>{
+            if(event.target.tagName !== 'OPTION'){
+                return;
+            }
+
+            event.target.parentElement.parentElement.children[0].value = event.target.innerHTML;
+        })
+
+        document.addEventListener("click", () => {
+            for (let i = 0; i < input.length; i++) {
+                const divElement = input[i].parentElement.children[1];
+                divElement.style.display = 'none';
+            }
+        })
+
+
+    }
+
 }

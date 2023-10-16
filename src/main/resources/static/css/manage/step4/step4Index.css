@@ -75,22 +75,25 @@
   line-height: 33px;
   font-weight: 600;
 }
-.step4 .step4_wrapper .option-form .detail-search-wrapper div {
+.step4 .step4_wrapper .option-form .detail-search-wrapper .detail-search-inner {
+  display: none;
+}
+.step4 .step4_wrapper .option-form .detail-search-wrapper .detail-search-inner div {
+  display: block;
   padding: 5px;
   border: 1px solid #ddd;
   margin: 10px 30px;
   position: relative;
-  display: block;
 }
-.step4 .step4_wrapper .option-form .detail-search-wrapper div input {
+.step4 .step4_wrapper .option-form .detail-search-wrapper .detail-search-inner div input {
   width: 100%;
 }
-.step4 .step4_wrapper .option-form .detail-search-wrapper div div {
+.step4 .step4_wrapper .option-form .detail-search-wrapper .detail-search-inner div div {
   max-height: 200px;
   width: 95%;
   border: 1px solid #ccc;
   margin: 0;
-  display: none; /* 초기에는 숨김 */
+  display: block; /* 초기에는 숨김 */
   position: absolute;
   font-size: 14px;
   background-color: #fff;

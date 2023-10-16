@@ -126,32 +126,34 @@
           font-weight: 600;
         }
 
-        div {
-          padding: 5px;
-          border: 1px solid #ddd;
-          margin: 10px 30px;
-          position: relative;
-          display: block;
-
-          input {
-            width: 100%;
-          }
+        .detail-search-inner {
+          display: none;
 
           div {
-            max-height: 200px;
-            width: 95%;
-            border: 1px solid #ccc;
-            margin: 0;
-            display: none; /* 초기에는 숨김 */
-            position: absolute;
-            font-size: 14px;
-            background-color: #fff;
-            overflow-y: auto;
-            z-index: 1;
+            display: block;
+            padding: 5px;
+            border: 1px solid #ddd;
+            margin: 10px 30px;
+            position: relative;
+
+            input {
+              width: 100%;
+            }
+
+            div {
+              max-height: 200px;
+              width: 95%;
+              border: 1px solid #ccc;
+              margin: 0;
+              display: block; /* 초기에는 숨김 */
+              position: absolute;
+              font-size: 14px;
+              background-color: #fff;
+              overflow-y: auto;
+              z-index: 1;
+            }
           }
-
         }
-
       }
 
       .search-btn-wrapper {

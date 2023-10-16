@@ -125,4 +125,11 @@ class ManageHandler {
             , paramObj.dataIdNamesAddingSuffix);
     }
 
+    async recommendKeywordList(){
+        const responseData = await new RequestHandler()
+            .get(defaultUrl + '/fetch/' + 'recommendKeyword');
+
+        this.responseHandler.printRecommendKeywordList(responseData);
+    }
+
 }

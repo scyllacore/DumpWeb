@@ -33,8 +33,6 @@ public class Step4ForDailyReportViewerService {
         option.setItems(step4Mapper.selectItemSearchOption(getUserIdFK()));
         option.setSubmitterTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFK()));
 
-        System.out.println(option);
-
         return new ResponseDTO<>(200, option);
     }
 
