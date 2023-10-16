@@ -1,31 +1,40 @@
-const step5InputElementLength = 12;
-const defaultUrl ='/manage/step5';
+const defaultParams = {
+    url: '/manage/step7'
+}
 
-const paramContainer = {
-    step5: {
-        url: defaultUrl
-        , redirectUrl: defaultUrl
-        , form: 'optionForm'
-        , dataIdNames: 'mileage'
-        , listElementClassName: 'table-tuple'
-        , inputElementNames: ['paymentChk', 'retrievalBtn', 'driveDate', 'item', 'lastKm', 'usedAmount', 'usedOil', 'memo', 'replActiveChk', 'replDate', 'replKm', 'replChk']
-        , checkBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
-        , activeInputConfigParams: {
+const paramsContainer = {
+    step7: {
+        redirectUrl: '/manage/step7'
+        //
+        ,
+        formName: 'driveReportForm'
+        ,
+        inputCheckBoxElements: ['paymentChk']
+        ,
+        dataIdName: 'driveReport'
+        //
+        ,
+        listElementClassName: 'table-tuple'
+        ,
+        defaultSortingCriteria: 'driveDate'
+        //
+        ,
+        activeInputElementNames: ['paymentChk', 'driverRetrievalBtn', 'retrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'memo', 'postingChk']
+        ,
+        activeInputConfigParams: {
             0: {
-                mainTrigger: 'replActiveChk',
-                type: 'active',
-                range: [step5InputElementLength - 3, step5InputElementLength],
-                initRange: [step5InputElementLength - 3, step5InputElementLength]
-            },
-            1: {
                 mainTrigger: 'paymentChk',
                 type: 'disable',
-                range: [1, step5InputElementLength],
-                exceptTrigger: 'replActiveChk',
-                exceptRange: [step5InputElementLength - 3, step5InputElementLength]
+                range: [1, 11]
             }
-        },
-        defaultSortingCriteria: 'driveDate'
+        }
+    },
+    step7Driver: {
+        formName: 'driveReportForm'
+        , dataIdName: 'driver'
+        //
+        , listElementClassName: 'table-driver-tuple'
+        , defaultSortingCriteria: 'carNo'
     }
 }
 

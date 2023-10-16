@@ -7,6 +7,7 @@ public class DriveReportDTO {
     private int driveReportId;
     private String driveDate;
     private String submitterTel;
+    private String driverCarNo;
 
     private String companyName;
     private String fromSite;
@@ -21,6 +22,7 @@ public class DriveReportDTO {
     private int submitterIdFk;
     private int writerIdFk;
 
-    private boolean driverPaymentChk;
+    private boolean paymentChk;
     private boolean submitterPaymentChk;
+    private boolean postingChk;
 }

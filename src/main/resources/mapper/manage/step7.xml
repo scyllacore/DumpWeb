@@ -4,124 +4,126 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForSubmitterOrderRegistrationMapper">
 
-    <insert id="insertDriveReport" parameterType="DriveReportDTO">
+    <insert id="insertDriveOrder" parameterType="DriveReportDTO">
         INSERT INTO drive_report_tb
-        (CAR_NO,
-        REG_DATE,
-        SRC_SUBMIT,
-        SRC_SUBMIT_TEL,
-        CONTACT_PERSON,
-        PAYMENT_CHK,
-        CUR_STATUS,
-        DRIVER_ID_IDX,
-        MANAGER_ID_IDX,
-        WRITER_ID_IDX_FK)
-        VALUES (#{carNo},
-        #{regDate},
-        #{srcSubmit},
-        #{srcSubmitTel},
-        #{contactPerson},
-        #{paymentChk},
-        #{curStatus},
-        (select USER_ID_IDX from user_info_tb where USER_ID = #{CarNo}),
-        #{managerIdIdx},
-        #{writerIdIdxFk})
-
-        <selectKey order="AFTER" keyProperty="reportId,driverIdIdx" resultType="DriveReportDTO">
-            select REPORT_ID, DRIVER_ID_IDX
-            from drive_report_tb
-            where REPORT_ID = (select MAX(REPORT_ID) from drive_report_tb)
-        </selectKey>
-    </insert>
-
-    <insert id="insertDriveReportSub" parameterType="DriveReportDTO">
-        INSERT INTO drive_report_tb
-        (REPORT_ID_FK,
+        (DRIVE_DATE,
          FROM_SITE,
          TO_SITE,
          ITEM,
-         QUANTITY,
          UNIT_PRICE,
-         DRIVER_ID_IDX,
-         MANAGER_ID_IDX,
-         WRITER_ID_IDX_FK)
-        VALUES (#{reportId},
+         QUANTITY,
+         MEMO,
+         PAYMENT_CHK,
+         PROGRESS,
+         DRIVER_ID_FK,
+         SUBMITTER_ID_FK,
+         WRITER_ID_FK)
+        VALUES (#{driveDate},
                 #{fromSite},
                 #{toSite},
                 #{item},
                 #{unitPrice},
                 #{quantity},
-                #{driverIdIdx},
-                #{managerIdIdx},
-                #{writerIdIdxFk})
+                #{memo},
+                #{paymentChk},
+                #{progress},
+                #{driverIdFk},
+                #{submitterIdFk},
+                #{writerIdFk})
     </insert>
 
 
     <update id="updateDriveReport" parameterType="DriveReportDTO">
-        UPDATE mileage_tb
-        SET FROM_SITE = #{driveDate},
-        ITEM = #{item},
-        LAST_KM = #{lastKm},
-        USED_AMOUNT = #{usedAmount},
-        USED_OIL = #{usedOil},
-        MEMO = #{memo},
-        PAYMENT_CHK = #{paymentChk},
-
-        REPL_ACTIVE_CHK = #{replActiveChk},
-        REPL_KM = #{replKm},
-        <if test="replDate != ''">
-            REPL_DATE = #{replDate},
-        </if>
-        REPL_CHK = #{replChk}
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
-        AND MILEAGE_ID = #{mileageId}
+        UPDATE drive_report_tb
+        SET DRIVE_DATE = #{driveDate},
+            FROM_SITE = #{fromSite},
+            TO_SITE = #{toSite},
+            ITEM = #{item},
+            QUANTITY = #{quantity},
+            MEMO = #{memo},
+            PAYMENT_CHK = #{paymentChk},
+            PROGRESS = #{progress},
+            SUBMITTER_ID_FK = #{submitterIdFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
+          AND DRIVE_REPORT_ID = #{driveReportId}
+          AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
 
-    <select id="selectMileageList" resultType="MileageDTO">
-        SELECT MILEAGE_ID,
-               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
-               ITEM,
-               PAYMENT_CHK,
-               LAST_KM,
-               USED_AMOUNT,
-               USED_OIL,
-               MEMO,
-               REPL_ACTIVE_CHK,
-               DATE_FORMAT(REPL_DATE, '%Y-%m-%d')  AS replDate,
-               REPL_KM,
-               REPL_CHK
-        FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
-          AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
-        ORDER BY DRIVE_DATE ASC
-    </select>
-
-
-    <delete id="deleteMileage">
+    <delete id="deleteDriveReport">
         DELETE
-        FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
-          AND MILEAGE_ID = #{mileageId}
+        FROM drive_report_tb
+        WHERE WRITER_ID_FK = #{writerIdFk}
+          AND DRIVE_REPORT_ID = #{driveReportId}
+          AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 
+    <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        SELECT
+        DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        UNIT_PRICE,
+        QUANTITY,
+        MEMO,
+        PAYMENT_CHK,
+        PROGRESS,
+        SUBMITTER_ID_FK
+        FROM drive_report_tb
+        WHERE
+        <if test="driveDate != ''">
+            DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
+            AND
+        </if>
+        DRIVER_ID_FK = #{writerIdFk}
+    </select>
 
-    <select id="selectMileage" resultType="MileageDTO">
-        SELECT MILEAGE_ID,
-               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
-               ITEM,
-               PAYMENT_CHK,
-               LAST_KM,
-               USED_AMOUNT,
-               USED_OIL,
-               MEMO,
-               REPL_ACTIVE_CHK,
-               DATE_FORMAT(REPL_DATE, '%Y-%m-%d')  AS replDate,
-               REPL_KM,
-               REPL_CHK
-        FROM mileage_tb
-        WHERE WRITER_ID_IDX_FK = #{writerIdIdxFk}
-          AND MILEAGE_ID = #{mileageId}
+    <sql id="r1">
+        WITH r1 AS(
+            SELECT DRIVE_REPORT_ID,
+                   DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS DRIVE_DATE,
+                   FROM_SITE,
+                   TO_SITE,
+                   ITEM,
+                   UNIT_PRICE,
+                   QUANTITY,
+                   MEMO,
+                   SUBMITTER_ID_FK,
+                   PAYMENT_CHK,
+                   PROGRESS
+            FROM drive_report_tb
+            WHERE DRIVER_ID_FK = ${writerIdFk}
+              AND DRIVE_REPORT_ID = ${driveReportId}
+        )
+    </sql>
+
+
+    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        <include refid="r1">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="driveReportId" value="#{driveReportId}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+        (SELECT TEL FROM submitter_tb where SUBMITTER_ID = r1.SUBMITTER_ID_FK) AS submitterTel,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        UNIT_PRICE,
+        QUANTITY,
+        MEMO,
+        SUBMITTER_ID_FK,
+        PAYMENT_CHK,
+        PROGRESS
+        FROM r1
+    </select>
+
+    <select id="selectSubmitterList" resultType="SubmitterDTO">
+        SELECT *
+        FROM submitter_tb
     </select>
 
 </mapper>

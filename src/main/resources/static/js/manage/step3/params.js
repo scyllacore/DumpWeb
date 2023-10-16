@@ -9,7 +9,7 @@ const paramsContainer = {
         ,
         formName: 'driveReportForm'
         ,
-        inputCheckBoxElements: ['driverPaymentChk']
+        inputCheckBoxElements: ['paymentChk']
         ,
         dataIdName: 'driveReport'
         //
@@ -19,11 +19,11 @@ const paramsContainer = {
         defaultSortingCriteria: 'driveDate'
         //
         ,
-        activeInputElementNames: ['driverPaymentChk', 'submitterRetrievalBtn', 'retrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+        activeInputElementNames: ['paymentChk', 'submitterRetrievalBtn', 'retrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
         ,
         activeInputConfigParams: {
             0: {
-                mainTrigger: 'driverPaymentChk',
+                mainTrigger: 'paymentChk',
                 type: 'disable',
                 range: [1, 11]
             }

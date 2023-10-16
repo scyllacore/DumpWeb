@@ -20,73 +20,66 @@
 
         <div class="line"></div>
 
-        <form class="order-form" name="orderForm">
-            <input type="hidden" name="reportId" value="0" required>
+        <form class="drive-report-form" name="driveReportForm">
+            <input type="hidden" name="driveReportId" value="0" required>
+            <input type="hidden" name="submitterIdFk" th:value="${session.loginInfo.userIdIdx}" required>
 
             <div class="payment-chk-wrapper">
                 <h3>결재</h3>
                 <input type="checkbox" name="paymentChk">
             </div>
 
+            <div class="submitter-wrapper">
+                <h3>차량번호</h3>
+                <input type="hidden" name="driverIdFk" required>
+                <input type="number" name="driverCarNo" disabled required>
+                <button type="button" name="driverRetrievalBtn" class="retrieval-btn" onclick="openPopUp('driver-search-result'); func.driverListRetrieval()" required>조회</button>
+            </div>
+
             <div class="period-wrapper">
                 <h3>주문일</h3>
-                <input type="date" id="reg-date" name="driveDate" required>
+                <input type="date" name="driveDate" required>
                 <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+            </div>
+
+            <div class="from-site-wrapper">
+                <h3>상차지</h3>
+                <input name="fromSite" placeholder="상차지">
+            </div>
+
+            <div class="to-site-wrapper">
+                <h3>하차지</h3>
+                <input name="toSite" placeholder="하차지">
             </div>
 
             <div class="item-wrapper">
                 <h3>품목</h3>
-                <select class="item-inner" name="item" required>
-                    <option value="주유">주유</option>
-                    <option value="요소수">요소수</option>
-                    <option value="엔진오일">엔진오일</option>
-                    <option value="정비(수리)">정비(수리)</option>
-                    <option value="기타">기타</option>
-                </select>
+                <input name="item" placeholder="품목">
             </div>
 
-            <div class="last-km-wrapper">
-                <h3>최종 주행 거리 (Km)</h3>
-                <input type="number" name="lastKm" placeholder="최종 주행 거리">
+            <div class="quantity-wrapper">
+                <h3>대수</h3>
+                <input type="number" name="quantity" placeholder="대수">
             </div>
 
-            <div class="used-amount-wrapper">
-                <h3>사용 금액</h3>
-                <input type="number" name="usedAmount" placeholder="사용 금액">
-            </div>
-
-            <div class="used-oil-wrapper">
-                <h3>주유량 (L)</h3>
-                <input type="number" name="usedOil" placeholder="주유량">
+            <div class="unit-price-wrapper">
+                <h3>운반 단가</h3>
+                <input type="number" name="unitPrice" placeholder="운반 단가">
             </div>
 
             <div class="memo-wrapper">
-                <h3>메모</h3>
+                <h3>비고</h3>
                 <textarea name="memo"></textarea>
             </div>
 
-            <div class="repl-active-wrapper">
-                <h3>교환 주기 입력</h3>
-                <input type="checkbox" name="replActiveChk">
+            <div class="posting-chk-wrapper">
+                <h3>모집 공고 등록</h3>
+                <input type="checkbox" name="postingChk">
             </div>
 
-            <div class="repl-date-wrapper">
-                <h3>교환 예정일</h3>
-                <input type="date" name="replDate" disabled>
-            </div>
-
-            <div class="repl-km-wrapper">
-                <h3>교환 주행 거리</h3>
-                <input type="number" name="replKm" placeholder="교환 주행 거리" disabled>
-            </div>
-
-            <div class="repl-chk-wrapper">
-                <h3>교환 완료 확인</h3>
-                <input type="checkbox" name="replChk" disabled>
-            </div>
 
             <div class="bottom-btn-wrapper">
-                <button type="button" class="save-btn" onclick="func.save()">저장</button>
+                <button type="button" class="save-btn" onclick="func.save()">등록</button>
                 <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
                 <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
                 <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
@@ -94,6 +87,7 @@
         </form>
 
         <th:block th:replace="/manage/step7/step7_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step7/step7_driver_retrieval :: resultFragment"></th:block>
 
     </div>
 </container>

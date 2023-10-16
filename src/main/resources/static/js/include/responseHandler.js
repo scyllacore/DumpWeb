@@ -92,7 +92,7 @@ class ResponseHandler {
         const details = document.querySelector('.detail-search-inner');
         const input = details.querySelectorAll('input');
 
-        data.progressType = ['배차','상차','하차','제출']
+        data.progressType = ['배차', '상차', '하차', '제출']
 
         for (let i = 0; i < input.length; i++) {
             input[i].addEventListener('click', (event) => {
@@ -100,7 +100,7 @@ class ResponseHandler {
 
                 divElement.style.display = 'block';
 
-               for (let j = 0; j < details.children.length; j++) {
+                for (let j = 0; j < details.children.length; j++) {
                     if (i !== j) {
                         details.children[j].children[1].style.display = 'none';
                     }
@@ -118,8 +118,8 @@ class ResponseHandler {
             })
         }
 
-        details.addEventListener("click", (event) =>{
-            if(event.target.tagName !== 'OPTION'){
+        details.addEventListener("click", (event) => {
+            if (event.target.tagName !== 'OPTION') {
                 return;
             }
 
@@ -133,5 +133,4 @@ class ResponseHandler {
             }
         })
     }
-
 }

@@ -46,13 +46,14 @@ class InputHandler {
 
         let selectKeys;
 
+        delete data.writerIdFk;
+
         if (typeof data.mileageId !== 'undefined') {
             selectKeys = ["item"];
-        }else{
+        } else {
             selectKeys = ["progress"];
             delete data.submitterPaymentChk;
             delete data.driverIdFk;
-            delete data.writerIdFk;
         }
 
         for (const key in data) {
@@ -60,6 +61,8 @@ class InputHandler {
             if (data[key] === null) {
                 continue;
             }
+
+            console.log(key, data[key]);
 
             if (selectKeys.includes(key)) {
                 const optionList = document.querySelector('select[name="' + key + '"]');

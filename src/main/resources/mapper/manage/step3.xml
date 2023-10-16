@@ -13,7 +13,7 @@
          UNIT_PRICE,
          QUANTITY,
          MEMO,
-         DRIVER_PAYMENT_CHK,
+         PAYMENT_CHK,
          PROGRESS,
          DRIVER_ID_FK,
          SUBMITTER_ID_FK,
@@ -25,7 +25,7 @@
                 #{unitPrice},
                 #{quantity},
                 #{memo},
-                #{driverPaymentChk},
+                #{paymentChk},
                 #{progress},
                 #{driverIdFk},
                 #{submitterIdFk},
@@ -41,7 +41,7 @@
         ITEM = #{item},
         QUANTITY = #{quantity},
         MEMO = #{memo},
-        DRIVER_PAYMENT_CHK = #{driverPaymentChk},
+        PAYMENT_CHK = #{paymentChk},
         PROGRESS = #{progress},
         SUBMITTER_ID_FK = #{submitterIdFk}
         WHERE WRITER_ID_FK = #{writerIdFk}
@@ -68,7 +68,7 @@
         UNIT_PRICE,
         QUANTITY,
         MEMO,
-        DRIVER_PAYMENT_CHK,
+        PAYMENT_CHK,
         PROGRESS,
         SUBMITTER_ID_FK
         FROM drive_report_tb
@@ -77,7 +77,7 @@
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>
-        WRITER_ID_FK = #{writerIdFk}
+        DRIVER_ID_FK = #{writerIdFk}
     </select>
 
     <sql id="r1">
@@ -91,10 +91,10 @@
                    QUANTITY,
                    MEMO,
                    SUBMITTER_ID_FK,
-                   DRIVER_PAYMENT_CHK,
+                   PAYMENT_CHK,
                    PROGRESS
             FROM drive_report_tb
-            WHERE WRITER_ID_FK = ${writerIdFk}
+            WHERE DRIVER_ID_FK = ${writerIdFk}
               AND DRIVE_REPORT_ID = ${driveReportId}
         )
     </sql>
@@ -116,7 +116,7 @@
         QUANTITY,
         MEMO,
         SUBMITTER_ID_FK,
-        DRIVER_PAYMENT_CHK,
+        PAYMENT_CHK,
         PROGRESS
         FROM r1
     </select>

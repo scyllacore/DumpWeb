@@ -1,12 +1,23 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface Step7ForSubmitterOrderRegistrationMapper {
-    void insertDriveReport(DriveReportDTO driveReport);
+    void insertDriveOrder(DriveReportDTO driveReport);
 
-    void insertDriveReportSub(DriveReportDTO driveReport);
+    void updateDriveOrder(DriveReportDTO driveReport);
+
+    List<DriveReportDTO> selectDriveOrderList(DriveReportDTO driveReportDTO);
+
+    DriveReportDTO selectDriveOrder(DriveReportDTO driveReportDTO);
+
+    void deleteDriveOrder(DriveReportDTO driveReport);
+
+    List<DriverDTO> selectDriverList();
 
 }

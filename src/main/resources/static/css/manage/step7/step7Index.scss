@@ -9,7 +9,7 @@ input[type=checkbox] {
   zoom: 1.5;
 }
 
-.step5 {
+.step7 {
   display: flex;
   justify: {
     content: center;
@@ -17,7 +17,7 @@ input[type=checkbox] {
   background: #d1d1d1;
   color: #333536;
 
-  .step5_wrapper {
+  .step7_wrapper {
     width: 100%;
     max: {
       width: 600px;
@@ -48,7 +48,7 @@ input[type=checkbox] {
     }
 
 
-    .option-form {
+    .drive-report-form {
       padding: {
         top: 15px;
         bottom: 10px;
@@ -80,7 +80,7 @@ input[type=checkbox] {
           }
         }
 
-        input, .item-inner, textarea {
+        input, .progress-inner, textarea {
           position: relative;
           width: 65%;
           padding: 5px;

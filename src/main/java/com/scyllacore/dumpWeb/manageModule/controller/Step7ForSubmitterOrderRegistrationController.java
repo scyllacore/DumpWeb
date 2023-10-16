@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step7ForSubmitterOrderRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/manage/step7")
 @RequiredArgsConstructor
 public class Step7ForSubmitterOrderRegistrationController {
-/*
+
     private final Step7ForSubmitterOrderRegistrationService step7Service;
 
     @GetMapping(value = "")
@@ -21,27 +22,33 @@ public class Step7ForSubmitterOrderRegistrationController {
         return "/manage/step7/step7_index";
     }
 
-    @PostMapping(value = "/fetch/orderSave")
+    @PostMapping(value = "/fetch/driveOrderSave")
     @ResponseBody
-    public ResponseDTO<String> orderSave(@RequestBody DriveReportDTO driveReport) {
-        return step7Service.saveOrder(driveReport);
+    public ResponseDTO<String> driveOrderSave(@RequestBody DriveReportDTO driveReport) {
+        return step7Service.saveDriveOrder(driveReport);
     }
 
-    @PostMapping(value = "/fetch/orderList")
+    @PostMapping(value = "/fetch/driveOrderList")
     @ResponseBody
-    public ResponseDTO<List<DriveReportDTO>> orderList(@RequestBody DriveReportDTO driveReport) {
-        return step7Service.findOrderList(driveReport);
+    public ResponseDTO<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
+        return step7Service.findDriveOrderList(driveReport);
     }
 
-    @DeleteMapping(value = "/fetch/orderRemove")
+    @PostMapping(value = "/fetch/driveReportDetails")
     @ResponseBody
-    public ResponseDTO<String> orderRemove(@RequestBody DriveReportDTO driveReport) {
-        return step7Service.removeOrder(driveReport);
+    public ResponseDTO<DriveReportDTO> driveOrderDetails(@RequestBody DriveReportDTO driveReport) {
+        return step7Service.findDriveOrder(driveReport);
     }
 
-    @PostMapping(value = "/fetch/orderDetails")
+    @DeleteMapping(value = "/fetch/driveOrderRemove")
     @ResponseBody
-    public ResponseDTO<DriveReportDTO> orderDetails(@RequestBody DriveReportDTO driveReport) {
-        return step7Service.findOrder(driveReport);
-    }*/
+    public ResponseDTO<String> driveOrderRemove(@RequestBody DriveReportDTO driveReport) {
+        return step7Service.removeDriveOrder(driveReport);
+    }
+
+    @GetMapping(value = "/fetch/driverList")
+    @ResponseBody
+    public ResponseDTO<List<DriverDTO>> submitterList() {
+        return step7Service.findDriverList();
+    }
 }
