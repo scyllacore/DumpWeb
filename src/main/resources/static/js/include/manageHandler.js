@@ -127,7 +127,7 @@ class ManageHandler {
 
     async recommendKeywordList(){
         const responseData = await new RequestHandler()
-            .get(defaultUrl + '/fetch/' + 'recommendKeyword');
+            .get(defaultUrl + '/fetch/' + 'recommendKeyword' +'List');
 
         this.responseHandler.printRecommendKeywordList(responseData);
     }

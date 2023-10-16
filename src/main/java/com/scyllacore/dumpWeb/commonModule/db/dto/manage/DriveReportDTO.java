@@ -8,6 +8,7 @@ public class DriveReportDTO {
     private String driveDate;
     private String submitterTel;
 
+    private String companyName;
     private String fromSite;
     private String toSite;
     private String item;

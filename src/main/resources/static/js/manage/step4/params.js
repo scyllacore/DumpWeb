@@ -4,12 +4,12 @@ const paramContainer = {
     step3: {
         url: defaultUrl
         , redirectUrl: '/manage/step3'
-        , dataIdNames: 'mileage'
+        , dataIdNames: 'driveReport'
     },
     step4: {
         url: defaultUrl
         , form: 'optionForm'
-        , dataIdNames: 'mileage'
+        , dataIdNames: 'driveReport'
         , listElementClassName: 'table-tuple'
         , defaultSortingCriteria: 'driveDate'
     }
