@@ -1,7 +1,7 @@
 let manageHandler;
 
 document.addEventListener("DOMContentLoaded", () => {
-    manageHandler = new ManageHandler(paramContainer);
+    manageHandler = new ManageHandler(paramsContainer);
 })
 
 const func = {

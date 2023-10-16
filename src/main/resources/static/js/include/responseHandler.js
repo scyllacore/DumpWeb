@@ -1,4 +1,5 @@
 class ResponseHandler {
+
     printList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
 
         const tableBody = document.querySelector('.' + listElementClassName);
@@ -131,8 +132,6 @@ class ResponseHandler {
                 divElement.style.display = 'none';
             }
         })
-
-
     }
 
 }

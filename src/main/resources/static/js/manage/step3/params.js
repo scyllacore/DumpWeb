@@ -1,35 +1,38 @@
-const step3InputElementLength = 12;
-const defaultUrl = '/manage/step3';
+const defaultParams = {
+    url: '/manage/step3'
+}
 
-const paramContainer = {
+const paramsContainer = {
     step3: {
-        url: defaultUrl
+        redirectUrl: '/manage/step3'
+        //
         ,
-        redirectUrl: defaultUrl
+        formName: 'driveReportForm'
         ,
-        form: 'driveReportForm'
+        inputCheckBoxElements: ['driverPaymentChk']
         ,
-        dataIdNames: 'driveReport'
+        dataIdName: 'driveReport'
+        //
         ,
         listElementClassName: 'table-tuple'
         ,
-        inputElementNames: ['driveReportId', 'driverPaymentChk', 'submitterRetrievalBtn','retrievalBtn', 'driveDate', 'fromSite','toSite', 'item', 'quantity', 'unitPrice','progress', 'memo']
+        defaultSortingCriteria: 'driveDate'
+        //
         ,
-        checkBoxElements: ['driverPaymentChk']
+        activeInputElementNames: ['driverPaymentChk', 'submitterRetrievalBtn', 'retrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
         ,
         activeInputConfigParams: {
             0: {
                 mainTrigger: 'driverPaymentChk',
                 type: 'disable',
-                range: [2, step3InputElementLength]
+                range: [1, 11]
             }
-        },
-        defaultSortingCriteria: 'driveDate'
+        }
     },
     step3Submitter: {
-        url: defaultUrl
-        , form: 'driveReportForm'
-        , dataIdNames: 'submitter'
+        formName: 'driveReportForm'
+        , dataIdName: 'submitter'
+        //
         , listElementClassName: 'table-submitter-tuple'
         , defaultSortingCriteria: 'tel'
     }

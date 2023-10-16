@@ -1,17 +1,18 @@
-const defaultUrl = '/manage/step4';
+const defaultParams = {
+    url: '/manage/step4'
+}
 
-const paramContainer = {
-    step3: {
-        url: defaultUrl
-        , redirectUrl: '/manage/step3'
-        , dataIdNames: 'driveReport'
-    },
+const paramsContainer = {
     step4: {
-        url: defaultUrl
-        , form: 'optionForm'
-        , dataIdNames: 'driveReport'
+        redirectUrl: '/manage/step3'
+        //
+        , formName: 'optionForm'
+        , dataIdName: 'driveReport'
+        //
         , listElementClassName: 'table-tuple'
         , defaultSortingCriteria: 'driveDate'
+        //
+        , recommendKeywordList: true
     }
 }
 

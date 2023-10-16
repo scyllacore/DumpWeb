@@ -29,13 +29,13 @@ input[type=checkbox] {
   font-weight: bold;
   gap: 5px;
 }
-.step5 .step5_wrapper .option-form {
+.step5 .step5_wrapper .mileage-form {
   padding-top: 15px;
   padding-bottom: 10px;
   background-color: #fafafa;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
 }
-.step5 .step5_wrapper .option-form div {
+.step5 .step5_wrapper .mileage-form div {
   padding: 10px 10px;
   margin: 10px;
   display: flex;
@@ -44,11 +44,11 @@ input[type=checkbox] {
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
   background-color: #ffffff;
 }
-.step5 .step5_wrapper .option-form div h3 {
+.step5 .step5_wrapper .mileage-form div h3 {
   width: 80px;
   font-size: 13px;
 }
-.step5 .step5_wrapper .option-form div input, .step5 .step5_wrapper .option-form div .item-inner, .step5 .step5_wrapper .option-form div textarea {
+.step5 .step5_wrapper .mileage-form div input, .step5 .step5_wrapper .mileage-form div .item-inner, .step5 .step5_wrapper .mileage-form div textarea {
   position: relative;
   width: 65%;
   padding: 5px;
@@ -57,18 +57,18 @@ input[type=checkbox] {
   text-align: center;
   cursor: pointer;
 }
-.step5 .step5_wrapper .option-form .retrieval-btn {
+.step5 .step5_wrapper .mileage-form .retrieval-btn {
   width: 35px;
   margin: 0 12px;
 }
-.step5 .step5_wrapper .option-form .bottom-btn-wrapper {
+.step5 .step5_wrapper .mileage-form .bottom-btn-wrapper {
   padding: 25px 15px;
   margin-top: 30px;
   border-radius: 10px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px, rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px;
 }
-.step5 .step5_wrapper .option-form .bottom-btn-wrapper button {
+.step5 .step5_wrapper .mileage-form .bottom-btn-wrapper button {
   width: 65px;
   height: 30px;
   border: 1px solid #ccc;
@@ -80,12 +80,12 @@ input[type=checkbox] {
   font-weight: 600;
   cursor: pointer;
 }
-.step5 .step5_wrapper .option-form .bottom-btn-wrapper .save-btn {
+.step5 .step5_wrapper .mileage-form .bottom-btn-wrapper .save-btn {
   border-color: #0068b7;
   background: #0068b7;
   color: #fff;
 }
-.step5 .step5_wrapper .option-form .bottom-btn-wrapper .delete-btn {
+.step5 .step5_wrapper .mileage-form .bottom-btn-wrapper .delete-btn {
   border-color: #ff3636;
   background: #ff3636;
   color: #fff;

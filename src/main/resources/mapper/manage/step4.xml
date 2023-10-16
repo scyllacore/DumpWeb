@@ -151,8 +151,7 @@
         UPDATE drive_report_tb
         SET DRIVER_PAYMENT_CHK = #{paymentBtnFlag}
         WHERE WRITER_ID_FK = #{writerIdFk}
-        WHERE
-        DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="companyName !=''">
             AND COMPANY_NAME = #{companyName}
         </if>

@@ -1,7 +1,6 @@
 let manageHandler;
 document.addEventListener("DOMContentLoaded", () => {
-    manageHandler = new ManageHandler(paramContainer);
-    func.test();
+    manageHandler = new ManageHandler(paramsContainer);
 })
 
 const func = {
@@ -13,8 +12,5 @@ const func = {
     },
     async cancelInBulk() {
         await manageHandler.modifyPaymentChkInBulk('step4', 'cancel');
-    },
-    async test(){
-        await manageHandler.recommendKeywordList();
     }
 }
