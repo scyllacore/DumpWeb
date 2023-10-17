@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class SubmitterDTO {
     private int submitterId;
-    private String companyName;
+    private String company;
     private String tel;
-    private String managerName;
+    private String name;
     private int userIdFk;
 }

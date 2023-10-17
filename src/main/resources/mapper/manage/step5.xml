@@ -6,8 +6,7 @@
 
     <insert id="insertMileage" parameterType="MileageDTO">
         INSERT INTO mileage_tb
-        (CAR_NO,
-        DRIVE_DATE,
+        (DRIVE_DATE,
         ITEM,
         LAST_KM,
         USED_AMOUNT,
@@ -21,8 +20,7 @@
         </if>
         REPL_CHK,
         WRITER_ID_FK)
-        VALUES (#{carNo},
-        #{driveDate},
+        VALUES (#{driveDate},
         #{item},
         #{lastKm},
         #{usedAmount},

@@ -1,7 +1,10 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.login.TrialMapper;
+import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.TrialMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,19 +16,28 @@ import org.springframework.stereotype.Service;
 public class TrialService {
 
     private final TrialMapper trialMapper;
+    private final LoginMapper loginMapper;
 
-    public ResponseDTO<String> loginForTrial(HttpServletRequest request, LoginDTO trialLoginInfo) {
+    public ResponseDTO<String> loginForTrial(HttpServletRequest request, AuthDTO trialLoginInfo) {
 
         if (trialLoginInfo.getUserType().equals("driver")) {
-            trialLoginInfo.setUserId("08호7313");
+            trialLoginInfo.setUserIdIdx(1);
         } else {
-            trialLoginInfo.setUserId("010-3717-7406");
+            trialLoginInfo.setUserIdIdx(2);
         }
 
         trialLoginInfo = trialMapper.selectTrialUserInfo(trialLoginInfo);
 
-        trialLoginInfo.setTrialChk(true);
         HttpSession session = request.getSession();
+
+        if (trialLoginInfo.getUserType().equals("driver")) {
+            DriverDTO driver =  loginMapper.selectDriverInfo(trialLoginInfo);
+            trialLoginInfo.setProfileName(driver.getCarNo());
+        } else {
+            SubmitterDTO submitter = loginMapper.selectSubmitterInfo(trialLoginInfo);
+            trialLoginInfo.setProfileName(submitter.getTel());
+        }
+
         session.setAttribute("loginInfo", trialLoginInfo);
 
         return new ResponseDTO<String>(200, trialLoginInfo.getUserType());

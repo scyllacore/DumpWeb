@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface Step4ForDailyReportViewerMapper {
-    List<String> selectCompanyNameSearchOption(int writerId);
+    List<String> selectCompanySearchOption(int writerId);
     List<String> selectFromSiteSearchOption(int writerId);
     List<String> selectToSiteSearchOption(int writerId);
     List<String> selectItemSearchOption(int writerId);

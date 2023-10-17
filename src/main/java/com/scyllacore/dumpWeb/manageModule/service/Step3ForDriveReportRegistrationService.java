@@ -21,7 +21,7 @@ public class Step3ForDriveReportRegistrationService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFK() {
-        return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
+        return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport){

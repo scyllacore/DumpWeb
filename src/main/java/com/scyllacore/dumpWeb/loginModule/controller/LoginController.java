@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.loginModule.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,12 +21,12 @@ public class LoginController {
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
 
-        return "/login/login_form";
+        return "/auth/login_form";
     }
 
-    @PostMapping(value = "/ajax/login")
+    @PostMapping(value = "/auth/fetch/login")
     @ResponseBody
-    public ResponseDTO<String> login(LoginDTO loginInfo, HttpServletRequest request) {
+    public ResponseDTO<String> login(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
         ResponseDTO<String> loginType = loginService.login(loginInfo, request);
 
         if (loginType.getStatus() != 200) {

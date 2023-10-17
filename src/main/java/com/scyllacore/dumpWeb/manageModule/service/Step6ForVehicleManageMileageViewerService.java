@@ -17,7 +17,7 @@ public class Step6ForVehicleManageMileageViewerService {
     private final CommonUtil commonUtil;
 
     public int getUserIdFK() {
-        return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
+        return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<List<MileageDTO>> findMileageListByOption(MileageSearchOptionDTO option) {

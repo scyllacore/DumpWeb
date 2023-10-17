@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.login.LoginDTO;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.login.PasswordChangeMapper;
+import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.PasswordChangeMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ public class PasswordChangeService {
 
     private final PasswordChangeMapper passwordChangeMapper;
 
-    public ResponseDTO<String> changePassword(HttpServletRequest request, LoginDTO loginInfo) {
-        LoginDTO sessionLoginInfo = (LoginDTO) request.getSession().getAttribute("loginInfo");
+    public ResponseDTO<String> changePassword(HttpServletRequest request, AuthDTO loginInfo) {
+        AuthDTO sessionLoginInfo = (AuthDTO) request.getSession().getAttribute("loginInfo");
         loginInfo.setUserIdIdx(sessionLoginInfo.getUserIdIdx());
 
         passwordChangeMapper.updateUserPassword(loginInfo);

@@ -20,7 +20,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFK() {
-        return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
+        return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public String getUserId(){
@@ -30,7 +30,6 @@ public class Step5ForVehicleManageMileageRegistrationService {
     public ResponseDTO<String> saveMileage(MileageDTO mileage) {
 
         mileage.setWriterIdFk(getUserIdFK());
-        mileage.setCarNo(getUserId());
 
         if (mileage.getMileageId() == 0) {
             step5Mapper.insertMileage(mileage);

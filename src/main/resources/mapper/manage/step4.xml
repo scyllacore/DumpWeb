@@ -17,15 +17,15 @@
             )
     </sql>
 
-    <select id="selectCompanyNameSearchOption">
+    <select id="selectCompanySearchOption">
         <include refid="r1">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
-        SELECT COMPANY_NAME
+        SELECT COMPANY
         FROM submitter_tb
         WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM r1)
-        GROUP BY COMPANY_NAME
+        GROUP BY COMPANY
         LIMIT 10
     </select>
 
@@ -100,7 +100,7 @@
         </include>
 
         SELECT DRIVE_REPORT_ID,
-        COMPANY_NAME,
+        COMPANY,
         DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
         FROM_SITE,
         TO_SITE,
@@ -110,8 +110,8 @@
         FROM r2
         WHERE
         DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
-        <if test="companyName !=''">
-            AND COMPANY_NAME = #{companyName}
+        <if test="company !=''">
+            AND COMPANY = #{company}
         </if>
         <if test="fromSite !=''">
             AND FROM_SITE = #{fromSite}
@@ -132,8 +132,8 @@
             <when test="sortingCriteria == 'driveDate'">
                 ORDER BY driveDate DESC
             </when>
-            <when test="sortingCriteria == 'companyName'">
-                ORDER BY COMPANY_NAME ASC
+            <when test="sortingCriteria == 'company'">
+                ORDER BY COMPANY ASC
             </when>
             <when test="sortingCriteria == 'fromSite'">
                 ORDER BY FROM_SITE ASC
@@ -152,8 +152,8 @@
         SET PAYMENT_CHK = #{paymentBtnFlag}
         WHERE WRITER_ID_FK = #{writerIdFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
-        <if test="companyName !=''">
-            AND COMPANY_NAME = #{companyName}
+        <if test="company !=''">
+            AND COMPANY = #{company}
         </if>
         <if test="fromSite !=''">
             AND FROM_SITE = #{fromSite}

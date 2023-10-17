@@ -24,14 +24,14 @@ public class Step4ForDailyReportViewerService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFK() {
-        return Integer.parseInt(commonUtil.getLoginInfoBySession().getUserIdIdx());
+        return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<DriveReportSearchOptionDTO> findRecommendKeywordList() {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
-        option.setCompanyNames(step4Mapper.selectCompanyNameSearchOption(getUserIdFK()));
+        option.setCompanies(step4Mapper.selectCompanySearchOption(getUserIdFK()));
         option.setFromSites(step4Mapper.selectFromSiteSearchOption(getUserIdFK()));
         option.setToSites(step4Mapper.selectToSiteSearchOption(getUserIdFK()));
         option.setItems(step4Mapper.selectItemSearchOption(getUserIdFK()));

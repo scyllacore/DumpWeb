@@ -6,5 +6,5 @@ import lombok.Data;
 public class DriverDTO {
     private int driverId;
     private String carNo;
-    private String driverName;
+    private String name;
 }

@@ -9,7 +9,7 @@ public class DriveReportDTO {
     private String submitterTel;
     private String driverCarNo;
 
-    private String companyName;
+    private String company;
     private String fromSite;
     private String toSite;
     private String item;

@@ -8,15 +8,19 @@
 </head>
 
 <body>
-<div class="join">
-    <section class="join-inner">
+<div class="trial">
+    <section class="trial-inner">
         <div class="wrap">
-            <h2>회원가입 유형을 선택해주세요.</h2>
+            <h2>체험 유형을 선택해주세요.</h2>
             <div class="select-area">
-                <div class="select-box-driver" onclick="location.href='/join/step2?type=driver'">
+                <form name="trialInfo" method="post">
+                    <input type="hidden" name="userType">
+                </form>
+
+                <div class="select-box-driver" name="driver" onclick = "func.accessTrialMode(this)">
                     <img src="/image/login/driver_btn.png">
                 </div>
-                <div class="select-box-manager" onclick="location.href='/join/step2?type=manager'">
+                <div class="select-box-submitter" name="submitter" onclick = "func.accessTrialMode(this)">
                     <img src="/image/login/manager_btn.png">
                 </div>
             </div>
@@ -24,5 +28,8 @@
     </section>
 </div>
 </body>
+
+<th:block th:replace="/include/auth_script :: scriptFragment"></th:block>
+
 </html>
 
