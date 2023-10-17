@@ -8,6 +8,9 @@ const func = {
     async save() {
         await manageHandler.save('step3');
     },
+    async submit() {
+        await manageHandler.save('step3',true);
+    },
     async remove() {
         await manageHandler.remove('step3')
     },

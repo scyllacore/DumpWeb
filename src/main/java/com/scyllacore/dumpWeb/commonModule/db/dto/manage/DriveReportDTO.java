@@ -23,6 +23,7 @@ public class DriveReportDTO {
     private int writerIdFk;
 
     private boolean paymentChk;
+    private boolean submitChk;
     private boolean submitterPaymentChk;
     private boolean postingChk;
 }

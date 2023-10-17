@@ -41,13 +41,17 @@ class ManageHandler {
         }
     }
 
-    async save(containerKey) {
+    async save(containerKey, submit = false) {
         const paramObj = this.paramContainer[containerKey];
 
         if (this.inputHandler.checkValidation(paramObj.formName)) {
             return;
         }
         this.activeInputHandler[containerKey].setDisabledFalse(paramObj.formName);
+
+        if (submit) {
+            document.querySelector('input[name="submitChk"]').value = true;
+        }
 
         let inputData = this.inputHandler.jsonHandler
             .getRequestJson(paramObj.formName, paramObj.inputCheckBoxElements);

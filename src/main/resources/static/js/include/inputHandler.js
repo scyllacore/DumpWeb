@@ -47,6 +47,7 @@ class InputHandler {
         let selectKeys;
 
         delete data.writerIdFk;
+        delete data.postingChk;
 
         if (typeof data.mileageId !== 'undefined') {
             selectKeys = ["item"];

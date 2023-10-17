@@ -43,7 +43,8 @@
         MEMO = #{memo},
         PAYMENT_CHK = #{paymentChk},
         PROGRESS = #{progress},
-        SUBMITTER_ID_FK = #{submitterIdFk}
+        SUBMITTER_ID_FK = #{submitterIdFk},
+        SUBMIT_CHK = #{submitChk}
         WHERE WRITER_ID_FK = #{writerIdFk}
         AND DRIVE_REPORT_ID = #{driveReportId}
         AND SUBMITTER_PAYMENT_CHK = 0
