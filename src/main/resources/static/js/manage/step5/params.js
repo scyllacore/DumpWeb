@@ -9,7 +9,7 @@ const paramsContainer = {
         //
         formName: 'mileageForm'
         ,
-        checkBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
+        inputCheckBoxElements: ['replActiveChk', 'replChk', 'paymentChk']
         ,
         dataIdName: 'mileage'
         //

@@ -85,7 +85,7 @@
     <sql id="reportForDriver">
         WITH writer_report AS (SELECT *
                     FROM drive_report_tb
-                    WHERE DRIVER_ID_FK = ${writerIdFk}
+                    WHERE WRITER_ID_FK = ${writerIdFk}
                       AND DRIVE_REPORT_ID = ${driveReportId}),
              join_report AS (SELECT *
                     FROM submitter_tb
