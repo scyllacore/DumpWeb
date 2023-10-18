@@ -7,4 +7,5 @@ public class DriverDTO {
     private int driverId;
     private String carNo;
     private String name;
+    private int userIdFk;
 }

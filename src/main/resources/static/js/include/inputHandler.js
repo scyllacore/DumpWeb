@@ -44,36 +44,30 @@ class InputHandler {
 
     fillInput(data) {
 
-        let selectKeys;
-
-        delete data.writerIdFk;
-        delete data.postingChk;
-
+        let selectKeys = [];
 
         if (typeof data.mileageId !== 'undefined') {
             selectKeys = ["item"];
-        } else {
+        } else if (defaultParams.url.includes('step3')) {
             selectKeys = ["progress"];
-            delete data.submitterPaymentChk;
-            //delete data.driverIdFk;
         }
 
 
         for (const key in data) {
 
-            if (data[key] === null) {
+            const element = document.querySelector('[name="' + key + '"]')
+
+            if (data[key] === null || element === null) {
                 continue;
             }
 
-            console.log(key,data[key] );
 
             if (selectKeys.includes(key)) {
-                const optionList = document.querySelector('select[name="' + key + '"]');
-                optionList.querySelector('option[value="' + data[key] + '"]').selected = true;
+                element.querySelector('[value="' + data[key] + '"]').selected = true;
             } else if (typeof data[key] === "boolean") {
-                document.querySelector('input[name="' + key + '"]').checked = data[key];
+                element.checked = data[key];
             } else {
-                document.querySelector('[name=' + key + ']').value = data[key];
+                element.value = data[key];
             }
         }
     }

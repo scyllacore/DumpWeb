@@ -33,9 +33,13 @@ public class TrialService {
         if (trialLoginInfo.getUserType().equals("driver")) {
             DriverDTO driver =  loginMapper.selectDriverInfo(trialLoginInfo);
             trialLoginInfo.setProfileName(driver.getCarNo());
+            session.setAttribute("driverInfo", driver);
+
         } else {
             SubmitterDTO submitter = loginMapper.selectSubmitterInfo(trialLoginInfo);
             trialLoginInfo.setProfileName(submitter.getTel());
+            session.setAttribute("submitterInfo", submitter);
+
         }
 
         session.setAttribute("loginInfo", trialLoginInfo);

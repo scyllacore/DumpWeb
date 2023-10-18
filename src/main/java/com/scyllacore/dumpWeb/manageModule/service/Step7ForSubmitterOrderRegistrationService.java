@@ -20,12 +20,12 @@ public class Step7ForSubmitterOrderRegistrationService {
     private final Step7ForSubmitterOrderRegistrationMapper step7Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFK() {
+    public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<String> saveDriveOrder(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         if (driveReport.getDriveReportId() == 0) {
             step7Mapper.insertDriveOrder(driveReport);
@@ -37,13 +37,13 @@ public class Step7ForSubmitterOrderRegistrationService {
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveOrderList(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         return new ResponseDTO<>(200, step7Mapper.selectDriveOrderList(driveReport));
     }
 
     public ResponseDTO<DriveReportDTO> findDriveOrder(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         System.out.println(step7Mapper.selectDriveOrder(driveReport));
 
@@ -52,7 +52,7 @@ public class Step7ForSubmitterOrderRegistrationService {
 
 
     public ResponseDTO<String> removeDriveOrder(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         step7Mapper.deleteDriveOrder(driveReport);
 

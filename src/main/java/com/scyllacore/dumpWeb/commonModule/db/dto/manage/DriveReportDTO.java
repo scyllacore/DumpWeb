@@ -6,7 +6,7 @@ import lombok.Data;
 public class DriveReportDTO {
     private int driveReportId;
     private String driveDate;
-    private String userInfo;
+    private String receiver;
 
     private String fromSite;
     private String toSite;
@@ -16,14 +16,15 @@ public class DriveReportDTO {
     private String memo;
     private String progress;
 
+    private String company;
     private String carNo;
-
-    private int driverIdFk;
-    private int submitterIdFk;
-    private int writerIdFk;
 
     private boolean paymentChk;
     private boolean submitChk;
     private boolean submitterPaymentChk;
     private boolean postingChk;
+
+    private int driverIdFk;
+    private int submitterIdFk;
+    private int writerIdFk;
 }

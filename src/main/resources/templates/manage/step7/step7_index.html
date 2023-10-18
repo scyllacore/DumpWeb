@@ -22,7 +22,7 @@
 
         <form class="drive-report-form" name="driveReportForm">
             <input type="hidden" name="driveReportId" value="0" required>
-            <input type="hidden" name="submitterIdFk" th:value="${session.loginInfo.userIdIdx}" required>
+            <input type="hidden" name="submitterIdFk" th:value="${session.submitterInfo.submitterId}" required>
 
             <input type="hidden" name="submitChk" value="false">
 
@@ -34,7 +34,7 @@
             <div class="submitter-wrapper">
                 <h3>차량번호</h3>
                 <input type="hidden" name="driverIdFk" required>
-                <input name="userInfo" disabled required>
+                <input name="receiver" disabled required>
                 <button type="button" name="driverRetrievalBtn" class="retrieval-btn" onclick="openPopUp('driver-search-result'); func.driverListRetrieval()" required>조회</button>
             </div>
 

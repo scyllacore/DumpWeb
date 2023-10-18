@@ -19,7 +19,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
     private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFK() {
+    public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
@@ -29,7 +29,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
 
     public ResponseDTO<String> saveMileage(MileageDTO mileage) {
 
-        mileage.setWriterIdFk(getUserIdFK());
+        mileage.setWriterIdFk(getUserIdFk());
 
         if (mileage.getMileageId() == 0) {
             step5Mapper.insertMileage(mileage);
@@ -41,14 +41,14 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     public ResponseDTO<List<MileageDTO>> findMileageList(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFK());
+        mileage.setWriterIdFk(getUserIdFk());
 
         return new ResponseDTO<>(200,
                 step5Mapper.selectMileageList(mileage));
     }
 
     public ResponseDTO<String> removeMileage(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFK());
+        mileage.setWriterIdFk(getUserIdFk());
 
         step5Mapper.deleteMileage(mileage);
 
@@ -56,7 +56,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     public ResponseDTO<MileageDTO> findMileage(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFK());
+        mileage.setWriterIdFk(getUserIdFk());
 
         return new ResponseDTO<>(200, step5Mapper.selectMileage(mileage));
     }

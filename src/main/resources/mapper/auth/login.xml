@@ -20,19 +20,13 @@
     </select>
 
     <select id="selectDriverInfo" parameterType="AuthDTO" resultType="DriverDTO">
-        SELECT DRIVER_ID,
-               CAR_NO,
-               NAME,
-               TEL
+        SELECT *
         FROM driver_tb
         WHERE USER_ID_FK = #{userIdIdx}
     </select>
 
     <select id="selectSubmitterInfo" parameterType="AuthDTO" resultType="SubmitterDTO">
-        SELECT SUBMITTER_ID,
-               COMPANY,
-               NAME,
-               TEL
+        SELECT *
         FROM submitter_tb
         WHERE USER_ID_FK = #{userIdIdx}
     </select>

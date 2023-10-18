@@ -16,17 +16,17 @@ public class Step6ForVehicleManageMileageViewerService {
     private final Step6ForVehicleManageMileageViewerMapper step6Mapper;
     private final CommonUtil commonUtil;
 
-    public int getUserIdFK() {
+    public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<List<MileageDTO>> findMileageListByOption(MileageSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFK());
+        option.setWriterIdFk(getUserIdFk());
         return new ResponseDTO<>(200, step6Mapper.selectMileageListByOption(option));
     }
 
     public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFK());
+        option.setWriterIdFk(getUserIdFk());
         step6Mapper.updateMileagePaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {

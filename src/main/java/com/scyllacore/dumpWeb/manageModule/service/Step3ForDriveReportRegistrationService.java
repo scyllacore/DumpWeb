@@ -20,12 +20,14 @@ public class Step3ForDriveReportRegistrationService {
     private final Step3ForDriveReportRegistrationMapper step3Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFK() {
+    public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
+
+        System.out.println(driveReport);
 
         if(driveReport.getDriveReportId() == 0){
             step3Mapper.insertDriveReport(driveReport);
@@ -37,20 +39,20 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         return new ResponseDTO<>(200,step3Mapper.selectDriveReportList(driveReport));
     }
 
     public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         return new ResponseDTO<>(200,step3Mapper.selectDriveReport(driveReport));
     }
 
 
     public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFK());
+        driveReport.setWriterIdFk(getUserIdFk());
 
         step3Mapper.deleteDriveReport(driveReport);
 

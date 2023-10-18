@@ -13,8 +13,6 @@ class ResponseHandler {
             return;
         }
 
-        console.log(searchResultData);
-
         const firstTh = tableThChild.className.split('-')[1];
         let start = searchResultData[0][firstTh];
 
@@ -53,14 +51,14 @@ class ResponseHandler {
             `;
     }
 
-    printUserList(searchResultData, listElementClassName, startTh, dataIdName) {
+    printReceiverList(searchResultData, listElementClassName, startTh, dataIdName) {
 
         const dataIdNamesAddingSuffix = dataIdName + 'Id';
 
         const tableBody = document.querySelector('.' + listElementClassName);
         tableBody.innerHTML = "";
 
-        const tableThChild = document.querySelector('.thu-' + startTh);
+        const tableThChild = document.querySelector('.thr-' + startTh);
         const tableThParent = tableThChild.parentNode;
         tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
 
@@ -85,7 +83,7 @@ class ResponseHandler {
             const info = event.target.parentElement.children[0].innerHTML;
 
             document.querySelector('[name="' + dataIdName + 'IdFk"]').value = id;
-            document.querySelector('[name="userInfo"]').value = info;
+            document.querySelector('[name="receiver"]').value = info;
 
             closePopUp(dataIdName + '-search-result');
         });

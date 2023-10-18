@@ -12,17 +12,20 @@ public class DriveReportSearchOptionDTO {
     private String sortingCriteria;
     private boolean paymentBtnFlag;
 
-    private String company;
     private String fromSite;
     private String toSite;
     private String item;
-    private String submitterTel;
     private String progress;
 
+    private String company;
+    private String tel;
+    private String carNo;
+
     private List<String> companies;
+    private List<String> tels;
+    private List<String> carNos;
     private List<String> fromSites;
     private List<String> toSites;
     private List<String> items;
-    private List<String> submitterTels;
 
 }

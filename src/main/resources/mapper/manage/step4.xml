@@ -4,38 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper">
 
-    <sql id="r1">
-        WITH r1 AS (SELECT DRIVE_REPORT_ID,
-                           SUBMITTER_ID_FK,
-                           FROM_SITE,
-                           TO_SITE,
-                           ITEM
-                    FROM drive_report_tb
-                    WHERE WRITER_ID_FK = ${writerIdFk}
-                    ORDER BY DRIVE_REPORT_ID DESC
+    <sql id="reportForDriver">
+        WITH writer_reports AS (SELECT SUBMITTER_ID_FK,
+                                       FROM_SITE,
+                                       TO_SITE,
+                                       ITEM
+                                FROM drive_report_tb
+                                WHERE WRITER_ID_FK = ${writerIdFk}
+                                ORDER BY DRIVE_REPORT_ID DESC
             LIMIT 50
             )
     </sql>
 
     <select id="selectCompanySearchOption">
-        <include refid="r1">
+        <include refid="reportForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT COMPANY
         FROM submitter_tb
-        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM r1)
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM writer_reports)
         GROUP BY COMPANY
         LIMIT 10
     </select>
 
     <select id="selectFromSiteSearchOption">
-        <include refid="r1">
+        <include refid="reportForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT FROM_SITE
-        FROM r1
+        FROM writer_reports
         GROUP BY FROM_SITE
         HAVING FROM_SITE != ''
         LIMIT 10
@@ -43,12 +42,12 @@
     </select>
 
     <select id="selectToSiteSearchOption">
-        <include refid="r1">
+        <include refid="reportForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT TO_SITE
-        FROM r1
+        FROM writer_reports
         GROUP BY TO_SITE
         HAVING TO_SITE != ''
         LIMIT 10
@@ -57,12 +56,12 @@
 
 
     <select id="selectItemSearchOption">
-        <include refid="r1">
+        <include refid="reportForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT ITEM
-        FROM r1
+        FROM writer_reports
         GROUP BY ITEM
         HAVING ITEM != ''
         LIMIT 10
@@ -70,20 +69,20 @@
     </select>
 
     <select id="selectSubmitterTelSearchOption">
-        <include refid="r1">
+        <include refid="reportForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT TEL
         FROM submitter_tb
-        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM r1)
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM writer_reports)
         GROUP BY TEL
         LIMIT 10
 
     </select>
 
-    <sql id="r2">
-        WITH r2 AS (SELECT *
+    <sql id="reportsForDriver">
+        WITH join_reports AS (SELECT *
                     FROM
                         drive_report_tb
                         INNER JOIN
@@ -95,19 +94,19 @@
     </sql>
 
     <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
-        <include refid="r2">
+        <include refid="reportsForDriver">
             <property name="writerIdFk" value="#{writerIdFk}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
-        COMPANY,
         DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        COMPANY,
         FROM_SITE,
         TO_SITE,
         ITEM,
         QUANTITY,
         UNIT_PRICE
-        FROM r2
+        FROM join_reports
         WHERE
         DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="company !=''">
@@ -122,8 +121,8 @@
         <if test="item !=''">
             AND ITEM = #{item}
         </if>
-        <if test="submitterTel !=''">
-            AND TEL = #{submitterTel}
+        <if test="tel !=''">
+            AND TEL = #{tel}
         </if>
         <if test="progress !=''">
             AND PROGRESS = #{progress}
@@ -164,8 +163,8 @@
         <if test="item !=''">
             AND ITEM = #{item}
         </if>
-        <if test="submitterTel !=''">
-            AND TEL = #{submitterTel}
+        <if test="tel !=''">
+            AND TEL = #{tel}
         </if>
         <if test="progress !=''">
             AND PROGRESS = #{progress}

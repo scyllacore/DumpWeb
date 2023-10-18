@@ -23,7 +23,7 @@ public class Step4ForDailyReportViewerService {
     private final Step4ForDailyReportViewerMapper step4Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFK() {
+    public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
@@ -31,23 +31,23 @@ public class Step4ForDailyReportViewerService {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
-        option.setCompanies(step4Mapper.selectCompanySearchOption(getUserIdFK()));
-        option.setFromSites(step4Mapper.selectFromSiteSearchOption(getUserIdFK()));
-        option.setToSites(step4Mapper.selectToSiteSearchOption(getUserIdFK()));
-        option.setItems(step4Mapper.selectItemSearchOption(getUserIdFK()));
-        option.setSubmitterTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFK()));
+        option.setCompanies(step4Mapper.selectCompanySearchOption(getUserIdFk()));
+        option.setFromSites(step4Mapper.selectFromSiteSearchOption(getUserIdFk()));
+        option.setToSites(step4Mapper.selectToSiteSearchOption(getUserIdFk()));
+        option.setItems(step4Mapper.selectItemSearchOption(getUserIdFk()));
+        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFk()));
 
         return new ResponseDTO<>(200, option);
     }
 
     public ResponseDTO<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFK());
+        option.setWriterIdFk(getUserIdFk());
         System.out.println(step4Mapper.selectDriveReportListByOption(option));
         return new ResponseDTO<>(200, step4Mapper.selectDriveReportListByOption(option));
     }
 
     public ResponseDTO<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFK());
+        option.setWriterIdFk(getUserIdFk());
         step4Mapper.updateDriveReportPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {

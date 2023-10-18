@@ -118,13 +118,13 @@ class ManageHandler {
         alert(responseData);
     }
 
-    async userListRetrieval(containerKey) {
+    async receiverListRetrieval(containerKey) {
         const paramObj = this.paramContainer[containerKey];
 
         const responseData = await this.requestHandler
             .get(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'List');
 
-        this.responseHandler.printUserList(responseData
+        this.responseHandler.printReceiverList(responseData
             , paramObj.listElementClassName
             , paramObj.defaultSortingCriteria
             , paramObj.dataIdName);
