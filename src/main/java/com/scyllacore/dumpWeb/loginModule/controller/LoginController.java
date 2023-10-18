@@ -29,6 +29,8 @@ public class LoginController {
     public ResponseDTO<String> login(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
         ResponseDTO<String> loginType = loginService.login(loginInfo, request);
 
+        loginService.logout(request);
+
         if (loginType.getStatus() != 200) {
             return loginType;
         }
