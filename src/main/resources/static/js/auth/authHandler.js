@@ -93,8 +93,6 @@ class AuthHandler {
     checkEqualPassword(inputData) {
         let inputObj = JSON.parse(inputData);
 
-        console.log(inputObj.userPwd ,inputObj.userPwdChk );
-
         if (inputObj.userPwd !== inputObj.userPwdChk) {
             alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
             document.querySelector('[name = "userPwd"]').focus();

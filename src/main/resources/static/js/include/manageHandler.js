@@ -118,16 +118,16 @@ class ManageHandler {
         alert(responseData);
     }
 
-    async submitterListRetrieval(containerKey) {
+    async userListRetrieval(containerKey) {
         const paramObj = this.paramContainer[containerKey];
 
         const responseData = await this.requestHandler
             .get(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'List');
 
-        this.responseHandler.printSubmitterList(responseData
+        this.responseHandler.printUserList(responseData
             , paramObj.listElementClassName
             , paramObj.defaultSortingCriteria
-            , paramObj.dataIdNameAddingSuffix);
+            , paramObj.dataIdName);
     }
 
     async recommendKeywordRetrieval(url, paramObj) {

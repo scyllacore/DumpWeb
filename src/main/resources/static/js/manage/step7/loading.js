@@ -14,7 +14,7 @@ const func = {
     async listRetrieval() {
         await manageHandler.listRetrieval('step7')
     },
-    async submitterListRetrieval() {
-        await manageHandler.submitterListRetrieval('step7Driver')
+    async driverListRetrieval() {
+        await manageHandler.userListRetrieval('step7Driver')
     }
 }

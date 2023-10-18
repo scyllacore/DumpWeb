@@ -14,7 +14,6 @@
          QUANTITY,
          MEMO,
          PAYMENT_CHK,
-         PROGRESS,
          DRIVER_ID_FK,
          SUBMITTER_ID_FK,
          WRITER_ID_FK)
@@ -26,23 +25,22 @@
                 #{quantity},
                 #{memo},
                 #{paymentChk},
-                #{progress},
                 #{driverIdFk},
                 #{submitterIdFk},
                 #{writerIdFk})
     </insert>
 
 
-    <update id="updateDriveReport" parameterType="DriveReportDTO">
+    <update id="updateDriveOrder" parameterType="DriveReportDTO">
         UPDATE drive_report_tb
-        SET DRIVE_DATE = #{driveDate},
-            FROM_SITE = #{fromSite},
-            TO_SITE = #{toSite},
-            ITEM = #{item},
-            QUANTITY = #{quantity},
-            MEMO = #{memo},
-            PAYMENT_CHK = #{paymentChk},
-            PROGRESS = #{progress},
+        SET DRIVE_DATE      = #{driveDate},
+            FROM_SITE       = #{fromSite},
+            TO_SITE         = #{toSite},
+            ITEM            = #{item},
+            QUANTITY        = #{quantity},
+            MEMO            = #{memo},
+            PAYMENT_CHK     = #{paymentChk},
+            PROGRESS        = #{progress},
             SUBMITTER_ID_FK = #{submitterIdFk}
         WHERE WRITER_ID_FK = #{writerIdFk}
           AND DRIVE_REPORT_ID = #{driveReportId}
@@ -50,7 +48,7 @@
     </update>
 
 
-    <delete id="deleteDriveReport">
+    <delete id="deleteDriveOrder">
         DELETE
         FROM drive_report_tb
         WHERE WRITER_ID_FK = #{writerIdFk}
@@ -58,72 +56,72 @@
           AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 
-    <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <sql id="cte_table2">
+        WITH r1 AS (SELECT *
+                    FROM drive_report_tb
+                    WHERE WRITER_ID_FK = ${writerIdFk}),
+            r2 AS (SELECT *
+            FROM driver_tb
+            INNER JOIN r1
+            ON DRIVER_ID = r1.DRIVER_ID_FK)
+    </sql>
+
+    <select id="selectDriveOrderList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        <include refid="cte_table2">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
         SELECT
         DRIVE_REPORT_ID,
         DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
         FROM_SITE,
+        CAR_NO,
         TO_SITE,
         ITEM,
-        UNIT_PRICE,
         QUANTITY,
-        MEMO,
-        PAYMENT_CHK,
-        PROGRESS,
-        SUBMITTER_ID_FK
-        FROM drive_report_tb
-        WHERE
+        DRIVER_ID_FK
+        FROM r2
         <if test="driveDate != ''">
-            DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
-            AND
+            WHERE DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
         </if>
-        DRIVER_ID_FK = #{writerIdFk}
     </select>
 
-    <sql id="r1">
-        WITH r1 AS(
-            SELECT DRIVE_REPORT_ID,
-                   DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS DRIVE_DATE,
-                   FROM_SITE,
-                   TO_SITE,
-                   ITEM,
-                   UNIT_PRICE,
-                   QUANTITY,
-                   MEMO,
-                   SUBMITTER_ID_FK,
-                   PAYMENT_CHK,
-                   PROGRESS
-            FROM drive_report_tb
-            WHERE DRIVER_ID_FK = ${writerIdFk}
-              AND DRIVE_REPORT_ID = ${driveReportId}
-        )
+
+    <sql id="cte_table1">
+        WITH r1 AS (SELECT *
+                    FROM drive_report_tb
+                    WHERE SUBMITTER_ID_FK = ${writerIdFk}
+                      AND DRIVE_REPORT_ID = ${driveReportId}),
+             r2 AS (SELECT *
+                    FROM driver_tb
+                             INNER JOIN r1
+                                        ON DRIVER_ID = r1.DRIVER_ID_FK)
     </sql>
 
-
-    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
-        <include refid="r1">
+    <select id="selectDriveOrder" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+        <include refid="cte_table1">
             <property name="writerIdFk" value="#{writerIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
-        (SELECT TEL FROM submitter_tb where SUBMITTER_ID = r1.SUBMITTER_ID_FK) AS submitterTel,
+        CAR_NO AS userInfo,
         FROM_SITE,
         TO_SITE,
         ITEM,
         UNIT_PRICE,
         QUANTITY,
         MEMO,
-        SUBMITTER_ID_FK,
+        DRIVER_ID_FK,
         PAYMENT_CHK,
         PROGRESS
-        FROM r1
+        FROM r2
     </select>
 
-    <select id="selectSubmitterList" resultType="SubmitterDTO">
+    <select id="selectDriverList" resultType="DriverDTO">
         SELECT *
-        FROM submitter_tb
+        FROM driver_tb
     </select>
 
 </mapper>

@@ -18,6 +18,6 @@ const func = {
         await manageHandler.listRetrieval('step3')
     },
     async submitterListRetrieval() {
-        await manageHandler.submitterListRetrieval('step3Submitter')
+        await manageHandler.userListRetrieval('step3Submitter')
     }
 }

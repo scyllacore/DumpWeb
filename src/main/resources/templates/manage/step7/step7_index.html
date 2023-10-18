@@ -24,6 +24,8 @@
             <input type="hidden" name="driveReportId" value="0" required>
             <input type="hidden" name="submitterIdFk" th:value="${session.loginInfo.userIdIdx}" required>
 
+            <input type="hidden" name="submitChk" value="false">
+
             <div class="payment-chk-wrapper">
                 <h3>결재</h3>
                 <input type="checkbox" name="paymentChk">
@@ -32,7 +34,7 @@
             <div class="submitter-wrapper">
                 <h3>차량번호</h3>
                 <input type="hidden" name="driverIdFk" required>
-                <input type="number" name="driverCarNo" disabled required>
+                <input name="userInfo" disabled required>
                 <button type="button" name="driverRetrievalBtn" class="retrieval-btn" onclick="openPopUp('driver-search-result'); func.driverListRetrieval()" required>조회</button>
             </div>
 
@@ -77,6 +79,15 @@
                 <input type="checkbox" name="postingChk">
             </div>
 
+            <div class="progress-wrapper">
+                <h3>진행</h3>
+                <select class="progress-inner" name="progress" disabled required>
+                    <option value="배차" selected>배차</option>
+                    <option value="상차">상차</option>
+                    <option value="하차">하차</option>
+                    <option value="제출">제출</option>
+                </select>
+            </div>
 
             <div class="bottom-btn-wrapper">
                 <button type="button" class="save-btn" onclick="func.save()">등록</button>

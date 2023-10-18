@@ -22,13 +22,13 @@ public class Step7ForSubmitterOrderRegistrationController {
         return "/manage/step7/step7_index";
     }
 
-    @PostMapping(value = "/fetch/driveOrderSave")
+    @PostMapping(value = "/fetch/driveReportSave")
     @ResponseBody
     public ResponseDTO<String> driveOrderSave(@RequestBody DriveReportDTO driveReport) {
         return step7Service.saveDriveOrder(driveReport);
     }
 
-    @PostMapping(value = "/fetch/driveOrderList")
+    @PostMapping(value = "/fetch/driveReportList")
     @ResponseBody
     public ResponseDTO<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
         return step7Service.findDriveOrderList(driveReport);
@@ -40,7 +40,7 @@ public class Step7ForSubmitterOrderRegistrationController {
         return step7Service.findDriveOrder(driveReport);
     }
 
-    @DeleteMapping(value = "/fetch/driveOrderRemove")
+    @DeleteMapping(value = "/fetch/driveReportRemove")
     @ResponseBody
     public ResponseDTO<String> driveOrderRemove(@RequestBody DriveReportDTO driveReport) {
         return step7Service.removeDriveOrder(driveReport);

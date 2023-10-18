@@ -45,6 +45,8 @@ public class Step7ForSubmitterOrderRegistrationService {
     public ResponseDTO<DriveReportDTO> findDriveOrder(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFK());
 
+        System.out.println(step7Mapper.selectDriveOrder(driveReport));
+
         return new ResponseDTO<>(200, step7Mapper.selectDriveOrder(driveReport));
     }
 

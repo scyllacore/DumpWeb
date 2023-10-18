@@ -9,7 +9,7 @@ const paramsContainer = {
         ,
         formName: 'driveReportForm'
         ,
-        inputCheckBoxElements: ['paymentChk']
+        inputCheckBoxElements: ['paymentChk','postingChk']
         ,
         dataIdName: 'driveReport'
         //

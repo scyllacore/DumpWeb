@@ -49,13 +49,15 @@ class InputHandler {
         delete data.writerIdFk;
         delete data.postingChk;
 
+
         if (typeof data.mileageId !== 'undefined') {
             selectKeys = ["item"];
         } else {
             selectKeys = ["progress"];
             delete data.submitterPaymentChk;
-            delete data.driverIdFk;
+            //delete data.driverIdFk;
         }
+
 
         for (const key in data) {
 
@@ -63,7 +65,7 @@ class InputHandler {
                 continue;
             }
 
-            console.log(key, data[key]);
+            console.log(key,data[key] );
 
             if (selectKeys.includes(key)) {
                 const optionList = document.querySelector('select[name="' + key + '"]');

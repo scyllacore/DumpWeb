@@ -78,38 +78,30 @@
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>
-        DRIVER_ID_FK = #{writerIdFk}
+        WRITER_ID_FK = #{writerIdFk}
     </select>
 
-    <sql id="r1">
-        WITH r1 AS(
-            SELECT DRIVE_REPORT_ID,
-                   DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS DRIVE_DATE,
-                   FROM_SITE,
-                   TO_SITE,
-                   ITEM,
-                   UNIT_PRICE,
-                   QUANTITY,
-                   MEMO,
-                   SUBMITTER_ID_FK,
-                   PAYMENT_CHK,
-                   PROGRESS
-            FROM drive_report_tb
-            WHERE DRIVER_ID_FK = ${writerIdFk}
-              AND DRIVE_REPORT_ID = ${driveReportId}
-        )
+    <sql id="cte_table1">
+        WITH r1 AS (SELECT *
+                    FROM drive_report_tb
+                    WHERE DRIVER_ID_FK = ${writerIdFk}
+                      AND DRIVE_REPORT_ID = ${driveReportId}),
+             r2 AS (SELECT *
+                    FROM submitter_tb
+                             INNER JOIN r1
+                                        ON SUBMITTER_ID = r1.SUBMITTER_ID_FK)
     </sql>
 
 
     <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
-        <include refid="r1">
+        <include refid="cte_table1">
             <property name="writerIdFk" value="#{writerIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
-        (SELECT TEL FROM submitter_tb where SUBMITTER_ID = r1.SUBMITTER_ID_FK) AS submitterTel,
+        TEL AS userInfo,
         FROM_SITE,
         TO_SITE,
         ITEM,
@@ -119,7 +111,7 @@
         SUBMITTER_ID_FK,
         PAYMENT_CHK,
         PROGRESS
-        FROM r1
+        FROM r2
     </select>
 
     <select id="selectSubmitterList" resultType="SubmitterDTO">

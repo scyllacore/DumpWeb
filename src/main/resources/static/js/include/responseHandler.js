@@ -13,6 +13,8 @@ class ResponseHandler {
             return;
         }
 
+        console.log(searchResultData);
+
         const firstTh = tableThChild.className.split('-')[1];
         let start = searchResultData[0][firstTh];
 
@@ -51,12 +53,14 @@ class ResponseHandler {
             `;
     }
 
-    printSubmitterList(searchResultData, listElementClassName, startTh, dataIdNamesAddingSuffix) {
+    printUserList(searchResultData, listElementClassName, startTh, dataIdName) {
+
+        const dataIdNamesAddingSuffix = dataIdName + 'Id';
 
         const tableBody = document.querySelector('.' + listElementClassName);
         tableBody.innerHTML = "";
 
-        const tableThChild = document.querySelector('.th-' + startTh);
+        const tableThChild = document.querySelector('.thu-' + startTh);
         const tableThParent = tableThChild.parentNode;
         tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
 
@@ -78,12 +82,12 @@ class ResponseHandler {
 
         tableBody.addEventListener("click", (event) => {
             const id = event.target.parentElement.getAttribute('data-' + dataIdNamesAddingSuffix);
-            const tel = event.target.parentElement.children[0].innerHTML;
+            const info = event.target.parentElement.children[0].innerHTML;
 
-            document.querySelector('[name="submitterIdFk"]').value = id;
-            document.querySelector('[name="submitterTel"]').value = tel;
+            document.querySelector('[name="' + dataIdName + 'IdFk"]').value = id;
+            document.querySelector('[name="userInfo"]').value = info;
 
-            closePopUp('submitter-search-result');
+            closePopUp(dataIdName + '-search-result');
         });
     }
 
