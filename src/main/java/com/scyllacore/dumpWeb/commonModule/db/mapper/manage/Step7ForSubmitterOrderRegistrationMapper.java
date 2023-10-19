@@ -12,9 +12,9 @@ public interface Step7ForSubmitterOrderRegistrationMapper {
 
     void updateDriveOrder(DriveReportDTO driveReport);
 
-    List<DriveReportDTO> selectDriveOrderList(DriveReportDTO driveReportDTO);
+    List<DriveReportDTO> selectDriveOrderList(DriveReportDTO driveReport);
 
-    DriveReportDTO selectDriveOrder(DriveReportDTO driveReportDTO);
+    DriveReportDTO selectDriveOrder(DriveReportDTO driveReport);
 
     void deleteDriveOrder(DriveReportDTO driveReport);
 

@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForSubmitterOrderRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
@@ -24,14 +25,17 @@ public class Step7ForSubmitterOrderRegistrationService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-
+    public SubmitterDTO getSubmitterInfo() {
+        return (SubmitterDTO) commonUtil.getInfoBySession("submitterInfo");
+    }
 
     public ResponseDTO<String> saveDriveOrder(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 
         if (driveReport.getDriveReportId() == 0) {
             step7Mapper.insertDriveOrder(driveReport);
-        } else {
+
+        } else if (driveReport.isUserType()) {
             step7Mapper.updateDriveOrder(driveReport);
         }
 
@@ -39,15 +43,13 @@ public class Step7ForSubmitterOrderRegistrationService {
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveOrderList(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFk());
+        driveReport.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
 
         return new ResponseDTO<>(200, step7Mapper.selectDriveOrderList(driveReport));
     }
 
     public ResponseDTO<DriveReportDTO> findDriveOrder(DriveReportDTO driveReport) {
-        driveReport.setWriterIdFk(getUserIdFk());
-
-        System.out.println(step7Mapper.selectDriveOrder(driveReport));
+        driveReport.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
 
         return new ResponseDTO<>(200, step7Mapper.selectDriveOrder(driveReport));
     }

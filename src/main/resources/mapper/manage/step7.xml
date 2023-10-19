@@ -63,7 +63,7 @@
     <sql id="reportsForSubmitter">
         WITH writer_reports AS (SELECT *
                     FROM drive_report_tb
-                    WHERE WRITER_ID_FK = ${writerIdFk}),
+                    WHERE SUBMITTER_ID_FK = ${submitterIdFk}),
             join_reports AS (SELECT *
             FROM driver_tb
             INNER JOIN writer_reports
@@ -72,7 +72,7 @@
 
     <select id="selectDriveOrderList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
         <include refid="reportsForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT
@@ -94,7 +94,7 @@
     <sql id="reportForSubmitter">
         WITH writer_report AS (SELECT *
                     FROM drive_report_tb
-                    WHERE WRITER_ID_FK = ${writerIdFk}
+                    WHERE SUBMITTER_ID_FK = ${submitterIdFk}
                       AND DRIVE_REPORT_ID = ${driveReportId}),
              join_report AS (SELECT *
                     FROM driver_tb
@@ -104,7 +104,7 @@
 
     <select id="selectDriveOrder" parameterType="DriveReportDTO" resultType="DriveReportDTO">
         <include refid="reportForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
         </include>
 
