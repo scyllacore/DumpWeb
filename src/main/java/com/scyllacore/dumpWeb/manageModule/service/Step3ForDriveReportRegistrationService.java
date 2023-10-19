@@ -38,7 +38,7 @@ public class Step3ForDriveReportRegistrationService {
 
         if (driveReport.getDriveReportId() == 0) {
             step3Mapper.insertDriveReport(driveReport);
-        } else if (driveReport.isUserType()) {
+        } else if (driveReport.getUserType() == 1) {
             step3Mapper.updateSubmit(driveReport);
         } else {
             step3Mapper.updateDriveReport(driveReport);

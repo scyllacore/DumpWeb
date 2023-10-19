@@ -41,11 +41,12 @@
             FROM_SITE       = #{fromSite},
             TO_SITE         = #{toSite},
             ITEM            = #{item},
+            UNIT_PRICE      = #{unitPrice},
             QUANTITY        = #{quantity},
             MEMO            = #{memo},
             PAYMENT_CHK     = #{paymentChk},
             PROGRESS        = #{progress},
-            SUBMITTER_ID_FK = #{submitterIdFk},
+            DRIVER_ID_FK = #{driverIdFk},
             POSTING_CHK = #{postingChk}
         WHERE WRITER_ID_FK = #{writerIdFk}
           AND DRIVE_REPORT_ID = #{driveReportId}
@@ -120,7 +121,8 @@
         MEMO,
         PAYMENT_CHK,
         PROGRESS,
-        POSTING_CHK
+        POSTING_CHK,
+        USER_TYPE
         FROM join_report
     </select>
 

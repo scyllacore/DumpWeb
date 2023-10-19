@@ -32,10 +32,12 @@ public class Step7ForSubmitterOrderRegistrationService {
     public ResponseDTO<String> saveDriveOrder(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 
+        System.out.println(driveReport);
+
         if (driveReport.getDriveReportId() == 0) {
             step7Mapper.insertDriveOrder(driveReport);
 
-        } else if (driveReport.isUserType()) {
+        } else if (driveReport.getUserType() == 1) {
             step7Mapper.updateDriveOrder(driveReport);
         }
 
