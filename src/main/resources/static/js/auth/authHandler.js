@@ -52,6 +52,8 @@ class AuthHandler {
             this.cookieHandler.deleteCookie('userPwd');
         }
 
+        console.log(responseData);
+
         location.href = responseData;
     }
 

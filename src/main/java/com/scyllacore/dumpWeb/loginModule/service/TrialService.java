@@ -18,7 +18,7 @@ public class TrialService {
     private final TrialMapper trialMapper;
     private final LoginMapper loginMapper;
 
-    public ResponseDTO<String> loginForTrial(HttpServletRequest request, AuthDTO trialLoginInfo) {
+    public ResponseDTO<String> loginForTrial(AuthDTO trialLoginInfo, HttpServletRequest request) {
 
         if (trialLoginInfo.getUserType().equals("driver")) {
             trialLoginInfo.setUserIdIdx(1);
@@ -31,7 +31,7 @@ public class TrialService {
         HttpSession session = request.getSession();
 
         if (trialLoginInfo.getUserType().equals("driver")) {
-            DriverDTO driver =  loginMapper.selectDriverInfo(trialLoginInfo);
+            DriverDTO driver = loginMapper.selectDriverInfo(trialLoginInfo);
             trialLoginInfo.setProfileName(driver.getCarNo());
             session.setAttribute("driverInfo", driver);
 

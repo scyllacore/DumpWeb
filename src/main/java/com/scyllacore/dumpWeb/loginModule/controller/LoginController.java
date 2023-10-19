@@ -27,9 +27,9 @@ public class LoginController {
     @PostMapping(value = "/auth/fetch/login")
     @ResponseBody
     public ResponseDTO<String> login(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
-        ResponseDTO<String> loginType = loginService.login(loginInfo, request);
-
         loginService.logout(request);
+
+        ResponseDTO<String> loginType = loginService.login(loginInfo, request);
 
         if (loginType.getStatus() != 200) {
             return loginType;

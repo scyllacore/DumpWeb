@@ -23,11 +23,11 @@ public class TrialController {
 
     @PostMapping("/auth/fetch/trialLogin")
     @ResponseBody
-    public ResponseDTO<String> trialLogin(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
+    public ResponseDTO<String> trialLogin(@RequestBody AuthDTO trialLoginInfo, HttpServletRequest request) {
 
         loginService.logout(request);
 
-        ResponseDTO<String> trialLoginType = trialService.loginForTrial(request, loginInfo);
+        ResponseDTO<String> trialLoginType = trialService.loginForTrial(trialLoginInfo,request);
 
         trialLoginType.setData("/manage/" + trialLoginType.getData());
         return trialLoginType;
