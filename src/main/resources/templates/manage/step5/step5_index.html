@@ -23,6 +23,8 @@
         <form class="mileage-form" name="mileageForm">
             <input type="hidden" name="mileageId" value="0" required>
 
+            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+
             <div class="payment-chk-wrapper">
                 <h3>결재</h3>
                 <input type="checkbox" name="paymentChk">

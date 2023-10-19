@@ -21,6 +21,9 @@
         <div class="line"></div>
 
         <form class="option-form" name="optionForm">
+
+            <input type="hidden" name="submitterIdFk" th:value="${session.submitterInfo.submitterId}" required>
+
             <div class="period-wrapper">
                 <h3>운행 기간</h3>
                 <label class="period-inner">
