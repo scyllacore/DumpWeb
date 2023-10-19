@@ -7,11 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface Step4ForDailyReportViewerMapper {
-    List<String> selectCompanySearchOption(int writerId);
-    List<String> selectFromSiteSearchOption(int writerId);
-    List<String> selectToSiteSearchOption(int writerId);
-    List<String> selectItemSearchOption(int writerId);
-    List<String> selectSubmitterTelSearchOption(int writerId);
+    List<String> selectCompanySearchOption(int driverId);
+    List<String> selectFromSiteSearchOption(int driverId);
+    List<String> selectToSiteSearchOption(int driverId);
+    List<String> selectItemSearchOption(int driverId);
+    List<String> selectSubmitterTelSearchOption(int driverId);
 
     List<DriveReportSearchOptionDTO> selectDriveReportListByOption(DriveReportSearchOptionDTO option);
 

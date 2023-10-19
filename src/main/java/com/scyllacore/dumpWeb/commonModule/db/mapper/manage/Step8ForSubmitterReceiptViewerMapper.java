@@ -7,13 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface Step8ForSubmitterReceiptViewerMapper {
-    List<String> selectCarNoSearchOption(int writerId);
+    List<String> selectCarNoSearchOption(int submitterId);
 
-    List<String> selectFromSiteSearchOption(int writerId);
+    List<String> selectFromSiteSearchOption(int submitterId);
 
-    List<String> selectToSiteSearchOption(int writerId);
+    List<String> selectToSiteSearchOption(int submitterId);
 
-    List<String> selectItemSearchOption(int writerId);
+    List<String> selectItemSearchOption(int submitterId);
 
     List<DriveReportSearchOptionDTO> selectDriveReportListByOption(DriveReportSearchOptionDTO option);
 

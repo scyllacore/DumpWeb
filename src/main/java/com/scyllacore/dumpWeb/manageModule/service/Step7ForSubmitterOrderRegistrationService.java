@@ -24,6 +24,8 @@ public class Step7ForSubmitterOrderRegistrationService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
+
+
     public ResponseDTO<String> saveDriveOrder(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 

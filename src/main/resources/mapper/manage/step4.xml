@@ -10,7 +10,7 @@
                                        TO_SITE,
                                        ITEM
                                 FROM drive_report_tb
-                                WHERE WRITER_ID_FK = ${writerIdFk}
+                                WHERE DRIVER_ID_FK = ${driverIdFk}
                                 ORDER BY DRIVE_REPORT_ID DESC
             LIMIT 50
             )
@@ -18,7 +18,7 @@
 
     <select id="selectCompanySearchOption">
         <include refid="reportForDriver">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="driverIdFk" value="#{driverIdFk}"/>
         </include>
 
         SELECT COMPANY
@@ -88,7 +88,7 @@
                         INNER JOIN
                         submitter_tb
                         on drive_report_tb.SUBMITTER_ID_FK = submitter_tb.SUBMITTER_ID
-                    WHERE WRITER_ID_FK = ${writerIdFk}
+                    WHERE DRIVER_ID_FK = ${driverIdFk}
                     ORDER BY DRIVE_REPORT_ID DESC
             )
     </sql>

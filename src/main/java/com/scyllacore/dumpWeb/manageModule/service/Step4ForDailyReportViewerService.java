@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
@@ -24,21 +25,25 @@ public class Step4ForDailyReportViewerService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
+    public DriverDTO getDriverInfo() {
+        return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
+    }
+
     public ResponseDTO<DriveReportSearchOptionDTO> findRecommendKeywordList() {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
-        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFk()));
-        option.setCompanies(step4Mapper.selectCompanySearchOption(getUserIdFk()));
-        option.setFromSites(step4Mapper.selectFromSiteSearchOption(getUserIdFk()));
-        option.setToSites(step4Mapper.selectToSiteSearchOption(getUserIdFk()));
-        option.setItems(step4Mapper.selectItemSearchOption(getUserIdFk()));
+        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getDriverInfo().getDriverId()));
+        option.setCompanies(step4Mapper.selectCompanySearchOption(getDriverInfo().getDriverId()));
+        option.setFromSites(step4Mapper.selectFromSiteSearchOption(getDriverInfo().getDriverId()));
+        option.setToSites(step4Mapper.selectToSiteSearchOption(getDriverInfo().getDriverId()));
+        option.setItems(step4Mapper.selectItemSearchOption(getDriverInfo().getDriverId()));
 
         return new ResponseDTO<>(200, option);
     }
 
     public ResponseDTO<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFk());
+        option.setDriverIdFk(getDriverInfo().getDriverId());
         return new ResponseDTO<>(200, step4Mapper.selectDriveReportListByOption(option));
     }
 

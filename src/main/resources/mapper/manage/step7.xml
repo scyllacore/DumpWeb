@@ -17,7 +17,8 @@
          DRIVER_ID_FK,
          SUBMITTER_ID_FK,
          WRITER_ID_FK,
-         POSTING_CHK)
+         POSTING_CHK,
+         USER_TYPE)
         VALUES (#{driveDate},
                 #{fromSite},
                 #{toSite},
@@ -29,8 +30,8 @@
                 #{driverIdFk},
                 #{submitterIdFk},
                 #{writerIdFk},
-                #{postingChk}
-                )
+                #{postingChk},
+                1)
     </insert>
 
 
@@ -50,7 +51,6 @@
           AND DRIVE_REPORT_ID = #{driveReportId}
           AND SUBMITTER_PAYMENT_CHK = 0
     </update>
-
 
     <delete id="deleteDriveOrder">
         DELETE

@@ -7,6 +7,8 @@ import java.util.List;
 @Data
 public class DriveReportSearchOptionDTO {
     private int writerIdFk;
+    private int driverIdFk;
+    private int submitterIdFk;
     private String startDate;
     private String endDate;
     private String sortingCriteria;

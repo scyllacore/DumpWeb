@@ -29,8 +29,12 @@ public class Step3ForDriveReportRegistrationService {
         return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
     }
 
+
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
+        driveReport.setDriverIdFk(getDriverInfo().getDriverId());
+
+        System.out.println(driveReport);
 
         if (driveReport.getDriveReportId() == 0) {
             step3Mapper.insertDriveReport(driveReport);
@@ -44,10 +48,12 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
+        driveReport.setDriverIdFk(getDriverInfo().getDriverId());
         return new ResponseDTO<>(200, step3Mapper.selectDriveReportList(driveReport));
     }
 
     public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
+        driveReport.setDriverIdFk(getDriverInfo().getDriverId());
         return new ResponseDTO<>(200, step3Mapper.selectDriveReport(driveReport));
     }
 

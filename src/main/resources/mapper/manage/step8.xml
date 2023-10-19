@@ -10,7 +10,7 @@
                                        TO_SITE,
                                        ITEM
                                 FROM drive_report_tb
-                                WHERE WRITER_ID_FK = ${writerIdFk}
+                                WHERE SUBMITTER_ID_FK = ${submitterIdFk}
                                 ORDER BY DRIVE_REPORT_ID DESC
             LIMIT 50
             )
@@ -18,7 +18,7 @@
 
     <select id="selectCarNoSearchOption">
         <include refid="detailSearchForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT CAR_NO
@@ -30,7 +30,7 @@
 
     <select id="selectFromSiteSearchOption">
         <include refid="detailSearchForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT FROM_SITE
@@ -43,7 +43,7 @@
 
     <select id="selectToSiteSearchOption">
         <include refid="detailSearchForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT TO_SITE
@@ -57,7 +57,7 @@
 
     <select id="selectItemSearchOption">
         <include refid="detailSearchForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT ITEM
@@ -75,14 +75,14 @@
                                       INNER JOIN
                                   driver_tb
                                   on drive_report_tb.DRIVER_ID_FK = driver_tb.DRIVER_ID
-                              WHERE WRITER_ID_FK = ${writerIdFk}
+                              WHERE SUBMITTER_ID_FK = ${submitterIdFk}
                               ORDER BY DRIVE_REPORT_ID DESC
         )
     </sql>
 
     <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
         <include refid="retrievalForSubmitter">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
@@ -128,7 +128,7 @@
     <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO">
         UPDATE drive_report_tb
         SET SUBMITTER_PAYMENT_CHK = #{paymentBtnFlag}
-        WHERE WRITER_ID_FK = #{writerIdFk}
+        WHERE SUBMITTER_ID_FK = #{submitterIdFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="carNo !=''">
             AND CAR_NO = #{carNo}
