@@ -2,9 +2,6 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
@@ -31,18 +28,17 @@ public class Step4ForDailyReportViewerService {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
+        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFk()));
         option.setCompanies(step4Mapper.selectCompanySearchOption(getUserIdFk()));
         option.setFromSites(step4Mapper.selectFromSiteSearchOption(getUserIdFk()));
         option.setToSites(step4Mapper.selectToSiteSearchOption(getUserIdFk()));
         option.setItems(step4Mapper.selectItemSearchOption(getUserIdFk()));
-        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getUserIdFk()));
 
         return new ResponseDTO<>(200, option);
     }
 
     public ResponseDTO<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFk());
-        System.out.println(step4Mapper.selectDriveReportListByOption(option));
         return new ResponseDTO<>(200, step4Mapper.selectDriveReportListByOption(option));
     }
 

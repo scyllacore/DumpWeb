@@ -1,8 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step4ForDailyReportViewerService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +21,9 @@ public class Step4ForDailyReportViewerController {
         return "/manage/step4/step4_index";
     }
 
-    @GetMapping(value="/fetch/recommendKeywordList")
+    @GetMapping(value = "/fetch/recommendKeywordList")
     @ResponseBody
-    public ResponseDTO<DriveReportSearchOptionDTO> recommendKeywordList(){
+    public ResponseDTO<DriveReportSearchOptionDTO> recommendKeywordList() {
         return step4Service.findRecommendKeywordList();
     }
 

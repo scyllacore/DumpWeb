@@ -6,14 +6,14 @@
 <th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
 
 <head>
-    <link href="/css/manage/step4/step4Index.css" rel="stylesheet" type="text/css">
+    <link href="/css/manage/step8/step8Index.css" rel="stylesheet" type="text/css">
 </head>
 
-<container class="step4">
-    <div class="step4_wrapper">
+<container class="step8">
+    <div class="step8_wrapper">
         <div class="sub_title">
             <h2>
-                운행 일보 조회
+                제출처 전표 조회
                 <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
             </h2>
         </div>
@@ -22,7 +22,7 @@
 
         <form class="option-form" name="optionForm">
             <div class="period-wrapper">
-                <h3>기간</h3>
+                <h3>운행 기간</h3>
                 <label class="period-inner">
                     <input type="date" name="startDate">
                     <span>~</span>
@@ -33,10 +33,8 @@
             <div class="sorting-wrapper">
                 <h3>정렬<br>기준</h3>
                 <select class="sorting-inner" name="sortingCriteria">
-                    <option value="driveDate" selected>날짜순</option>
-                    <option value="company">제출처순</option>
-                    <option value="fromSite">상차지순</option>
-                    <option value="toSite">하차지순</option>
+                    <option value="driveDate" selected>운행일순</option>
+                    <option value="carNo">차량</option>
                     <option value="item">품목순</option>
                 </select>
             </div>
@@ -47,13 +45,9 @@
                 </button>
 
                 <div class="detail-search-inner">
-                    <div class="submitter-tel-wrapper">
-                        <input name="tel" placeholder="휴대폰 번호" autocomplete="off">
-                        <div name="tels"></div>
-                    </div>
-                    <div class="company-name-wrapper">
-                        <input name="company" placeholder="제출처" autocomplete="off">
-                        <div name="companies"></div>
+                    <div class="car-no-tel-wrapper">
+                        <input name="carNo" placeholder="차량 번호" autocomplete="off">
+                        <div name="carNos"></div>
                     </div>
                     <div class="from-site-wrapper">
                         <input name="fromSite" placeholder="상차지" autocomplete="off">
@@ -87,14 +81,14 @@
             </div>
         </form>
 
-        <th:block th:replace="/manage/step4/step4_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step8/step8_retrieval :: resultFragment"></th:block>
 
     </div>
 </container>
 
-<script src="/js/manage/step4/params.js"></script>
+<script src="/js/manage/step8/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
-<script src="/js/manage/step4/loading.js"></script>
+<script src="/js/manage/step8/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 
