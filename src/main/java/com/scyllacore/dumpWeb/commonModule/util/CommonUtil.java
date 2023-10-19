@@ -23,5 +23,7 @@ public class CommonUtil {
         return (AuthDTO) request.getSession(true).getAttribute("loginInfo");
     }
 
-
+    public <T> T getInfoBySession(String name) {
+        return (T) request.getSession(true).getAttribute(name);
+    }
 }

@@ -12,6 +12,8 @@ public interface Step3ForDriveReportRegistrationMapper {
 
     void updateDriveReport(DriveReportDTO driveReport);
 
+    void updateSubmit(DriveReportDTO driveReport);
+
     List<DriveReportDTO> selectDriveReportList(DriveReportDTO driveReportDTO);
 
     DriveReportDTO selectDriveReport(DriveReportDTO driveReportDTO);

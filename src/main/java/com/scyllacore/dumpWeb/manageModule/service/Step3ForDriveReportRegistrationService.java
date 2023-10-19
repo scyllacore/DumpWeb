@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
@@ -24,42 +25,42 @@ public class Step3ForDriveReportRegistrationService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-    public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport){
+    public DriverDTO getDriverInfo() {
+        return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
+    }
+
+    public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 
-        System.out.println(driveReport);
-
-        if(driveReport.getDriveReportId() == 0){
+        if (driveReport.getDriveReportId() == 0) {
             step3Mapper.insertDriveReport(driveReport);
-        }else{
+        } else if (driveReport.isUserType()) {
+            step3Mapper.updateSubmit(driveReport);
+        } else {
             step3Mapper.updateDriveReport(driveReport);
         }
 
-        return new ResponseDTO<String>(200,"저장 완료.");
+        return new ResponseDTO<String>(200, "저장 완료.");
     }
 
-    public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFk());
-
-        return new ResponseDTO<>(200,step3Mapper.selectDriveReportList(driveReport));
+    public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
+        return new ResponseDTO<>(200, step3Mapper.selectDriveReportList(driveReport));
     }
 
-    public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport){
-        driveReport.setWriterIdFk(getUserIdFk());
-
-        return new ResponseDTO<>(200,step3Mapper.selectDriveReport(driveReport));
+    public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
+        return new ResponseDTO<>(200, step3Mapper.selectDriveReport(driveReport));
     }
 
 
-    public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport){
+    public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 
         step3Mapper.deleteDriveReport(driveReport);
 
-        return new ResponseDTO<String>(200,"삭제 완료.");
+        return new ResponseDTO<String>(200, "삭제 완료.");
     }
 
-    public ResponseDTO<List<SubmitterDTO>> findSubmitterList(){
-        return new ResponseDTO<>(200,step3Mapper.selectSubmitterList());
+    public ResponseDTO<List<SubmitterDTO>> findSubmitterList() {
+        return new ResponseDTO<>(200, step3Mapper.selectSubmitterList());
     }
 }
