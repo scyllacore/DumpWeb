@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("")
 @RequiredArgsConstructor
 public class PasswordChangeController {
 
@@ -20,7 +19,7 @@ public class PasswordChangeController {
         return "/auth/password_change_form";
     }
 
-    @PostMapping(value = "/auth/fetch/changePassword")
+    @PostMapping(value = "/auth/fetch/passwordChange")
     @ResponseBody
     public ResponseDTO<String> passwordChange(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
         return passwordChangeService.changePassword(request, loginInfo);
