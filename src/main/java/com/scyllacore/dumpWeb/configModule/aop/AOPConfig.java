@@ -21,7 +21,10 @@ public class AOPConfig {
 
     @Around("execution (* com.scyllacore.dumpWeb..controller.*Controller.*(..))")
     public Object loginChk(ProceedingJoinPoint pjp) throws Throwable {
-        String type = pjp.getSignature().getDeclaringTypeName();
+
+        return pjp.proceed();
+
+       /* String type = pjp.getSignature().getDeclaringTypeName();
         String className = type.substring(type.lastIndexOf(".") + 1);
         String method_name = pjp.getSignature().getName();
 
@@ -45,6 +48,6 @@ public class AOPConfig {
             result = pjp.proceed();
         }
 
-        return result;
+        return result;*/
     }
 }

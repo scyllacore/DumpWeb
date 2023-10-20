@@ -1,0 +1,113 @@
+.drive-report {
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+.drive-report .drive-report-wrapper {
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  top: 50%;
+  left: 50%;
+  border-radius: 4px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  overflow-y: auto;
+}
+.drive-report .drive-report-wrapper .pop-up-close-wrapper {
+  height: 30px;
+  display: flex;
+}
+.drive-report .drive-report-wrapper .pop-up-close-wrapper .pop-up-close {
+  width: 14px;
+  height: 14px;
+  top: 10px;
+  right: 14px;
+  border: 0 solid #ddd;
+  border-radius: 5px;
+  display: block;
+  position: absolute;
+  background-image: url(/image/icons/ico_close.png);
+  background-size: 14px, 14px;
+  background-color: #0064c1;
+  cursor: pointer;
+}
+.drive-report .drive-report-wrapper .pop-up-close-wrapper .pop-up-close .screen-off {
+  z-index: -9999;
+}
+.drive-report .drive-report-wrapper .title-wrapper {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+.drive-report .drive-report-wrapper .drive-report-form {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background-color: #fafafa;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+}
+.drive-report .drive-report-wrapper .drive-report-form div {
+  padding: 10px 50px;
+  margin: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+  background-color: #ffffff;
+}
+.drive-report .drive-report-wrapper .drive-report-form div h3 {
+  width: 80px;
+  font-size: 13px;
+}
+.drive-report .drive-report-wrapper .drive-report-form div input, .drive-report .drive-report-wrapper .drive-report-form div .progress-inner, .drive-report .drive-report-wrapper .drive-report-form div textarea {
+  position: relative;
+  width: 65%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin: 0 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.drive-report .drive-report-wrapper .drive-report-form .retrieval-btn {
+  width: 35px;
+  margin: 0 12px;
+}
+.drive-report .drive-report-wrapper .drive-report-form .bottom-btn-wrapper {
+  padding: 25px 15px;
+  margin-top: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px, rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px;
+}
+.drive-report .drive-report-wrapper .drive-report-form .bottom-btn-wrapper button {
+  width: 65px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  color: #555;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.drive-report .drive-report-wrapper .drive-report-form .bottom-btn-wrapper .save-btn {
+  border-color: #0068b7;
+  background: #0068b7;
+  color: #fff;
+}
+.drive-report .drive-report-wrapper .drive-report-form .bottom-btn-wrapper .delete-btn {
+  border-color: #ff3636;
+  background: #ff3636;
+  color: #fff;
+}
+
+/*# sourceMappingURL=step9DriveReport.css.map */

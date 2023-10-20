@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step9/step9Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step9">
+    <div class="step9_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 그룹 등록
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <form class="group-drive-report-form" name="groupDriveReportForm">
+            <input type="hidden" name="driveReportId" value="0" required>
+            <!--/*<input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>*/-->
+
+            <input type="hidden" name="submitChk" value="false">
+            <input type="hidden" name="userType">
+
+            <div class="payment-chk-wrapper">
+                <h3>결재</h3>
+                <input type="checkbox" name="paymentChk">
+            </div>
+
+            <div class="submitter-wrapper">
+                <h3>제출처</h3>
+                <input type="hidden" name="submitterIdFk" required>
+                <input type="number" name="receiver" disabled required>
+                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
+                        onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
+                </button>
+            </div>
+
+            <div class="memo-wrapper">
+                <h3>제목</h3>
+                <input name="title" placeholder="검색할 때 사용">
+            </div>
+
+
+            <div class="memo-wrapper">
+                <h3>설명</h3>
+                <textarea name="memo"></textarea>
+            </div>
+
+            <div class="drive-reports-wrapper">
+                <div class="edit-header">
+
+                    <span>
+                        일보 등록 리스트
+                    </span>
+
+                    <container>
+                        <button type="button" onclick="">
+                            기존 추가
+                        </button>
+                        <button type="button" onclick="openPopUp('drive-report');">
+                            신규 추가
+                        </button>
+                    </container>
+                </div>
+            </div>
+
+
+            <div class="bottom-btn-wrapper">
+                <button type="button" class="save-btn" onclick="func.save()">등록</button>
+                <button type="button" class="save-btn" onclick="func.submit()">제출</button>
+                <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
+                <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step9/step9_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step9/step9_submitter_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step9/step9_drive_report :: form"></th:block>
+
+
+    </div>
+</container>
+
+<script src="/js/manage/step9/params.js"></script>
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step9/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+</html>
+
