@@ -33,10 +33,10 @@
   padding: 0 25px;
   display: block;
 }
-.trial .trial-inner .wrap .select-area .select-box-driver, .trial .trial-inner .wrap .select-area .select-box-manager, .trial .join-inner .wrap .select-area .select-box-driver, .trial .join-inner .wrap .select-area .select-box-manager, .join .trial-inner .wrap .select-area .select-box-driver, .join .trial-inner .wrap .select-area .select-box-manager, .join .join-inner .wrap .select-area .select-box-driver, .join .join-inner .wrap .select-area .select-box-manager {
+.trial .trial-inner .wrap .select-area .select-box-driver, .trial .trial-inner .wrap .select-area .select-box-submitter, .trial .join-inner .wrap .select-area .select-box-driver, .trial .join-inner .wrap .select-area .select-box-submitter, .join .trial-inner .wrap .select-area .select-box-driver, .join .trial-inner .wrap .select-area .select-box-submitter, .join .join-inner .wrap .select-area .select-box-driver, .join .join-inner .wrap .select-area .select-box-submitter {
   margin: 10px 0;
 }
-.trial .trial-inner .wrap .select-area .select-box-driver img, .trial .trial-inner .wrap .select-area .select-box-manager img, .trial .join-inner .wrap .select-area .select-box-driver img, .trial .join-inner .wrap .select-area .select-box-manager img, .join .trial-inner .wrap .select-area .select-box-driver img, .join .trial-inner .wrap .select-area .select-box-manager img, .join .join-inner .wrap .select-area .select-box-driver img, .join .join-inner .wrap .select-area .select-box-manager img {
+.trial .trial-inner .wrap .select-area .select-box-driver img, .trial .trial-inner .wrap .select-area .select-box-submitter img, .trial .join-inner .wrap .select-area .select-box-driver img, .trial .join-inner .wrap .select-area .select-box-submitter img, .join .trial-inner .wrap .select-area .select-box-driver img, .join .trial-inner .wrap .select-area .select-box-submitter img, .join .join-inner .wrap .select-area .select-box-driver img, .join .join-inner .wrap .select-area .select-box-submitter img {
   width: 100%;
   height: 145px;
 }

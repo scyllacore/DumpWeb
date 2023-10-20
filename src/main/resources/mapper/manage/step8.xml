@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step8ForSubmitterReceiptViewerMapper">
+
+    <sql id="detailSearchForSubmitter">
+        WITH writer_reports AS (SELECT DRIVER_ID_FK,
+                                       FROM_SITE,
+                                       TO_SITE,
+                                       ITEM
+                                FROM drive_report_tb
+                                WHERE SUBMITTER_ID_FK = ${submitterIdFk}
+                                ORDER BY DRIVE_REPORT_ID DESC
+            LIMIT 50
+            )
+    </sql>
+
+    <select id="selectCarNoSearchOption">
+        <include refid="detailSearchForSubmitter">
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
+        </include>
+
+        SELECT CAR_NO
+        FROM driver_tb
+        WHERE DRIVER_ID IN (SELECT DRIVER_ID_FK FROM writer_reports)
+        GROUP BY CAR_NO
+        LIMIT 10
+    </select>
+
+    <select id="selectFromSiteSearchOption">
+        <include refid="detailSearchForSubmitter">
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
+        </include>
+
+        SELECT FROM_SITE
+        FROM writer_reports
+        GROUP BY FROM_SITE
+        HAVING FROM_SITE != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectToSiteSearchOption">
+        <include refid="detailSearchForSubmitter">
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
+        </include>
+
+        SELECT TO_SITE
+        FROM writer_reports
+        GROUP BY TO_SITE
+        HAVING TO_SITE != ''
+        LIMIT 10
+
+    </select>
+
+
+    <select id="selectItemSearchOption">
+        <include refid="detailSearchForSubmitter">
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
+        </include>
+
+        SELECT ITEM
+        FROM writer_reports
+        GROUP BY ITEM
+        HAVING ITEM != ''
+        LIMIT 10
+
+    </select>
+
+    <sql id="retrievalForSubmitter">
+        WITH join_reports AS (SELECT *
+                              FROM
+                                  drive_report_tb
+                                      INNER JOIN
+                                  driver_tb
+                                  on drive_report_tb.DRIVER_ID_FK = driver_tb.DRIVER_ID
+                              WHERE SUBMITTER_ID_FK = ${submitterIdFk}
+                              ORDER BY DRIVE_REPORT_ID DESC
+        )
+    </sql>
+
+    <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
+        <include refid="retrievalForSubmitter">
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        CAR_NO,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        QUANTITY,
+        PROGRESS,
+        SUBMITTER_PAYMENT_CHK
+        FROM join_reports
+        WHERE
+        DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="carNo !=''">
+            AND CAR_NO = #{carNo}
+        </if>
+        <if test="fromSite !=''">
+            AND FROM_SITE = #{fromSite}
+        </if>
+        <if test="toSite !=''">
+            AND TO_SITE = #{toSite}
+        </if>
+        <if test="item !=''">
+            AND ITEM = #{item}
+        </if>
+        <if test="progress !=''">
+            AND PROGRESS = #{progress}
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'carNo'">
+                ORDER BY CAR_NO ASC
+            </when>
+            <when test="sortingCriteria == 'driveDate'">
+                ORDER BY driveDate DESC
+            </when>
+            <when test="sortingCriteria == 'item'">
+                ORDER BY ITEM ASC
+            </when>
+        </choose>
+    </select>
+
+    <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO">
+        UPDATE drive_report_tb
+        SET SUBMITTER_PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE SUBMITTER_ID_FK = #{submitterIdFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="carNo !=''">
+            AND CAR_NO = #{carNo}
+        </if>
+        <if test="fromSite !=''">
+            AND FROM_SITE = #{fromSite}
+        </if>
+        <if test="toSite !=''">
+            AND TO_SITE = #{toSite}
+        </if>
+        <if test="item !=''">
+            AND ITEM = #{item}
+        </if>
+        <if test="progress !=''">
+            AND PROGRESS = #{progress}
+        </if>
+        AND SUBMITTER_PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
+</mapper>

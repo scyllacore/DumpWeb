@@ -12,8 +12,8 @@ public class StepController {
         return "redirect:/manage/step1";
     }
 
-    @GetMapping("/manage/manager")
-    public String managerPage(){
+    @GetMapping("/manage/submitter")
+    public String submitterPage(){
         return "redirect:/manage/step2";
     }
 }

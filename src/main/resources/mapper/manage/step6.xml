@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
-    <select id="selectMileageListByOption" parameterType="SearchOptionDTO" resultType="MileageDTO">
+    <select id="selectMileageListByOption" parameterType="MileageSearchOptionDTO" resultType="MileageDTO">
         SELECT MILEAGE_ID,
         DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
         ITEM,
@@ -13,7 +13,7 @@
         MEMO,
         REPL_ACTIVE_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="item !='전체'">
             AND ITEM = #{item}
@@ -28,10 +28,10 @@
         </choose>
     </select>
 
-    <update id="updateMileagePaymentChk" parameterType="SearchOptionDTO">
+    <update id="updateMileagePaymentChk" parameterType="MileageSearchOptionDTO">
         UPDATE mileage_tb
         SET PAYMENT_CHK = #{paymentBtnFlag}
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
         AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
         <if test="item != '전체'">
             AND ITEM = #{item}

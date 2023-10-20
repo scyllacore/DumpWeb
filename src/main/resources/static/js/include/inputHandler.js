@@ -35,29 +35,39 @@ class InputHandler {
 
         const inputData = this.jsonHandler.getRequestJson(data);
 
-        const responseData = await  new RequestHandler()
+        const responseData = await new RequestHandler()
             .post(url, inputData);
 
         this.fillInput(responseData);
+
     }
 
     fillInput(data) {
 
-        const itemKeys = ["item"];
+        let selectKeys = [];
+
+        if (typeof data.mileageId !== 'undefined') {
+            selectKeys = ["item"];
+        } else if (defaultParams.url.includes('step3')) {
+            selectKeys = ["progress"];
+        }
+
 
         for (const key in data) {
 
-            if (data[key] === null || key.includes('IdIdxFk')) {
+            const element = document.querySelector('[name="' + key + '"]')
+
+            if (data[key] === null || element === null) {
                 continue;
             }
 
-            if (itemKeys.includes(key)) {
-                const optionList = document.querySelector('select[name="' + key + '"]');
-                optionList.querySelector('option[value="' + data[key] + '"]').selected = true;
+
+            if (selectKeys.includes(key)) {
+                element.querySelector('[value="' + data[key] + '"]').selected = true;
             } else if (typeof data[key] === "boolean") {
-                document.querySelector('input[name="' + key + '"]').checked = data[key];
+                element.checked = data[key];
             } else {
-                document.querySelector('[name=' + key + ']').value = data[key];
+                element.value = data[key];
             }
         }
     }

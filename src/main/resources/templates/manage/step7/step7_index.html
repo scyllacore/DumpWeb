@@ -1,128 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<th:block th:replace="/include/manage_header :: headerFragment"></th:block>
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/manage/step7/order.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="/css/manage/step7/step7Index.css" rel="stylesheet" type="text/css">
 </head>
 
+<container class="step7">
+    <div class="step7_wrapper">
+        <div class="sub_title">
+            <h2>
+                제출처 주문 등록
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
 
-<section class="GolSection">
-<h2>제출처 주문 등록</h2>
-    <form method="post" name="golForm">
-        <fieldset>
-          <ul>
-            <li>
-              <label class="golLabel" for="date">주문일</label>
-              <span class="golInputSpan"><input id="date" name="date"></span>
-              <input class="golSearch" type="button" value="조회">
-              <div class="checkbox">
-                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                <input id="chk1" type="checkbox">
-              </div>
-            </li>
-            <li>
-              <label class="golLabel" for="fromsite"> 상차지 <span><img class="golVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="fromsite" name="fromsite" type="text" placeholder="상차지"></span>
-            </li>
-            <li>
-              <label class="golLabel" for="tosite"> 하차지 <span><img class="golVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="tosite" name="tosite" type="text" placeholder="하차지"></span>
-            </li>
-            <li>
-              <label class="golLabel" for="item"> 품목 <span><img class="golVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="item" name="item" type="text" placeholder="품목"></span>
-            </li>
-            <li>
-              <label class="golLabel" for="Qty">대수</label>
-              <span class="golInputSpan">
-                <input class="golIn" id="Qty" name="Qty" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
-              </span>
-            </li>
-            <li>
-              <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
-            </li>
-          </ul>
-        </fieldset>
-    		</form>
-    <script src="/js/manage/step7/voice.js"></script>
-    <div>
-      <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">취소</button>
-      <button class="opBtn" data-popName="golPop3" onClick="clickSaveBtn()">저장</button>
-      <button class="opBtn" data-popName="golPop4">이전화면</button>
+        <div class="line"></div>
+
+        <form class="drive-report-form" name="driveReportForm">
+            <input type="hidden" name="driveReportId" value="0" required>
+            <input type="hidden" name="submitterIdFk" th:value="${session.submitterInfo.submitterId}" required>
+
+            <input type="hidden" name="submitChk" value="false">
+            <input type="hidden" name="userType">
+
+            <div class="payment-chk-wrapper">
+                <h3>결재</h3>
+                <input type="checkbox" name="paymentChk">
+            </div>
+
+            <div class="submitter-wrapper">
+                <h3>차량번호</h3>
+                <input type="hidden" name="driverIdFk" required>
+                <input name="receiver" disabled required>
+                <button type="button" name="driverRetrievalBtn" class="retrieval-btn" onclick="openPopUp('driver-search-result'); func.driverListRetrieval()" required>조회</button>
+            </div>
+
+            <div class="period-wrapper">
+                <h3>주문일</h3>
+                <input type="date" name="driveDate" required>
+                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+            </div>
+
+            <div class="from-site-wrapper">
+                <h3>상차지</h3>
+                <input name="fromSite" placeholder="상차지">
+            </div>
+
+            <div class="to-site-wrapper">
+                <h3>하차지</h3>
+                <input name="toSite" placeholder="하차지">
+            </div>
+
+            <div class="item-wrapper">
+                <h3>품목</h3>
+                <input name="item" placeholder="품목">
+            </div>
+
+            <div class="quantity-wrapper">
+                <h3>대수</h3>
+                <input type="number" name="quantity" placeholder="대수">
+            </div>
+
+            <div class="unit-price-wrapper">
+                <h3>운반 단가</h3>
+                <input type="number" name="unitPrice" placeholder="운반 단가">
+            </div>
+
+            <div class="memo-wrapper">
+                <h3>비고</h3>
+                <textarea name="memo"></textarea>
+            </div>
+
+            <div class="posting-chk-wrapper">
+                <h3>모집 공고 등록</h3>
+                <input type="checkbox" name="postingChk">
+            </div>
+
+            <div class="progress-wrapper">
+                <h3>진행</h3>
+                <select class="progress-inner" name="progress" disabled required>
+                    <option value="배차" selected>배차</option>
+                    <option value="상차">상차</option>
+                    <option value="하차">하차</option>
+                    <option value="제출">제출</option>
+                </select>
+            </div>
+
+            <div class="bottom-btn-wrapper">
+                <button type="button" class="save-btn" onclick="func.save()">등록</button>
+                <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
+                <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
+                <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step7/step7_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step7/step7_driver_retrieval :: resultFragment"></th:block>
+
     </div>
+</container>
 
-		<div id="golPop1" class="golPopup1">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
+<script src="/js/manage/step7/params.js"></script>
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step7/loading.js"></script>
 
-		<div id="golPop2" class="golPopup2">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">취소</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
-
-		<div id="golPop3" class="golPopup3">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="clickConfirmButton()">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
-
-		<div id="golPop4" class="golPopup4">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">이전화면</span>으로 돌아가시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="history.go(-1)">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
-
-    <table>
-      <thead>
-        <tr>
-				<tr>
-					<th>No.</th>
-					<th>상차지</th>
-					<th>하차지</th>
-					<th>품목</th>
-					<th>대수</th>
-					<th>차량번호 <br> <span style="font-weight: normal;">(일괄배차)</span></th>
-				</tr>
-			</thead>
-			<tbody id="tBody">
-				<tr onclick="openPopupTest('dispatchform');">
-					<td>1</td>
-					<td>강남</td>
-					<td>구로</td>
-					<td>모래, 자갈</td>
-					<td>100</td>
-					<td>미지정</td>
-				</tr>
-      </tbody>
-    </table>
-</section>
-
-<th:block th:replace="/include/manage_footer :: footerFragment"></th:block>
-<th:block th:replace="/manage/step7/popup/layer_popup :: popUpFragment"></th:block>
-
-<script src="/js/manage/step7/datepicker.js"></script>
-<script src="/js/manage/step7/pop.js"></script>
-<script src="/js/manage/step7/order.js"></script>
-
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
 </html>
+

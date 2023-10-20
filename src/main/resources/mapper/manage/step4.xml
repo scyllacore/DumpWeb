@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper">
+
+    <sql id="reportForDriver">
+        WITH writer_reports AS (SELECT SUBMITTER_ID_FK,
+                                       FROM_SITE,
+                                       TO_SITE,
+                                       ITEM
+                                FROM drive_report_tb
+                                WHERE DRIVER_ID_FK = ${driverIdFk}
+                                ORDER BY DRIVE_REPORT_ID DESC
+            LIMIT 50
+            )
+    </sql>
+
+    <select id="selectCompanySearchOption">
+        <include refid="reportForDriver">
+            <property name="driverIdFk" value="#{driverIdFk}"/>
+        </include>
+
+        SELECT COMPANY
+        FROM submitter_tb
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM writer_reports)
+        GROUP BY COMPANY
+        LIMIT 10
+    </select>
+
+    <select id="selectFromSiteSearchOption">
+        <include refid="reportForDriver">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT FROM_SITE
+        FROM writer_reports
+        GROUP BY FROM_SITE
+        HAVING FROM_SITE != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectToSiteSearchOption">
+        <include refid="reportForDriver">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT TO_SITE
+        FROM writer_reports
+        GROUP BY TO_SITE
+        HAVING TO_SITE != ''
+        LIMIT 10
+
+    </select>
+
+
+    <select id="selectItemSearchOption">
+        <include refid="reportForDriver">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT ITEM
+        FROM writer_reports
+        GROUP BY ITEM
+        HAVING ITEM != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectSubmitterTelSearchOption">
+        <include refid="reportForDriver">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT TEL
+        FROM submitter_tb
+        WHERE SUBMITTER_ID IN (SELECT SUBMITTER_ID_FK FROM writer_reports)
+        GROUP BY TEL
+        LIMIT 10
+
+    </select>
+
+    <sql id="reportsForDriver">
+        WITH join_reports AS (SELECT *
+                    FROM
+                        drive_report_tb
+                        INNER JOIN
+                        submitter_tb
+                        on drive_report_tb.SUBMITTER_ID_FK = submitter_tb.SUBMITTER_ID
+                    WHERE DRIVER_ID_FK = ${driverIdFk}
+                    ORDER BY DRIVE_REPORT_ID DESC
+            )
+    </sql>
+
+    <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
+        <include refid="reportsForDriver">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        COMPANY,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        QUANTITY,
+        UNIT_PRICE
+        FROM join_reports
+        WHERE
+        DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="company !=''">
+            AND COMPANY = #{company}
+        </if>
+        <if test="fromSite !=''">
+            AND FROM_SITE = #{fromSite}
+        </if>
+        <if test="toSite !=''">
+            AND TO_SITE = #{toSite}
+        </if>
+        <if test="item !=''">
+            AND ITEM = #{item}
+        </if>
+        <if test="tel !=''">
+            AND TEL = #{tel}
+        </if>
+        <if test="progress !=''">
+            AND PROGRESS = #{progress}
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'driveDate'">
+                ORDER BY driveDate DESC
+            </when>
+            <when test="sortingCriteria == 'company'">
+                ORDER BY COMPANY ASC
+            </when>
+            <when test="sortingCriteria == 'fromSite'">
+                ORDER BY FROM_SITE ASC
+            </when>
+            <when test="sortingCriteria == 'toSite'">
+                ORDER BY TO_SITE ASC
+            </when>
+            <when test="sortingCriteria == 'item'">
+                ORDER BY ITEM ASC
+            </when>
+        </choose>
+    </select>
+
+    <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO">
+        UPDATE drive_report_tb
+        SET PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE WRITER_ID_FK = #{writerIdFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="company !=''">
+            AND COMPANY = #{company}
+        </if>
+        <if test="fromSite !=''">
+            AND FROM_SITE = #{fromSite}
+        </if>
+        <if test="toSite !=''">
+            AND TO_SITE = #{toSite}
+        </if>
+        <if test="item !=''">
+            AND ITEM = #{item}
+        </if>
+        <if test="tel !=''">
+            AND TEL = #{tel}
+        </if>
+        <if test="progress !=''">
+            AND PROGRESS = #{progress}
+        </if>
+        AND PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
+</mapper>

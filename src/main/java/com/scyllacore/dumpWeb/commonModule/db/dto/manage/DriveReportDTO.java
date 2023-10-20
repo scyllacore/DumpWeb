@@ -4,13 +4,29 @@ import lombok.Data;
 
 @Data
 public class DriveReportDTO {
-    private int ReportId;
-    private String CarNo;           // LINE :: 차량번호
-    private String regDate;            // LINE :: 운행일
-    private String srcSubmit;       // LINE :: 제출처
-    private String srcSubmitTel;    // LINE :: 제출처 연락처
-    private String contactPerson;        // LINE :: 제출처 담당자
-    private boolean paymentChk;           // LINE :: 결재여부
+    private int driveReportId;
+    private String driveDate;
+    private String receiver;
 
-    private int userId_IDX_FK;            // LINE :: 회원 idx
+    private String fromSite;
+    private String toSite;
+    private String item;
+    private double unitPrice;
+    private double quantity;
+    private String memo;
+    private String progress;
+
+    private String company;
+    private String carNo;
+
+    private boolean paymentChk;
+    private boolean submitChk;
+    private boolean submitterPaymentChk;
+    private boolean postingChk;
+
+    private int driverIdFk;
+    private int submitterIdFk;
+    private int writerIdFk;
+
+    private int userType;
 }

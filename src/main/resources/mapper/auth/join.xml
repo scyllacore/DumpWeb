@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper">
+
+    <insert id="insertUserInfo" parameterType="AuthDTO">
+        INSERT INTO user_info_tb( USER_ID
+        , USER_PWD
+        , USER_TYPE
+        , JOIN_DATE)
+        VALUES ( #{userId}
+        , SHA2(#{userPwd}, 256)
+        , #{userType}
+        , NOW())
+
+        <selectKey keyProperty="userIdIdx" resultType="int" order="AFTER">
+            SELECT USER_ID_IDX FROM user_info_tb WHERE USER_ID = #{userId}
+        </selectKey>
+    </insert>
+
+    <select id="selectUserIdForDuplicateCheck" parameterType="AuthDTO">
+        SELECT COUNT(*)
+        FROM user_info_tb
+        WHERE USER_ID = #{userId}
+    </select>
+
+
+    <insert id="insertDriverInfo" parameterType="AuthDTO">
+        INSERT INTO driver_tb( CAR_NO
+                             , NAME
+                             , TEL
+                             , USER_ID_FK)
+        VALUES ( #{userId}
+               , #{name}
+               , #{tel}
+               , #{userIdIdx})
+    </insert>
+
+    <insert id="insertSubmitterInfo" parameterType="AuthDTO">
+        INSERT INTO submitter_tb( COMPANY
+                                , NAME
+                                , TEL
+                                , USER_ID_FK)
+        VALUES ( #{company}
+               , #{name}
+               , #{userId}
+               , #{userIdIdx})
+    </insert>
+
+</mapper>
+
+

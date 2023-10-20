@@ -16,6 +16,7 @@ class Request {
         const jsonData = await this.tryFetch();
 
         if (jsonData.status !== 200) {
+            alert(jsonData.data);
             throw new Error(jsonData.data);
         }
 

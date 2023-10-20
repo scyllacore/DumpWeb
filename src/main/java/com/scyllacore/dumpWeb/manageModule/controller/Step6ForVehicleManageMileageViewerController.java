@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step6ForVehicleManageMileageViewerService;
@@ -24,14 +24,14 @@ public class Step6ForVehicleManageMileageViewerController {
 
     @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public ResponseDTO<List<MileageDTO>> mileageList(@RequestBody SearchOptionDTO option) {
+    public ResponseDTO<List<MileageDTO>> mileageList(@RequestBody MileageSearchOptionDTO option) {
         System.out.println(option);
         return step6Service.findMileageListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseDTO<String> paymentInBulk(@RequestBody SearchOptionDTO option) {
+    public ResponseDTO<String> paymentInBulk(@RequestBody MileageSearchOptionDTO option) {
         return step6Service.modifyPaymentInBulk(option);
     }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="resultFragment">
+
+    <head>
+        <link href="/css/manage/step4/step4Retrieval.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <div class="search-result">
+        <div class="search-result-wrapper">
+
+            <div class="pop-up-close-wrapper">
+                <button class="pop-up-close" type="button" onclick="closePopUp('search-result')">
+                    <i class="close-icon"></i>
+                    <span class="screen-off"></span>
+                </button>
+            </div>
+
+            <div class="list-summary-wrapper">
+            </div>
+            <div class="payment-wrapper">
+                <button class="payment_btn" onclick="func.approveInBulk()">일괄결재</button>
+                <button class="payment_btn" onclick="func.cancelInBulk()">일괄취소</button>
+            </div>
+            <div class="line"></div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr class="table-key">
+                        <th class="th-driveDate">날짜</th>
+                        <th class="th-company">제출처</th>
+                        <th class="th-fromSite">상차지</th>
+                        <th class="th-toSite">하차지</th>
+                        <th class="th-item">품목</th>
+                        <th class="th-quantity">대수</th>
+                        <th class="th-unitPrice">운반단가</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-tuple">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+</html>

@@ -6,8 +6,7 @@
 
     <insert id="insertMileage" parameterType="MileageDTO">
         INSERT INTO mileage_tb
-        (CAR_NO,
-        DRIVE_DATE,
+        (DRIVE_DATE,
         ITEM,
         LAST_KM,
         USED_AMOUNT,
@@ -20,9 +19,8 @@
             REPL_DATE,
         </if>
         REPL_CHK,
-        USER_ID_IDX_FK)
-        VALUES (#{carNo},
-        #{driveDate},
+        WRITER_ID_FK)
+        VALUES (#{driveDate},
         #{item},
         #{lastKm},
         #{usedAmount},
@@ -35,7 +33,7 @@
             #{replDate},
         </if>
         #{replChk},
-        #{userIdIdxFk})
+        #{writerIdFk})
     </insert>
 
 
@@ -55,7 +53,7 @@
             REPL_DATE = #{replDate},
         </if>
         REPL_CHK = #{replChk}
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
         AND MILEAGE_ID = #{mileageId}
     </update>
 
@@ -74,7 +72,7 @@
                REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND DRIVE_DATE LIKE CONCAT(#{driveDate}, '%')
         ORDER BY DRIVE_DATE ASC
     </select>
@@ -83,7 +81,7 @@
     <delete id="deleteMileage">
         DELETE
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND MILEAGE_ID = #{mileageId}
     </delete>
 
@@ -102,7 +100,7 @@
                REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE USER_ID_IDX_FK = #{userIdIdxFk}
+        WHERE WRITER_ID_FK = #{writerIdFk}
           AND MILEAGE_ID = #{mileageId}
     </select>
 
