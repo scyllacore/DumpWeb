@@ -35,11 +35,9 @@ public class LoginService {
 
         if (login.getUserType().equals("driver")) {
             DriverDTO driver =  loginMapper.selectDriverInfo(login);
-            login.setProfileName(driver.getCarNo());
             session.setAttribute("driverInfo", driver);
         } else {
             SubmitterDTO submitter = loginMapper.selectSubmitterInfo(login);
-            login.setProfileName(submitter.getTel());
             session.setAttribute("submitterInfo", submitter);
         }
 

@@ -9,7 +9,7 @@
         <nav class="manage-menu">
 
             <div class="top-area">
-                <span th:if="${session.loginInfo} != null">[[${session.loginInfo.profileName}]]</span>
+                <span th:if="${session.loginInfo} != null">[[${session.loginInfo.userId}]]</span>
                 <span class="bar"></span>
                 <button class="change-password-btn" onclick="location.href='/passwordChange'">
                     암호변경
