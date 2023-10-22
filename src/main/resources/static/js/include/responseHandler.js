@@ -135,4 +135,43 @@ class ResponseHandler {
             }
         })
     }
+
+    printGroupDriveReportList(searchResultData, listElementClassName, startTh,groupList) {
+
+        const tableBody = document.querySelector('.' + listElementClassName);
+        tableBody.innerHTML = "";
+
+        const tableThChild = document.querySelector('.thg-' + startTh);
+        const tableThParent = tableThChild.parentNode;
+        tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
+
+        if (searchResultData.length === 0) {
+            return;
+        }
+
+        for (let i = 0; i < searchResultData.length; i++) {
+            const data = searchResultData[i];
+
+            const row = document.createElement("tr");
+            const childNodes = tableThParent.children;
+
+            for (let j = 0; j < childNodes.length; j++) {
+                row.innerHTML += `<td>` + data[childNodes[j].className.split('-')[1]] + `</td>`
+            }
+
+            row.setAttribute('data-' + 'idx', i.toString());
+            tableBody.appendChild(row);
+        }
+
+        tableBody.addEventListener("click", (event) => {
+            const idx = event.target.parentElement.getAttribute('data-' + 'idx');
+            const driveReport = groupList[parseInt(idx)];
+            document.querySelector('input[name="groupReportIdx"]').value = idx;
+            const inputHandler = new InputHandler();
+            inputHandler.fillInput(driveReport);
+
+            openPopUp('drive-report');
+        });
+    }
+
 }

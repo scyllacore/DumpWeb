@@ -134,6 +134,36 @@ input[type=checkbox] {
             color: #0068b7;
           }
         }
+
+        .group-table-wrapper {
+          display: flex;
+          justify:{
+            content: center;
+          }
+          box-shadow: none;
+
+          table {
+            border:{
+              spacing: 0;
+              collapse: collapse;
+            }
+
+            .group-table-key {
+              th {
+                padding: 8px 7px;
+                border: 1px solid #ddd;
+                text:{
+                  align: center;
+                }
+                font:{
+                  size: 11px;
+                }
+                background: #f2f2f2;
+              }
+            }
+          }
+        }
+
       }
 
 

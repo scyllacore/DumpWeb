@@ -87,6 +87,22 @@ input[type=checkbox] {
   background: #fff;
   color: #0068b7;
 }
+.step9 .step9_wrapper .group-drive-report-form .drive-reports-wrapper .group-table-wrapper {
+  display: flex;
+  justify-content: center;
+  box-shadow: none;
+}
+.step9 .step9_wrapper .group-drive-report-form .drive-reports-wrapper .group-table-wrapper table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.step9 .step9_wrapper .group-drive-report-form .drive-reports-wrapper .group-table-wrapper table .group-table-key th {
+  padding: 8px 7px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 11px;
+  background: #f2f2f2;
+}
 .step9 .step9_wrapper .group-drive-report-form .retrieval-btn {
   width: 35px;
   margin: 0 12px;

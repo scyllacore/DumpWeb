@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<th:block th:fragment="form">
+<th:block th:fragment="formFragment">
 
     <head>
         <link href="/css/manage/step9/step9DriveReport.css" rel="stylesheet" type="text/css">
@@ -17,13 +17,15 @@
             </div>
 
             <div class="title-wrapper">
-                일보 추가
+                일보 리스트 추가
             </div>
             <div class="line"></div>
 
+            <input type="hidden" name="groupReportIdx">
+
             <form class="drive-report-form" name="driveReportForm">
                 <input type="hidden" name="driveReportId" value="0" required>
-                <input type="hidden" name="submitChk" value="false">
+                <!--<input type="hidden" name="submitChk" value="false"> 백엔드에서 처리할 것-->
                 <input type="hidden" name="userType">
 
                 <div class="payment-chk-wrapper">
@@ -35,11 +37,15 @@
                     <h3>제출처</h3>
                     <input type="hidden" name="submitterIdFk" required>
                     <input type="number" name="receiver" disabled required>
+                    <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
+                            onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
+                    </button>
                 </div>
 
                 <div class="period-wrapper">
                     <h3>운행일</h3>
                     <input type="date" name="driveDate" required>
+                    <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
                 </div>
 
                 <div class="from-site-wrapper">
@@ -84,11 +90,10 @@
 
 
                 <div class="bottom-btn-wrapper">
-                    <button type="button" class="save-btn" onclick="func.save()">등록</button>
-                    <button type="button" class="save-btn" onclick="func.submit()">제출</button>
-                    <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
-                    <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
-                    <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
+                    <button type="button" class="save-btn" onclick="func.addGroupReport()">추가</button>
+                    <button type="button" class="delete-btn" onclick="func.removeGroupReport()">제거</button>
+                    <button type="button" class="input-init-btn" onclick="">입력 초기화</button>
+                    <button type="button" class="prev-page-btn" onclick="closePopUp('drive-report')">닫기</button>
                 </div>
             </form>
         </div>

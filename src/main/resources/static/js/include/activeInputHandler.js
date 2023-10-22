@@ -17,7 +17,7 @@ class ActiveInputHandler {
 
             for (const idx in activeInputInfo.activeConfigs) {
                 const activeConfigParams = activeInputInfo.activeConfigs[idx];
-                const checkBoxElement = document.querySelector('input[name="' + activeConfigParams.mainTrigger + '"]');
+                const checkBoxElement = document.querySelector('[name="' + activeConfigParams.mainTrigger + '"]');
 
                 if (checkBoxElement.checked) {
                     setDisabled(activeInputInfo, activeConfigParams, checkBoxElement.checked);
@@ -79,7 +79,7 @@ class ActiveInputHandler {
                 return;
             }
 
-            const exceptActive = document.querySelector('input[name="'
+            const exceptActive = document.querySelector('[name="'
                 + activeConfigParams.exceptTrigger + '"]')
                 .checked;
 

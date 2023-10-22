@@ -21,53 +21,66 @@
         <div class="line"></div>
 
         <form class="group-drive-report-form" name="groupDriveReportForm">
-            <input type="hidden" name="driveReportId" value="0" required>
+            <input type="hidden" name="groupId" value="0" required>
             <!--/*<input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>*/-->
 
-            <input type="hidden" name="submitChk" value="false">
-            <input type="hidden" name="userType">
+            <input type="hidden" name="groupSubmitChk" value="false">
+            <input type="hidden" name="groupUserType">
 
-            <div class="payment-chk-wrapper">
+            <div class="group-payment-chk-wrapper">
                 <h3>결재</h3>
-                <input type="checkbox" name="paymentChk">
+                <input type="checkbox" name="groupPaymentChk">
             </div>
 
-            <div class="submitter-wrapper">
+            <div class="group-submitter-wrapper">
                 <h3>제출처</h3>
-                <input type="hidden" name="submitterIdFk" required>
-                <input type="number" name="receiver" disabled required>
-                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
+                <input type="hidden" name="groupSubmitterIdFk" >
+                <input type="number" name="groupReceiver" disabled >
+                <button type="button" name="groupSubmitterRetrievalBtn" class="retrieval-btn"
                         onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
                 </button>
             </div>
 
             <div class="memo-wrapper">
                 <h3>제목</h3>
-                <input name="title" placeholder="검색할 때 사용">
+                <input name="groupTitle" placeholder="검색할 때 사용">
             </div>
 
 
             <div class="memo-wrapper">
                 <h3>설명</h3>
-                <textarea name="memo"></textarea>
+                <textarea name="groupMemo"></textarea>
             </div>
 
             <div class="drive-reports-wrapper">
                 <div class="edit-header">
-
                     <span>
                         일보 등록 리스트
                     </span>
 
                     <container>
-                        <button type="button" onclick="">
-                            기존 추가
-                        </button>
-                        <button type="button" onclick="openPopUp('drive-report');">
-                            신규 추가
+                        <button name="newDriveReport" type="button" onclick="func.openPopUpAndInit();">
+                            추가
                         </button>
                     </container>
                 </div>
+
+                <div class="group-table-wrapper">
+                    <table>
+                        <thead>
+                        <tr class="group-table-key">
+                            <th class="thg-driveDate">날짜</th>
+                            <th class="thg-fromSite">상차지</th>
+                            <th class="thg-toSite">하차지</th>
+                            <th class="thg-item">품목</th>
+                            <th class="thg-quantity">대수</th>
+                        </tr>
+                        </thead>
+                        <tbody class="group-table-tuple">
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
 
@@ -81,8 +94,7 @@
 
         <th:block th:replace="/manage/step9/step9_retrieval :: resultFragment"></th:block>
         <th:block th:replace="/manage/step9/step9_submitter_retrieval :: resultFragment"></th:block>
-        <th:block th:replace="/manage/step9/step9_drive_report :: form"></th:block>
-
+        <th:block th:replace="/manage/step9/step9_drive_report :: formFragment"></th:block>
 
     </div>
 </container>

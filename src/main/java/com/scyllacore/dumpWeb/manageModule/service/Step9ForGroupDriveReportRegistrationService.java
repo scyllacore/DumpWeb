@@ -1,0 +1,125 @@
+package com.scyllacore.dumpWeb.manageModule.service;
+
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper;
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@RequiredArgsConstructor
+@Service
+public class Step9ForGroupDriveReportRegistrationService {
+    private final CommonUtil commonUtil;
+    private final Step9ForGroupDriveReportRegistrationMapper step9Mapper;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    public int getUserIdFk() {
+        return commonUtil.getLoginInfoBySession().getUserIdIdx();
+    }
+
+    public DriverDTO getDriverInfo() {
+        return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
+    }
+
+    public ResponseDTO<String> saveGroupDriveReport(GroupDriveReportDTO groupReport) {
+        groupReport.setGroupWriterIdFk(getUserIdFk());
+        groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
+
+        if (groupReport.getGroupId() == 0) {
+            this.insertGroupDriveReport(groupReport);
+        } else if (groupReport.getGroupUserType() == 1) {
+            this.updateGroupSubmit(groupReport);
+        } else {
+            this.updateDriveReports(groupReport);
+        }
+
+        return new ResponseDTO<String>(200, "저장 완료.");
+    }
+
+    public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport){
+        step9Mapper.insertGroupDriveReport(newGroupReport);
+        step9Mapper.insertDriveReports(newGroupReport.getDriveReports());
+    }
+
+    public void updateGroupSubmit(GroupDriveReportDTO groupReport){
+        step9Mapper.updateGroupSubmit(groupReport);
+        step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
+    }
+
+    public void updateDriveReports(GroupDriveReportDTO newGroupReport) {
+        step9Mapper.updateGroupDriveReport(newGroupReport);
+
+        Set<Integer> driveIds = new HashSet<>();
+
+        List<Integer> prvDriveReportIds = step9Mapper
+                .selectDriveReportIdsByGroupId(newGroupReport.getGroupId());
+
+        for(Integer id : prvDriveReportIds){
+            driveIds.add(id);
+        }
+
+        List<DriveReportDTO> newDriveReports = newGroupReport.getDriveReports();
+
+        for(DriveReportDTO driveReport : newDriveReports){
+            driveIds.remove(driveReport.getDriveReportId());
+        }
+
+        List<DriveReportDTO> driveReportsForInsert = new ArrayList<>();
+        List<DriveReportDTO> driveReportsForUpdate = new ArrayList<>();
+
+        for(DriveReportDTO driveReport : newDriveReports){
+            if(driveReport.getDriveReportId() == 0){
+                driveReportsForInsert.add(driveReport);
+            }else{
+                driveReportsForUpdate.add(driveReport);
+            }
+        }
+
+        step9Mapper.insertDriveReports(driveReportsForInsert);
+        step9Mapper.updateDriveReports(driveReportsForUpdate);
+
+        List<Integer> trashIds = driveIds.stream().toList();
+        step9Mapper.updateDriveReportsGroupIdFk(trashIds);
+    }
+
+    public ResponseDTO<List<GroupDriveReportDTO>> findGroupDriveReportList(GroupDriveReportDTO groupReport) {
+        groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
+        return new ResponseDTO<>(200, step9Mapper.selectGroupDriveReportList(groupReport));
+    }
+
+    public ResponseDTO<GroupDriveReportDTO> findGroupDriveReport(GroupDriveReportDTO groupReport) {
+        groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
+        return new ResponseDTO<>(200, step9Mapper.selectGroupDriveReport(groupReport));
+    }
+
+    public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
+        driveReport.setDriverIdFk(getDriverInfo().getDriverId());
+        return new ResponseDTO<>(200, step9Mapper.selectDriveReportList(driveReport));
+    }
+
+    public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
+        driveReport.setDriverIdFk(getDriverInfo().getDriverId());
+        return new ResponseDTO<>(200, step9Mapper.selectDriveReport(driveReport));
+    }
+
+    public ResponseDTO<String> removeGroupDriveReport(GroupDriveReportDTO groupReport) {
+        groupReport.setGroupWriterIdFk(getUserIdFk());
+
+        step9Mapper.deleteGroupDriveReport(groupReport);
+        step9Mapper.updateAllGroupIdFk(groupReport.getGroupId());
+
+        return new ResponseDTO<String>(200, "삭제 완료.");
+    }
+
+    public ResponseDTO<List<SubmitterDTO>> findSubmitterList() {
+        return new ResponseDTO<>(200, step9Mapper.selectSubmitterList());
+    }
+}

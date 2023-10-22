@@ -8,18 +8,21 @@ import java.util.List;
 @Data
 public class GroupDriveReportDTO {
     private int groupId;
-    private String title;
+    private String groupDate;
+    private String groupReceiver;
+    private String groupTitle;
+    private String groupMemo;
 
-    private boolean paymentChk;
-    private boolean submitChk;
-    private boolean submitterPaymentChk;
-    private boolean postingChk;
+    private boolean groupPaymentChk;
+    private boolean groupSubmitChk;
+    private boolean groupSubmitterPaymentChk;
+    private boolean groupPostingChk;
 
-    private int driverIdFk;
-    private int submitterIdFk;
-    private int writerIdFk;
+    private int groupDriverIdFk;
+    private int groupSubmitterIdFk;
+    private int groupWriterIdFk;
 
-    private int userType;
+    private int groupUserType;
 
-    private List<DriverDTO> driverReports;
+    private List<DriveReportDTO> driveReports;
 }
