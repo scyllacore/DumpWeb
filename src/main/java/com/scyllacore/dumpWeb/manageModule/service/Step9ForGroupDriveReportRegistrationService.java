@@ -44,12 +44,28 @@ public class Step9ForGroupDriveReportRegistrationService {
         return new ResponseDTO<String>(200, "저장 완료.");
     }
 
-    public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport){
+    public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport) {
         step9Mapper.insertGroupDriveReport(newGroupReport);
+
+        List<DriveReportDTO> prvDriveReport = new ArrayList<>();
+
+        for (int i = 0; i < newGroupReport.getDriveReports().size(); i++) {
+            DriveReportDTO driveReport = newGroupReport.getDriveReports().get(i);
+            driveReport.setGroupIdFk(newGroupReport.getGroupId());
+
+            if (driveReport.getDriveReportId() != 0) {
+                prvDriveReport.add(driveReport);
+                newGroupReport.getDriveReports().remove(i);
+            }
+        }
+
+        if(!prvDriveReport.isEmpty()){
+        step9Mapper.updateDriveReports(prvDriveReport);
+        }
         step9Mapper.insertDriveReports(newGroupReport.getDriveReports());
     }
 
-    public void updateGroupSubmit(GroupDriveReportDTO groupReport){
+    public void updateGroupSubmit(GroupDriveReportDTO groupReport) {
         step9Mapper.updateGroupSubmit(groupReport);
         step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
     }
@@ -62,23 +78,23 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<Integer> prvDriveReportIds = step9Mapper
                 .selectDriveReportIdsByGroupId(newGroupReport.getGroupId());
 
-        for(Integer id : prvDriveReportIds){
+        for (Integer id : prvDriveReportIds) {
             driveIds.add(id);
         }
 
         List<DriveReportDTO> newDriveReports = newGroupReport.getDriveReports();
 
-        for(DriveReportDTO driveReport : newDriveReports){
+        for (DriveReportDTO driveReport : newDriveReports) {
             driveIds.remove(driveReport.getDriveReportId());
         }
 
         List<DriveReportDTO> driveReportsForInsert = new ArrayList<>();
         List<DriveReportDTO> driveReportsForUpdate = new ArrayList<>();
 
-        for(DriveReportDTO driveReport : newDriveReports){
-            if(driveReport.getDriveReportId() == 0){
+        for (DriveReportDTO driveReport : newDriveReports) {
+            if (driveReport.getDriveReportId() == 0) {
                 driveReportsForInsert.add(driveReport);
-            }else{
+            } else {
                 driveReportsForUpdate.add(driveReport);
             }
         }

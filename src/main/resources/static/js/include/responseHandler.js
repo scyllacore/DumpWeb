@@ -31,10 +31,25 @@ class ResponseHandler {
             }
 
             row.setAttribute('data-' + dataIdNamesAddingSuffix, data[dataIdNamesAddingSuffix]);
+            row.setAttribute('data-' + 'no', no);
             tableBody.appendChild(row);
         });
 
+        if(defaultParams.url.includes('step9')){
+            const inputHandler = new InputHandler();
+
+            const table = document.querySelector('.table-tuple');
+            table.addEventListener('click', (event) =>{
+                const no = event.target.parentElement.getAttribute('data-' + 'no');
+                searchResultData[no].driveDate = searchResultData[no].driveDate.split('.').join('-');
+                inputHandler.fillInput(searchResultData[no]);
+                closePopUp('search-result');
+            })
+
+        }
+
     };
+
 
     printListSummary(searchResultData, className) {
         const resultElement = document.querySelector("." + className);
@@ -171,6 +186,45 @@ class ResponseHandler {
             inputHandler.fillInput(driveReport);
 
             openPopUp('drive-report');
+        });
+    }
+
+    printGroupReceiverList(searchResultData, listElementClassName, startTh, dataIdName) {
+
+        const dataIdNamesAddingSuffix = dataIdName + 'Id';
+
+        const tableBody = document.querySelector('.' + listElementClassName);
+        tableBody.innerHTML = "";
+
+        const tableThChild = document.querySelector('.thr-' + startTh);
+        const tableThParent = tableThChild.parentNode;
+        tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
+
+        if (searchResultData.length === 0) {
+            return;
+        }
+
+        searchResultData.forEach((data, no) => {
+            const row = document.createElement("tr");
+            const childNodes = tableThParent.children;
+
+            for (let i = 0; i < childNodes.length; i++) {
+                row.innerHTML += `<td>` + data[childNodes[i].className.split('-')[1]] + `</td>`
+            }
+
+            row.setAttribute('data-' + dataIdNamesAddingSuffix, data[dataIdNamesAddingSuffix]);
+            tableBody.appendChild(row);
+        });
+
+        tableBody.addEventListener("click", (event) => {
+            const id = event.target.parentElement.getAttribute('data-' + dataIdNamesAddingSuffix);
+            const info = event.target.parentElement.children[0].innerHTML;
+
+            document.querySelector('[name="group' + dataIdName.charAt(0).toUpperCase()
+                + dataIdName.slice(1) + 'IdFk"]').value = id;
+            document.querySelector('[name="groupReceiver"]').value = info;
+
+            closePopUp(dataIdName + '-search-result');
         });
     }
 

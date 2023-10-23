@@ -6,19 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const func = {
     async save() {
-        await manageHandler.save('step9', false, {driveReports: manageHandler.groupList});
+        await manageHandler.groupSave('step9', false, {driveReports: manageHandler.groupList});
     },
     async submit() {
-        await manageHandler.save('step9', true, {driveReports: manageHandler.groupList});
+        await manageHandler.groupSave('step9', true, {driveReports: manageHandler.groupList});
     },
     async remove() {
-        await manageHandler.remove('step9')
-    },
-    async listRetrieval() {
-        await manageHandler.listRetrieval('step9')
+        await manageHandler.remove('step9');
     },
     async submitterListRetrieval() {
-        await manageHandler.receiverListRetrieval('step9Submitter')
+        await manageHandler.receiverListRetrieval('step9Submitter');
+    },
+    async groupSubmitterListRetrieval() {
+        await manageHandler.groupReceiverListRetrieval('step9Submitter');
     },
     addGroupReport() {
         manageHandler.addGroupReport();
@@ -29,5 +29,8 @@ const func = {
     openPopUpAndInit() {
         document.querySelector('[name="groupReportIdx"]').value = '-1';
         openPopUp('drive-report');
-    }
+    },
+    async listRetrieval() {
+        await manageHandler.listRetrieval('step9Drive')
+    },
 }

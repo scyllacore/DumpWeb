@@ -22,7 +22,7 @@
 
         <form class="group-drive-report-form" name="groupDriveReportForm">
             <input type="hidden" name="groupId" value="0" required>
-            <!--/*<input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>*/-->
+            <input type="hidden" name="groupDriverIdFk" th:value="${session.driverInfo.driverId}" required>
 
             <input type="hidden" name="groupSubmitChk" value="false">
             <input type="hidden" name="groupUserType">
@@ -34,10 +34,10 @@
 
             <div class="group-submitter-wrapper">
                 <h3>제출처</h3>
-                <input type="hidden" name="groupSubmitterIdFk" >
-                <input type="number" name="groupReceiver" disabled >
+                <input type="hidden" name="groupSubmitterIdFk" required>
+                <input type="number" name="groupReceiver" disabled required>
                 <button type="button" name="groupSubmitterRetrievalBtn" class="retrieval-btn"
-                        onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
+                        onclick="openPopUp('submitter-search-result'); func.groupSubmitterListRetrieval()" required>조회
                 </button>
             </div>
 

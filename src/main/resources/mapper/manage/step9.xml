@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper">
 
-    <insert id="insertGroupDriveReport" parameterType="GroupDriveReportDTO">
+    <insert id="insertGroupDriveReport" parameterType="GroupDriveReportDTO"  useGeneratedKeys="true" keyProperty="groupId">
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
          GROUP_TITLE,
          GROUP_MEMO,
          GROUP_DRIVER_ID_FK,
          GROUP_SUBMITTER_ID_FK,
-         GROUP_WRTIER_ID_FK,
+         GROUP_WRITER_ID_FK,
          GROUP_PAYMENT_CHK,
          GROUP_SUBMIT_CHK,
          GROUP_USER_TYPE)
@@ -24,6 +24,10 @@
                 #{groupPaymentChk},
                 #{groupSubmitChk},
                 0)
+
+        <selectKey keyProperty="groupId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <update id="updateGroupDriveReport" parameterType="GroupDriveReportDTO">
@@ -77,7 +81,7 @@
     </sql>
 
 
-    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectGroupDriveReport" parameterType="GroupDriveReportDTO" resultType="GroupDriveReportDTO">
         <include refid="groupReportForDriver">
             <property name="groupDriverIdFk" value="#{groupDriverIdFk}"/>
             <property name="groupId" value="#{groupId}"/>
@@ -105,34 +109,36 @@
     <insert id="insertDriveReports" parameterType="java.util.List">
         INSERT INTO drive_report_tb
         (DRIVE_DATE,
-         FROM_SITE,
-         TO_SITE,
-         ITEM,
-         UNIT_PRICE,
-         QUANTITY,
-         MEMO,
-         PAYMENT_CHK,
-         PROGRESS,
-         DRIVER_ID_FK,
-         SUBMITTER_ID_FK,
-         WRITER_ID_FK,
-         USER_TYPE)
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        UNIT_PRICE,
+        QUANTITY,
+        MEMO,
+        PAYMENT_CHK,
+        PROGRESS,
+        DRIVER_ID_FK,
+        SUBMITTER_ID_FK,
+        WRITER_ID_FK,
+        USER_TYPE,
+        GROUP_ID_FK)
         VALUES
-            <foreach collection="list" item="driveReport" separator=",">
-                (#{driveReport.driveDate},
-                #{driveReport.fromSite},
-                #{driveReport.toSite},
-                #{driveReport.item},
-                #{driveReport.unitPrice},
-                #{driveReport.quantity},
-                #{driveReport.memo},
-                #{driveReport.paymentChk},
-                #{driveReport.progress},
-                #{driveReport.driverIdFk},
-                #{driveReport.submitterIdFk},
-                #{driveReport.writerIdFk},
-                0)
-            </foreach>
+        <foreach collection="list" item="driveReport" separator=",">
+            (#{driveReport.driveDate},
+            #{driveReport.fromSite},
+            #{driveReport.toSite},
+            #{driveReport.item},
+            #{driveReport.unitPrice},
+            #{driveReport.quantity},
+            #{driveReport.memo},
+            #{driveReport.paymentChk},
+            #{driveReport.progress},
+            #{driveReport.driverIdFk},
+            #{driveReport.submitterIdFk},
+            #{driveReport.writerIdFk},
+            0,
+            #{driveReport.groupIdFk})
+        </foreach>
 
     </insert>
 
@@ -206,7 +212,7 @@
         DRIVER_ID_FK = #{driverIdFk}
     </select>
 
-    <select id="selectDriveReportList">
+    <select id="selectDriveReportIdsByGroupId">
         SELECT
         DRIVE_REPORT_ID
         FROM drive_report_tb

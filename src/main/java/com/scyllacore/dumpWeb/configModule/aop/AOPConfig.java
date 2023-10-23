@@ -22,9 +22,9 @@ public class AOPConfig {
     @Around("execution (* com.scyllacore.dumpWeb..controller.*Controller.*(..))")
     public Object loginChk(ProceedingJoinPoint pjp) throws Throwable {
 
-        return pjp.proceed();
+        //return pjp.proceed();
 
-       /* String type = pjp.getSignature().getDeclaringTypeName();
+        String type = pjp.getSignature().getDeclaringTypeName();
         String className = type.substring(type.lastIndexOf(".") + 1);
         String method_name = pjp.getSignature().getName();
 
@@ -40,7 +40,7 @@ public class AOPConfig {
 
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        AuthDTO loginInfo = (AuthDTO)  request.getSession().getAttribute("loginInfo");
+        AuthDTO loginInfo = (AuthDTO) request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null) {
             result = "redirect:/login";
@@ -48,6 +48,6 @@ public class AOPConfig {
             result = pjp.proceed();
         }
 
-        return result;*/
+        return result;
     }
 }
