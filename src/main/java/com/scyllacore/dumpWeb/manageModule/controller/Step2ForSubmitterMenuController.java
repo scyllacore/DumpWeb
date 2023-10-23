@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/step2")
 @RequiredArgsConstructor
 public class Step2ForSubmitterMenuController {
-
+    @GetMapping(value = "")
+    public String step2() {
+        return "/manage/step2/step2_index";
+    }
 }
 

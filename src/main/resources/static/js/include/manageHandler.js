@@ -4,6 +4,7 @@ class ManageHandler {
     activeInputHandler = {};
     requestHandler = new RequestHandler();
     responseHandler = new ResponseHandler();
+    groupList = [];
 
     constructor(paramContainer) {
         this.paramContainer = paramContainer;
@@ -22,11 +23,11 @@ class ManageHandler {
 
 
             this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
-                , paramObj.dataIdNameAddingSuffix);
+                , paramObj.dataIdNameAddingSuffix, paramObj.clickElement);
 
             activateInput(this.activeInputHandler, key, paramObj);
 
-            this.recommendKeywordRetrieval(defaultParams.url, paramObj);
+            await this.recommendKeywordRetrieval(defaultParams.url, paramObj);
         }
 
         function activateInput(activeInputHandler, key, paramObj) {
@@ -41,7 +42,7 @@ class ManageHandler {
         }
     }
 
-    async save(containerKey, submit = false) {
+    async save(containerKey, submit = false, addingProperties = {}) {
         const paramObj = this.paramContainer[containerKey];
 
         if (this.inputHandler.checkValidation(paramObj.formName)) {
@@ -54,7 +55,29 @@ class ManageHandler {
         }
 
         let inputData = this.inputHandler.jsonHandler
-            .getRequestJson(paramObj.formName, paramObj.inputCheckBoxElements);
+            .getRequestJson(paramObj.formName, paramObj.inputCheckBoxElements, addingProperties);
+
+        const responseData = await this.requestHandler
+            .post(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'Save', inputData);
+        alert(responseData);
+
+        location.href = defaultParams.url;
+    }
+
+    async groupSave(containerKey, submit = false, addingProperties = {}) {
+        const paramObj = this.paramContainer[containerKey];
+
+        if (this.inputHandler.checkValidation(paramObj.formName)) {
+            return;
+        }
+        this.activeInputHandler[containerKey].setDisabledFalse(paramObj.formName);
+
+        if (submit) {
+            document.querySelector('input[name="groupSubmitChk"]').value = true;
+        }
+
+        let inputData = this.inputHandler.jsonHandler
+            .getRequestJson(paramObj.formName, paramObj.inputCheckBoxElements, addingProperties);
 
         const responseData = await this.requestHandler
             .post(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'Save', inputData);
@@ -141,4 +164,47 @@ class ManageHandler {
         this.responseHandler.printRecommendKeywordList(responseData);
     }
 
+
+    async groupReceiverListRetrieval(containerKey) {
+        const paramObj = this.paramContainer[containerKey];
+
+        const responseData = await this.requestHandler
+            .get(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'List');
+
+        this.responseHandler.printGroupReceiverList(responseData
+            , paramObj.listElementClassName
+            , paramObj.defaultSortingCriteria
+            , paramObj.dataIdName);
+    }
+
+    addGroupReport(containerKey) {
+        const paramObj = this.paramContainer[containerKey];
+
+        //paramObj.formName
+        const el = document.querySelector('form[name="' + 'driveReportForm' + '"]');
+        const entry = new FormData(el).entries();
+        const obj = Object.fromEntries(entry);
+        obj['paymentChk'] = document.querySelector('input[name="' + 'paymentChk' + '"]').checked;
+
+        this.groupList.push(obj);
+
+        closePopUp('drive-report');
+
+        this.responseHandler.printGroupDriveReportList(this.groupList, 'group-table-tuple', 'driveDate', this.groupList);
+    }
+
+    removeGroupReport() {
+        const idx = document.querySelector('[name="' + 'groupReportIdx' + '"]').value;
+
+        if (idx === '-1') {
+            closePopUp('drive-report');
+            return;
+        }
+
+
+        this.groupList.splice(idx, 1);
+
+        closePopUp('drive-report');
+        this.responseHandler.printGroupDriveReportList(this.groupList, 'group-table-tuple', 'driveDate', this.groupList);
+    }
 }

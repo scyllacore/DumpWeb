@@ -9,19 +9,19 @@ input[type=checkbox] {
   zoom: 1.5;
 }
 
-.step1 {
+.step2 {
   display: flex;
   justify-content: center;
   background: #d1d1d1;
   color: #333536;
 }
-.step1 .step1_wrapper {
+.step2 .step2_wrapper {
   width: 100%;
   max-width: 600px;
   padding: 20px 10px 10px;
   background: #ffffff;
 }
-.step1 .step1_wrapper .sub_title h2 {
+.step2 .step2_wrapper .sub_title h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,13 +29,13 @@ input[type=checkbox] {
   font-weight: bold;
   gap: 5px;
 }
-.step1 .step1_wrapper .driver-menu-wrapper {
+.step2 .step2_wrapper .submitter-menu-wrapper {
   padding-top: 15px;
   padding-bottom: 10px;
   background-color: #e7f3ff;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
 }
-.step1 .step1_wrapper .driver-menu-wrapper div {
+.step2 .step2_wrapper .submitter-menu-wrapper div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ input[type=checkbox] {
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
   background-color: #ffffff;
 }
-.step1 .step1_wrapper .driver-menu-wrapper button {
+.step2 .step2_wrapper .submitter-menu-wrapper button {
   outline: none;
   cursor: pointer;
   width: 25%;
@@ -58,18 +58,15 @@ input[type=checkbox] {
   line-height: 1.15;
   font-size: 13px;
 }
-.step1 .step1_wrapper .driver-menu-wrapper button:hover {
+.step2 .step2_wrapper .submitter-menu-wrapper button:hover {
   transition: all 0.1s ease;
   box-shadow: 0 0 0 0 #fff, 0 0 0 3px #77e1a9;
 }
-.step1 .step1_wrapper .driver-menu-wrapper .summary-retrieval, .step1 .step1_wrapper .driver-menu-wrapper .car-recruitment-notice-retrieval {
+.step2 .step2_wrapper .submitter-menu-wrapper .summary-retrieval, .step2 .step2_wrapper .submitter-menu-wrapper .car-recruitment-notice-retrieval {
   background: #57a9ee;
 }
-.step1 .step1_wrapper .driver-menu-wrapper .drive-report-registration, .step1 .step1_wrapper .driver-menu-wrapper .drive-report-retrieval {
+.step2 .step2_wrapper .submitter-menu-wrapper .drive-order-registration, .step2 .step2_wrapper .submitter-menu-wrapper .drive-order-retrieval {
   background: #8fe797;
 }
-.step1 .step1_wrapper .driver-menu-wrapper .mileage-registration, .step1 .step1_wrapper .driver-menu-wrapper .mileage-retrieval {
-  background: #e5d9a6;
-}
 
-/*# sourceMappingURL=step1Index.css.map */
+/*# sourceMappingURL=step2Index.css.map */

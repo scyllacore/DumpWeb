@@ -17,6 +17,4 @@ public class AuthDTO {
     private String tel;
     private String carNo;
 
-    private String profileName;
-
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="formFragment">
+
+    <head>
+        <link href="/css/manage/step9/step9DriveReport.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <div class="drive-report">
+        <div class="drive-report-wrapper">
+
+            <div class="pop-up-close-wrapper">
+                <button class="pop-up-close" type="button" onclick="closePopUp('drive-report')">
+                    <i class="close-icon"></i>
+                    <span class="screen-off"></span>
+                </button>
+            </div>
+
+            <div class="title-wrapper">
+                일보 리스트 추가
+            </div>
+            <div class="line"></div>
+
+            <input type="hidden" name="groupReportIdx">
+
+            <form class="drive-report-form" name="driveReportForm">
+                <input type="hidden" name="driveReportId" value="0" required>
+                <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+                <!--<input type="hidden" name="submitChk" value="false"> 백엔드에서 처리할 것-->
+                <input type="hidden" name="userType">
+
+                <div class="payment-chk-wrapper">
+                    <h3>결재</h3>
+                    <input type="checkbox" name="paymentChk">
+                </div>
+
+                <div class="submitter-wrapper">
+                    <h3>제출처</h3>
+                    <input type="hidden" name="submitterIdFk" required>
+                    <input type="number" name="receiver" disabled required>
+                    <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
+                            onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
+                    </button>
+                </div>
+
+                <div class="period-wrapper">
+                    <h3>운행일</h3>
+                    <input type="date" name="driveDate" required>
+                    <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+                </div>
+
+                <div class="from-site-wrapper">
+                    <h3>상차지</h3>
+                    <input name="fromSite" placeholder="상차지">
+                </div>
+
+                <div class="to-site-wrapper">
+                    <h3>하차지</h3>
+                    <input name="toSite" placeholder="하차지">
+                </div>
+
+                <div class="item-wrapper">
+                    <h3>품목</h3>
+                    <input name="item" placeholder="품목">
+                </div>
+
+                <div class="quantity-wrapper">
+                    <h3>대수</h3>
+                    <input type="number" name="quantity" placeholder="대수">
+                </div>
+
+                <div class="unit-price-wrapper">
+                    <h3>운반 단가</h3>
+                    <input type="number" name="unitPrice" placeholder="운반 단가">
+                </div>
+
+                <div class="progress-wrapper">
+                    <h3>진행</h3>
+                    <select class="progress-inner" name="progress" required>
+                        <option value="배차" selected>배차</option>
+                        <option value="상차">상차</option>
+                        <option value="하차">하차</option>
+                        <option value="제출">제출</option>
+                    </select>
+                </div>
+
+                <div class="memo-wrapper">
+                    <h3>비고</h3>
+                    <textarea name="memo"></textarea>
+                </div>
+
+
+                <div class="bottom-btn-wrapper">
+                    <button type="button" class="save-btn" onclick="func.addGroupReport()">추가</button>
+                    <button type="button" class="delete-btn" onclick="func.removeGroupReport()">제거</button>
+                    <button type="button" class="input-init-btn" onclick="">입력 초기화</button>
+                    <button type="button" class="prev-page-btn" onclick="closePopUp('drive-report')">닫기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</th:block>
+</html>

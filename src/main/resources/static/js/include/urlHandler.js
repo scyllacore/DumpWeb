@@ -1,10 +1,10 @@
 class UrlHandler {
-    redirectByElementValue(url, paramName) {
-        if (typeof url === 'undefined') {
+    redirectByElementValue(url, paramName,element = 'tbody') {
+        if (typeof url === 'undefined' || element === '') {
             return;
         }
 
-        const listRow = document.querySelector("table tbody");
+        const listRow = document.querySelector(element);
 
         listRow.addEventListener("click", (event) => {
             let val = event.target.parentElement.getAttribute('data-' + paramName);

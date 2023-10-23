@@ -6,6 +6,7 @@
 
     <select id="selectTrialUserInfo" parameterType="AuthDTO" resultType="AuthDTO">
         SELECT USER_ID_IDX,
+               USER_ID,
                USER_TYPE,
                TRIAL_CHK
         FROM user_info_tb

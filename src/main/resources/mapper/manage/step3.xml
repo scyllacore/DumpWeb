@@ -107,7 +107,7 @@
 
     <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
         <include refid="reportForDriver">
-            <property name="DRIVER_ID_FK" value="#{driverIdFk}"/>
+            <property name="driverIdFk" value="#{driverIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
         </include>
 
