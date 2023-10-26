@@ -35,6 +35,8 @@ public interface Step9ForGroupDriveReportRegistrationMapper {
 
     List<Integer> selectDriveReportIdsByGroupId(int groupIdFk);
 
+    List<DriveReportDTO> selectDriveReportsForGroupDTO(GroupDriveReportDTO groupReport);
+
     DriveReportDTO selectDriveReport(DriveReportDTO driveReport);
 
     List<SubmitterDTO> selectSubmitterList();

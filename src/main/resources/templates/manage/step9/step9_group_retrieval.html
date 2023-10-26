@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <th:block th:fragment="resultFragment">
 
-    <div class="search-result">
+    <div class="group-search-result">
         <div class="search-result-wrapper">
 
             <div class="pop-up-close-wrapper">
-                <button class="pop-up-close" type="button" onclick="closePopUp('search-result')">
+                <button class="pop-up-close" type="button" onclick="closePopUp('group-search-result')">
                     <i class="close-icon"></i>
                     <span class="screen-off"></span>
                 </button>
             </div>
 
             <div class="title-wrapper">
-                조회 리스트
+                그룹 조회 리스트
             </div>
             <div class="line"></div>
 
@@ -21,15 +21,10 @@
                 <table>
                     <thead>
                     <tr class="table-key">
-                        <th class="th-driveDate">날짜</th>
-                        <th class="th-fromSite">상차지</th>
-                        <th class="th-toSite">하차지</th>
-                        <th class="th-item">품목</th>
-                        <th class="th-quantity">대수</th>
-                        <th class="th-memo">비고</th>
+                        <th class="gth-groupTitle">제목</th>
                     </tr>
                     </thead>
-                    <tbody class="table-tuple">
+                    <tbody class="group-table-tuple">
                     </tbody>
                 </table>
             </div>

@@ -31,12 +31,18 @@ class InputHandler {
         }
 
         const data = {};
-        data[paramName] = ParamVal;
 
+        if(paramName === 'groupDriveReportId'){
+            data['groupId'] = ParamVal;
+        }else {
+            data[paramName] = ParamVal;
+        }
         const inputData = this.jsonHandler.getRequestJson(data);
 
         const responseData = await new RequestHandler()
             .post(url, inputData);
+
+        console.log(responseData);
 
         this.fillInput(responseData);
 

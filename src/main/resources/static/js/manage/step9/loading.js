@@ -28,7 +28,11 @@ const func = {
     },
     openPopUpAndInit() {
         document.querySelector('[name="groupReportIdx"]').value = '-1';
+        document.querySelector('[name="driveReportId"]').value = '0';
         openPopUp('drive-report');
+    },
+    async groupListRetrieval() {
+        await manageHandler.groupListRetrieval('step9')
     },
     async listRetrieval() {
         await manageHandler.listRetrieval('step9Drive')

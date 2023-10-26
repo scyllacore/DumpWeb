@@ -33,6 +33,7 @@ public class Step9ForGroupDriveReportRegistrationController {
     @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
     public ResponseDTO<List<GroupDriveReportDTO>> groupDriveReportList(@RequestBody GroupDriveReportDTO groupReport) {
+        System.out.println(groupReport);
         return step9Service.findGroupDriveReportList(groupReport);
     }
 

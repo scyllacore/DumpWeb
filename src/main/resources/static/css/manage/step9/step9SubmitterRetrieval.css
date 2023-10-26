@@ -1,4 +1,4 @@
-.submitter-search-result {
+.submitter-search-result, .search-result, .group-search-result {
   z-index: 999;
   width: 100%;
   height: 100%;
@@ -8,7 +8,7 @@
   position: fixed;
   background-color: rgba(0, 0, 0, 0.35);
 }
-.submitter-search-result .search-result-wrapper {
+.submitter-search-result .search-result-wrapper, .search-result .search-result-wrapper, .group-search-result .search-result-wrapper {
   width: 90%;
   max-width: 600px;
   height: 90%;
@@ -20,11 +20,11 @@
   background-color: #fff;
   overflow-y: auto;
 }
-.submitter-search-result .search-result-wrapper .pop-up-close-wrapper {
+.submitter-search-result .search-result-wrapper .pop-up-close-wrapper, .search-result .search-result-wrapper .pop-up-close-wrapper, .group-search-result .search-result-wrapper .pop-up-close-wrapper {
   height: 30px;
   display: flex;
 }
-.submitter-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close {
+.submitter-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close, .search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close, .group-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close {
   width: 14px;
   height: 14px;
   top: 10px;
@@ -38,16 +38,16 @@
   background-color: #0064c1;
   cursor: pointer;
 }
-.submitter-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off {
+.submitter-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off, .search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off, .group-search-result .search-result-wrapper .pop-up-close-wrapper .pop-up-close .screen-off {
   z-index: -9999;
 }
-.submitter-search-result .search-result-wrapper .title-wrapper {
+.submitter-search-result .search-result-wrapper .title-wrapper, .search-result .search-result-wrapper .title-wrapper, .group-search-result .search-result-wrapper .title-wrapper {
   margin: 50px;
   text-align: center;
   font-size: 30px;
   font-weight: bold;
 }
-.submitter-search-result .search-result-wrapper .payment-wrapper {
+.submitter-search-result .search-result-wrapper .payment-wrapper, .search-result .search-result-wrapper .payment-wrapper, .group-search-result .search-result-wrapper .payment-wrapper {
   display: flex;
   justify-content: right;
   margin-top: 20px;
@@ -55,7 +55,7 @@
   margin-right: 10px;
   font-size: 12px;
 }
-.submitter-search-result .search-result-wrapper .payment-wrapper .payment-btn {
+.submitter-search-result .search-result-wrapper .payment-wrapper .payment-btn, .search-result .search-result-wrapper .payment-wrapper .payment-btn, .group-search-result .search-result-wrapper .payment-wrapper .payment-btn {
   width: 80px;
   height: 40px;
   border: 1px solid #0068b7;
@@ -66,15 +66,15 @@
   font-weight: 600;
   cursor: pointer;
 }
-.submitter-search-result .search-result-wrapper .table-wrapper {
+.submitter-search-result .search-result-wrapper .table-wrapper, .search-result .search-result-wrapper .table-wrapper, .group-search-result .search-result-wrapper .table-wrapper {
   display: flex;
   justify-content: center;
 }
-.submitter-search-result .search-result-wrapper .table-wrapper table {
+.submitter-search-result .search-result-wrapper .table-wrapper table, .search-result .search-result-wrapper .table-wrapper table, .group-search-result .search-result-wrapper .table-wrapper table {
   border-spacing: 0;
   border-collapse: collapse;
 }
-.submitter-search-result .search-result-wrapper .table-wrapper table .table-key th {
+.submitter-search-result .search-result-wrapper .table-wrapper table .table-key th, .search-result .search-result-wrapper .table-wrapper table .table-key th, .group-search-result .search-result-wrapper .table-wrapper table .table-key th {
   padding: 8px 7px;
   border: 1px solid #ddd;
   text-align: center;

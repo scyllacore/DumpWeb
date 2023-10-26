@@ -1,10 +1,13 @@
 class UrlHandler {
     redirectByElementValue(url, paramName,element = 'tbody') {
+
         if (typeof url === 'undefined' || element === '') {
             return;
         }
 
         const listRow = document.querySelector(element);
+
+        console.log(listRow);
 
         listRow.addEventListener("click", (event) => {
             let val = event.target.parentElement.getAttribute('data-' + paramName);

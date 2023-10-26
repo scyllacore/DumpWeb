@@ -104,6 +104,36 @@ class ResponseHandler {
         });
     }
 
+    printGroupList(searchResultData, listElementClassName, startTh, dataIdName) {
+
+        const dataIdNamesAddingSuffix = dataIdName + 'Id';
+
+        const tableBody = document.querySelector('.' + listElementClassName);
+        tableBody.innerHTML = "";
+
+        const tableThChild = document.querySelector('.gth-' + startTh);
+        const tableThParent = tableThChild.parentNode;
+        tableThParent.insertBefore(tableThChild, tableThParent.firstChild);
+
+        if (searchResultData.length === 0) {
+            return;
+        }
+
+        searchResultData.forEach((data, no) => {
+            const row = document.createElement("tr");
+            const childNodes = tableThParent.children;
+
+            for (let i = 0; i < childNodes.length; i++) {
+                row.innerHTML += `<td>` + data[childNodes[i].className.split('-')[1]] + `</td>`
+            }
+
+            data[dataIdNamesAddingSuffix] = data['groupId'];
+
+            row.setAttribute('data-' + dataIdNamesAddingSuffix, data[dataIdNamesAddingSuffix]);
+            tableBody.appendChild(row);
+        });
+    }
+
 
     printRecommendKeywordList(data) {
         const details = document.querySelector('.detail-search-inner');

@@ -51,6 +51,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
         for (int i = 0; i < newGroupReport.getDriveReports().size(); i++) {
             DriveReportDTO driveReport = newGroupReport.getDriveReports().get(i);
+            driveReport.setWriterIdFk(getUserIdFk());
             driveReport.setGroupIdFk(newGroupReport.getGroupId());
 
             if (driveReport.getDriveReportId() != 0) {
@@ -59,8 +60,8 @@ public class Step9ForGroupDriveReportRegistrationService {
             }
         }
 
-        if(!prvDriveReport.isEmpty()){
-        step9Mapper.updateDriveReports(prvDriveReport);
+        if (!prvDriveReport.isEmpty()) {
+            step9Mapper.updateDriveReports(prvDriveReport);
         }
         step9Mapper.insertDriveReports(newGroupReport.getDriveReports());
     }
@@ -77,6 +78,8 @@ public class Step9ForGroupDriveReportRegistrationService {
 
         List<Integer> prvDriveReportIds = step9Mapper
                 .selectDriveReportIdsByGroupId(newGroupReport.getGroupId());
+
+        System.out.println(prvDriveReportIds);
 
         for (Integer id : prvDriveReportIds) {
             driveIds.add(id);
@@ -99,11 +102,19 @@ public class Step9ForGroupDriveReportRegistrationService {
             }
         }
 
-        step9Mapper.insertDriveReports(driveReportsForInsert);
-        step9Mapper.updateDriveReports(driveReportsForUpdate);
+        if (!driveReportsForInsert.isEmpty()) {
+            step9Mapper.insertDriveReports(driveReportsForInsert);
+        }
+
+        if (!driveReportsForUpdate.isEmpty()) {
+            step9Mapper.updateDriveReports(driveReportsForUpdate);
+        }
 
         List<Integer> trashIds = driveIds.stream().toList();
-        step9Mapper.updateDriveReportsGroupIdFk(trashIds);
+
+        if (!trashIds.isEmpty()) {
+            step9Mapper.updateDriveReportsGroupIdFk(trashIds);
+        }
     }
 
     public ResponseDTO<List<GroupDriveReportDTO>> findGroupDriveReportList(GroupDriveReportDTO groupReport) {
@@ -113,7 +124,10 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     public ResponseDTO<GroupDriveReportDTO> findGroupDriveReport(GroupDriveReportDTO groupReport) {
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step9Mapper.selectGroupDriveReport(groupReport));
+        groupReport = step9Mapper.selectGroupDriveReport(groupReport);
+        groupReport.setDriveReports(step9Mapper.selectDriveReportsForGroupDTO(groupReport));
+
+        return new ResponseDTO<>(200,groupReport);
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {

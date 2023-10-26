@@ -4,7 +4,11 @@ const defaultParams = {
 
 const paramsContainer = {
     step9: {
-        clickElement : '',
+        redirectUrl: '/manage/step9',
+        clickElement : '.group-table-tuple',
+        //
+        listElementClassName: 'group-table-tuple',
+        defaultSortingCriteria : 'groupTitle',
         //
         formName: 'groupDriveReportForm'
         ,
@@ -27,6 +31,7 @@ const paramsContainer = {
     step9Submitter: {
         formName: 'driveReportForm'
         , dataIdName: 'submitter'
+        , clickElement: '.table-submitter-tuple'
         //
         , listElementClassName: 'table-submitter-tuple'
         , defaultSortingCriteria: 'tel'

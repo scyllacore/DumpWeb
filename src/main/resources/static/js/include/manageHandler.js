@@ -153,6 +153,21 @@ class ManageHandler {
             , paramObj.dataIdName);
     }
 
+    async groupListRetrieval(containerKey) {
+        const paramObj = this.paramContainer[containerKey];
+
+        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.formName);
+
+
+        const responseData = await this.requestHandler
+            .post(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'List',inputData);
+
+        this.responseHandler.printGroupList(responseData
+            , paramObj.listElementClassName
+            , paramObj.defaultSortingCriteria
+            , paramObj.dataIdName);
+    }
+
     async recommendKeywordRetrieval(url, paramObj) {
         if (typeof paramObj.recommendKeywordList === 'undefined') {
             return;
@@ -190,7 +205,7 @@ class ManageHandler {
 
         closePopUp('drive-report');
 
-        this.responseHandler.printGroupDriveReportList(this.groupList, 'group-table-tuple', 'driveDate', this.groupList);
+        this.responseHandler.printGroupDriveReportList(this.groupList, 'table-group-tuple', 'driveDate', this.groupList);
     }
 
     removeGroupReport() {
