@@ -96,6 +96,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
         for (DriveReportDTO driveReport : newDriveReports) {
             if (driveReport.getDriveReportId() == 0) {
+                driveReport.setGroupIdFk(newGroupReport.getGroupId());
                 driveReportsForInsert.add(driveReport);
             } else {
                 driveReportsForUpdate.add(driveReport);
@@ -105,6 +106,8 @@ public class Step9ForGroupDriveReportRegistrationService {
         if (!driveReportsForInsert.isEmpty()) {
             step9Mapper.insertDriveReports(driveReportsForInsert);
         }
+
+        System.out.println(driveReportsForUpdate);
 
         if (!driveReportsForUpdate.isEmpty()) {
             step9Mapper.updateDriveReports(driveReportsForUpdate);

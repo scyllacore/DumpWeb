@@ -18,8 +18,14 @@ class ManageHandler {
 
             paramObj.dataIdNameAddingSuffix = paramObj.dataIdName + 'Id';
 
-            await this.inputHandler.inputDataByUrlParams(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'Details'
+            const driveReports = await this.inputHandler.inputDataByUrlParams(defaultParams.url + '/fetch/' + paramObj.dataIdName + 'Details'
                 , paramObj.dataIdNameAddingSuffix);
+
+            if(typeof driveReports !== 'undefined'){
+                this.groupList = driveReports;
+                console.log(driveReports);
+                this.responseHandler.printGroupDriveReportList(this.groupList, 'table-group-tuple', 'driveDate', this.groupList);
+            }
 
 
             this.inputHandler.urlHandler.redirectByElementValue(paramObj.redirectUrl
@@ -215,7 +221,6 @@ class ManageHandler {
             closePopUp('drive-report');
             return;
         }
-
 
         this.groupList.splice(idx, 1);
 

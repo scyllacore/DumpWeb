@@ -141,13 +141,24 @@
     <update id="updateDriveReports" parameterType="java.util.List">
         <foreach collection="list" item="driveReport" separator=";">
             UPDATE drive_report_tb
-            SET DRIVE_DATE = #{driveReport.driveDate},
-            FROM_SITE = #{driveReport.fromSite},
-            TO_SITE = #{driveReport.toSite},
-            ITEM = #{driveReport.item},
+            SET
+            <if test="driveReport.driveDate != ''">
+                DRIVE_DATE = #{driveReport.driveDate},
+            </if>
+            <if test="driveReport.fromSite != ''">
+                FROM_SITE = #{driveReport.fromSite},
+            </if>
+            <if test="driveReport.toSite != ''">
+                TO_SITE = #{driveReport.toSite},
+            </if>
+            <if test="driveReport.item != ''">
+                ITEM = #{driveReport.item},
+            </if>
             UNIT_PRICE = #{driveReport.unitPrice},
             QUANTITY = #{driveReport.quantity},
-            MEMO = #{driveReport.memo},
+            <if test="driveReport.memo != ''">
+                MEMO = #{driveReport.memo},
+            </if>
             PAYMENT_CHK = #{driveReport.paymentChk},
             PROGRESS = #{driveReport.progress},
             SUBMITTER_ID_FK = #{driveReport.submitterIdFk},
@@ -216,12 +227,35 @@
         GROUP_ID_FK = #{groupIdFk}
     </select>
 
+    <sql id="reportsForDriver">
+        WITH writer_report AS (SELECT *
+                               FROM drive_report_tb
+                               WHERE GROUP_ID_FK = ${groupId}),
+             join_report AS (SELECT *
+                             FROM submitter_tb
+                                      INNER JOIN writer_report
+                                                 ON SUBMITTER_ID = writer_report.SUBMITTER_ID_FK)
+    </sql>
+
     <select id="selectDriveReportsForGroupDTO" parameterType="GroupDriveReportDTO" resultType="DriveReportDTO">
-        SELECT
-            *
-        FROM drive_report_tb
-        WHERE
-            GROUP_ID_FK = #{groupId}
+        <include refid="reportsForDriver">
+            <property name="groupId" value="#{groupId}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        SUBMITTER_ID_FK,
+        TEL AS receiver,
+        PAYMENT_CHK,
+        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        QUANTITY,
+        UNIT_PRICE,
+        PROGRESS,
+        MEMO,
+        USER_TYPE
+        FROM join_report
     </select>
 
     <sql id="reportForDriver">

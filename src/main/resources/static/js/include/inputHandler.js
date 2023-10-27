@@ -42,10 +42,9 @@ class InputHandler {
         const responseData = await new RequestHandler()
             .post(url, inputData);
 
-        console.log(responseData);
-
         this.fillInput(responseData);
 
+        return responseData['driveReports'];
     }
 
     fillInput(data) {
