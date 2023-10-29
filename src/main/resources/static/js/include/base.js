@@ -4,3 +4,5 @@ function checkUndefined(val) {
     }
     return false;
 }
+
+console.log( document.querySelector('[name="' + 'paymentChk' + '"]').type);
