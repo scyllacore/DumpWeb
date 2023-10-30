@@ -1,79 +1,57 @@
 class InputHandler {
 
-    urlHandler = new UrlHandler();
-    jsonHandler = new JsonHandler();
+    objHandler = new ObjectHandler();
 
-    checkValidation(formName) {
+    getChecked(chkBoxEleName) {
+        const chkBoxEle = this.objHandler.selectElementByName(chkBoxEleName);
 
-        const formElement = document.querySelector('form[name="' + formName + '"]');
-        const formInput = formElement.querySelectorAll('input');
+        if (chkBoxEle.type !== 'checkbox') {
+            throw new Error('체크박스 입력이 아닙니다.');
+        }
 
-        for (let i = 0; i < formInput.length; i++) {
-            let value = formInput[i].value;
+        return chkBoxEle.checked;
+    }
 
-            if (formInput[i].required && value === '') {
-                alert(formInput[i].parentElement.querySelector('h3').innerHTML + '를 다시 확인해주세요');
-                formInput[i].focus();
+    getInputValue(inputEleName) {
+        const inputEle = this.objHandler.selectElementByName(inputEleName);
 
-                return true;
-            }
+        if (inputEle.tagName !== 'input') {
+            throw new Error('입력 요소가 아닙니다.');
+        }
 
+        return inputEle.value;
+    }
+
+    checkValidInput(inputName) {
+        const element = this.objHandler.selectElementByName(inputName);
+
+        if (element.required && element.value === '') {
+            element.focus();
+            return true;
         }
 
         return false;
     }
 
-    async inputDataByUrlParams(url, paramName) {
-        const ParamVal = this.urlHandler.getUrlParamVal(paramName);
+    fillInput(inputData) {
 
-        if (ParamVal === null) {
-            return;
-        }
+        for (const key in inputData) {
 
-        const data = {};
+            const element = this.objHandler.selectElementByName(key);
 
-        if(paramName === 'groupDriveReportId'){
-            data['groupId'] = ParamVal;
-        }else {
-            data[paramName] = ParamVal;
-        }
-        const inputData = this.jsonHandler.getRequestJson(data);
-
-        const responseData = await new RequestHandler()
-            .post(url, inputData);
-
-        this.fillInput(responseData);
-
-        return responseData['driveReports'];
-    }
-
-    fillInput(data) {
-
-        let selectKeys = [];
-
-        if (typeof data.mileageId !== 'undefined') {
-            selectKeys = ["item"];
-        } else if (defaultParams.url.includes('step3')) {
-            selectKeys = ["progress"];
-        }
-
-
-        for (const key in data) {
-
-            const element = document.querySelector('[name="' + key + '"]')
-
-            if (data[key] === null || element === null) {
+            if (inputData[key] === null || element === null) {
                 continue;
             }
 
-
-            if (selectKeys.includes(key)) {
-                element.querySelector('[value="' + data[key] + '"]').selected = true;
-            } else if (typeof data[key] === "boolean") {
-                element.checked = data[key];
+            if (element.tagName === 'SELECT') {
+                element.querySelector('[value="' + inputData[key] + '"]').selected = true;
+            } else if (element.type === 'checkbox') {
+                element.checked = inputData[key];
             } else {
-                element.value = data[key];
+                element.value = inputData[key];
             }
         }
     }
+
+
 }

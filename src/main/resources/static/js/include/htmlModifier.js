@@ -69,24 +69,4 @@ class HtmlModifier {
         }
     }
 
-    fillInput(inputData) {
-
-        for (const key in inputData) {
-
-            const element = this.objHandler.selectElementByName(key);
-
-            if (inputData[key] === null || element === null) {
-                continue;
-            }
-
-            if (element.tagName === 'SELECT') {
-                element.querySelector('[value="' + inputData[key] + '"]').selected = true;
-            } else if (element.type === 'checkbox') {
-                element.checked = inputData[key];
-            } else {
-                element.value = inputData[key];
-            }
-        }
-    }
-
 }

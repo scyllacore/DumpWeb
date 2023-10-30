@@ -1,19 +1,11 @@
 class Request {
-    constructor(url, options) {
-        this.fetchUrl = url;
-        this.fetchOptions = options;
-    }
-
-    async tryFetch() {
-        const result = await fetch(this.fetchUrl, this.fetchOptions);
-        return result.json()
-            .catch(error => {
-                alert("예기치 못한 오류가 발생했습니다.");
-            });
+    constructor(url, option) {
+        this.url = url;
+        this.option = option;
     }
 
     async tryRequest() {
-        const jsonData = await this.tryFetch();
+        const jsonData = await this.runFetch();
 
         if (jsonData.status !== 200) {
             alert(jsonData.data);
@@ -21,5 +13,13 @@ class Request {
         }
 
         return jsonData.data;
+    }
+
+    async runFetch() {
+        const result = await fetch(this.url, this.option);
+        return result.json()
+            .catch(error => {
+                alert("예기치 못한 오류가 발생했습니다.");
+            });
     }
 }

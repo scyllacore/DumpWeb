@@ -1,4 +1,4 @@
-class ActiveInputInfo {
+class InputActiveHandler{
 
     objHandler = new ObjectHandler();
     inputHandler = new InputHandler();
@@ -39,6 +39,7 @@ class ActiveInputInfo {
         }
     }
 
+/*
     activateFormForSubmit(formEleName) {
         const formEle = this.objHandler.selectElementByName(formEleName);
         const innerEles = formEle.querySelectorAll('input, select, textarea');
@@ -47,5 +48,6 @@ class ActiveInputInfo {
             ele.disabled = false;
         });
     }
+*/
 
 }

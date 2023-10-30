@@ -1,34 +1,42 @@
-//함수 호출.
-changeSpeechToText();
+class SpeechRecognition {
 
-//함수 선언.
-function changeSpeechToText(){
+    objHandler = new ObjectHandler();
 
-  const SpeechRecongition = window.SpeechRecongition || window.webkitSpeechRecognition;
+    constructor() {
+        this.start();
+    }
 
-  if(SpeechRecongition === null)
-  {
-    alert('이 브라우저는 음성인식을 지원하지 않습니다.');
-    return;
-  }
+    start() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  const micImages = document.querySelectorAll('.mic-img');
-  const micText = document.querySelectorAll('.mic-text');
+        if (SpeechRecognition === null) {
+            alert('이 브라우저는 음성인식을 지원하지 않습니다.');
+            return;
+        }
 
-  micImages.forEach((image,idx) => {
-    image.addEventListener('click', () => {
-      const recognition = new SpeechRecongition();
+        const micImages = this.objHandler.selectAllElementsByClass('mic-img');
+        const micTexts = this.objHandler.selectAllElementsByClass('mic-text');
 
-      recognition.onstart = () => {
-        micText[idx].value = '음성 입력 중...';
-      };
+        const length = (micImages.length + micTexts.length) / 2;
 
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        micText[idx].value = transcript;
-      };
-      recognition.start();
-    });
-  })
+        for (let i = 0; i < length; i++) {
+            this.recognizeSpeech(micImages[i], micTexts[i]);
+        }
+    }
+
+    recognizeSpeech(image, micText) {
+        image.addEventListener('click', () => {
+            const recognition = new SpeechRecognition();
+
+            recognition.onstart = () => {
+                micText.value = '음성 입력 중...';
+            };
+
+            recognition.onresult = (event) => {
+                micText.value = event.results[0][0].transcript;
+            };
+            recognition.start();
+        });
+    }
 
 }

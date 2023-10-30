@@ -1,30 +1,35 @@
-//함수 호출
-setAnimation('menu-wrap');
+class PopUp {
 
-//함수 정의
-function openPopUp(page) {
-    document.querySelector('.' + page).style.display = 'block';
-}
+    objHandler = new ObjectHandler();
 
-function closePopUp(page) {
-    document.querySelector('.' + page).style.display = 'none';
-}
-
-function openAndCloseDetailSearch(page,btn) {
-    const element = document.querySelector('.' + page);
-
-    if(element.style.display === 'none' || element.style.display === ''){ // 처음에 왜 값 조회 못하는지 알아낼 것.
-        btn.innerHTML = '상세 검색 닫기';
-        element.style.display = 'block'
-    }else{
-        btn.innerHTML = '상세 검색 열기';
-        element.style.display = 'none';
+    constructor() {
+        this.setAnimation('menu-wrap');
     }
-}
 
-function setAnimation(elementClassName) {
-    const element = document.querySelector('.' + elementClassName); // 요소를 선택
-    element.classList.add("animation-slideInFromRight"); // 애니메이션 클래스 추가
+    openPopUp(page) {
+        this.objHandler.selectElementByClass(page).style.display = 'block';
+    }
+
+    closePopUp(page) {
+        this.objHandler.selectElementByClass(page).style.display = 'none';
+    }
+
+    handleDetailSearchPopUp(page, btn) {
+        const element = this.objHandler.selectElementByClass(page)
+
+        if (element.style.display === 'none') {
+            btn.innerHTML = '상세 검색 닫기';
+            element.style.display = 'block'
+        } else {
+            btn.innerHTML = '상세 검색 열기';
+            element.style.display = 'none';
+        }
+    }
+
+    setAnimation(className) {
+        const element = this.objHandler.selectElementByClass(className)
+        element.classList.add("animation-slideInFromRight");
+    }
 }
 
 
