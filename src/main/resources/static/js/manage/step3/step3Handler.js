@@ -5,14 +5,17 @@ class Step3Handler {
     jsonHandler = new JsonHandler();
     urlHandler = new UrlHandler();
     inputActiveHandler = new InputActiveHandler();
+    objHandler = new ObjectHandler();
+    htmlModifier = new HtmlModifier();
 
     constructor() {
         this.run();
     }
 
     async run() {
-
-
+        this.loadInputDataByUrlParams();
+        this.redirectByDriveReportId();
+        this.setInputDisabled();
     }
 
     async loadInputDataByUrlParams() {
@@ -38,5 +41,47 @@ class Step3Handler {
         this.inputActiveHandler.disableInputsByCheckBox('paymentChk', activeInputElementNames);
     }
 
+    createDriveReportFormObj() {
+        return this.objHandler.convertFormIntoObject(
+            this.objHandler.selectElementByName('driveReportForm'));
+    }
+
+    async save() {
+        const requestObj = this.getDriveReportFormObj();
+
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportSave'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        alert(responseData);
+        location.href = '/manage/step3'
+    }
+
+    async remove(containerKey) {
+        const requestObj = this.createDriveReportFormObj();
+
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportRemove'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        alert(responseData);
+        location.href = defaultParams.url;
+    }
+
+    async driveReportsRetrieval() {
+        const requestObj = this.createDriveReportFormObj();
+
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportList'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
+        this.htmlModifier.printList('drive-report-tuple', responseData);
+        this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
+    }
+
+    async receiverListRetrieval() {
+        const responseData = await this.requestHandler
+            .get('/manage/step3' + '/fetch/' + 'submitterList');
+
+        this.htmlModifier.printList('submitter-tuple', responseData);
+    }
 
 }

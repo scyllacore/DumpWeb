@@ -8,7 +8,7 @@ class HtmlModifier {
         parentTh.insertBefore(ChildTh, parentTh.firstChild);
     }
 
-    printList(listData, tBodyClass) {
+    printList(tBodyClass, listData) {
         const tBodyEle = this.objHandler.selectElementByClass(tBodyClass);
         tBodyEle.innerHTML = "";
 
@@ -27,7 +27,9 @@ class HtmlModifier {
     }
 
     addRedLineToTableByDifferentValue(tBodyClass) {
-        const childTrs = tBodyClass.children;
+        const tBodyEle = this.objHandler.selectElementByClass(tBodyClass);
+        
+        const childTrs = tBodyEle.children;
         let start = childTrs[0].children[0];
 
         for (let i = 1; i < childTrs.length; i++) {
