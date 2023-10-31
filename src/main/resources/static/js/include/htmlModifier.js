@@ -28,7 +28,7 @@ class HtmlModifier {
 
     addRedLineToTableByDifferentValue(tBodyClass) {
         const tBodyEle = this.objHandler.selectElementByClass(tBodyClass);
-        
+
         const childTrs = tBodyEle.children;
         let start = childTrs[0].children[0];
 

@@ -13,14 +13,14 @@
         <div class="wrap">
             <h2>체험 유형을 선택해주세요.</h2>
             <div class="select-area">
-                <form name="trialInfo" method="post">
+                <form name="trialForm" method="post">
                     <input type="hidden" name="userType">
                 </form>
 
-                <div class="select-box-driver" name="driver" onclick = "func.accessTrialMode(this)">
+                <div class="select-box-driver" name="driver" onclick = "func.accessTrialMode('driver')">
                     <img src="/image/login/driver_btn.png">
                 </div>
-                <div class="select-box-submitter" name="submitter" onclick = "func.accessTrialMode(this)">
+                <div class="select-box-submitter" name="submitter" onclick = "func.accessTrialMode('submitter')">
                     <img src="/image/login/manager_btn.png">
                 </div>
             </div>

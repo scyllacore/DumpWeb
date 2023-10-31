@@ -1,18 +1,21 @@
 let authHandler;
 
 document.addEventListener("DOMContentLoaded", () => {
-    authHandler = new AuthHandler(paramsContainer);
+    authHandler = new AuthHandler();
+    getLoginCookie();
+})
 
+function getLoginCookie() {
     const userInfo = authHandler.cookieHandler.getCookie();
 
     if (typeof userInfo['userId'] === 'undefined') {
         return;
     }
 
-    document.querySelector('input[name = "userId"]').value = userInfo['userId'];
-    document.querySelector('input[name = "userPwd"]').value = userInfo['userPwd'];
-    document.querySelector('input[name = "accountSave"]').checked = true;
-})
+    authHandler.objHandler.selectElementByName('userId').value = userInfo['userId'];
+    authHandler.objHandler.selectElementByName('userPwd').value = userInfo['userPwd'];
+    authHandler.objHandler.selectElementByName('accountSave').checked = true;
+}
 
 const func = {
     async join() {
@@ -21,8 +24,9 @@ const func = {
     async login() {
         await authHandler.login('login')
     },
-    async accessTrialMode(_this) {
-        await authHandler.accessTrialMode('trial', _this)
+    async accessTrialMode(type) {
+        authHandler.objHandler.selectElementByName('userType').value = type;
+        await authHandler.accessTrialMode();
     },
     async changePassword() {
         await authHandler.changePassword('passwordChange')

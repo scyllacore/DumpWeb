@@ -27,7 +27,7 @@ class Step3Handler {
 
         const reqData = this.jsonHandler.convertObjectToJson({driveReportId: driveReportId});
         const inputData = this.requestHandler
-            .post('/manage/step3' + '/fetch/' + 'driveReportSave', reqData);
+            .post('/manage/step3' + '/fetch' + '/driveReportSave', reqData);
 
         this.inputHandler.fillInput(inputData);
     }
@@ -47,9 +47,9 @@ class Step3Handler {
     }
 
     async save() {
-        const requestObj = this.getDriveReportFormObj();
+        const requestObj = this.createDriveReportFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportSave'
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportSave'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
@@ -59,7 +59,7 @@ class Step3Handler {
     async remove(containerKey) {
         const requestObj = this.createDriveReportFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportRemove'
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportRemove'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
@@ -69,7 +69,7 @@ class Step3Handler {
     async driveReportsRetrieval() {
         const requestObj = this.createDriveReportFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch/' + 'driveReportList'
+        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
@@ -79,7 +79,7 @@ class Step3Handler {
 
     async receiverListRetrieval() {
         const responseData = await this.requestHandler
-            .get('/manage/step3' + '/fetch/' + 'submitterList');
+            .get('/manage/step3' + '/fetch' + '/submitterList');
 
         this.htmlModifier.printList('submitter-tuple', responseData);
     }

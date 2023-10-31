@@ -3,111 +3,121 @@ class AuthHandler {
     inputHandler = new InputHandler();
     requestHandler = new RequestHandler();
     cookieHandler = new CookieHandler();
+    objHandler = new ObjectHandler();
+    jsonHandler = new JsonHandler();
 
-    constructor(paramContainer) {
-        this.paramContainer = paramContainer;
+
+    constructor() {
     }
 
-    async join(containerKey) {
-        const paramObj = this.paramContainer[containerKey];
+    async join() {
+        const inputElementNames = ['userId', 'userPwd', 'tel', 'name'];
 
-        if (this.inputHandler.checkValidation(paramObj.formName)) {
+        for (const name of inputElementNames) {
+            if (this.inputHandler.checkValidInput(name)) {
+                return;
+            }
+        }
+
+        if (this.checkEqualPassword()) {
             return;
         }
 
-        let inputData = this.inputHandler.jsonHandler
-            .getRequestJson(paramObj.formName, paramObj.inputCheckBoxElements);
-
-        if (this.checkEqualPassword(inputData)) {
-            return;
-        }
-
-        if(document.querySelector('input[name = "privacyChk"]').checked === false){
+        if (this.checkPrivacyChk()) {
             alert("개인 정보 수집 및 이용에 동의해주세요.");
             return;
         }
 
-        const responseData = await this.requestHandler
-            .post(paramObj.url + '/fetch/' + 'join', inputData);
+        const requestObj = this.createFormObj('joinForm');
+
+        const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/join'
+            , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
         location.href = '/login';
     }
 
-    async login(containerKey) {
-        const paramObj = this.paramContainer[containerKey];
-
-        const inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.formName);
-
-        const responseData = await this.requestHandler
-            .post(paramObj.url + '/fetch/' + 'login', inputData);
-
-        let inputObj = JSON.parse(inputData);
-
-        if (document.querySelector('input[name = "accountSave"]').checked === true) {
-            this.cookieHandler.setCookie('userId', inputObj.userId, 30);
-            this.cookieHandler.setCookie('userPwd', inputObj.userPwd, 30);
-        } else {
-            this.cookieHandler.deleteCookie('userId');
-            this.cookieHandler.deleteCookie('userPwd');
-        }
-
-        console.log(responseData);
-
-        location.href = responseData;
+    checkPrivacyChk() {
+        return this.objHandler.selectElementByName('privacyChk').checked === false;
     }
 
-    async accessTrialMode(containerKey,_this) {
+    checkEqualPassword() {
+        const userPwd = this.objHandler.selectElementByName('userPwd');
+        const userPwdChk = this.objHandler.selectElementByName('userPwdChk');
 
-        document.querySelector('input[name = "userType"]').value = _this.getAttribute("name");
-
-        const paramObj = this.paramContainer[containerKey];
-
-        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.formName);
-
-        const responseData = await this.requestHandler
-            .post(paramObj.url + '/fetch/' + 'trialLogin', inputData);
-
-        location.href = responseData;
-    }
-
-    async changePassword(containerKey) {
-        const paramObj = this.paramContainer[containerKey];
-
-        if (this.inputHandler.checkValidation(paramObj.formName)) {
-            return;
-        }
-
-        let inputData = this.inputHandler.jsonHandler.getRequestJson(paramObj.formName);
-
-        if (this.checkEqualPassword(inputData)) {
-            return;
-        }
-
-        const responseData = await this.requestHandler
-            .post(paramObj.url + '/fetch/' + 'passwordChange', inputData);
-
-
-        alert(responseData);
-        location.href = '/login';
-    }
-
-    checkEqualPassword(inputData) {
-        let inputObj = JSON.parse(inputData);
-
-        if (inputObj.userPwd !== inputObj.userPwdChk) {
+        if (userPwd.value !== userPwdChk.value) {
             alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-            document.querySelector('[name = "userPwd"]').focus();
+            userPwd.focus();
             return true;
         }
 
-        if (inputObj.userPwd.length < 4) {
+        if (userPwd.value.length < 4) {
             alert("비밀번호는 4글자 이상 입력해주세요.");
-            document.querySelector('input[name = "userPwd"]').focus();
+            userPwd.focus();
             return true;
         }
 
         return false;
     }
+
+    async login() {
+        const requestObj = this.createFormObj('loginForm');
+
+        const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/login'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        this.setLoginCookie(requestObj);
+        location.href = responseData;
+    }
+
+    setLoginCookie(requestObj) {
+        if (this.objHandler.selectElementByName('accountSave').checked === true) {
+            this.cookieHandler.setCookie('userId', requestObj.userId, 30);
+            this.cookieHandler.setCookie('userPwd', requestObj.userPwd, 30);
+        } else {
+            this.cookieHandler.deleteCookie('userId');
+            this.cookieHandler.deleteCookie('userPwd');
+        }
+    }
+
+    async accessTrialMode() {
+        const requestObj = this.createFormObj('trialForm');
+
+        const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/trialLogin'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        location.href = responseData;
+    }
+
+
+    async changePassword() {
+        const inputElementNames = ['userPwd', 'userPwdChk'];
+
+        for (const name of inputElementNames) {
+            if (this.inputHandler.checkValidInput(name)) {
+                return;
+            }
+        }
+
+        if (this.checkEqualPassword()) {
+            return;
+        }
+
+        const requestObj = this.createFormObj('passwordChangeForm');
+
+
+        const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/passwordChange'
+            , this.jsonHandler.convertObjectToJson(requestObj));
+
+        alert(responseData);
+        location.href = '/login';
+    }
+
+
+    createFormObj(name) {
+        return this.objHandler.convertFormIntoObject(
+            this.objHandler.selectElementByName(name));
+    }
+
 
 }
