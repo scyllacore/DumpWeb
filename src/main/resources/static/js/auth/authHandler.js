@@ -11,24 +11,11 @@ class AuthHandler {
     }
 
     async join() {
-        const inputElementNames = ['userId', 'userPwd', 'tel', 'name'];
-
-        for (const name of inputElementNames) {
-            if (this.inputHandler.checkValidInput(name)) {
-                return;
-            }
-        }
-
-        if (this.checkEqualPassword()) {
+        if(this.checkValidation()){
             return;
         }
 
-        if (this.checkPrivacyChk()) {
-            alert("개인 정보 수집 및 이용에 동의해주세요.");
-            return;
-        }
-
-        const requestObj = this.createFormObj('joinForm');
+        const requestObj = this.objHandler.createFormObj('joinForm');
 
         const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/join'
             , this.jsonHandler.convertObjectToJson(requestObj));
@@ -37,8 +24,31 @@ class AuthHandler {
         location.href = '/login';
     }
 
+    checkValidation(){
+        const inputElementNames = ['userId', 'userPwd', 'tel', 'name'];
+
+        for (const name of inputElementNames) {
+            if (this.inputHandler.checkValidInput(name)) {
+                return true;
+            }
+        }
+
+        if (this.checkEqualPassword()) {
+            return true;
+        }
+        if (this.checkPrivacyChk()) {
+            return true;
+        }
+        return false;
+    }
+
     checkPrivacyChk() {
-        return this.objHandler.selectElementByName('privacyChk').checked === false;
+        if(this.objHandler.selectElementByName('privacyChk').checked  === false){
+            alert("개인 정보 수집 및 이용에 동의해주세요.");
+            return true;
+        }
+
+        return false;
     }
 
     checkEqualPassword() {
@@ -61,7 +71,7 @@ class AuthHandler {
     }
 
     async login() {
-        const requestObj = this.createFormObj('loginForm');
+        const requestObj = this.objHandler.createFormObj('loginForm');
 
         const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/login'
             , this.jsonHandler.convertObjectToJson(requestObj));
@@ -81,7 +91,7 @@ class AuthHandler {
     }
 
     async accessTrialMode() {
-        const requestObj = this.createFormObj('trialForm');
+        const requestObj = this.objHandler.createFormObj('trialForm');
 
         const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/trialLogin'
             , this.jsonHandler.convertObjectToJson(requestObj));
@@ -103,7 +113,7 @@ class AuthHandler {
             return;
         }
 
-        const requestObj = this.createFormObj('passwordChangeForm');
+        const requestObj =this.objHandler.createFormObj('passwordChangeForm');
 
 
         const responseData = await this.requestHandler.post('/auth' + '/fetch' + '/passwordChange'
@@ -111,12 +121,6 @@ class AuthHandler {
 
         alert(responseData);
         location.href = '/login';
-    }
-
-
-    createFormObj(name) {
-        return this.objHandler.convertFormIntoObject(
-            this.objHandler.selectElementByName(name));
     }
 
 

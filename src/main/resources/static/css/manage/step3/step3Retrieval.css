@@ -47,25 +47,6 @@
   font-size: 30px;
   font-weight: bold;
 }
-.search-result .search-result-wrapper .payment-wrapper {
-  display: flex;
-  justify-content: right;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  font-size: 12px;
-}
-.search-result .search-result-wrapper .payment-wrapper .payment-btn {
-  width: 80px;
-  height: 40px;
-  border: 1px solid #0068b7;
-  margin: 5px;
-  text-align: center;
-  color: #0064c1;
-  background: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
 .search-result .search-result-wrapper .table-wrapper {
   display: flex;
   justify-content: center;
@@ -74,7 +55,7 @@
   border-spacing: 0;
   border-collapse: collapse;
 }
-.search-result .search-result-wrapper .table-wrapper table .table-key th {
+.search-result .search-result-wrapper .table-wrapper table .drive-report-key th {
   padding: 8px 7px;
   border: 1px solid #ddd;
   text-align: center;

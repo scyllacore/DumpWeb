@@ -1,4 +1,4 @@
-class PopUp {
+class PopUpHandler {
 
     objHandler = new ObjectHandler();
 

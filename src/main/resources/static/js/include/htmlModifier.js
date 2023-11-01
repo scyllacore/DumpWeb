@@ -8,17 +8,18 @@ class HtmlModifier {
         parentTh.insertBefore(ChildTh, parentTh.firstChild);
     }
 
-    printList(tBodyClass, listData) {
+    printList(tHeadClass, tBodyClass, listData) {
         const tBodyEle = this.objHandler.selectElementByClass(tBodyClass);
-        tBodyEle.innerHTML = "";
+        const tHeadEle = this.objHandler.selectElementByClass(tHeadClass);
 
+        tBodyEle.innerHTML = "";
         listData.forEach((data, no) => {
             const row = document.createElement("tr");
-            const childTd = tBodyEle.children;
+            const childTd = tHeadEle.children;
 
-            row.innerHTML += `<td>` + no + `</td>`
+            row.innerHTML += `<td>` + (no + 1) + `</td>`
 
-            for (let i = 0; i < childTd.length; i++) {
+            for (let i = 1; i < childTd.length; i++) {
                 row.innerHTML += `<td>` + data[childTd[i].className] + `</td>`
             }
 

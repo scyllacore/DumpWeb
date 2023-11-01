@@ -3,7 +3,6 @@
 
 <th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
 
-<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
 
 <head>
     <link href="/css/manage/step3/step3Index.css" rel="stylesheet" type="text/css">
@@ -36,13 +35,13 @@
                 <h3>제출처</h3>
                 <input type="hidden" name="submitterIdFk" required>
                 <input type="number" name="receiver" disabled required>
-                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn" onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회</button>
+                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회</button>
             </div>
 
             <div class="period-wrapper">
                 <h3>운행일</h3>
                 <input type="date" name="driveDate" required>
-                <button type="button" name="driveReportRetrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+                <button type="button" name="driveReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()" required>조회</button>
             </div>
 
             <div class="from-site-wrapper">
@@ -101,8 +100,8 @@
     </div>
 </container>
 
-<script src="/js/manage/step3/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step3/step3Handler.js"></script>
 <script src="/js/manage/step3/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

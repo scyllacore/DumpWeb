@@ -1,30 +1,28 @@
-class InputActiveHandler{
+class InputActiveHandler {
 
     objHandler = new ObjectHandler();
     inputHandler = new InputHandler();
 
-    disableChildInputsByCheckBoxesNotChecked(childChkBoxEleName, childEleName, parentEleName) {
-        const childChk = this.inputHandler.getChecked(childChkBoxEleName);
-        const parentChk = this.inputHandler.getChecked(parentEleName);
+    disableChildInputsByCheckBoxesNotChecked(childChkBoxName, parentChkBoxName, childInputEleNames) {
+        const childChk = this.inputHandler.getChecked(childChkBoxName);
+        const parentChk = this.inputHandler.getChecked(parentChkBoxName);
 
         if (parentChk || childChk) {
             return;
         }
 
-        this.disableInputsByCheckBox(childChkBoxEleName, childEleName);
+        this.disableInputs(childInputEleNames);
     }
 
-    activateInputsByCheckBox(chkBoxEleName, inputEleNames) {
-        this.setDisabled(chkBoxEleName, inputEleNames, false);
+    activateInputs(inputEleNames) {
+        this.setDisabled(inputEleNames, false);
     }
 
-    disableInputsByCheckBox(chkBoxEleName, inputEleNames) {
-        this.setDisabled(chkBoxEleName, inputEleNames, true);
+    disableInputs(inputEleNames) {
+        this.setDisabled(inputEleNames, true);
     }
 
-    setDisabled(chkBoxEleName, inputEleNames, disabledType) {
-        const chkBoxEle = this.objHandler.selectElementByName(chkBoxEleName);
-
+    setDisabled(inputEleNames, disabledType) {
         for (const name of inputEleNames) {
             const inputEle = this.objHandler.selectElementByName(name);
             inputEle.disabled = disabledType;
@@ -38,16 +36,5 @@ class InputActiveHandler{
             initEle.checked = false;
         }
     }
-
-/*
-    activateFormForSubmit(formEleName) {
-        const formEle = this.objHandler.selectElementByName(formEleName);
-        const innerEles = formEle.querySelectorAll('input, select, textarea');
-
-        innerEles.forEach(function (ele) {
-            ele.disabled = false;
-        });
-    }
-*/
 
 }

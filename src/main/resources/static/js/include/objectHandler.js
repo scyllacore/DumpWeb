@@ -12,8 +12,12 @@ class ObjectHandler {
         return document.querySelectorAll('.' + name);
     }
 
-    convertFormIntoObject(formElement) {
-        return Object.fromEntries(new FormData(formElement).entries());
+    createFormObj(name) {
+        return this.convertFormIntoObject(this.selectElementByName(name));
+    }
+
+    convertFormIntoObject(formEle) {
+        return Object.fromEntries(new FormData(formEle).entries());
     }
 
     addPropertyToObject(obj, properties) {

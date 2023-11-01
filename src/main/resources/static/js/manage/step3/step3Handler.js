@@ -8,6 +8,9 @@ class Step3Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
+    activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+
+
     constructor() {
         this.run();
     }
@@ -15,8 +18,23 @@ class Step3Handler {
     async run() {
         this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
-        this.setInputDisabled();
+        this.handleInputActiveByPaymentChk()
     }
+
+    handleInputActiveByPaymentChk() {
+        if (this.inputHandler.getChecked('paymentChk')) {
+            this.inputActiveHandler.disableInputs(this.activeInputElementNames);
+        }
+
+        document.addEventListener('change', event => {
+            if (this.inputHandler.getChecked('paymentChk')) {
+                this.inputActiveHandler.disableInputs(this.activeInputElementNames);
+            } else {
+                this.inputActiveHandler.activateInputs(this.activeInputElementNames)
+            }
+        })
+    }
+
 
     async loadInputDataByUrlParams() {
         const driveReportId = new UrlHandler().getUrlParameterValue('driveReportId');
@@ -36,17 +54,13 @@ class Step3Handler {
         this.urlHandler.redirectByElementData('/manage/step3', 'drive-report-tuple', 'driveReportId');
     }
 
-    setInputDisabled() {
-        const activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
-        this.inputActiveHandler.disableInputsByCheckBox('paymentChk', activeInputElementNames);
-    }
-
     createDriveReportFormObj() {
-        return this.objHandler.convertFormIntoObject(
-            this.objHandler.selectElementByName('driveReportForm'));
+        return this.objHandler.createFormObj('driveReportForm');
     }
 
     async save() {
+        this.inputActiveHandler.activateInputs(this.activeInputElementNames);
+
         const requestObj = this.createDriveReportFormObj();
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportSave'
@@ -57,6 +71,8 @@ class Step3Handler {
     }
 
     async remove(containerKey) {
+        this.inputActiveHandler.activateInputs(this.activeInputElementNames);
+
         const requestObj = this.createDriveReportFormObj();
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportRemove'
@@ -72,16 +88,18 @@ class Step3Handler {
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('drive-report-tuple', responseData);
-        this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
+        console.log(responseData);
+
+/*        this.htmlModifier.moveColumnToTheFront('reportNo');*/
+        this.htmlModifier.printList('drive-report-key','drive-report-tuple', responseData);
+/*        this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');*/
     }
 
     async receiverListRetrieval() {
         const responseData = await this.requestHandler
             .get('/manage/step3' + '/fetch' + '/submitterList');
 
-        this.htmlModifier.printList('submitter-tuple', responseData);
+        this.htmlModifier.printList('submitter-key','submitter-tuple', responseData);
     }
 
 }
