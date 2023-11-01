@@ -26,6 +26,7 @@ class InputHandler {
         const element = this.objHandler.selectElementByName(inputName);
 
         if (element.required && element.value === '') {
+            alert('폼을 다시 확인해주세요');
             element.focus();
             return true;
         }

@@ -18,7 +18,8 @@ class Step3Handler {
     async run() {
         this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
-        this.handleInputActiveByPaymentChk()
+        this.handleInputActiveByPaymentChk();
+        this.inputSubmitter()
     }
 
     handleInputActiveByPaymentChk() {
@@ -44,8 +45,10 @@ class Step3Handler {
         }
 
         const reqData = this.jsonHandler.convertObjectToJson({driveReportId: driveReportId});
-        const inputData = this.requestHandler
-            .post('/manage/step3' + '/fetch' + '/driveReportSave', reqData);
+        const inputData = await this.requestHandler
+            .post('/manage/step3' + '/fetch' + '/driveReportDetails', reqData);
+
+        console.log(inputData);
 
         this.inputHandler.fillInput(inputData);
     }
@@ -61,6 +64,10 @@ class Step3Handler {
     async save() {
         this.inputActiveHandler.activateInputs(this.activeInputElementNames);
 
+        if (this.checkSaveValidation()) {
+            return;
+        }
+
         const requestObj = this.createDriveReportFormObj();
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportSave'
@@ -68,6 +75,23 @@ class Step3Handler {
 
         alert(responseData);
         location.href = '/manage/step3'
+    }
+
+    checkSaveValidation() {
+        const requiredInputs = document.querySelectorAll('input[required]');
+        const requiredNames = [];
+
+        requiredInputs.forEach(input => {
+            requiredNames.push(input.name);
+        })
+
+        for(let name of requiredNames){
+            if (this.inputHandler.checkValidInput(name)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     async remove(containerKey) {
@@ -88,18 +112,41 @@ class Step3Handler {
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        console.log(responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
 
-/*        this.htmlModifier.moveColumnToTheFront('reportNo');*/
-        this.htmlModifier.printList('drive-report-key','drive-report-tuple', responseData);
-/*        this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');*/
+        const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
+
+        responseData.forEach((data, idx) => {
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'driveReportId', data['driveReportId']);
+        })
     }
 
     async receiverListRetrieval() {
         const responseData = await this.requestHandler
             .get('/manage/step3' + '/fetch' + '/submitterList');
 
-        this.htmlModifier.printList('submitter-key','submitter-tuple', responseData);
+        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData);
+
+        const tBodyEleChild = this.objHandler.selectElementByClass('submitter-tuple').children;
+
+        responseData.forEach((data, idx) => {
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'submitterId', data['submitterId']);
+        })
+    }
+
+     inputSubmitter() {
+         const tableEle = this.objHandler.selectElementByClass('submitter-tuple');
+
+         tableEle.addEventListener("click", (event) => {
+             const parentEle = event.target.parentElement;
+             const submitterId = parentEle.getAttribute('data-' + 'submitterId');
+             const submitterTel = parentEle.children[1].innerHTML;
+
+             this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
+             this.objHandler.selectElementByName('receiver').value = submitterTel;
+
+             popUpHandler.closePopUp('submitter-search-result');
+         });
     }
 
 }
