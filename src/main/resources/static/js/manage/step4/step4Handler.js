@@ -7,6 +7,16 @@ class Step4Handler {
     htmlModifier = new HtmlModifier();
 
     tagNames = ['tels', 'companies', 'fromSites', 'toSites', 'items'];
+    driveReportKey = `
+                        <th>No</th>
+                        <th class="driveDate">날짜</th>
+                        <th class="company">제출처</th>
+                        <th class="fromSite">상차지</th>
+                        <th class="toSite">하차지</th>
+                        <th class="item">품목</th>
+                        <th class="quantity">대수</th>
+                        <th class="unitPrice">운반단가</th>
+    `;
 
     constructor() {
         this.run();
@@ -28,7 +38,10 @@ class Step4Handler {
         const responseData = await this.requestHandler.post('/manage/step4' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
+        this.objHandler.selectElementByClass('drive-report-key').innerHTML = this.driveReportKey;
+        this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
         this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
@@ -72,14 +85,13 @@ class Step4Handler {
         });
     }
 
-    setOneDisplayToBlock(pick){
+    setOneDisplayToBlock(pick) {
         for (const name of this.tagNames) {
             if (name !== pick) {
                 this.objHandler.selectElementByName(name).style.display = 'none';
             }
         }
     }
-
 
 
     printSearchOptionToDiv(listData, inputEle) {

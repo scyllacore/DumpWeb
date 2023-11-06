@@ -5,7 +5,7 @@ class HtmlModifier {
     moveColumnToTheFront(movingTh) {
         const ChildTh = this.objHandler.selectElementByClass(movingTh);
         const parentTh = ChildTh.parentNode;
-        parentTh.insertBefore(ChildTh, parentTh.firstChild);
+        parentTh.insertBefore(ChildTh, parentTh.children[1]);
     }
 
     printList(tHeadClass, tBodyClass, listData) {
@@ -31,13 +31,13 @@ class HtmlModifier {
         const tBodyEle = this.objHandler.selectElementByClass(tBodyClass);
 
         const childTrs = tBodyEle.children;
-        let start = childTrs[0].children[0];
+        let start = childTrs[0].children[1];
 
         for (let i = 1; i < childTrs.length; i++) {
-            let end = childTrs[i].children[0];
+            let end = childTrs[i].children[1];
 
             if (start.innerHTML !== end.innerHTML) {
-                end.classList.add("red-line-divider");
+                end.parentElement.classList.add("red-line-divider");
                 start = end;
             }
         }
