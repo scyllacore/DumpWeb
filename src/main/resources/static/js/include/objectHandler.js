@@ -26,4 +26,12 @@ class ObjectHandler {
         }
     }
 
+    changeOnToTrue(obj){
+        for(const i in obj){
+            if(obj[i] === 'on'){
+                obj[i] = true;
+            }
+        }
+    }
+
 }

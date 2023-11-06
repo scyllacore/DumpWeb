@@ -16,7 +16,7 @@ class Step3Handler {
     }
 
     async run() {
-        this.loadInputDataByUrlParams();
+        await this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
         this.handleInputActiveByPaymentChk();
         this.inputSubmitter()
@@ -53,7 +53,7 @@ class Step3Handler {
         this.inputHandler.fillInput(inputData);
     }
 
-    async redirectByDriveReportId() {
+    redirectByDriveReportId() {
         this.urlHandler.redirectByElementData('/manage/step3', 'drive-report-tuple', 'driveReportId');
     }
 
@@ -62,13 +62,14 @@ class Step3Handler {
     }
 
     async save() {
-        this.inputActiveHandler.activateInputs(this.activeInputElementNames);
-
         if (this.checkSaveValidation()) {
             return;
         }
 
+        this.inputActiveHandler.activateInputs(this.activeInputElementNames);
+
         const requestObj = this.createDriveReportFormObj();
+        this.objHandler.changeOnToTrue(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportSave'
             , this.jsonHandler.convertObjectToJson(requestObj));
@@ -108,6 +109,7 @@ class Step3Handler {
 
     async driveReportsRetrieval() {
         const requestObj = this.createDriveReportFormObj();
+        this.objHandler.changeOnToTrue(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
