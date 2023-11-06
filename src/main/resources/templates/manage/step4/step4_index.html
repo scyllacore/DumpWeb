@@ -3,7 +3,6 @@
 
 <th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
 
-<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
 
 <head>
     <link href="/css/manage/step4/step4Index.css" rel="stylesheet" type="text/css">
@@ -20,7 +19,7 @@
 
         <div class="line"></div>
 
-        <form class="option-form" name="optionForm">
+        <form class="search-option-form" name="searchOptionForm">
 
             <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
 
@@ -45,7 +44,7 @@
             </div>
 
             <div class="detail-search-wrapper">
-                <button type="button" onclick="openAndCloseDetailSearch('detail-search-inner',this)">
+                <button type="button" onclick="func.openAndCloseDetailSearch('detail-search-inner',this)">
                     상세 검색 열기
                 </button>
 
@@ -85,7 +84,7 @@
 
 
             <div class="search-btn-wrapper">
-                <button type="button" class="search-btn" onclick="openPopUp('search-result'); func.listRetrieval()">검색
+                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()">검색
                 </button>
             </div>
         </form>
@@ -95,8 +94,8 @@
     </div>
 </container>
 
-<script src="/js/manage/step4/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step4/step4Handler.js"></script>
 <script src="/js/manage/step4/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

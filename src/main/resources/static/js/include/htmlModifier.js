@@ -47,29 +47,4 @@ class HtmlModifier {
         ele.setAttribute('data-' + name, val);
     }
 
-    searchList(listData, className) {
-        const searchEle = this.objHandler.selectElementByClass(className);
-        const inputEle = searchEle.querySelector('input');
-
-        inputEle.addEventListener('click', (event) => {
-            this.printSearchListToDiv(listData, inputEle);
-        });
-
-        inputEle.addEventListener('keyup', (event) => {
-            const matchDataList = listData.filter((data) => data.includes(inputEle.value));
-            this.printSearchListToDiv(matchDataList, inputEle);
-        });
-    }
-
-    printSearchListToDiv(listData, inputEle) {
-        const ele = inputEle.parentElement.querySelector('div');
-        ele.innerHTML = ``;
-        ele.style.display = 'block';
-
-        const key = ele.getAttribute('name');
-        for (const val of listData[key]) {
-            ele.innerHTML += `<option>` + val + `</option>`
-        }
-    }
-
 }
