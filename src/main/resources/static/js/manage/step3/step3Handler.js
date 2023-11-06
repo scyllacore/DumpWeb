@@ -27,7 +27,9 @@ class Step3Handler {
             this.inputActiveHandler.disableInputs(this.activeInputElementNames);
         }
 
-        document.addEventListener('change', event => {
+        const chkBox = this.objHandler.selectElementByName('paymentChk');
+
+        chkBox.addEventListener('change', event => {
             if (this.inputHandler.getChecked('paymentChk')) {
                 this.inputActiveHandler.disableInputs(this.activeInputElementNames);
             } else {
