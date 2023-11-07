@@ -1,16 +1,18 @@
-let manageHandler;
-document.addEventListener("DOMContentLoaded", () =>{
-    manageHandler = new ManageHandler(paramsContainer);
+let step6Handler;
+const popUpHandler = new PopUpHandler();
+
+document.addEventListener("DOMContentLoaded", () => {
+    step6Handler = new Step6Handler();
 })
 
 const func = {
-    async listRetrieval(){
-       await manageHandler.listRetrieval('step6');
+    async mileageRetrieval() {
+        await step6Handler.mileageRetrieval();
     },
-    async approveInBulk(){
-        await manageHandler.modifyPaymentChkInBulk('step6','approve');
+    async approveInBulk() {
+        await step6Handler.modifyPaymentChkInBulk(true);
     },
-    async cancelInBulk(){
-        await manageHandler.modifyPaymentChkInBulk('step6','cancel');
+    async cancelInBulk() {
+        await step6Handler.modifyPaymentChkInBulk(false);
     }
 }

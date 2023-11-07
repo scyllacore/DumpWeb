@@ -128,10 +128,11 @@ class Step4Handler {
     }
 
     async modifyPaymentChkInBulk(type) {
-        const property = {paymentBtnFlag: type};
+        const requestObj = this.createSearchOptionObj();
+        requestObj['paymentBtnFlag'] = type;
 
         const responseData = await this.requestHandler
-            .put('/manage/step4' + '/fetch/' + 'paymentInBulk', this.jsonHandler.convertObjectToJson(property));
+            .put('/manage/step4' + '/fetch' + '/paymentInBulk', this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
     }
