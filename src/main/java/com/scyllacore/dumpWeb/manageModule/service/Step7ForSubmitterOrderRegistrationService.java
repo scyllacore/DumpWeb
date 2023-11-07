@@ -31,8 +31,7 @@ public class Step7ForSubmitterOrderRegistrationService {
 
     public ResponseDTO<String> saveDriveOrder(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
-
-        System.out.println(driveReport);
+        driveReport.setProgress("배차");
 
         if (driveReport.getDriveReportId() == 0) {
             step7Mapper.insertDriveOrder(driveReport);

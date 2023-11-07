@@ -10,7 +10,7 @@
         <div class="search-result-wrapper">
 
             <div class="pop-up-close-wrapper">
-                <button class="pop-up-close" type="button" onclick="closePopUp('driver-search-result')">
+                <button class="pop-up-close" type="button" onclick="popUpHandler.closePopUp('driver-search-result')">
                     <i class="close-icon"></i>
                     <span class="screen-off"></span>
                 </button>
@@ -24,12 +24,12 @@
             <div class="table-wrapper">
                 <table>
                     <thead>
-                    <tr class="table-key">
-                        <th class="thr-carNo">기사 차번호</th>
-                        <th class="thr-name">담당 기사 이름</th>
+                    <tr class="driver-key">
+                        <th class="carNo">기사 차번호</th>
+                        <th class="name">담당 기사 이름</th>
                     </tr>
                     </thead>
-                    <tbody class="table-driver-tuple">
+                    <tbody class="driver-tuple">
                     </tbody>
                 </table>
             </div>

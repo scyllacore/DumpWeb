@@ -74,7 +74,7 @@
   border-spacing: 0;
   border-collapse: collapse;
 }
-.driver-search-result .search-result-wrapper .table-wrapper table .table-key th {
+.driver-search-result .search-result-wrapper .table-wrapper table .driver-key th {
   padding: 8px 7px;
   border: 1px solid #ddd;
   text-align: center;
