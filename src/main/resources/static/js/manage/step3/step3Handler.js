@@ -144,7 +144,7 @@ class Step3Handler {
          tableEle.addEventListener("click", (event) => {
              const parentEle = event.target.parentElement;
              const submitterId = parentEle.getAttribute('data-' + 'submitterId');
-             const submitterTel = parentEle.children[1].innerHTML;
+             const submitterTel = parentEle.children[2].innerHTML;
 
              this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
              this.objHandler.selectElementByName('receiver').value = submitterTel;

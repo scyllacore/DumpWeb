@@ -19,7 +19,7 @@ class Step7Handler {
         await this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
         this.handleInputActiveByPaymentChk();
-        this.inputSubmitter()
+        this.inputDriver()
     }
 
     handleInputActiveByPaymentChk() {
@@ -136,7 +136,7 @@ class Step7Handler {
         })
     }
 
-    inputSubmitter() {
+    inputDriver() {
         const tableEle = this.objHandler.selectElementByClass('driver-tuple');
 
         tableEle.addEventListener("click", (event) => {
