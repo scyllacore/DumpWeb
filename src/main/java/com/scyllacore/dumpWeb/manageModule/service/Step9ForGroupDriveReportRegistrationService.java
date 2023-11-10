@@ -33,7 +33,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         groupReport.setGroupWriterIdFk(getUserIdFk());
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
 
-        if (groupReport.getGroupId() == 0) {
+        if (groupReport.getGroupReportId() == 0) {
             this.insertGroupDriveReport(groupReport);
         } else if (groupReport.getGroupUserType() == 1) {
             this.updateGroupSubmit(groupReport);
@@ -52,7 +52,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         for (int i = 0; i < newGroupReport.getDriveReports().size(); i++) {
             DriveReportDTO driveReport = newGroupReport.getDriveReports().get(i);
             driveReport.setWriterIdFk(getUserIdFk());
-            driveReport.setGroupIdFk(newGroupReport.getGroupId());
+            driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
 
             if (driveReport.getDriveReportId() != 0) {
                 prvDriveReport.add(driveReport);
@@ -77,7 +77,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         Set<Integer> driveIds = new HashSet<>();
 
         List<Integer> prvDriveReportIds = step9Mapper
-                .selectDriveReportIdsByGroupId(newGroupReport.getGroupId());
+                .selectDriveReportIdsByGroupReportId(newGroupReport.getGroupReportId());
 
         System.out.println(prvDriveReportIds);
 
@@ -96,7 +96,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
         for (DriveReportDTO driveReport : newDriveReports) {
             if (driveReport.getDriveReportId() == 0) {
-                driveReport.setGroupIdFk(newGroupReport.getGroupId());
+                driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
                 driveReportsForInsert.add(driveReport);
             } else {
                 driveReportsForUpdate.add(driveReport);
@@ -116,7 +116,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<Integer> trashIds = driveIds.stream().toList();
 
         if (!trashIds.isEmpty()) {
-            step9Mapper.updateDriveReportsGroupIdFk(trashIds);
+            step9Mapper.updateDriveReportsGroupReportIdFk(trashIds);
         }
     }
 
@@ -147,7 +147,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         groupReport.setGroupWriterIdFk(getUserIdFk());
 
         step9Mapper.deleteGroupDriveReport(groupReport);
-        step9Mapper.updateAllGroupIdFk(groupReport.getGroupId());
+        step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
 
         return new ResponseDTO<String>(200, "삭제 완료.");
     }

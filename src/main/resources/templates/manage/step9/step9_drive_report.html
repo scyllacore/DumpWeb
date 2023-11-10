@@ -10,7 +10,7 @@
         <div class="drive-report-wrapper">
 
             <div class="pop-up-close-wrapper">
-                <button class="pop-up-close" type="button" onclick="closePopUp('drive-report')">
+                <button class="pop-up-close" type="button" onclick="popUpHandler.closePopUp('drive-report')">
                     <i class="close-icon"></i>
                     <span class="screen-off"></span>
                 </button>
@@ -21,7 +21,7 @@
             </div>
             <div class="line"></div>
 
-            <input type="hidden" name="groupReportIdx">
+            <input type="hidden" name="driveReportIdx" value='-1'>
 
             <form class="drive-report-form" name="driveReportForm">
                 <input type="hidden" name="driveReportId" value="0" required>
@@ -39,14 +39,14 @@
                     <input type="hidden" name="submitterIdFk" required>
                     <input type="number" name="receiver" disabled required>
                     <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
-                            onclick="openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
+                            onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
                     </button>
                 </div>
 
                 <div class="period-wrapper">
                     <h3>운행일</h3>
                     <input type="date" name="driveDate" required>
-                    <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+                    <button type="button" name="driveReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()" required>조회</button>
                 </div>
 
                 <div class="from-site-wrapper">
@@ -94,7 +94,7 @@
                     <button type="button" class="save-btn" onclick="func.addGroupReport()">추가</button>
                     <button type="button" class="delete-btn" onclick="func.removeGroupReport()">제거</button>
                     <button type="button" class="input-init-btn" onclick="">입력 초기화</button>
-                    <button type="button" class="prev-page-btn" onclick="closePopUp('drive-report')">닫기</button>
+                    <button type="button" class="prev-page-btn" onclick="popUpHandler.closePopUp('drive-report')">닫기</button>
                 </div>
             </form>
         </div>

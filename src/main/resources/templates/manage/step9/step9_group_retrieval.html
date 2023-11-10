@@ -6,7 +6,7 @@
         <div class="search-result-wrapper">
 
             <div class="pop-up-close-wrapper">
-                <button class="pop-up-close" type="button" onclick="closePopUp('group-search-result')">
+                <button class="pop-up-close" type="button" onclick="popUpHandler.closePopUp('group-search-result')">
                     <i class="close-icon"></i>
                     <span class="screen-off"></span>
                 </button>
@@ -20,11 +20,12 @@
             <div class="table-wrapper">
                 <table>
                     <thead>
-                    <tr class="table-key">
-                        <th class="gth-groupTitle">제목</th>
+                    <tr class="group-report-key">
+                        <th>No</th>
+                        <th class="groupTitle">제목</th>
                     </tr>
                     </thead>
-                    <tbody class="group-table-tuple">
+                    <tbody class="group-report-tuple">
                     </tbody>
                 </table>
             </div>

@@ -74,7 +74,7 @@
   border-spacing: 0;
   border-collapse: collapse;
 }
-.submitter-search-result .search-result-wrapper .table-wrapper table .table-key th, .search-result .search-result-wrapper .table-wrapper table .table-key th, .group-search-result .search-result-wrapper .table-wrapper table .table-key th {
+.submitter-search-result .search-result-wrapper .table-wrapper table .submitter-key th, .search-result .search-result-wrapper .table-wrapper table .submitter-key th, .group-search-result .search-result-wrapper .table-wrapper table .submitter-key th {
   padding: 8px 7px;
   border: 1px solid #ddd;
   text-align: center;
