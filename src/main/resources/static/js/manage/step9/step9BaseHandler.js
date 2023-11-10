@@ -41,12 +41,14 @@ class Step9BaseHandler {
 
     addDriveReport(groupList) {
         if(this.checkSaveValidation()){
-            return;
+            return true;
         }
 
         const obj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(obj);
         groupList.push(obj);
+
+        return false;
     }
 
     removeDriveReport(groupList) {
@@ -57,8 +59,7 @@ class Step9BaseHandler {
             return;
         }
 
-        const t = groupList.splice(idx, 1);
-        console.log(t);
+        groupList.splice(idx, 1);
     }
 
 

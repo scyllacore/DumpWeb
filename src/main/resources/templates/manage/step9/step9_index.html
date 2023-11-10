@@ -35,14 +35,14 @@
                 <input type="hidden" name="groupSubmitterIdFk" required>
                 <input type="number" name="groupReceiver" disabled required>
                 <button type="button" name="groupSubmitterRetrievalBtn" class="retrieval-btn"
-                        onclick="popUpHandler.openPopUp('submitter-search-result'); func.groupSubmitterListRetrieval()" required>조회
+                        onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrievalForGroup()" required>조회
                 </button>
             </div>
 
             <div class="memo-wrapper">
                 <h3>제목</h3>
                 <input name="groupTitle" placeholder="검색할 때 사용">
-                <button type="button" name="groupReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('group-search-result'); func.groupListRetrieval()" required>조회</button>
+                <button type="button" name="groupReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('group-search-result'); func.groupDriveReportsRetrieval()" required>조회</button>
             </div>
 
 

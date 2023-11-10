@@ -21,9 +21,6 @@ const func = {
     async remove() {
         await step9GroupHandler.remove();
     },
-    async groupListRetrieval() {
-        await step9GroupHandler.groupListRetrieval();
-    },
     async groupDriveReportsRetrieval() {
         await step9GroupHandler.groupReportsRetrieval();
     },
@@ -31,7 +28,10 @@ const func = {
         await step9GroupHandler.receiverListRetrieval();
     },
     addGroupReport() {
-        step9BaseHandler.addDriveReport(step9GroupHandler.groupList);
+        const res = step9BaseHandler.addDriveReport(step9GroupHandler.groupList);
+        if (res) {
+            return;
+        }
         popUpHandler.closePopUp('drive-report');
         step9GroupHandler.htmlModifier
             .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);

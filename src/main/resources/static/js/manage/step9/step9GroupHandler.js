@@ -42,7 +42,7 @@ class Step9GroupHandler {
 
 
     async loadInputDataByUrlParams() {
-        const groupReportId = new UrlHandler().getUrlParameterValue('groupReportId');
+        const groupReportId = this.urlHandler.getUrlParameterValue('groupReportId');
 
         if (groupReportId === null) {
             return;
@@ -52,7 +52,11 @@ class Step9GroupHandler {
         const inputData = await this.requestHandler
             .post('/manage/step9' + '/fetch' + '/groupDriveReportDetails', reqData);
 
+        this.groupList = inputData['driveReports'];
+
         this.inputHandler.fillInput(inputData);
+        this.htmlModifier
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
     }
 
     redirectByDriveReportId() {
@@ -72,6 +76,7 @@ class Step9GroupHandler {
 
         const requestObj = this.createGroupDriveReportFormObj();
         this.objHandler.changeOnToTrue(requestObj);
+        requestObj['driveReports'] = this.groupList;
 
         const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/groupDriveReportSave'
             , this.jsonHandler.convertObjectToJson(requestObj));
