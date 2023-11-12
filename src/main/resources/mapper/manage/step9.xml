@@ -84,6 +84,7 @@
 
         SELECT
         GROUP_REPORT_ID,
+        TEL AS groupReceiver,
         DATE_FORMAT(GROUP_DATE, '%Y.%m.%d') AS groupDate,
         GROUP_TITLE,
         GROUP_MEMO,
@@ -163,8 +164,7 @@
             PROGRESS = #{driveReport.progress},
             SUBMITTER_ID_FK = #{driveReport.submitterIdFk},
             SUBMIT_CHK = #{driveReport.submitChk}
-            WHERE WRITER_ID_FK = #{driveReport.writerIdFk}
-            AND DRIVE_REPORT_ID = #{driveReport.driveReportId}
+            WHERE DRIVE_REPORT_ID = #{driveReport.driveReportId}
             AND SUBMITTER_PAYMENT_CHK = 0
         </foreach>
     </update>

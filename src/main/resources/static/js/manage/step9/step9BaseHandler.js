@@ -40,13 +40,20 @@ class Step9BaseHandler {
     }
 
     addDriveReport(groupList) {
-        if(this.checkSaveValidation()){
+        if (this.checkSaveValidation()) {
             return true;
         }
 
         const obj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(obj);
-        groupList.push(obj);
+
+        const idx = objHandler.selectElementByName('driveReportIdx').value;
+
+        if (idx !== '-1') {
+            groupList[parseInt(idx)] = obj;
+        } else {
+            groupList.push(obj);
+        }
 
         return false;
     }
