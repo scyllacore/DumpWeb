@@ -54,8 +54,6 @@ class Step9GroupHandler {
 
         this.groupList = inputData['driveReports'];
 
-        console.log(inputData);
-
         this.inputHandler.fillInput(inputData);
         this.htmlModifier
             .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);

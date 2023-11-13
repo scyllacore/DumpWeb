@@ -15,7 +15,7 @@ const func = {
         await step9GroupHandler.save();
     },
     async submit() {
-        step3Handler.objHandler.selectElementByName('groupSubmitChk').value = true;
+        objHandler.selectElementByName('groupSubmitChk').value = true;
         await step9GroupHandler.save();
     },
     async remove() {

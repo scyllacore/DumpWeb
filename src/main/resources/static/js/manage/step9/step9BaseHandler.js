@@ -9,6 +9,8 @@ class Step9BaseHandler {
 
     activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
+    driveReports = [];
+
     constructor() {
         this.run();
     }
@@ -17,6 +19,7 @@ class Step9BaseHandler {
         await this.loadInputDataByUrlParams();
         this.handleInputActiveByPaymentChk();
         this.inputSubmitter()
+        this.inputDriveReport();
     }
 
     handleInputActiveByPaymentChk() {
@@ -107,15 +110,17 @@ class Step9BaseHandler {
         const requestObj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(requestObj);
 
-        const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
+        const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
+
+        this.driveReports = responseData;
 
         this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
         responseData.forEach((data, idx) => {
-            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'driveReportId', data['driveReportId']);
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'idx', idx);
         })
     }
 
@@ -144,6 +149,20 @@ class Step9BaseHandler {
             this.objHandler.selectElementByName('groupReceiver').value = submitterTel;
 
             popUpHandler.closePopUp('submitter-search-result');
+        });
+    }
+
+    inputDriveReport() {
+        const tableBody = objHandler.selectElementByClass('drive-report-tuple');
+
+        tableBody.addEventListener("click", (event) => {
+            const idx = event.target.parentElement.getAttribute('data-' + 'idx');
+            const driveReport = this.driveReports[parseInt(idx)];
+
+            console.log(driveReport);
+
+            this.inputHandler.fillInput(driveReport);
+            popUpHandler.closePopUp('search-result');
         });
     }
 

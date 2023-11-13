@@ -53,7 +53,7 @@
 
     <select id="selectGroupDriveReportList" parameterType="GroupDriveReportDTO" resultType="GroupDriveReportDTO">
         SELECT GROUP_REPORT_ID,
-               DATE_FORMAT(GROUP_DATE, '%Y.%m.%d') AS groupDate,
+               DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
                GROUP_TITLE,
                GROUP_MEMO,
                GROUP_SUBMITTER_ID_FK,
@@ -85,7 +85,7 @@
         SELECT
         GROUP_REPORT_ID,
         TEL AS groupReceiver,
-        DATE_FORMAT(GROUP_DATE, '%Y.%m.%d') AS groupDate,
+        DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
         GROUP_TITLE,
         GROUP_MEMO,
         GROUP_SUBMITTER_ID_FK,
@@ -199,7 +199,7 @@
     <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
         SELECT
         DRIVE_REPORT_ID,
-        DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
+        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
         FROM_SITE,
         TO_SITE,
         ITEM,

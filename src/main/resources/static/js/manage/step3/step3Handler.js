@@ -50,8 +50,6 @@ class Step3Handler {
         const inputData = await this.requestHandler
             .post('/manage/step3' + '/fetch' + '/driveReportDetails', reqData);
 
-        console.log(inputData);
-
         this.inputHandler.fillInput(inputData);
     }
 
