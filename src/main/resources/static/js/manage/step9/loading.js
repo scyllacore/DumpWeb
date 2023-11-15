@@ -1,36 +1,56 @@
-let manageHandler;
+let step9BaseHandler;
+let step9GroupHandler;
+
+const popUpHandler = new PopUpHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
-    manageHandler = new ManageHandler(paramsContainer);
+    step9BaseHandler = new Step9BaseHandler();
+    step9GroupHandler = new Step9GroupHandler();
 })
+
+const objHandler = new ObjectHandler();
 
 const func = {
     async save() {
-        await manageHandler.groupSave('step9', false, {driveReports: manageHandler.groupList});
+        await step9GroupHandler.save();
     },
     async submit() {
-        await manageHandler.groupSave('step9', true, {driveReports: manageHandler.groupList});
+        objHandler.selectElementByName('groupSubmitChk').value = true;
+        await step9GroupHandler.save();
     },
     async remove() {
-        await manageHandler.remove('step9');
+        await step9GroupHandler.remove();
     },
-    async submitterListRetrieval() {
-        await manageHandler.receiverListRetrieval('step9Submitter');
+    async groupDriveReportsRetrieval() {
+        await step9GroupHandler.groupReportsRetrieval();
     },
-    async groupSubmitterListRetrieval() {
-        await manageHandler.groupReceiverListRetrieval('step9Submitter');
+    async submitterListRetrievalForGroup() {
+        await step9GroupHandler.receiverListRetrieval();
     },
     addGroupReport() {
-        manageHandler.addGroupReport();
+        const res = step9BaseHandler.addDriveReport(step9GroupHandler.groupList);
+        if (res) {
+            return;
+        }
+        popUpHandler.closePopUp('drive-report');
+        step9GroupHandler.htmlModifier
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
     },
     removeGroupReport() {
-        manageHandler.removeGroupReport();
+        step9BaseHandler.removeDriveReport(step9GroupHandler.groupList);
+        popUpHandler.closePopUp('drive-report');
+        step9GroupHandler.htmlModifier
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
     },
     openPopUpAndInit() {
-        document.querySelector('[name="groupReportIdx"]').value = '-1';
-        openPopUp('drive-report');
+        objHandler.selectElementByName('driveReportIdx').value = '-1';
+        objHandler.selectElementByName('driveReportId').value = '0';
+        popUpHandler.openPopUp('drive-report');
     },
-    async listRetrieval() {
-        await manageHandler.listRetrieval('step9Drive')
+    async submitterListRetrieval() {
+        await step9BaseHandler.receiverListRetrieval();
     },
+    async driveReportsRetrieval() {
+        await step9BaseHandler.driveReportsRetrieval(step9GroupHandler.groupList);
+    }
 }

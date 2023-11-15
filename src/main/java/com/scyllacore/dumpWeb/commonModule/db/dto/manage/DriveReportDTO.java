@@ -27,7 +27,7 @@ public class DriveReportDTO {
     private int driverIdFk;
     private int submitterIdFk;
     private int writerIdFk;
-    private int groupIdFk;
+    private int groupReportIdFk;
 
     private int userType;
 }

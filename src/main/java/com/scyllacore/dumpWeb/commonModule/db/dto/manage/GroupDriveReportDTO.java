@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class GroupDriveReportDTO {
-    private int groupId;
+    private int groupReportId;
     private String groupDate;
     private String groupReceiver;
     private String groupTitle;

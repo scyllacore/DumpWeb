@@ -63,36 +63,6 @@
       }
     }
 
-    .payment-wrapper {
-      display: flex;
-      justify-content: right;
-      margin:{
-        top: 20px;
-        bottom: 10px;
-        right: 10px;
-      }
-      font:{
-        size: 12px;
-      }
-
-      .payment-btn {
-        width: 80px;
-        height: 40px;
-        border: 1px solid #0068b7;
-        margin: 5px;
-        text:{
-          align: center;
-        }
-        color: #0064c1;
-        background: #fff;
-        font:{
-          weight: 600;
-        }
-        cursor: pointer;
-      }
-
-    }
-
     .table-wrapper {
       display: flex;
       justify:{
@@ -105,7 +75,7 @@
           collapse: collapse;
         }
 
-        .table-key {
+        .drive-report-key {
           th {
             padding: 8px 7px;
             border: 1px solid #ddd;

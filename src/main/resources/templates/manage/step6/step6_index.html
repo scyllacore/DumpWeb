@@ -3,8 +3,6 @@
 
 <th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
 
-<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
-
 <head>
     <link href="/css/manage/step6/step6Index.css" rel="stylesheet" type="text/css">
 </head>
@@ -20,7 +18,7 @@
 
         <div class="line"></div>
 
-        <form class="option-form" name="optionForm">
+        <form class="search-option-form" name="searchOptionForm">
 
             <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
 
@@ -53,7 +51,7 @@
             </div>
 
             <div class="search-btn-wrapper">
-                <button type="button" class="search-btn" onclick="openPopUp('search-result'); func.listRetrieval()">검색</button>
+                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.mileageRetrieval()">검색</button>
             </div>
         </form>
 
@@ -62,8 +60,8 @@
     </div>
 </container>
 
-<script src="/js/manage/step6/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step6/step6Handler.js"></script>
 <script src="/js/manage/step6/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

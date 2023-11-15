@@ -1,16 +1,18 @@
-let manageHandler;
+let step5Handler;
+const popUpHandler = new PopUpHandler();
+
 document.addEventListener("DOMContentLoaded", () => {
-    manageHandler = new ManageHandler(paramsContainer);
+    step5Handler = new Step5Handler();
 })
 
 const func = {
     async save() {
-        await manageHandler.save('step5');
+        await step5Handler.save();
     },
     async remove() {
-        await manageHandler.remove('step5')
+        await step5Handler.remove();
     },
-    async listRetrieval() {
-        await manageHandler.listRetrieval('step5')
+    async mileageRetrieval() {
+        await step5Handler.mileageRetrieval();
     }
 }

@@ -25,7 +25,7 @@
   font-weight: bold;
   gap: 5px;
 }
-.step6 .step6_wrapper .option-form div {
+.step6 .step6_wrapper .search-option-form div {
   padding: 15px 10px;
   margin: 20px;
   display: flex;
@@ -33,14 +33,14 @@
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
 }
-.step6 .step6_wrapper .option-form div h3 {
+.step6 .step6_wrapper .search-option-form div h3 {
   width: 70px;
   font-size: 14px;
 }
-.step6 .step6_wrapper .option-form .period-wrapper .period-inner {
+.step6 .step6_wrapper .search-option-form .period-wrapper .period-inner {
   display: flex;
 }
-.step6 .step6_wrapper .option-form .period-wrapper .period-inner input {
+.step6 .step6_wrapper .search-option-form .period-wrapper .period-inner input {
   position: relative;
   width: 120px;
   padding: 5px 10px;
@@ -50,10 +50,10 @@
   font-family: "Noto Sans KR", sans-serif;
   cursor: pointer;
 }
-.step6 .step6_wrapper .option-form .period-wrapper .period-inner span {
+.step6 .step6_wrapper .search-option-form .period-wrapper .period-inner span {
   margin: 7px 5px;
 }
-.step6 .step6_wrapper .option-form .item-wrapper .item-inner, .step6 .step6_wrapper .option-form .item-wrapper .sorting-inner, .step6 .step6_wrapper .option-form .sorting-wrapper .item-inner, .step6 .step6_wrapper .option-form .sorting-wrapper .sorting-inner {
+.step6 .step6_wrapper .search-option-form .item-wrapper .item-inner, .step6 .step6_wrapper .search-option-form .item-wrapper .sorting-inner, .step6 .step6_wrapper .search-option-form .sorting-wrapper .item-inner, .step6 .step6_wrapper .search-option-form .sorting-wrapper .sorting-inner {
   width: 400px;
   padding: 5px;
   border: 1px solid #ddd;
@@ -61,13 +61,13 @@
   text-align: center;
   cursor: pointer;
 }
-.step6 .step6_wrapper .option-form .search-btn-wrapper {
+.step6 .step6_wrapper .search-option-form .search-btn-wrapper {
   display: flex;
   justify-content: center;
   text-align: center;
   box-shadow: none;
 }
-.step6 .step6_wrapper .option-form .search-btn-wrapper button {
+.step6 .step6_wrapper .search-option-form .search-btn-wrapper button {
   width: 120px;
   height: 40px;
   border: 1px solid #0068b7;

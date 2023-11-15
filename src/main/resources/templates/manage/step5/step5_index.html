@@ -3,8 +3,6 @@
 
 <th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
 
-<th:block th:replace="/include/adding_manage_head :: headFragment"></th:block>
-
 <head>
     <link href="/css/manage/step5/step5Index.css" rel="stylesheet" type="text/css">
 </head>
@@ -33,7 +31,7 @@
             <div class="period-wrapper">
                 <h3>날짜</h3>
                 <input type="date" id="reg-date" name="driveDate" required>
-                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="openPopUp('search-result'); func.listRetrieval()" required>조회</button>
+                <button type="button" name="retrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('mileage-search-result'); func.mileageRetrieval()" required>조회</button>
             </div>
 
             <div class="item-wrapper">
@@ -100,8 +98,8 @@
     </div>
 </container>
 
-<script src="/js/manage/step5/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step5/step5Handler.js"></script>
 <script src="/js/manage/step5/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

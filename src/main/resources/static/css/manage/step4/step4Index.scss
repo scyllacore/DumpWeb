@@ -43,7 +43,7 @@
       }
     }
 
-    .option-form {
+    .search-option-form {
       div {
         padding: 15px 10px;
         margin: 20px;
@@ -145,7 +145,7 @@
               width: 95%;
               border: 1px solid #ccc;
               margin: 0;
-              display: block; /* 초기에는 숨김 */
+              display: none; /* 초기에는 숨김 */
               position: absolute;
               font-size: 14px;
               background-color: #fff;

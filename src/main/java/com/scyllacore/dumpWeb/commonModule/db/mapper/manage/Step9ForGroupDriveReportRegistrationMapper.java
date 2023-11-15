@@ -27,13 +27,15 @@ public interface Step9ForGroupDriveReportRegistrationMapper {
 
     void updateReportsSubmit(List<DriveReportDTO> driveReports);
 
-    void updateDriveReportsGroupIdFk(List<Integer> driveIds);
+    void updateDriveReportsGroupReportIdFk(List<Integer> driveIds);
 
-    void updateAllGroupIdFk(int groupIdFk);
+    void updateAllGroupReportIdFk(int groupReportIdFk);
 
     List<DriveReportDTO> selectDriveReportList(DriveReportDTO driveReport);
 
-    List<Integer> selectDriveReportIdsByGroupId(int groupIdFk);
+    List<Integer> selectDriveReportIdsByGroupReportId(int groupReportIdFk);
+
+    List<DriveReportDTO> selectDriveReportsForGroupDTO(GroupDriveReportDTO groupReport);
 
     DriveReportDTO selectDriveReport(DriveReportDTO driveReport);
 

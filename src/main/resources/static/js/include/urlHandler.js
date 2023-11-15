@@ -1,19 +1,17 @@
 class UrlHandler {
-    redirectByElementValue(url, paramName,element = 'tbody') {
-        if (typeof url === 'undefined' || element === '') {
-            return;
-        }
 
-        const listRow = document.querySelector(element);
+    objHandler = new ObjectHandler();
 
-        listRow.addEventListener("click", (event) => {
-            let val = event.target.parentElement.getAttribute('data-' + paramName);
-            let href = url + '?' + paramName + '=' + val;
-            window.location.href = href;
+    redirectByElementData(url, tBodyClass, name) {
+        const tableEle = this.objHandler.selectElementByClass(tBodyClass);
+
+        tableEle.addEventListener("click", (event) => {
+            const val = event.target.parentElement.getAttribute('data-' + name);
+            window.location.href = url + '?' + name + '=' + val;
         });
     }
 
-    getUrlParamVal(paramName) {
+    getUrlParameterValue(paramName) {
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
         return params.get(paramName);

@@ -10,7 +10,7 @@
         <div class="search-result-wrapper">
 
             <div class="pop-up-close-wrapper">
-                <button class="pop-up-close" type="button" onclick="closePopUp('search-result')">
+                <button class="pop-up-close" type="button" onclick="popUpHandler.closePopUp('search-result')">
                     <i class="close-icon"></i>
                     <span class="screen-off"></span>
                 </button>
@@ -27,18 +27,19 @@
             <div class="table-wrapper">
                 <table>
                     <thead>
-                    <tr class="table-key">
-                        <th class="th-driveDate">날짜</th>
-                        <th class="th-carNo">차량번호</th>
-                        <th class="th-fromSite">상차지</th>
-                        <th class="th-toSite">하차지</th>
-                        <th class="th-item">품목</th>
-                        <th class="th-quantity">대수</th>
-                        <th class="th-progress">상태</th>
-                        <th class="th-submitterPaymentChk">제출처 확인</th>
+                    <tr class="drive-report-key">
+                        <th>No</th>
+                        <th class="driveDate">날짜</th>
+                        <th class="carNo">차량번호</th>
+                        <th class="fromSite">상차지</th>
+                        <th class="toSite">하차지</th>
+                        <th class="item">품목</th>
+                        <th class="quantity">대수</th>
+                        <th class="progress">상태</th>
+                        <th class="submitterPaymentChk">제출처 확인</th>
                     </tr>
                     </thead>
-                    <tbody class="table-tuple">
+                    <tbody class="drive-report-tuple">
                     </tbody>
                 </table>
             </div>

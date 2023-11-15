@@ -1,20 +1,25 @@
-let manageHandler;
+let step7Handler;
+const popUpHandler = new PopUpHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
-    manageHandler = new ManageHandler(paramsContainer);
+    step7Handler = new Step7Handler();
 })
 
 const func = {
     async save() {
-        await manageHandler.save('step7');
+        await step7Handler.save();
+    },
+    async submit() {
+        step7Handler.objHandler.selectElementByName('submitChk').value = true;
+        await step7Handler.save();
     },
     async remove() {
-        await manageHandler.remove('step7')
+        await step7Handler.remove();
     },
-    async listRetrieval() {
-        await manageHandler.listRetrieval('step7')
+    async driveReportsRetrieval() {
+        await step7Handler.driveReportsRetrieval();
     },
     async driverListRetrieval() {
-        await manageHandler.receiverListRetrieval('step7Driver')
+        await step7Handler.receiverListRetrieval();
     }
 }
