@@ -51,6 +51,6 @@ const func = {
         await step9BaseHandler.receiverListRetrieval();
     },
     async driveReportsRetrieval() {
-        await step9BaseHandler.driveReportsRetrieval();
+        await step9BaseHandler.driveReportsRetrieval(step9GroupHandler.groupList);
     }
 }

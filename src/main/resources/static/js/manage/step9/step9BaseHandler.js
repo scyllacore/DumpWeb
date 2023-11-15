@@ -9,8 +9,6 @@ class Step9BaseHandler {
 
     activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
-    driveReports = [];
-
     constructor() {
         this.run();
     }
@@ -48,6 +46,7 @@ class Step9BaseHandler {
         }
 
         const obj = this.createDriveReportFormObj();
+
         this.objHandler.changeOnToTrue(obj);
 
         const idx = objHandler.selectElementByName('driveReportIdx').value;
@@ -106,21 +105,30 @@ class Step9BaseHandler {
         return false;
     }
 
-    async driveReportsRetrieval() {
+    async driveReportsRetrieval(groupList) {
         const requestObj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.driveReports = responseData;
+        console.log(responseData);
+        console.log(groupList);
+
+        for(let i=0; i<responseData.length; i++){
+            for(let j=0; j<groupList.length; j++){
+                if(i!==j && responseData[i].driveReportId === parseInt(groupList[j].driveReportId)){
+                    responseData.splice(i,1);
+                }
+            }
+        }
 
         this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
         responseData.forEach((data, idx) => {
-            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'idx', idx);
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'driveReportId', data['driveReportId']);
         })
     }
 
@@ -155,13 +163,15 @@ class Step9BaseHandler {
     inputDriveReport() {
         const tableBody = objHandler.selectElementByClass('drive-report-tuple');
 
-        tableBody.addEventListener("click", (event) => {
-            const idx = event.target.parentElement.getAttribute('data-' + 'idx');
-            const driveReport = this.driveReports[parseInt(idx)];
+        tableBody.addEventListener("click", async (event) => {
+            const driveReportId = event.target.parentElement.getAttribute('data-' + 'driveReportId');
+            const reqData = this.jsonHandler.convertObjectToJson({driveReportId: driveReportId});
 
-            console.log(driveReport);
+            const inputData = await this.requestHandler
+                .post('/manage/step9' + '/fetch' + '/driveReportDetails', reqData);
 
-            this.inputHandler.fillInput(driveReport);
+            this.inputHandler.fillInput(inputData);
+
             popUpHandler.closePopUp('search-result');
         });
     }

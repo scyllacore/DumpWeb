@@ -163,7 +163,8 @@
             PAYMENT_CHK = #{driveReport.paymentChk},
             PROGRESS = #{driveReport.progress},
             SUBMITTER_ID_FK = #{driveReport.submitterIdFk},
-            SUBMIT_CHK = #{driveReport.submitChk}
+            SUBMIT_CHK = #{driveReport.submitChk},
+            GROUP_REPORT_ID_FK = #{driveReport.groupReportIdFk}
             WHERE DRIVE_REPORT_ID = #{driveReport.driveReportId}
             AND SUBMITTER_PAYMENT_CHK = 0
         </foreach>

@@ -79,7 +79,6 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<Integer> prvDriveReportIds = step9Mapper
                 .selectDriveReportIdsByGroupReportId(newGroupReport.getGroupReportId());
 
-        System.out.println(prvDriveReportIds);
 
         for (Integer id : prvDriveReportIds) {
             driveIds.add(id);
@@ -95,8 +94,9 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<DriveReportDTO> driveReportsForUpdate = new ArrayList<>();
 
         for (DriveReportDTO driveReport : newDriveReports) {
+            driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
+
             if (driveReport.getDriveReportId() == 0) {
-                driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
                 driveReportsForInsert.add(driveReport);
             } else {
                 driveReportsForUpdate.add(driveReport);
