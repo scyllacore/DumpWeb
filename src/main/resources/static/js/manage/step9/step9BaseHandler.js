@@ -112,8 +112,6 @@ class Step9BaseHandler {
         const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        console.log(responseData);
-        console.log(groupList);
 
         for(let i=0; i<responseData.length; i++){
             for(let j=0; j<groupList.length; j++){

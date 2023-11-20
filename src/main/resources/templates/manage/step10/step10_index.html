@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step10/step10Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step10">
+    <div class="step10_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 그룹 조회
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <form class="group-search-option-form" name="groupSearchOptionForm">
+
+            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+
+            <div class="title-wrapper">
+                <h3>제목</h3>
+                <label class="title-inner">
+                    <input name="title" placeholder="제목" autocomplete="off">
+                </label>
+                <div name="titles"></div>
+            </div>
+
+            <div class="company-wrapper">
+                <h3>제출처</h3>
+                <label class="company-inner">
+                    <input name="company" placeholder="제출처" autocomplete="off">
+                </label>
+                <div name="companies"></div>
+            </div>
+
+            <div class="sorting-wrapper">
+                <h3>정렬<br>기준</h3>
+                <select class="sorting-inner" name="sortingCriteria">
+                    <option value="title" selected>제목순</option>
+                    <option value="company">제출처순</option>
+                </select>
+            </div>
+
+            <div class="search-btn-wrapper">
+                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.groupDriveReportsRetrieval()">검색
+                </button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step10/step10_retrieval :: resultFragment"></th:block>
+
+    </div>
+</container>
+
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step10/step10Handler.js"></script>
+<script src="/js/manage/step10/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+
+</html>
+
