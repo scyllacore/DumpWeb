@@ -27,10 +27,10 @@ public class Step10ForGroupDriveReportViewerController {
         return step10Service.findRecommendKeywordList();
     }
 
-    @PostMapping(value = "/fetch/driveReportList")
+    @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
-    public ResponseDTO<List<GroupDriveReportSearchOptionDTO>> driveReportList(@RequestBody GroupDriveReportSearchOptionDTO option) {
-        return step10Service.findDriveReportListByOption(option);
+    public ResponseDTO<List<GroupDriveReportSearchOptionDTO>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO option) {
+        return step10Service.findGroupDriveReportListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")

@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const func = {
-    async driveReportsRetrieval() {
-        await step10Handler.groupDriveReportsRetrieval();
+    async groupDriveReportsRetrieval() {
+        await step10Handler.groupReportsRetrieval();
     },
     async approveInBulk() {
         await step10Handler.modifyPaymentChkInBulk(true);

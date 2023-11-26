@@ -67,7 +67,6 @@
       }
 
       .title-wrapper, .company-wrapper, .sorting-wrapper {
-
         .title-inner, .company-inner, .sorting-inner {
           width: 400px;
           padding: 5px;
@@ -80,28 +79,35 @@
           }
           cursor: pointer;
 
-          option {
-
-          }
-        }
-
-        input {
           position: relative;
-          width: 100%;
-          padding: 5px 10px;
-          border: none;
-          text: {
-            align: center;
-          }
-          font: {
-            size: 13px;
-            family: "Noto Sans KR", sans-serif;
-          }
-          cursor: pointer;
-        }
 
-        div{
-          display: none;
+          input {
+            position: relative;
+            width: 100%;
+            padding: 5px 10px;
+            border: none;
+            text: {
+              align: center;
+            }
+            font: {
+              size: 13px;
+              family: "Noto Sans KR", sans-serif;
+            }
+            cursor: pointer;
+          }
+
+          div {
+            max-height: 200px;
+            width: 95%;
+            border: 1px solid #ccc;
+            margin: 0;
+            display: none; /* 초기에는 숨김 */
+            position: absolute;
+            font-size: 14px;
+            background-color: #fff;
+            overflow-y: auto;
+            z-index: 1;
+          }
         }
       }
 

@@ -7,12 +7,14 @@ import java.util.List;
 
 @Mapper
 public interface Step10ForGroupDriveReportViewerMapper {
-    List<String> selectCompanySearchOption(int driverId);
+    List<String> selectCompanySearchOption(int groupDriverIdFk);
 
-    List<String> selectSubmitterTelSearchOption(int driverId);
+    List<String> selectTitleSearchOption(int groupDriverIdFk);
 
-    List<GroupDriveReportSearchOptionDTO> selectDriveReportListByOption(GroupDriveReportSearchOptionDTO option);
+    List<GroupDriveReportSearchOptionDTO> selectGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO option);
 
-    void updateDriveReportPaymentChk(GroupDriveReportSearchOptionDTO option);
+    void updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO option);
+
+    //void updateDriveReportsPaymentChk()
 
 }

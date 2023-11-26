@@ -26,22 +26,22 @@
                 <h3>제목</h3>
                 <label class="title-inner">
                     <input name="title" placeholder="제목" autocomplete="off">
+                    <div name="titles"></div>
                 </label>
-                <div name="titles"></div>
             </div>
 
             <div class="company-wrapper">
                 <h3>제출처</h3>
                 <label class="company-inner">
                     <input name="company" placeholder="제출처" autocomplete="off">
+                    <div name="companies"></div>
                 </label>
-                <div name="companies"></div>
             </div>
 
             <div class="sorting-wrapper">
                 <h3>정렬<br>기준</h3>
                 <select class="sorting-inner" name="sortingCriteria">
-                    <option value="title" selected>제목순</option>
+                    <option value="desc" selected>최신순</option>
                     <option value="company">제출처순</option>
                 </select>
             </div>
