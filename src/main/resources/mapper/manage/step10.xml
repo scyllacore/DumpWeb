@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step10ForGroupDriveReportViewerMapper">
+
+    <sql id="groupReportForDriver">
+        WITH writer_reports AS (SELECT GROUP_SUBMITTER_ID_FK,
+                                       GROUP_TITLE
+                                FROM group_drive_report_tb
+                                WHERE GROUP_DRIVER_ID_FK = ${groupDriverIdFk}
+                                ORDER BY GROUP_REPORT_ID DESC
+            LIMIT 50
+            )
+    </sql>
+
+    <select id="selectCompanySearchOption">
+        <include refid="groupReportForDriver">
+            <property name="groupDriverIdFk" value="#{groupDriverIdFk}"/>
+        </include>
+
+        SELECT COMPANY
+        FROM submitter_tb
+        WHERE SUBMITTER_ID IN (SELECT GROUP_SUBMITTER_ID_FK FROM writer_reports)
+        GROUP BY COMPANY
+        LIMIT 10
+    </select>
+
+    <select id="selectTitleSearchOption">
+        <include refid="groupReportForDriver">
+            <property name="groupDriverIdFk" value="#{groupDriverIdFk}"/>
+        </include>
+
+        SELECT GROUP_TITLE
+        FROM writer_reports
+        GROUP BY GROUP_TITLE
+        HAVING GROUP_TITLE != ''
+        LIMIT 10
+
+    </select>
+
+    <sql id="reportsForDriver">
+        WITH join_reports AS (SELECT *
+                    FROM
+                        group_drive_report_tb
+                        INNER JOIN
+                        submitter_tb
+                        on group_drive_report_tb.GROUP_SUBMITTER_ID_FK = submitter_tb.SUBMITTER_ID
+                    WHERE DRIVER_ID_FK = ${groupDriverIdFk}
+                    ORDER BY DRIVE_REPORT_ID DESC
+            )
+    </sql>
+
+    <select id="selectGroupDriveReportListByOption" parameterType="GroupDriveReportSearchOptionDTO" resultType="GroupDriveReportDTO">
+        <include refid="reportsForDriver">
+            <property name="groupWriterIdFk" value="#{groupWriterIdFk}"/>
+        </include>
+
+        SELECT DRIVE_REPORT_ID,
+        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        COMPANY,
+        FROM_SITE,
+        TO_SITE,
+        ITEM,
+        QUANTITY,
+        UNIT_PRICE
+        FROM join_reports
+        WHERE 1=1
+        <if test="title !=''">
+            AND GROUP_TITLE = #{title}
+        </if>
+        <if test="company !=''">
+            AND COMPANY = #{company}
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'title'">
+                ORDER BY TITLE DESC
+            </when>
+            <when test="sortingCriteria == 'company'">
+                ORDER BY COMPANY ASC
+            </when>
+        </choose>
+    </select>
+
+    <update id="updateGroupDriveReportPaymentChk" parameterType="GroupDriveReportSearchOptionDTO">
+        UPDATE group_drive_report_tb
+        SET GROUP_PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
+        <if test="title !=''">
+            AND GROUP_TITLE = #{title}
+        </if>
+        <if test="company !=''">
+            AND COMPANY = #{company}
+        </if>
+        AND GROUP_PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
+</mapper>

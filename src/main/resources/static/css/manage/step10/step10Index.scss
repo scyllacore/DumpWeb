@@ -1,0 +1,156 @@
+.line {
+  width: 100%;
+  height: 1.5px;
+  margin: 15px 0px;
+  background: #0068b7;
+}
+
+.step10 {
+  display: flex;
+  justify: {
+    content: center;
+  }
+  background: #d1d1d1;
+  color: #333536;
+
+  .step10_wrapper {
+    width: 100%;
+    max: {
+      width: 600px;
+    }
+    padding: 20px 10px 10px;
+    background: #ffffff;
+
+    .sub_title {
+
+      h2 {
+        display: flex;
+        justify: {
+          content: center;
+        }
+        align: {
+          items: center;
+        }
+        font: {
+          size: 21px;
+          weight: bold;
+        }
+        gap: 5px;
+
+        img {
+
+        }
+      }
+    }
+
+    .group-search-option-form {
+      div {
+        padding: 15px 10px;
+        margin: 20px;
+        display: flex;
+        justify: {
+          content: space-between;
+        }
+        align: {
+          items: center;
+        }
+        box: {
+          shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+        }
+
+        h3 {
+          width: 70px;
+          font: {
+            size: 14px;
+          }
+        }
+      }
+
+      .title-wrapper, .company-wrapper, .sorting-wrapper {
+        .title-inner, .company-inner, .sorting-inner {
+          width: 400px;
+          padding: 5px;
+          border: 1px solid #ddd;
+          margin: {
+            left: 25px;
+          }
+          text: {
+            align: center;
+          }
+          cursor: pointer;
+
+          position: relative;
+
+          input {
+            position: relative;
+            width: 100%;
+            padding: 5px 10px;
+            border: none;
+            text: {
+              align: center;
+            }
+            font: {
+              size: 13px;
+              family: "Noto Sans KR", sans-serif;
+            }
+            cursor: pointer;
+          }
+
+          div {
+            max-height: 200px;
+            width: 95%;
+            border: 1px solid #ccc;
+            margin: 0;
+            display: none; /* 초기에는 숨김 */
+            position: absolute;
+            font-size: 14px;
+            background-color: #fff;
+            overflow-y: auto;
+            z-index: 1;
+          }
+        }
+      }
+
+      .search-btn-wrapper {
+        display: flex;
+        justify: {
+          content: center;
+        }
+        text: {
+          align: center;
+        }
+
+        box: {
+          shadow: none;
+        }
+
+        button {
+          width: 120px;
+          height: 40px;
+          border: 1px solid #0068b7;
+          text: {
+            align: center;
+            indent: 20px;
+          }
+          color: #0064c1;
+          background: #fff;
+          font: {
+            size: 16px;
+            weight: 600;
+          }
+          line: {
+            height: 40px;
+          }
+          cursor: pointer;
+
+          background: {
+            image: url(/image/icons/ico_search-b.png);
+            size: 23px;
+            position: 25px 9px;
+            repeat: no-repeat;
+          }
+        }
+      }
+    }
+  }
+}
