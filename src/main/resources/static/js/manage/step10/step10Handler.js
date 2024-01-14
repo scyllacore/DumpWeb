@@ -7,7 +7,7 @@ class Step10Handler {
     htmlModifier = new HtmlModifier();
 
     tagNames = ['titles','companies'];
-    driveReportKey = `
+    groupReportKey = `
                         <th>No</th>
                         <th class="groupReceiver">제출처</th>
                         <th class="groupTitle">제목</th>
@@ -38,6 +38,8 @@ class Step10Handler {
         const responseData = await this.requestHandler.post('/manage/step10' + '/fetch' + '/groupDriveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
+
+        this.objHandler.selectElementByClass('group-report-key').innerHTML = this.groupReportKey;
         this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData);
 
         const tBodyEleChild = this.objHandler.selectElementByClass('group-report-tuple').children;

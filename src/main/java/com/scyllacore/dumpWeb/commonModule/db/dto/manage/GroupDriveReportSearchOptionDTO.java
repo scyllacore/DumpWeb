@@ -11,6 +11,8 @@ public class GroupDriveReportSearchOptionDTO {
     private boolean paymentBtnFlag;
     private String sortingCriteria;
 
+    private String title;
+    private String company;
     private List<String> titles;
     private List<String> companies;
 
