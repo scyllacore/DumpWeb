@@ -63,7 +63,10 @@ public class Step9ForGroupDriveReportRegistrationService {
         if (!prvDriveReport.isEmpty()) {
             step9Mapper.updateDriveReports(prvDriveReport);
         }
-        step9Mapper.insertDriveReports(newGroupReport.getDriveReports());
+
+        if (!newGroupReport.getDriveReports().isEmpty()) {
+            step9Mapper.insertDriveReports(newGroupReport.getDriveReports());
+        }
     }
 
     public void updateGroupSubmit(GroupDriveReportDTO groupReport) {

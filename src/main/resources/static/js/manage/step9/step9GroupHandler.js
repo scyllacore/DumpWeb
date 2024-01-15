@@ -108,7 +108,7 @@ class Step9GroupHandler {
 
         const requestObj = this.createGroupDriveReportFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/groupDriveReportRemove'
+        const responseData = await this.requestHandler.delete('/manage/step9' + '/fetch' + '/groupDriveReportRemove'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
