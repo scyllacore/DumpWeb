@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.file.FileMapper">
+
+    <insert id="insertFileInfoByGroupReportId" parameterType="FileDTO">
+        INSERT INTO group_report_file_tb(FILE_NAME, FILE_EXT, UUID, GROUP_REPORT_ID_FK)
+        VALUES (#{fileName}, #{fileExt}, #{uuid}, #{groupReportIdFk})
+    </insert>
+
+    <select id="findFileInfoByGroupReportId" resultType="FileDTO" parameterType="Integer">
+        SELECT FILE_NAME, FILE_EXT, UUID, GROUP_REPORT_ID_FK FROM group_report_file_tb WHERE FILE_ID = #{fileId}
+    </select>
+
+</mapper>

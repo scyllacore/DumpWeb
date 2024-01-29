@@ -7,10 +7,12 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -19,6 +21,7 @@ import java.util.*;
 public class Step9ForGroupDriveReportRegistrationService {
     private final CommonUtil commonUtil;
     private final Step9ForGroupDriveReportRegistrationMapper step9Mapper;
+    private final FileUtil fileUtil;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFk() {
@@ -29,12 +32,12 @@ public class Step9ForGroupDriveReportRegistrationService {
         return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
     }
 
-    public ResponseDTO<String> saveGroupDriveReport(GroupDriveReportDTO groupReport) {
+    public ResponseDTO<String> saveGroupDriveReport(GroupDriveReportDTO groupReport, MultipartFile imageFile) {
         groupReport.setGroupWriterIdFk(getUserIdFk());
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
 
         if (groupReport.getGroupReportId() == 0) {
-            this.insertGroupDriveReport(groupReport);
+            this.insertGroupDriveReport(groupReport, imageFile);
         } else if (groupReport.getGroupUserType() == 1) {
             this.updateGroupSubmit(groupReport);
         } else {
@@ -44,8 +47,12 @@ public class Step9ForGroupDriveReportRegistrationService {
         return new ResponseDTO<String>(200, "저장 완료.");
     }
 
-    public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport) {
+    public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
         step9Mapper.insertGroupDriveReport(newGroupReport);
+
+        if (!imageFile.isEmpty()) {
+            uploadFileByGroupReportId(imageFile, newGroupReport.getGroupReportId());
+        }
 
         List<DriveReportDTO> prvDriveReport = new ArrayList<>();
 
@@ -133,7 +140,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         groupReport = step9Mapper.selectGroupDriveReport(groupReport);
         groupReport.setDriveReports(step9Mapper.selectDriveReportsForGroupDTO(groupReport));
 
-        return new ResponseDTO<>(200,groupReport);
+        return new ResponseDTO<>(200, groupReport);
     }
 
     public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
@@ -157,5 +164,9 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     public ResponseDTO<List<SubmitterDTO>> findSubmitterList() {
         return new ResponseDTO<>(200, step9Mapper.selectSubmitterList());
+    }
+
+    public void uploadFileByGroupReportId(MultipartFile file, int groupReportId) {
+        fileUtil.uploadFile(file, groupReportId);
     }
 }
