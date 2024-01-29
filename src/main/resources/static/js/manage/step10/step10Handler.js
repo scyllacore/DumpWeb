@@ -6,7 +6,7 @@ class Step10Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    tagNames = ['titles','companies'];
+    tagNames = ['titles', 'companies'];
     groupReportKey = `
                         <th>No</th>
                         <th class="groupReceiver">제출처</th>
@@ -65,7 +65,8 @@ class Step10Handler {
         const inputEle = searchEle.parentElement.querySelector('input');
 
         inputEle.addEventListener('click', (event) => {
-            this.printSearchOptionToDiv(listData, inputEle);
+            const matchDataList = listData.filter((data) => data.includes(inputEle.value));
+            this.printSearchOptionToDiv(matchDataList, inputEle);
             this.setOneDisplayToBlock(name);
             event.stopPropagation();
         });
@@ -97,7 +98,7 @@ class Step10Handler {
 
         ele.innerHTML = ``;
         ele.style.display = 'block';
-        
+
 
         for (const val of listData) {
             ele.innerHTML += `<option>` + val + `</option>`
@@ -105,20 +106,13 @@ class Step10Handler {
     }
 
     setDisplayToNone() {
-        document.addEventListener("click", (event) => {
-            for (const name of this.tagNames) {
-                const divElement = this.objHandler.selectElementByName(name);
+        for (const name of this.tagNames) {
+            const divElement = this.objHandler.selectElementByName(name);
+            divElement.addEventListener("click", (event) => {
                 divElement.style.display = 'none';
-            }
-
-            if (event.target.tagName !== 'OPTION') {
-                return;
-            }
-
-            event.target.parentElement.parentElement.children[0].value = event.target.innerHTML;
-
-        })
-
+                event.target.parentElement.parentElement.children[0].value = event.target.innerHTML;
+            });
+        }
     }
 
     async modifyPaymentChkInBulk(type) {
