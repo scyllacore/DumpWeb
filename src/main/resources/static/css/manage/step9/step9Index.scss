@@ -91,6 +91,26 @@ input[type=checkbox] {
           }
           cursor: pointer;
         }
+
+      }
+
+      .upload-file-wrapper{
+        display: block;
+
+        .file-upload-btn {
+          width: 65px;
+          height: 30px;
+          border-radius: 3px;
+        }
+
+        .photo-view{
+          height: 450px;
+          width: 400px;
+
+          display: none;
+          shadow: none;
+          border: 2px solid #d1d1d1;
+        }
       }
 
       .drive-reports-wrapper {

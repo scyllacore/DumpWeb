@@ -12,6 +12,8 @@ class Step9GroupHandler {
 
     groupList = [];
 
+    uploadingFileData = null;
+
     constructor() {
         this.run();
     }
@@ -22,6 +24,7 @@ class Step9GroupHandler {
         this.handleInputActiveByGroupPaymentChk();
         this.inputSubmitter()
         this.inputDriveReport();
+        this.uploadFile();
     }
 
     handleInputActiveByGroupPaymentChk() {
@@ -183,6 +186,24 @@ class Step9GroupHandler {
             inputHandler.fillInput(driveReport);
             popUpHandler.openPopUp('drive-report');
         });
+    }
+
+    uploadFile(){
+        const imageFileInputEle = objHandler.selectElementByName('imageFile');
+        const photoViewEle = objHandler.selectElementByClass('photo-view');
+
+        imageFileInputEle.addEventListener('change', function () {
+            const fileList = this.files;
+            const file = fileList[0];
+
+            if (!file) {
+                return;
+            }
+
+            this.uploadingFileData = URL.createObjectURL(file);
+            photoViewEle.src =  this.uploadingFileData;
+            photoViewEle.style.display = 'flex';
+        })
     }
 
 }
