@@ -18,7 +18,16 @@
 
         <div class="line"></div>
 
-        <form class="group-drive-report-form" name="groupDriveReportForm">
+        <input
+                id="imageFileInput"
+                type="file"
+                name="imageFile"
+                accept="image/*"
+                capture="environment"
+                style="display: none;"
+        />
+
+        <form class="group-drive-report-form" name="groupDriveReportForm" enctype="multipart/form-data">
             <input type="hidden" name="groupReportId" value="0" required>
             <input type="hidden" name="groupDriverIdFk" th:value="${session.driverInfo.driverId}" required>
 
@@ -58,14 +67,6 @@
             <div class="upload-file-wrapper">
                 <div>
                     <h3>전표 사진 등록</h3>
-                    <input
-                            id="imageFileInput"
-                            type="file"
-                            name="imageFile"
-                            accept="image/*"
-                            capture="environment"
-                            style="display: none;"
-                    />
                     <button type="button" class="file-upload-btn" onclick="func.uploadImageFile()">사진 등록</button>
                 </div>
 

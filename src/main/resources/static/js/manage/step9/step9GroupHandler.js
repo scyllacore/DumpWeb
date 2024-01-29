@@ -81,8 +81,12 @@ class Step9GroupHandler {
         this.objHandler.changeOnToTrue(requestObj);
         requestObj['driveReports'] = this.groupList;
 
-        const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/groupDriveReportSave'
-            , this.jsonHandler.convertObjectToJson(requestObj));
+        const requestForm = new FormData();
+        requestForm.append('dto', new Blob([this.jsonHandler.convertObjectToJson(requestObj)], { type: 'application/json' }));
+        requestForm.append('imageFile',objHandler.selectElementByName('imageFile').files[0]);
+
+        const responseData = await this.requestHandler.postFormData('/manage/step9' + '/fetch' + '/groupDriveReportSave'
+            , requestForm);
 
         alert(responseData);
         location.href = '/manage/step9'
@@ -188,9 +192,10 @@ class Step9GroupHandler {
         });
     }
 
-    uploadFile(){
+    async uploadFile(){
         const imageFileInputEle = objHandler.selectElementByName('imageFile');
         const photoViewEle = objHandler.selectElementByClass('photo-view');
+
 
         imageFileInputEle.addEventListener('change', function () {
             const fileList = this.files;
@@ -200,10 +205,10 @@ class Step9GroupHandler {
                 return;
             }
 
-            this.uploadingFileData = URL.createObjectURL(file);
-            photoViewEle.src =  this.uploadingFileData;
+            photoViewEle.src =  URL.createObjectURL(file);
             photoViewEle.style.display = 'flex';
         })
     }
+
 
 }

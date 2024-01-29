@@ -19,6 +19,6 @@ class RequestHandler {
     }
 
     postFormData(url, data) {
-        return new Request(url, this.requestOption.createFormDataOption(data)).tryRequest();
+        return new Request(url, this.requestOption.createFormDataPostOption(data)).tryRequest();
     }
 }
