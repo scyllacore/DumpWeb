@@ -50,7 +50,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
         step9Mapper.insertGroupDriveReport(newGroupReport);
 
-        if (!imageFile.isEmpty()) {
+        if (imageFile != null) {
             uploadFileByGroupReportId(imageFile, newGroupReport.getGroupReportId());
         }
 
