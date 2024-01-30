@@ -28,7 +28,7 @@ public class FileUtil {
     @Value("${file.upload.path}")
     private String UPLOAD_PATH;
 
-    public void uploadFile(MultipartFile file, long groupReportId) {
+    public Long uploadFile(MultipartFile file, long groupReportId) {
         try {
             String fileName = file.getOriginalFilename();
             String uuid = UUID.randomUUID().toString();
@@ -47,8 +47,12 @@ public class FileUtil {
 
             fileMapper.insertFileInfoByGroupReportId(fileDTO);
             log.info(fileName);
+
+            return fileDTO.getFileId();
+
         } catch (IOException e) {
             log.error("Excepetion [" + e.getMessage() + "]");
+            return null; // 수정할 것
         }
 
     }
@@ -63,15 +67,17 @@ public class FileUtil {
 
         FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(fileId);
 
-        File downloadFile = new File(UPLOAD_PATH + fileInfo.getUuid());
+        File storedFile = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
         try {
-            String mime = this.getMimeType(downloadFile);
+            String mime = this.getMimeType(storedFile);
+            System.out.println(mime);
             response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
-            InputStream is = new FileInputStream(downloadFile);
+
+            InputStream is = new FileInputStream(storedFile);
             int len;
             byte[] buffer = new byte[1024];
             OutputStream os = response.getOutputStream();

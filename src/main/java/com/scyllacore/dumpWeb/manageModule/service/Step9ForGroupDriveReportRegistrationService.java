@@ -48,10 +48,17 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
+
         step9Mapper.insertGroupDriveReport(newGroupReport);
 
+        Long fileIdFk = null;
+
         if (imageFile != null) {
-            uploadFileByGroupReportId(imageFile, newGroupReport.getGroupReportId());
+            fileIdFk = uploadFileByGroupReportId(imageFile, newGroupReport.getGroupReportId());
+        }
+
+        if (fileIdFk != null) {
+            step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(),fileIdFk.longValue());
         }
 
         List<DriveReportDTO> prvDriveReport = new ArrayList<>();
@@ -166,7 +173,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         return new ResponseDTO<>(200, step9Mapper.selectSubmitterList());
     }
 
-    public void uploadFileByGroupReportId(MultipartFile file, int groupReportId) {
-        fileUtil.uploadFile(file, groupReportId);
+    public Long uploadFileByGroupReportId(MultipartFile file, int groupReportId) {
+        return fileUtil.uploadFile(file, groupReportId);
     }
 }

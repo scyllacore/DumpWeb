@@ -7,6 +7,10 @@
     <insert id="insertFileInfoByGroupReportId" parameterType="FileDTO">
         INSERT INTO group_report_file_tb(FILE_NAME, FILE_EXT, UUID, GROUP_REPORT_ID_FK)
         VALUES (#{fileName}, #{fileExt}, #{uuid}, #{groupReportIdFk})
+
+        <selectKey keyProperty="fileId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <select id="findFileInfoByGroupReportId" resultType="FileDTO" parameterType="Integer">

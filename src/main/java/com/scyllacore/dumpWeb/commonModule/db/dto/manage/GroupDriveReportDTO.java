@@ -21,6 +21,7 @@ public class GroupDriveReportDTO {
     private int groupDriverIdFk;
     private int groupSubmitterIdFk;
     private int groupWriterIdFk;
+    private long fileIdFk;
 
     private int groupUserType;
 

@@ -192,7 +192,7 @@ class Step9GroupHandler {
         });
     }
 
-    async uploadFile(){
+    uploadFile() {
         const imageFileInputEle = objHandler.selectElementByName('imageFile');
         const photoViewEle = objHandler.selectElementByClass('photo-view');
 
@@ -205,7 +205,7 @@ class Step9GroupHandler {
                 return;
             }
 
-            photoViewEle.src =  URL.createObjectURL(file);
+            photoViewEle.src = URL.createObjectURL(file);
             photoViewEle.style.display = 'flex';
         })
     }

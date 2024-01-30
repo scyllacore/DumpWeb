@@ -30,8 +30,6 @@ public class Step9ForGroupDriveReportRegistrationController {
     public ResponseDTO<String> groupDriveReportSave(
             @RequestPart(value = "dto") GroupDriveReportDTO groupReport,
             @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
-        System.out.println(groupReport);
-        System.out.println(imageFile);
         return step9Service.saveGroupDriveReport(groupReport,imageFile);
     }
 
