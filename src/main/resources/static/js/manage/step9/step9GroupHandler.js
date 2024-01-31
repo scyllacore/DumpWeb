@@ -55,9 +55,17 @@ class Step9GroupHandler {
         const inputData = await this.requestHandler
             .post('/manage/step9' + '/fetch' + '/groupDriveReportDetails', reqData);
 
+        if(inputData['fileIdFk'] !== null) {
+            const photoViewEle = objHandler.selectElementByClass('photo-view');
+            photoViewEle.src = '/image/' + inputData['fileIdFk'];
+            photoViewEle.style.display = 'flex';
+            delete inputData['fileIdFk'];
+        }
+
         this.groupList = inputData['driveReports'];
 
         this.inputHandler.fillInput(inputData);
+
         this.htmlModifier
             .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
     }

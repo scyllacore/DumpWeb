@@ -72,9 +72,9 @@ public class FileUtil {
         log.info(fileInfo.getFileName());
 
         try {
-            String mime = this.getMimeType(storedFile);
-            System.out.println(mime);
-            response.setContentType(mime);
+            //String mime = this.getMimeType(storedFile);
+            //System.out.println("확인 : " + mime);
+            //response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
             InputStream is = new FileInputStream(storedFile);
