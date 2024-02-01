@@ -4,26 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
+    <sql id="covering">
+        WITH covering_tb AS (
+        SELECT MILEAGE_ID
+        FROM mileage_tb
+        WHERE WRITER_ID_FK = ${writerIdFk}
+        AND <![CDATA[ DRIVE_DATE >= ${startDate} AND DRIVE_DATE <= ${endDate}]]>
+        <if test="item !='전체'">
+            AND ITEM = ${item}
+        </if>
+        ORDER BY MILEAGE_ID DESC
+        )
+    </sql>
+
     <select id="selectMileageListByOption" parameterType="MileageSearchOptionDTO" resultType="MileageDTO">
-        SELECT MILEAGE_ID,
+        <include refid="covering">
+            <property name="writerIdFk" value="#{writerIdFk}"/>
+            <property name="startDate" value="#{startDate}"/>
+            <property name="endDate" value="#{endDate}"/>
+            <property name="item" value="#{item}"/>
+        </include>
+        SELECT mileage_tb.MILEAGE_ID as MILEAGE_ID,
         DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
         ITEM,
         LAST_KM,
         USED_AMOUNT,
         MEMO,
         REPL_ACTIVE_CHK
-        FROM mileage_tb
-        WHERE WRITER_ID_FK = #{writerIdFk}
-        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
-        <if test="item !='전체'">
-            AND ITEM = #{item}
-        </if>
+        FROM mileage_tb INNER JOIN covering_tb on mileage_tb.MILEAGE_ID = covering_tb.MILEAGE_ID
         <choose>
-            <when test="sortingCriteria == 'driveDate'">
-                ORDER BY driveDate DESC, ITEM ASC
+            <when test="sortingCriteria == 'item'">
+                ORDER BY ITEM ASC, MILEAGE_ID DESC
             </when>
             <otherwise>
-                ORDER BY ITEM ASC, driveDate DESC
+                ORDER BY MILEAGE_ID DESC, ITEM ASC
             </otherwise>
         </choose>
     </select>
