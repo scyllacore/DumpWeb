@@ -59,6 +59,7 @@ class Step9GroupHandler {
             const photoViewEle = objHandler.selectElementByClass('photo-view');
             photoViewEle.src = '/image/' + inputData['fileIdFk'];
             photoViewEle.style.display = 'flex';
+            delete inputData['fileIdFk'];
         }
 
         this.groupList = inputData['driveReports'];

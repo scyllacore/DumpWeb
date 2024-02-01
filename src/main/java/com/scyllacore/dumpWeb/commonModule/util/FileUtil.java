@@ -65,18 +65,19 @@ public class FileUtil {
 
     public void getImageFile(HttpServletResponse response, int fileId) {
 
-        FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
+        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(fileId);
 
         File storedFile = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
-        try (InputStream is = new FileInputStream(storedFile)) {
+        try {
             //String mime = this.getMimeType(storedFile);
             //System.out.println("확인 : " + mime);
             //response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
+            InputStream is = new FileInputStream(storedFile);
             int len;
             byte[] buffer = new byte[1024];
             OutputStream os = response.getOutputStream();
@@ -93,32 +94,24 @@ public class FileUtil {
 
     }
 
-    public void deleteFile(int fileId) {
-        this.deleteImageFile(fileId);
-        this.deleteFileColumn(fileId);
-    }
-
-
-    public boolean deleteImageFile(int fileId) {
+    public boolean deleteImageFile(int idx) {
 
         boolean result = false;
 
-        FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
+        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(idx);
 
-        File file = new File(UPLOAD_PATH + fileInfo.getUuid());
+        File deleteFile = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
-        System.out.println(fileInfo.getUuid());
-
         try {
 
-            if (file.delete()) {
+            if (deleteFile.delete()) {
                 result = true;
             } else {
                 result = false;
             }
-            System.out.println("삭제 결과 : " + result);
+
 
         } catch (Exception e) {
             log.error("Excepetion [" + e.getMessage() + "]");
@@ -128,8 +121,31 @@ public class FileUtil {
 
     }
 
-    public void deleteFileColumn(long fileId) {
-        fileMapper.deleteFile(fileId);
+    public void updateImageFile(MultipartFile file, int fileId) {
+        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(fileId);
+        File orgFile = new File(UPLOAD_PATH + fileInfo.getUuid());
+
+        log.info(fileInfo.getFileName());
+
+        try {
+            String fileName = file.getOriginalFilename();
+            String ext = getExtension(fileName);
+
+            file.transferTo(orgFile);
+
+            FileDTO fileDTO = new FileDTO();
+
+            fileDTO.setFileName(fileName);
+            fileDTO.setFileExt(ext);
+            fileDTO.setGroupReportIdFk(fileInfo.getGroupReportIdFk());
+
+            //fileMapper.updateFileInfoBySheetID(fileDTO);
+
+
+        } catch (Exception e) {
+            log.error("Excepetion [" + e.getMessage() + "]");
+        }
+
     }
 
     public String getExtension(String fileName) {
