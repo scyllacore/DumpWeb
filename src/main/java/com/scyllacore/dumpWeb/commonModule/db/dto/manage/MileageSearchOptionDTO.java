@@ -12,4 +12,7 @@ public class MileageSearchOptionDTO {
     private String item;
     private String sortingCriteria;
     private boolean paymentBtnFlag;
+
+    private int pageNum;
+    private int pageAmount;
 }

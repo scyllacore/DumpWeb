@@ -7,8 +7,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 public class PageDTO {
+    private MileageSearchOptionDTO option;
     private PageVO pageInfo;
     private List<MileageDTO> pageList;
 }

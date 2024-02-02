@@ -5,7 +5,7 @@
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
     <sql id="covering">
-        WITH covering_tb AS (
+        WITH covering_tb1 AS (
         SELECT MILEAGE_ID
         FROM mileage_tb
         WHERE WRITER_ID_FK = ${writerIdFk}
@@ -14,16 +14,39 @@
             AND ITEM = ${item}
         </if>
         ORDER BY MILEAGE_ID DESC
+        ),
+        covering_tb2 AS(
+        SELECT MILEAGE_ID
+        FROM covering_tb1
+        LIMIT ${startPage} - 1,  #{endPage} - #{startPage} + 1
         )
+
     </sql>
 
-    <select id="selectMileageListByOption" parameterType="MileageSearchOptionDTO" resultType="MileageDTO">
+
+
+    <select id="countMileageListByOption" parameterType="MileageSearchOptionDTO" resultType="int">
         <include refid="covering">
-            <property name="writerIdFk" value="#{writerIdFk}"/>
-            <property name="startDate" value="#{startDate}"/>
-            <property name="endDate" value="#{endDate}"/>
-            <property name="item" value="#{item}"/>
+            <property name="writerIdFk" value="#{option.writerIdFk}"/>
+            <property name="startDate" value="#{option.startDate}"/>
+            <property name="endDate" value="#{option.endDate}"/>
+            <property name="item" value="#{option.item}"/>
         </include>
+
+        SELECT COUNT(MILEAGE_ID)
+        FROM covering_tb1
+    </select>
+
+    <select id="selectMileageListByOption" parameterType="PageDTO" resultType="MileageDTO">
+        <include refid="covering">
+            <property name="writerIdFk" value="#{option.writerIdFk}"/>
+            <property name="startDate" value="#{option.startDate}"/>
+            <property name="endDate" value="#{option.endDate}"/>
+            <property name="item" value="#{option.item}"/>
+            <property name="startPage" value="#{pageInfo.startPage}"/>
+            <property name="endPage" value="#{pageInfo.endPage}"/>
+        </include>
+
         SELECT mileage_tb.MILEAGE_ID as MILEAGE_ID,
         DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
         ITEM,
@@ -31,7 +54,7 @@
         USED_AMOUNT,
         MEMO,
         REPL_ACTIVE_CHK
-        FROM mileage_tb INNER JOIN covering_tb on mileage_tb.MILEAGE_ID = covering_tb.MILEAGE_ID
+        FROM mileage_tb INNER JOIN covering_tb2 on mileage_tb.MILEAGE_ID = covering_tb2.MILEAGE_ID
         <choose>
             <when test="sortingCriteria == 'item'">
                 ORDER BY ITEM ASC, MILEAGE_ID DESC

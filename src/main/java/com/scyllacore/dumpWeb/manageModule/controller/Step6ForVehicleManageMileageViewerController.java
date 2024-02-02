@@ -23,16 +23,9 @@ public class Step6ForVehicleManageMileageViewerController {
 
     @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public ResponseDTO<String> mileageList(@RequestBody MileageSearchOptionDTO option) {
+    public ResponseDTO<PageDTO> mileageList(@RequestBody MileageSearchOptionDTO option) {
         return step6Service.findMileageListByOption(option);
     }
-
-    @GetMapping(value = "/fetch/mileagePage")
-    @ResponseBody
-    public ResponseDTO<PageDTO> mileagePage(@RequestBody PageCriteriaDTO pageCriteria) {
-        return step6Service.findPageList(pageCriteria);
-    }
-
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody

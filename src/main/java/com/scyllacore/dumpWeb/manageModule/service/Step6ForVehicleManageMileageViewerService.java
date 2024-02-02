@@ -19,22 +19,27 @@ public class Step6ForVehicleManageMileageViewerService {
     private final Step6ForVehicleManageMileageViewerMapper step6Mapper;
     private final CommonUtil commonUtil;
 
-    private List<MileageDTO> mileageList;
-
     public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-    public ResponseDTO<String> findMileageListByOption(MileageSearchOptionDTO option) {
+    public ResponseDTO<PageDTO> findMileageListByOption(MileageSearchOptionDTO option) {
+
         option.setWriterIdFk(getUserIdFk());
-        this.mileageList = step6Mapper.selectMileageListByOption(option);
-        return new ResponseDTO<>(200, "리스트가 조회 되었습니다");
-    }
 
-    public ResponseDTO<PageDTO> findPageList(PageCriteriaDTO pageCriteria) {
-        PageVO pageInfo = new PageVO(pageCriteria, mileageList.size());
+        int totalAmount = step6Mapper.countMileageListByOption(option);
 
-        return new ResponseDTO<>(200, new PageDTO(pageInfo, mileageList.subList(pageInfo.getStartPage(), pageInfo.getEndPage())));
+        PageCriteriaDTO criteria = new PageCriteriaDTO(option.getPageNum(),option.getPageAmount());
+        PageVO pageInfo =  new PageVO(criteria,totalAmount);
+
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setOption(option);
+        pageDTO.setPageInfo(pageInfo);
+
+        List<MileageDTO> mileageList = step6Mapper.selectMileageListByOption(pageDTO);
+        pageDTO.setPageList(mileageList);
+
+        return new ResponseDTO<>(200, pageDTO);
     }
 
     public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
