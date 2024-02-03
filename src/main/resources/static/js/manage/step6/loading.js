@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const func = {
-    async mileageRetrieval() {
-        await step6Handler.mileageRetrieval();
+    async mileageRetrieval(pageNum) {
+        await step6Handler.mileageRetrieval(pageNum);
     },
     async approveInBulk() {
         await step6Handler.modifyPaymentChkInBulk(true);

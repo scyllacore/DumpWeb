@@ -37,7 +37,7 @@ public class Step6ForVehicleManageMileageViewerService {
         pageDTO.setPageInfo(pageInfo);
 
         List<MileageDTO> mileageList = step6Mapper.selectMileageListByOption(pageDTO);
-        pageDTO.setPageList(mileageList);
+        pageDTO.setMileageList(mileageList);
 
         return new ResponseDTO<>(200, pageDTO);
     }

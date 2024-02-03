@@ -22,6 +22,9 @@
 
             <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
 
+            <input type="hidden" name="pageNum" value="1">
+            <input type="hidden" name="pageAmount" value="10">
+
             <div class="period-wrapper">
                 <h3>기간</h3>
                 <label class="period-inner">
@@ -51,7 +54,7 @@
             </div>
 
             <div class="search-btn-wrapper">
-                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.mileageRetrieval()">검색</button>
+                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.mileageRetrieval(1)">검색</button>
             </div>
         </form>
 

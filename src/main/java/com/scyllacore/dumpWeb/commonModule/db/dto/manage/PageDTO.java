@@ -10,5 +10,5 @@ import java.util.List;
 public class PageDTO {
     private MileageSearchOptionDTO option;
     private PageVO pageInfo;
-    private List<MileageDTO> pageList;
+    private List<MileageDTO> mileageList;
 }

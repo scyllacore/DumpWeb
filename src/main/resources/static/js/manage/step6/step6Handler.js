@@ -16,6 +16,7 @@ class Step6Handler {
                         <th class="replActiveChk">교환 주기</th>
     `
 
+
     constructor() {
         this.run();
     }
@@ -32,21 +33,32 @@ class Step6Handler {
         return this.objHandler.createFormObj('searchOptionForm');
     }
 
-    async mileageRetrieval() {
+    async mileageRetrieval(pageNum) {
+
+        const curPage = this.objHandler.selectElementByName('pageNum');
+        curPage.value = (pageNum).toString();
+
         const requestObj = this.createMileageFormObj();
         this.objHandler.changeOnToTrue(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step6' + '/fetch' + '/mileageList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
+
+        this.setPage(responseData['pageInfo']);
+        this.printMileageTable(requestObj, responseData['mileageList']);
+    }
+
+    async printMileageTable(requestObj, mileageList) {
+
         this.objHandler.selectElementByClass('mileage-key').innerHTML = this.mileageKey;
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('mileage-key', 'mileage-tuple', responseData);
+        this.htmlModifier.printList('mileage-key', 'mileage-tuple', mileageList);
         this.htmlModifier.addRedLineToTableByDifferentValue('mileage-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('mileage-tuple').children;
 
-        responseData.forEach((data, idx) => {
+        mileageList.forEach((data, idx) => {
             this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'mileageId', data['mileageId']);
         })
     }
@@ -60,4 +72,34 @@ class Step6Handler {
 
         alert(responseData);
     }
+
+    setPage(pageInfo) {
+        const pageNationEle = objHandler.selectElementByClass('page_nation');
+
+        pageNationEle.innerHTML = `
+        <a className="arrow pprev" onclick="func.movePageSet(-1)"></a>
+        <a className="arrow prev" onclick="func.moveBothEndsPageSet(1)></a>
+        `;
+
+        const curPage = this.objHandler.selectElementByName('pageNum');
+
+        for (let i = pageInfo['startPage']; i <= pageInfo['endPage']; i++) {
+
+            if (parseInt(curPage.value) == i) {
+                pageNationEle.innerHTML += `
+                <a className="active" onclick="func.mileageRetrieval(${i})">${i}</a>
+            `
+            } else {
+                pageNationEle.innerHTML += `
+                <a onclick="func.mileageRetrieval(${i})">${i}</a>
+            `
+            }
+        }
+
+        pageNationEle.innerHTML += `
+        <a className="arrow next"  onclick="func.movePageSet(1)"></a>
+        <a className="arrow nnext" onclick="func.moveBothEndsPageSet(99999999)"></a>
+        `
+    }
+
 }
