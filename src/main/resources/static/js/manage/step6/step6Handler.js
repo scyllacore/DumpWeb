@@ -7,7 +7,7 @@ class Step6Handler {
     htmlModifier = new HtmlModifier();
 
     mileageKey = `
-                        <th>No</th>
+                        <th class="mileageId">No</th>
                         <th class="driveDate">날짜</th>
                         <th class="item">품목</th>
                         <th class="lastKm">최종주행(km)</th>
@@ -17,6 +17,7 @@ class Step6Handler {
     `
 
     curPage = this.objHandler.selectElementByName('pageNum');
+    totalList = null;
 
 
     constructor() {
@@ -77,14 +78,14 @@ class Step6Handler {
     }
 
     setPage(pageInfo) {
-        const pageNationEle = objHandler.selectElementByClass('page_nation');
+        const pageNationEle = this.objHandler.selectElementByClass('page_nation');
 
         pageNationEle.innerHTML = ``;
 
         if (pageInfo['prev'] === true) {
             pageNationEle.innerHTML = `
-        <a className="arrow pprev" onclick="func.movePageSet(false)"></a>
-        <a className="arrow prev" onclick="func.moveBothEndsPageSet(false)></a>
+        <a class="arrow pprev" onclick="func.moveBothEndsPageSet(false)"></a>
+        <a class="arrow prev" onclick="func.movePageSet(false)"></a>
         `;
         }
 
@@ -92,7 +93,7 @@ class Step6Handler {
 
             if (parseInt(this.curPage.value) == i) {
                 pageNationEle.innerHTML += `
-                <a className="active" onclick="func.mileageRetrieval(${i})">${i}</a>
+                <a class="active" onclick="func.mileageRetrieval(${i})">${i}</a>
             `
             } else {
                 pageNationEle.innerHTML += `
@@ -101,12 +102,12 @@ class Step6Handler {
             }
         }
 
-        this.totalPage = pageInfo['total'];
+        this.totalList = pageInfo['total'];
 
         if (pageInfo['next'] === true) {
             pageNationEle.innerHTML += `
-        <a className="arrow next"  onclick="func.movePageSet(1)"></a>
-        <a className="arrow nnext" onclick="func.moveBothEndsPageSet(true)"></a>
+        <a class="arrow next"  onclick="func.movePageSet(true)"></a>
+        <a class="arrow nnext" onclick="func.moveBothEndsPageSet(true)"></a>
         `
         }
     }
@@ -115,15 +116,15 @@ class Step6Handler {
         if (flag === true) {
             this.curPage.value = Math.ceil(parseInt(this.curPage.value) / 10) * 10 + 1;
         } else {
-            this.curPage.value = Math.floor(parseInt(this.curPage.value) / 10) * 10 - 1;
+            this.curPage.value = Math.floor(parseInt(this.curPage.value) / 10) * 10;
         }
 
         this.mileageRetrieval(0);
     }
 
-    moveBothEndsPageSet(flag){
+    moveBothEndsPageSet(flag) {
         if (flag === true) {
-            this.curPage.value = Math.floor(parseInt(this.totalPage.value) / 10) * 10 + 1;
+            this.curPage.value = Math.floor(parseInt(this.totalList) / 100) * 10 + 1;
         } else {
             this.curPage.value = 1;
         }

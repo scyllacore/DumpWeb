@@ -28,8 +28,8 @@ public class PageVO {
             this.endPage = realEnd;
         }
 
-        this.start = startPage - 1;
-        this.end = endPage - start;
+        this.start = cri.getPageNum()  * cri.getAmount() - 1;
+        this.end = cri.getAmount();
 
         //이전, 다음 버튼 표출 여부 결정
         this.prev = this.startPage > 1;
