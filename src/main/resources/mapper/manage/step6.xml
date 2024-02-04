@@ -4,29 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
-    <sql id="covering">
+    <sql id="covering1">
         WITH covering_tb1 AS (
         SELECT MILEAGE_ID
         FROM mileage_tb
         WHERE WRITER_ID_FK = ${writerIdFk}
         AND <![CDATA[ DRIVE_DATE >= ${startDate} AND DRIVE_DATE <= ${endDate}]]>
-        <if test="item !='전체'">
+        <if test="option.item != '전체'">
             AND ITEM = ${item}
         </if>
         ORDER BY MILEAGE_ID DESC
-        ),
+        )
+    </sql>
+
+    <sql id="covering2">
         covering_tb2 AS(
         SELECT MILEAGE_ID
         FROM covering_tb1
-        LIMIT ${startPage} - 1,  #{endPage} - #{startPage} + 1
+        ORDER BY MILEAGE_ID DESC
+        <![CDATA[ LIMIT ${startPage},${endPage} ]]>
         )
-
     </sql>
 
 
-
-    <select id="countMileageListByOption" parameterType="MileageSearchOptionDTO" resultType="int">
-        <include refid="covering">
+    <select id="countMileageListByOption" parameterType="PageDTO" resultType="int">
+        <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
             <property name="endDate" value="#{option.endDate}"/>
@@ -38,13 +40,15 @@
     </select>
 
     <select id="selectMileageListByOption" parameterType="PageDTO" resultType="MileageDTO">
-        <include refid="covering">
+        <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
             <property name="endDate" value="#{option.endDate}"/>
             <property name="item" value="#{option.item}"/>
-            <property name="startPage" value="#{pageInfo.startPage}"/>
-            <property name="endPage" value="#{pageInfo.endPage}"/>
+        </include>,
+        <include refid="covering2">
+            <property name="startPage" value="#{pageInfo.start}"/>
+            <property name="endPage" value="#{pageInfo.end}"/>
         </include>
 
         SELECT mileage_tb.MILEAGE_ID as MILEAGE_ID,
@@ -56,7 +60,7 @@
         REPL_ACTIVE_CHK
         FROM mileage_tb INNER JOIN covering_tb2 on mileage_tb.MILEAGE_ID = covering_tb2.MILEAGE_ID
         <choose>
-            <when test="sortingCriteria == 'item'">
+            <when test="option.sortingCriteria == 'item'">
                 ORDER BY ITEM ASC, MILEAGE_ID DESC
             </when>
             <otherwise>

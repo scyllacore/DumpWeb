@@ -14,5 +14,11 @@ const func = {
     },
     async cancelInBulk() {
         await step6Handler.modifyPaymentChkInBulk(false);
+    },
+    async movePageSet(flag){
+        step6Handler.movePageSet(flag);
+    },
+    async moveBothEndsPageSet(flag){
+        step6Handler.moveBothEndsPageSet(flag);
     }
 }

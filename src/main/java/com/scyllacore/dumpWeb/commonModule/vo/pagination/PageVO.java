@@ -8,6 +8,7 @@ public class PageVO {
     private int startPage;
     private int endPage;
     private boolean prev, next;
+    private int start,end;
 
     private int total;
     //현재 페이지 번호, 한 페이지에 표출할 데이터 개수
@@ -26,6 +27,9 @@ public class PageVO {
         if (realEnd < this.endPage) {
             this.endPage = realEnd;
         }
+
+        this.start = startPage - 1;
+        this.end = endPage - start;
 
         //이전, 다음 버튼 표출 여부 결정
         this.prev = this.startPage > 1;

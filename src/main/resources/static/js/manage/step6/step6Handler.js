@@ -16,6 +16,8 @@ class Step6Handler {
                         <th class="replActiveChk">교환 주기</th>
     `
 
+    curPage = this.objHandler.selectElementByName('pageNum');
+
 
     constructor() {
         this.run();
@@ -35,8 +37,9 @@ class Step6Handler {
 
     async mileageRetrieval(pageNum) {
 
-        const curPage = this.objHandler.selectElementByName('pageNum');
-        curPage.value = (pageNum).toString();
+        if (pageNum !== 0) {
+            this.curPage.value = (pageNum).toString();
+        }
 
         const requestObj = this.createMileageFormObj();
         this.objHandler.changeOnToTrue(requestObj);
@@ -76,16 +79,18 @@ class Step6Handler {
     setPage(pageInfo) {
         const pageNationEle = objHandler.selectElementByClass('page_nation');
 
-        pageNationEle.innerHTML = `
-        <a className="arrow pprev" onclick="func.movePageSet(-1)"></a>
-        <a className="arrow prev" onclick="func.moveBothEndsPageSet(1)></a>
-        `;
+        pageNationEle.innerHTML = ``;
 
-        const curPage = this.objHandler.selectElementByName('pageNum');
+        if (pageInfo['prev'] === true) {
+            pageNationEle.innerHTML = `
+        <a className="arrow pprev" onclick="func.movePageSet(false)"></a>
+        <a className="arrow prev" onclick="func.moveBothEndsPageSet(false)></a>
+        `;
+        }
 
         for (let i = pageInfo['startPage']; i <= pageInfo['endPage']; i++) {
 
-            if (parseInt(curPage.value) == i) {
+            if (parseInt(this.curPage.value) == i) {
                 pageNationEle.innerHTML += `
                 <a className="active" onclick="func.mileageRetrieval(${i})">${i}</a>
             `
@@ -96,10 +101,33 @@ class Step6Handler {
             }
         }
 
-        pageNationEle.innerHTML += `
+        this.totalPage = pageInfo['total'];
+
+        if (pageInfo['next'] === true) {
+            pageNationEle.innerHTML += `
         <a className="arrow next"  onclick="func.movePageSet(1)"></a>
-        <a className="arrow nnext" onclick="func.moveBothEndsPageSet(99999999)"></a>
+        <a className="arrow nnext" onclick="func.moveBothEndsPageSet(true)"></a>
         `
+        }
+    }
+
+    movePageSet(flag) {
+        if (flag === true) {
+            this.curPage.value = Math.ceil(parseInt(this.curPage.value) / 10) * 10 + 1;
+        } else {
+            this.curPage.value = Math.floor(parseInt(this.curPage.value) / 10) * 10 - 1;
+        }
+
+        this.mileageRetrieval(0);
+    }
+
+    moveBothEndsPageSet(flag){
+        if (flag === true) {
+            this.curPage.value = Math.floor(parseInt(this.totalPage.value) / 10) * 10 + 1;
+        } else {
+            this.curPage.value = 1;
+        }
+        this.mileageRetrieval(0);
     }
 
 }
