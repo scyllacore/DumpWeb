@@ -9,6 +9,7 @@ import com.scyllacore.dumpWeb.manageModule.service.Step9ForGroupDriveReportRegis
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,8 +27,10 @@ public class Step9ForGroupDriveReportRegistrationController {
 
     @PostMapping(value = "/fetch/groupDriveReportSave")
     @ResponseBody
-    public ResponseDTO<String> groupDriveReportSave(@RequestBody GroupDriveReportDTO groupReport) {
-        return step9Service.saveGroupDriveReport(groupReport);
+    public ResponseDTO<String> groupDriveReportSave(
+            @RequestPart(value = "dto") GroupDriveReportDTO groupReport,
+            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
+        return step9Service.saveGroupDriveReport(groupReport,imageFile);
     }
 
     @PostMapping(value = "/fetch/groupDriveReportList")

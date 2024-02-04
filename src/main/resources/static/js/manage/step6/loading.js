@@ -6,13 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const func = {
-    async mileageRetrieval() {
-        await step6Handler.mileageRetrieval();
+    async mileageRetrieval(pageNum) {
+        await step6Handler.mileageRetrieval(pageNum);
     },
     async approveInBulk() {
         await step6Handler.modifyPaymentChkInBulk(true);
     },
     async cancelInBulk() {
         await step6Handler.modifyPaymentChkInBulk(false);
+    },
+    async movePageSet(flag){
+        step6Handler.movePageSet(flag);
+    },
+    async moveBothEndsPageSet(flag){
+        step6Handler.moveBothEndsPageSet(flag);
     }
 }

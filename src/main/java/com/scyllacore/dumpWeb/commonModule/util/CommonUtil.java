@@ -26,4 +26,5 @@ public class CommonUtil {
     public <T> T getInfoBySession(String name) {
         return (T) request.getSession(true).getAttribute(name);
     }
+
 }

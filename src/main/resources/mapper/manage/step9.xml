@@ -30,6 +30,12 @@
         </selectKey>
     </insert>
 
+    <update id="updateFileIdFk">
+        UPDATE group_drive_report_tb
+        SET FILE_ID_FK = #{fileIdFk}
+        WHERE GROUP_REPORT_ID = #{groupReportId}
+    </update>
+
     <update id="updateGroupDriveReport" parameterType="GroupDriveReportDTO">
         UPDATE group_drive_report_tb
         SET GROUP_DATE            = #{groupDate},
@@ -90,7 +96,8 @@
         GROUP_MEMO,
         GROUP_SUBMITTER_ID_FK,
         GROUP_PAYMENT_CHK,
-        GROUP_SUBMIT_CHK
+        GROUP_SUBMIT_CHK,
+        FILE_ID_FK
         FROM join_group_report
     </select>
 

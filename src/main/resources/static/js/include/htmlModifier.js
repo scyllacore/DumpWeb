@@ -17,9 +17,9 @@ class HtmlModifier {
             const row = document.createElement("tr");
             const childTd = tHeadEle.children;
 
-            row.innerHTML += `<td>` + (no + 1) + `</td>`
+            row.innerHTML += ``;
 
-            for (let i = 1; i < childTd.length; i++) {
+            for (let i = 0; i < childTd.length; i++) {
                 row.innerHTML += `<td>` + data[childTd[i].className] + `</td>`
             }
 

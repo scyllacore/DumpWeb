@@ -57,6 +57,21 @@ input[type=checkbox] {
   text-align: center;
   cursor: pointer;
 }
+.step9 .step9_wrapper .group-drive-report-form .upload-file-wrapper {
+  display: block;
+}
+.step9 .step9_wrapper .group-drive-report-form .upload-file-wrapper .file-upload-btn {
+  width: 65px;
+  height: 30px;
+  border-radius: 3px;
+}
+.step9 .step9_wrapper .group-drive-report-form .upload-file-wrapper .photo-view {
+  height: 450px;
+  width: 400px;
+  display: none;
+  shadow: none;
+  border: 2px solid #d1d1d1;
+}
 .step9 .step9_wrapper .group-drive-report-form .drive-reports-wrapper {
   display: block;
 }

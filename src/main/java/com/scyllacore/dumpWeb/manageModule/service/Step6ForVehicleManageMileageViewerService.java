@@ -1,10 +1,13 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageCriteriaDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.vo.pagination.PageVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +23,31 @@ public class Step6ForVehicleManageMileageViewerService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-    public ResponseDTO<List<MileageDTO>> findMileageListByOption(MileageSearchOptionDTO option) {
+    public ResponseDTO<PageDTO> findMileageListByOption(MileageSearchOptionDTO option) {
+
         option.setWriterIdFk(getUserIdFk());
-        return new ResponseDTO<>(200, step6Mapper.selectMileageListByOption(option));
+
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setOption(option);
+
+        int totalAmount = step6Mapper.countMileageListByOption(pageDTO);
+
+        System.out.println(option.getPageNum());
+
+        PageCriteriaDTO criteria = new PageCriteriaDTO(option.getPageNum(),option.getPageAmount());
+        PageVO pageInfo =  new PageVO(criteria,totalAmount);
+        pageDTO.setPageInfo(pageInfo);
+
+        System.out.println(pageInfo.getStartPage() + " " + pageInfo.getEndPage());
+
+        System.out.println(pageInfo.getStart() + " " + pageInfo.getEnd());
+
+        List<MileageDTO> mileageList = step6Mapper.selectMileageListByOption(pageDTO);
+        System.out.println(mileageList);
+
+        pageDTO.setMileageList(mileageList);
+
+        return new ResponseDTO<>(200, pageDTO);
     }
 
     public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {

@@ -11,6 +11,8 @@ import java.util.List;
 public interface Step9ForGroupDriveReportRegistrationMapper {
     void insertGroupDriveReport(GroupDriveReportDTO groupReport);
 
+    void updateFileIdFk(int groupReportId,long fileIdFk);
+
     void updateGroupDriveReport(GroupDriveReportDTO groupReport);
 
     void updateGroupSubmit(GroupDriveReportDTO groupReport);

@@ -12,6 +12,8 @@ class Step9GroupHandler {
 
     groupList = [];
 
+    uploadingFileData = null;
+
     constructor() {
         this.run();
     }
@@ -22,6 +24,7 @@ class Step9GroupHandler {
         this.handleInputActiveByGroupPaymentChk();
         this.inputSubmitter()
         this.inputDriveReport();
+        this.uploadFile();
     }
 
     handleInputActiveByGroupPaymentChk() {
@@ -52,9 +55,17 @@ class Step9GroupHandler {
         const inputData = await this.requestHandler
             .post('/manage/step9' + '/fetch' + '/groupDriveReportDetails', reqData);
 
+        if(inputData['fileIdFk'] !== null) {
+            const photoViewEle = objHandler.selectElementByClass('photo-view');
+            photoViewEle.src = '/image/' + inputData['fileIdFk'];
+            photoViewEle.style.display = 'flex';
+            delete inputData['fileIdFk'];
+        }
+
         this.groupList = inputData['driveReports'];
 
         this.inputHandler.fillInput(inputData);
+
         this.htmlModifier
             .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
     }
@@ -78,8 +89,12 @@ class Step9GroupHandler {
         this.objHandler.changeOnToTrue(requestObj);
         requestObj['driveReports'] = this.groupList;
 
-        const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/groupDriveReportSave'
-            , this.jsonHandler.convertObjectToJson(requestObj));
+        const requestForm = new FormData();
+        requestForm.append('dto', new Blob([this.jsonHandler.convertObjectToJson(requestObj)], { type: 'application/json' }));
+        requestForm.append('imageFile',objHandler.selectElementByName('imageFile').files[0]);
+
+        const responseData = await this.requestHandler.postFormData('/manage/step9' + '/fetch' + '/groupDriveReportSave'
+            , requestForm);
 
         alert(responseData);
         location.href = '/manage/step9'
@@ -184,5 +199,24 @@ class Step9GroupHandler {
             popUpHandler.openPopUp('drive-report');
         });
     }
+
+    uploadFile() {
+        const imageFileInputEle = objHandler.selectElementByName('imageFile');
+        const photoViewEle = objHandler.selectElementByClass('photo-view');
+
+
+        imageFileInputEle.addEventListener('change', function () {
+            const fileList = this.files;
+            const file = fileList[0];
+
+            if (!file) {
+                return;
+            }
+
+            photoViewEle.src = URL.createObjectURL(file);
+            photoViewEle.style.display = 'flex';
+        })
+    }
+
 
 }

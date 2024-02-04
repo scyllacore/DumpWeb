@@ -1,14 +1,13 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageCriteriaDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageDTO;
 import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step6ForVehicleManageMileageViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/manage/step6")
@@ -24,8 +23,7 @@ public class Step6ForVehicleManageMileageViewerController {
 
     @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public ResponseDTO<List<MileageDTO>> mileageList(@RequestBody MileageSearchOptionDTO option) {
-        System.out.println(option);
+    public ResponseDTO<PageDTO> mileageList(@RequestBody MileageSearchOptionDTO option) {
         return step6Service.findMileageListByOption(option);
     }
 

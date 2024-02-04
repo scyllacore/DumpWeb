@@ -33,11 +33,10 @@ class RequestOption {
         };
     }
 
-    createFormDataOption(formData = {}) {
+    createFormDataPostOption(formData = {}) {
         return {
-            method: 'DELETE',
-            body: formData,
-            headers: {'Content-Type': 'multipart/form-data'}
+            method: 'POST',
+            body: formData
         };
     }
 

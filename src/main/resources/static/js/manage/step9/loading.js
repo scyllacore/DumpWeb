@@ -52,5 +52,9 @@ const func = {
     },
     async driveReportsRetrieval() {
         await step9BaseHandler.driveReportsRetrieval(step9GroupHandler.groupList);
+    },
+
+    uploadImageFile(){
+        objHandler.selectElementByName('imageFile').click();
     }
 }

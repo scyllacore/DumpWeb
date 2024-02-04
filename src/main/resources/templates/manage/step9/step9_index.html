@@ -18,6 +18,15 @@
 
         <div class="line"></div>
 
+        <input
+                id="imageFileInput"
+                type="file"
+                name="imageFile"
+                accept="image/*"
+                capture="environment"
+                style="display: none;"
+        />
+
         <form class="group-drive-report-form" name="groupDriveReportForm">
             <input type="hidden" name="groupReportId" value="0" required>
             <input type="hidden" name="groupDriverIdFk" th:value="${session.driverInfo.driverId}" required>
@@ -35,14 +44,18 @@
                 <input type="hidden" name="groupSubmitterIdFk" required>
                 <input type="number" name="groupReceiver" disabled required>
                 <button type="button" name="groupSubmitterRetrievalBtn" class="retrieval-btn"
-                        onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrievalForGroup()" required>조회
+                        onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrievalForGroup()"
+                        required>조회
                 </button>
             </div>
 
             <div class="memo-wrapper">
                 <h3>제목</h3>
                 <input name="groupTitle" placeholder="검색할 때 사용">
-                <button type="button" name="groupReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('group-search-result'); func.groupDriveReportsRetrieval()" required>조회</button>
+                <button type="button" name="groupReportRetrievalBtn" class="retrieval-btn"
+                        onclick="popUpHandler.openPopUp('group-search-result'); func.groupDriveReportsRetrieval()"
+                        required>조회
+                </button>
             </div>
 
 
@@ -50,6 +63,16 @@
                 <h3>설명</h3>
                 <textarea name="groupMemo"></textarea>
             </div>
+
+            <div class="upload-file-wrapper">
+                <div>
+                    <h3>전표 사진 등록</h3>
+                    <button type="button" class="file-upload-btn" onclick="func.uploadImageFile()">사진 등록</button>
+                </div>
+
+                <img class="photo-view" src="" alt="Uploaded Photo">
+            </div>
+
 
             <div class="drive-reports-wrapper">
                 <div class="edit-header">
