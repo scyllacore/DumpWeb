@@ -1,5 +1,6 @@
 package com.scyllacore.dumpWeb.commonModule.controller;
 
+import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.FileUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class StepController {
     }
 
     @RequestMapping(value = "/image/{fileId}", method = RequestMethod.GET)
-    public void getImage(HttpServletResponse response, @PathVariable int fileId) {
+    public void getImage(HttpServletResponse response, @PathVariable int fileId) throws Exception {
         fileUtil.getImageFile(response, fileId);
     }
 

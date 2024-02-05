@@ -63,21 +63,20 @@ public class FileUtil {
     }
 
 
-    public void getImageFile(HttpServletResponse response, int fileId) {
+    public void getImageFile(HttpServletResponse response, int fileId) throws IOException {
 
-        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(fileId);
+        FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
 
         File storedFile = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
-        try {
+        try (InputStream is = new FileInputStream(storedFile)) {
             //String mime = this.getMimeType(storedFile);
             //System.out.println("확인 : " + mime);
             //response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
-            InputStream is = new FileInputStream(storedFile);
             int len;
             byte[] buffer = new byte[1024];
             OutputStream os = response.getOutputStream();
@@ -89,29 +88,38 @@ public class FileUtil {
             os.close();
 
         } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
             log.error("Excepetion [" + e.getMessage() + "]");
         }
 
     }
 
-    public boolean deleteImageFile(int idx) {
+    public void deleteFile(int fileId) {
+        this.deleteImageFile(fileId);
+        this.deleteFileColumn(fileId);
+    }
+
+
+    public boolean deleteImageFile(int fileId) {
 
         boolean result = false;
 
-        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(idx);
+        FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
 
-        File deleteFile = new File(UPLOAD_PATH + fileInfo.getUuid());
+        File file = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
+        System.out.println(fileInfo.getUuid());
+
         try {
 
-            if (deleteFile.delete()) {
+            if (file.delete()) {
                 result = true;
             } else {
                 result = false;
             }
-
+            System.out.println("삭제 결과 : " + result);
 
         } catch (Exception e) {
             log.error("Excepetion [" + e.getMessage() + "]");
@@ -121,31 +129,8 @@ public class FileUtil {
 
     }
 
-    public void updateImageFile(MultipartFile file, int fileId) {
-        FileDTO fileInfo = fileMapper.findFileInfoByGroupReportId(fileId);
-        File orgFile = new File(UPLOAD_PATH + fileInfo.getUuid());
-
-        log.info(fileInfo.getFileName());
-
-        try {
-            String fileName = file.getOriginalFilename();
-            String ext = getExtension(fileName);
-
-            file.transferTo(orgFile);
-
-            FileDTO fileDTO = new FileDTO();
-
-            fileDTO.setFileName(fileName);
-            fileDTO.setFileExt(ext);
-            fileDTO.setGroupReportIdFk(fileInfo.getGroupReportIdFk());
-
-            //fileMapper.updateFileInfoBySheetID(fileDTO);
-
-
-        } catch (Exception e) {
-            log.error("Excepetion [" + e.getMessage() + "]");
-        }
-
+    public void deleteFileColumn(long fileId) {
+        fileMapper.deleteFile(fileId);
     }
 
     public String getExtension(String fileName) {

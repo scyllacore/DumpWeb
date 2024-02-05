@@ -13,8 +13,14 @@
         </selectKey>
     </insert>
 
-    <select id="findFileInfoByGroupReportId" resultType="FileDTO" parameterType="Integer">
+    <select id="findFileInfoByFileId" resultType="FileDTO" parameterType="Integer">
         SELECT FILE_NAME, FILE_EXT, UUID, GROUP_REPORT_ID_FK FROM group_report_file_tb WHERE FILE_ID = #{fileId}
     </select>
+
+    <delete id="deleteFile">
+        DELETE
+        FROM group_report_file_tb
+        WHERE FILE_ID = #{fileId}
+    </delete>
 
 </mapper>
