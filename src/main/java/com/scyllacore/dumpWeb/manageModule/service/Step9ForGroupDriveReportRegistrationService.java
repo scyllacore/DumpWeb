@@ -41,7 +41,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         } else if (groupReport.getGroupUserType() == 1) {
             this.updateGroupSubmit(groupReport);
         } else {
-            this.updateDriveReports(groupReport);
+            this.updateGroupDriveReport(groupReport, imageFile);
         }
 
         return new ResponseDTO<String>(200, "저장 완료.");
@@ -58,7 +58,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         }
 
         if (fileIdFk != null) {
-            step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(),fileIdFk.longValue());
+            step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue());
         }
 
         List<DriveReportDTO> prvDriveReport = new ArrayList<>();
@@ -88,7 +88,16 @@ public class Step9ForGroupDriveReportRegistrationService {
         step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
     }
 
-    public void updateDriveReports(GroupDriveReportDTO newGroupReport) {
+    public void updateGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
+
+        if (imageFile != null) {
+            this.deleteFile((int)newGroupReport.getFileIdFk());
+
+            Long fileIdFk = uploadFileByGroupReportId(imageFile, newGroupReport.getGroupReportId());
+            step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue());
+        }
+
+
         step9Mapper.updateGroupDriveReport(newGroupReport);
 
         Set<Integer> driveIds = new HashSet<>();
@@ -176,4 +185,9 @@ public class Step9ForGroupDriveReportRegistrationService {
     public Long uploadFileByGroupReportId(MultipartFile file, int groupReportId) {
         return fileUtil.uploadFile(file, groupReportId);
     }
+
+    public void deleteFile(int fileIdFk) {
+        fileUtil.deleteFile(fileIdFk);
+    }
+
 }
