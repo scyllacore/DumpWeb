@@ -22,7 +22,7 @@
         SELECT MILEAGE_ID
         FROM covering_tb1
         ORDER BY MILEAGE_ID DESC
-        <![CDATA[ LIMIT ${startPage},${endPage} ]]>
+        <![CDATA[ LIMIT ${startId},${pageSize} ]]>
         )
     </sql>
 
@@ -47,8 +47,8 @@
             <property name="item" value="#{option.item}"/>
         </include>,
         <include refid="covering2">
-            <property name="startPage" value="#{pageInfo.start}"/>
-            <property name="endPage" value="#{pageInfo.end}"/>
+            <property name="startId" value="#{pageInfo.startId}"/>
+            <property name="pageSize" value="#{pageInfo.pageSize}"/>
         </include>
 
         SELECT mileage_tb.MILEAGE_ID as MILEAGE_ID,
