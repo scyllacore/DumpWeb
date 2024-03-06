@@ -10,11 +10,13 @@ import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import com.scyllacore.dumpWeb.commonModule.vo.pagination.PageVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step6ForVehicleManageMileageViewerService {
     private final Step6ForVehicleManageMileageViewerMapper step6Mapper;
     private final CommonUtil commonUtil;
@@ -43,6 +45,7 @@ public class Step6ForVehicleManageMileageViewerService {
         return new ResponseDTO<>(200, pageDTO);
     }
 
+    @Transactional
     public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFk());
         step6Mapper.updateMileagePaymentChk(option);

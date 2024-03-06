@@ -10,11 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step4ForDailyReportViewerService {
 
     private final CommonUtil commonUtil;
@@ -47,6 +49,7 @@ public class Step4ForDailyReportViewerService {
         return new ResponseDTO<>(200, step4Mapper.selectDriveReportListByOption(option));
     }
 
+    @Transactional
     public ResponseDTO<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFk());
         step4Mapper.updateDriveReportPaymentChk(option);

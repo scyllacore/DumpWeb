@@ -10,16 +10,17 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step3ForDriveReportRegistrationService {
 
     private final CommonUtil commonUtil;
     private final Step3ForDriveReportRegistrationMapper step3Mapper;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
@@ -30,11 +31,10 @@ public class Step3ForDriveReportRegistrationService {
     }
 
 
+    @Transactional
     public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-
-        System.out.println(driveReport);
 
         if (driveReport.getDriveReportId() == 0) {
             step3Mapper.insertDriveReport(driveReport);
@@ -57,7 +57,7 @@ public class Step3ForDriveReportRegistrationService {
         return new ResponseDTO<>(200, step3Mapper.selectDriveReport(driveReport));
     }
 
-
+    @Transactional
     public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 

@@ -10,11 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step10ForGroupDriveReportViewerService {
 
     private final CommonUtil commonUtil;
@@ -44,6 +46,7 @@ public class Step10ForGroupDriveReportViewerService {
         return new ResponseDTO<>(200, step10Mapper.selectGroupDriveReportListByOption(option));
     }
 
+    @Transactional
     public ResponseDTO<String> modifyPaymentInBulk(GroupDriveReportSearchOptionDTO option) {
         option.setGroupWriterIdFk(getUserIdFk());
         step10Mapper.updateGroupDriveReportPaymentChk(option);

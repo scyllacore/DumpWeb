@@ -9,11 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step5ForVehicleManageMileageRegistrationService {
     private final CommonUtil commonUtil;
     private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
@@ -27,6 +29,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
         return commonUtil.getLoginInfoBySession().getUserId();
     }
 
+    @Transactional
     public ResponseDTO<String> saveMileage(MileageDTO mileage) {
 
         mileage.setWriterIdFk(getUserIdFk());
@@ -47,6 +50,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
                 step5Mapper.selectMileageList(mileage));
     }
 
+    @Transactional
     public ResponseDTO<String> removeMileage(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
 

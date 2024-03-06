@@ -12,12 +12,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
 @RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
 public class Step9ForGroupDriveReportRegistrationService {
     private final CommonUtil commonUtil;
     private final Step9ForGroupDriveReportRegistrationMapper step9Mapper;
@@ -32,6 +34,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
     }
 
+    @Transactional
     public ResponseDTO<String> saveGroupDriveReport(GroupDriveReportDTO groupReport, MultipartFile imageFile) {
         groupReport.setGroupWriterIdFk(getUserIdFk());
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
@@ -169,6 +172,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         return new ResponseDTO<>(200, step9Mapper.selectDriveReport(driveReport));
     }
 
+    @Transactional
     public ResponseDTO<String> removeGroupDriveReport(GroupDriveReportDTO groupReport) {
         groupReport.setGroupWriterIdFk(getUserIdFk());
 
