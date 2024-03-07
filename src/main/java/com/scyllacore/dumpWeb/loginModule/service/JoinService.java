@@ -2,12 +2,14 @@ package com.scyllacore.dumpWeb.loginModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
 import com.scyllacore.dumpWeb.loginModule.constant.JoinType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
+import java.util.function.Consumer;
 
 @Service
 @RequiredArgsConstructor
@@ -16,22 +18,28 @@ public class JoinService {
 
     private final JoinMapper joinMapper;
 
-    public ResponseEntity<String> join(AuthDTO joinInfo) {
+    private final Map<String, Consumer<AuthDTO>> actionMap = Map.of(
+            "driver", joinInfo -> joinMapper.insertDriverInfo(joinInfo),
+            "submitter", joinInfo -> joinMapper.insertSubmitterInfo(joinInfo)
+    );
 
+    public ResponseEntity<String> join(AuthDTO joinInfo) {
         if (joinMapper.selectUserIdForDuplicateCheck(joinInfo) > 0) {
             return JoinType.DUPLICATED_ID.toResponseEntity();
         }
 
         joinMapper.insertUserInfo(joinInfo);
-
-        if (joinInfo.getUserType().equals("driver")) {
-            joinMapper.insertDriverInfo(joinInfo);
-        }
-        else{
-            joinMapper.insertSubmitterInfo(joinInfo);
-        }
+        insertUserTypeInfo(joinInfo);
 
         return JoinType.SUCCESS_JOIN.toResponseEntity();
     }
 
+    private void insertUserTypeInfo(AuthDTO joinInfo) {
+        Consumer<AuthDTO> action = actionMap.get(joinInfo.getUserType());
+        if (action == null) {
+            throw new IllegalArgumentException(JoinType.NOT_SUPPORT_USER_TYPE.getMessage() + joinInfo.getUserType());
+        }
+
+        action.accept(joinInfo);
+    }
 }
