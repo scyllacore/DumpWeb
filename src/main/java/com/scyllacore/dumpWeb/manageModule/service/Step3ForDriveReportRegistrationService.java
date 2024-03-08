@@ -44,29 +44,29 @@ public class Step3ForDriveReportRegistrationService {
             step3Mapper.updateDriveReport(driveReport);
         }
 
-        return new ResponseEntity<String>(200, "저장 완료.");
+        return ResponseEntity.ok("저장 완료.");
     }
 
     public ResponseEntity<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step3Mapper.selectDriveReportList(driveReport));
+        return ResponseEntity.ok(step3Mapper.selectDriveReportList(driveReport));
     }
 
     public ResponseEntity<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step3Mapper.selectDriveReport(driveReport));
+        return ResponseEntity.ok(step3Mapper.selectDriveReport(driveReport));
     }
 
     @Transactional
     public ResponseEntity<String> removeDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
-
         step3Mapper.deleteDriveReport(driveReport);
 
-        return new ResponseEntity<String>(200, "삭제 완료.");
+        return ResponseEntity.ok("삭제 완료.");
+
     }
 
     public ResponseEntity<List<SubmitterDTO>> findSubmitterList() {
-        return new ResponseEntity<>(200, step3Mapper.selectSubmitterList());
+        return ResponseEntity.ok(step3Mapper.selectSubmitterList());
     }
 }

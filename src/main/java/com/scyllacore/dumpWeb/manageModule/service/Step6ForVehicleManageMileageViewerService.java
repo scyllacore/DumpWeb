@@ -42,7 +42,7 @@ public class Step6ForVehicleManageMileageViewerService {
 
         pageDTO.setMileageList(mileageList);
 
-        return new ResponseEntity<>(200, pageDTO);
+        return ResponseEntity.ok(pageDTO);
     }
 
     @Transactional
@@ -51,9 +51,10 @@ public class Step6ForVehicleManageMileageViewerService {
         step6Mapper.updateMileagePaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
-        }
+            return ResponseEntity.ok("일괄 결재 되었습니다");
 
-        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
+        }
+        return ResponseEntity.ok("일괄 취소 되었습니다");
+
     }
 }

@@ -3,11 +3,11 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
-import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +25,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-    public String getUserId(){
+    public String getUserId() {
         return commonUtil.getLoginInfoBySession().getUserId();
     }
 
@@ -40,14 +40,13 @@ public class Step5ForVehicleManageMileageRegistrationService {
             step5Mapper.updateMileage(mileage);
         }
 
-        return new ResponseEntity<>(200, "저장 완료.");
+        return ResponseEntity.ok("저장 완료.");
     }
 
     public ResponseEntity<List<MileageDTO>> findMileageList(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
+        return ResponseEntity.ok(step5Mapper.selectMileageList(mileage));
 
-        return new ResponseEntity<>(200,
-                step5Mapper.selectMileageList(mileage));
     }
 
     @Transactional
@@ -55,13 +54,14 @@ public class Step5ForVehicleManageMileageRegistrationService {
         mileage.setWriterIdFk(getUserIdFk());
 
         step5Mapper.deleteMileage(mileage);
+        return ResponseEntity.ok("정상적으로 삭제되었습니다.");
 
-        return new ResponseEntity<>(200, "정상적으로 삭제되었습니다.");
     }
 
     public ResponseEntity<MileageDTO> findMileage(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
 
-        return new ResponseEntity<>(200, step5Mapper.selectMileage(mileage));
+        return ResponseEntity.ok(step5Mapper.selectMileage(mileage));
+
     }
 }

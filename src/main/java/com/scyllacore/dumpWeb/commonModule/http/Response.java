@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @RequiredArgsConstructor
 @Builder
+@AllArgsConstructor
 public class Response {
     private HttpStatus httpStatus;
     private String message;

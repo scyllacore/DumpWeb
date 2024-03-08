@@ -24,7 +24,6 @@ public class Step9ForGroupDriveReportRegistrationService {
     private final CommonUtil commonUtil;
     private final Step9ForGroupDriveReportRegistrationMapper step9Mapper;
     private final FileUtil fileUtil;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public int getUserIdFk() {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
@@ -47,7 +46,7 @@ public class Step9ForGroupDriveReportRegistrationService {
             this.updateGroupDriveReport(groupReport, imageFile);
         }
 
-        return new ResponseEntity<String>(200, "저장 완료.");
+        return ResponseEntity.ok("저장 완료.");
     }
 
     public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
@@ -151,7 +150,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     public ResponseEntity<List<GroupDriveReportDTO>> findGroupDriveReportList(GroupDriveReportDTO groupReport) {
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step9Mapper.selectGroupDriveReportList(groupReport));
+        return ResponseEntity.ok(step9Mapper.selectGroupDriveReportList(groupReport));
     }
 
     public ResponseEntity<GroupDriveReportDTO> findGroupDriveReport(GroupDriveReportDTO groupReport) {
@@ -159,17 +158,18 @@ public class Step9ForGroupDriveReportRegistrationService {
         groupReport = step9Mapper.selectGroupDriveReport(groupReport);
         groupReport.setDriveReports(step9Mapper.selectDriveReportsForGroupDTO(groupReport));
 
-        return new ResponseEntity<>(200, groupReport);
+        return ResponseEntity.ok(groupReport);
     }
 
     public ResponseEntity<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step9Mapper.selectDriveReportList(driveReport));
+        return ResponseEntity.ok(step9Mapper.selectDriveReportList(driveReport));
+
     }
 
     public ResponseEntity<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step9Mapper.selectDriveReport(driveReport));
+        return ResponseEntity.ok(step9Mapper.selectDriveReport(driveReport));
     }
 
     @Transactional
@@ -179,11 +179,12 @@ public class Step9ForGroupDriveReportRegistrationService {
         step9Mapper.deleteGroupDriveReport(groupReport);
         step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
 
-        return new ResponseEntity<String>(200, "삭제 완료.");
+        return ResponseEntity.ok("삭제 완료.");
+
     }
 
     public ResponseEntity<List<SubmitterDTO>> findSubmitterList() {
-        return new ResponseEntity<>(200, step9Mapper.selectSubmitterList());
+        return ResponseEntity.ok(step9Mapper.selectSubmitterList());
     }
 
     public Long uploadFileByGroupReportId(MultipartFile file, int groupReportId) {

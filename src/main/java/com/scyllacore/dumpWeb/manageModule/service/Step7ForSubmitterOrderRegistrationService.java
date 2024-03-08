@@ -43,19 +43,19 @@ public class Step7ForSubmitterOrderRegistrationService {
             step7Mapper.updateDriveOrder(driveReport);
         }
 
-        return new ResponseEntity<String>(200, "저장 완료.");
+        return ResponseEntity.ok("저장 완료.");
     }
 
     public ResponseEntity<List<DriveReportDTO>> findDriveOrderList(DriveReportDTO driveReport) {
         driveReport.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
+        return ResponseEntity.ok(step7Mapper.selectDriveOrderList(driveReport));
 
-        return new ResponseEntity<>(200, step7Mapper.selectDriveOrderList(driveReport));
     }
 
     public ResponseEntity<DriveReportDTO> findDriveOrder(DriveReportDTO driveReport) {
         driveReport.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
 
-        return new ResponseEntity<>(200, step7Mapper.selectDriveOrder(driveReport));
+        return ResponseEntity.ok(step7Mapper.selectDriveOrder(driveReport));
     }
 
     @Transactional
@@ -64,10 +64,11 @@ public class Step7ForSubmitterOrderRegistrationService {
 
         step7Mapper.deleteDriveOrder(driveReport);
 
-        return new ResponseEntity<String>(200, "삭제 완료.");
+        return ResponseEntity.ok("삭제 완료.");
+
     }
 
     public ResponseEntity<List<DriverDTO>> findDriverList() {
-        return new ResponseEntity<>(200, step7Mapper.selectDriverList());
+        return ResponseEntity.ok(step7Mapper.selectDriverList());
     }
 }

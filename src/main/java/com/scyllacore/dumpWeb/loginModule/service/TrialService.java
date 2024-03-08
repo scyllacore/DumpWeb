@@ -5,6 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.TrialMapper;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class TrialService {
     private final TrialMapper trialMapper;
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<String> loginForTrial(AuthDTO trialLoginInfo, HttpServletRequest request) {
+    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO trialLoginInfo, HttpServletRequest request) {
         setUserType(trialLoginInfo);
         trialLoginInfo = trialMapper.selectTrialUserInfo(trialLoginInfo);
 
@@ -28,10 +29,10 @@ public class TrialService {
         setSessionUserType(trialLoginInfo, session);
         session.setAttribute("loginInfo", trialLoginInfo);
 
-        return ResponseEntity.ok("/manage/" + trialLoginInfo.getUserType());
+        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + trialLoginInfo.getUserType()));
     }
 
-    private void setUserType(AuthDTO trialLoginInfo){
+    private void setUserType(AuthDTO trialLoginInfo) {
         if (trialLoginInfo.getUserType().equals("driver")) {
             trialLoginInfo.setUserIdIdx(1);
         } else {

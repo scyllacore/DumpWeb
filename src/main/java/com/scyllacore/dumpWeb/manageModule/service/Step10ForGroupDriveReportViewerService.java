@@ -4,11 +4,11 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step10ForGroupDriveReportViewerMapper;
-import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,12 +38,12 @@ public class Step10ForGroupDriveReportViewerService {
         option.setTitles(step10Mapper.selectTitleSearchOption(getDriverInfo().getDriverId()));
         option.setCompanies(step10Mapper.selectCompanySearchOption(getDriverInfo().getDriverId()));
 
-        return new ResponseEntity<>(200, option);
+        return ResponseEntity.ok(option);
     }
 
     public ResponseEntity<List<GroupDriveReportSearchOptionDTO>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO option) {
         option.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step10Mapper.selectGroupDriveReportListByOption(option));
+        return ResponseEntity.ok( step10Mapper.selectGroupDriveReportListByOption(option));
     }
 
     @Transactional
@@ -53,10 +53,11 @@ public class Step10ForGroupDriveReportViewerService {
         //step10Mapper.setDriveReportsPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
+            return ResponseEntity.ok("일괄 결재 되었습니다");
+
         }
 
-        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
+        return ResponseEntity.ok("일괄 취소 되었습니다");
     }
 
 }

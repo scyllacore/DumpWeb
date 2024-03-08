@@ -4,11 +4,11 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
-import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,12 +41,12 @@ public class Step4ForDailyReportViewerService {
         option.setToSites(step4Mapper.selectToSiteSearchOption(getDriverInfo().getDriverId()));
         option.setItems(step4Mapper.selectItemSearchOption(getDriverInfo().getDriverId()));
 
-        return new ResponseEntity<>(200, option);
+        return ResponseEntity.ok(option);
     }
 
     public ResponseEntity<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
         option.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseEntity<>(200, step4Mapper.selectDriveReportListByOption(option));
+        return ResponseEntity.ok(step4Mapper.selectDriveReportListByOption(option));
     }
 
     @Transactional
@@ -55,10 +55,11 @@ public class Step4ForDailyReportViewerService {
         step4Mapper.updateDriveReportPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
+            return ResponseEntity.ok("일괄 결재 되었습니다");
         }
 
-        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
+        return ResponseEntity.ok("일괄 취소 되었습니다");
+
     }
 
 }

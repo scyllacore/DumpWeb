@@ -19,12 +19,6 @@ import java.util.function.Consumer;
 public class JoinService {
 
     private final JoinMapper joinMapper;
-
-    private final Map<String, Consumer<AuthDTO>> actionMap = Map.of(
-            "driver", joinInfo -> joinMapper.insertDriverInfo(joinInfo),
-            "submitter", joinInfo -> joinMapper.insertSubmitterInfo(joinInfo)
-    );
-
     public ResponseEntity<String> join(AuthDTO joinInfo) throws Exception {
         if (joinMapper.selectUserIdForDuplicateCheck(joinInfo) > 0) {
             throw new DuplicateMemberException("중복 회원");
@@ -37,6 +31,11 @@ public class JoinService {
     }
 
     private void insertUserTypeInfo(AuthDTO joinInfo) {
+        Map<String, Consumer<AuthDTO>> actionMap = Map.of(
+                "driver", join -> this.joinMapper.insertDriverInfo(join),
+                "submitter", join -> this.joinMapper.insertSubmitterInfo(join)
+        );
+
         Optional<Consumer<AuthDTO>> action = Optional.of(actionMap.get(joinInfo.getUserType()));
         if (action.isEmpty()) {
             throw new IllegalArgumentException(joinInfo.getUserType());

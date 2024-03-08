@@ -37,12 +37,12 @@ public class Step8ForSubmitterReceiptViewerService {
         option.setToSites(step8Mapper.selectToSiteSearchOption(getSubmitterInfo().getSubmitterId()));
         option.setItems(step8Mapper.selectItemSearchOption(getSubmitterInfo().getSubmitterId()));
 
-        return new ResponseEntity<>(200, option);
+        return ResponseEntity.ok(option);
     }
 
     public ResponseEntity<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
         option.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
-        return new ResponseEntity<>(200, step8Mapper.selectDriveReportListByOption(option));
+        return ResponseEntity.ok(step8Mapper.selectDriveReportListByOption(option));
     }
 
     @Transactional
@@ -51,10 +51,10 @@ public class Step8ForSubmitterReceiptViewerService {
         step8Mapper.updateDriveReportPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
+            return ResponseEntity.ok("일괄 결재 되었습니다");
         }
 
-        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
+        return ResponseEntity.ok("일괄 취소 되었습니다");
     }
 
 }
