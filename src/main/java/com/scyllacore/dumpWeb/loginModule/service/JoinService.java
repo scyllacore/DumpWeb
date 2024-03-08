@@ -1,9 +1,10 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
+import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper;
-import com.scyllacore.dumpWeb.loginModule.constant.JoinType;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,21 +24,21 @@ public class JoinService {
             "submitter", joinInfo -> joinMapper.insertSubmitterInfo(joinInfo)
     );
 
-    public ResponseEntity<String> join(AuthDTO joinInfo) {
+    public ResponseEntity<String> join(AuthDTO joinInfo) throws Exception {
         if (joinMapper.selectUserIdForDuplicateCheck(joinInfo) > 0) {
-            return JoinType.DUPLICATED_ID.toResponseEntity();
+            throw new DuplicateMemberException("중복 회원");
         }
 
         joinMapper.insertUserInfo(joinInfo);
         insertUserTypeInfo(joinInfo);
 
-        return JoinType.SUCCESS_JOIN.toResponseEntity();
+        return ResponseType.SUCCESS_JOIN.toResponseEntity();
     }
 
     private void insertUserTypeInfo(AuthDTO joinInfo) {
         Consumer<AuthDTO> action = actionMap.get(joinInfo.getUserType());
         if (action == null) {
-            throw new IllegalArgumentException(JoinType.NOT_SUPPORT_USER_TYPE.getMessage() + joinInfo.getUserType());
+            throw new IllegalArgumentException(joinInfo.getUserType());
         }
 
         action.accept(joinInfo);
