@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.manageModule.service.Step10ForGroupDriveReportViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,19 +23,19 @@ public class Step10ForGroupDriveReportViewerController {
 
     @GetMapping(value = "/fetch/recommendKeywordList")
     @ResponseBody
-    public ResponseDTO<GroupDriveReportSearchOptionDTO> recommendKeywordList() {
+    public ResponseEntity<GroupDriveReportSearchOptionDTO> recommendKeywordList() {
         return step10Service.findRecommendKeywordList();
     }
 
     @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
-    public ResponseDTO<List<GroupDriveReportSearchOptionDTO>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<GroupDriveReportSearchOptionDTO>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO option) {
         return step10Service.findGroupDriveReportListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseDTO<String> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO option) {
         return step10Service.modifyPaymentInBulk(option);
     }
 

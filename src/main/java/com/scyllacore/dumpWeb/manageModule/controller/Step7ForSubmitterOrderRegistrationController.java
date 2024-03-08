@@ -2,7 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.manageModule.service.Step7ForSubmitterOrderRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,31 +24,31 @@ public class Step7ForSubmitterOrderRegistrationController {
 
     @PostMapping(value = "/fetch/driveReportSave")
     @ResponseBody
-    public ResponseDTO<String> driveOrderSave(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<String> driveOrderSave(@RequestBody DriveReportDTO driveReport) {
         return step7Service.saveDriveOrder(driveReport);
     }
 
     @PostMapping(value = "/fetch/driveReportList")
     @ResponseBody
-    public ResponseDTO<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
         return step7Service.findDriveOrderList(driveReport);
     }
 
     @PostMapping(value = "/fetch/driveReportDetails")
     @ResponseBody
-    public ResponseDTO<DriveReportDTO> driveOrderDetails(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<DriveReportDTO> driveOrderDetails(@RequestBody DriveReportDTO driveReport) {
         return step7Service.findDriveOrder(driveReport);
     }
 
     @DeleteMapping(value = "/fetch/driveReportRemove")
     @ResponseBody
-    public ResponseDTO<String> driveOrderRemove(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<String> driveOrderRemove(@RequestBody DriveReportDTO driveReport) {
         return step7Service.removeDriveOrder(driveReport);
     }
 
     @GetMapping(value = "/fetch/driverList")
     @ResponseBody
-    public ResponseDTO<List<DriverDTO>> submitterList() {
+    public ResponseEntity<List<DriverDTO>> submitterList() {
         return step7Service.findDriverList();
     }
 }

@@ -5,7 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageCriteriaDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import com.scyllacore.dumpWeb.commonModule.vo.pagination.PageVO;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class Step6ForVehicleManageMileageViewerService {
         return commonUtil.getLoginInfoBySession().getUserIdIdx();
     }
 
-    public ResponseDTO<PageDTO> findMileageListByOption(MileageSearchOptionDTO option) {
+    public ResponseEntity<PageDTO> findMileageListByOption(MileageSearchOptionDTO option) {
 
         option.setWriterIdFk(getUserIdFk());
 
@@ -42,18 +42,18 @@ public class Step6ForVehicleManageMileageViewerService {
 
         pageDTO.setMileageList(mileageList);
 
-        return new ResponseDTO<>(200, pageDTO);
+        return new ResponseEntity<>(200, pageDTO);
     }
 
     @Transactional
-    public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
+    public ResponseEntity<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFk());
         step6Mapper.updateMileagePaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
         }
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
     }
 }

@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.loginModule.service.LoginService;
 import com.scyllacore.dumpWeb.loginModule.service.TrialService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,13 +23,8 @@ public class TrialController {
 
     @PostMapping("/auth/fetch/trialLogin")
     @ResponseBody
-    public ResponseDTO<String> trialLogin(@RequestBody AuthDTO trialLoginInfo, HttpServletRequest request) {
-
+    public ResponseEntity<String> trialLogin(@RequestBody AuthDTO trialLoginInfo, HttpServletRequest request) {
         loginService.logout(request);
-
-        ResponseDTO<String> trialLoginType = trialService.loginForTrial(trialLoginInfo,request);
-
-        trialLoginType.setData("/manage/" + trialLoginType.getData());
-        return trialLoginType;
+        return trialService.loginForTrial(trialLoginInfo,request);
     }
 }

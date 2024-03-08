@@ -5,7 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import com.scyllacore.dumpWeb.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseDTO<String> saveGroupDriveReport(GroupDriveReportDTO groupReport, MultipartFile imageFile) {
+    public ResponseEntity<String> saveGroupDriveReport(GroupDriveReportDTO groupReport, MultipartFile imageFile) {
         groupReport.setGroupWriterIdFk(getUserIdFk());
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
 
@@ -47,7 +47,7 @@ public class Step9ForGroupDriveReportRegistrationService {
             this.updateGroupDriveReport(groupReport, imageFile);
         }
 
-        return new ResponseDTO<String>(200, "저장 완료.");
+        return new ResponseEntity<String>(200, "저장 완료.");
     }
 
     public void insertGroupDriveReport(GroupDriveReportDTO newGroupReport, MultipartFile imageFile) {
@@ -149,41 +149,41 @@ public class Step9ForGroupDriveReportRegistrationService {
         }
     }
 
-    public ResponseDTO<List<GroupDriveReportDTO>> findGroupDriveReportList(GroupDriveReportDTO groupReport) {
+    public ResponseEntity<List<GroupDriveReportDTO>> findGroupDriveReportList(GroupDriveReportDTO groupReport) {
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step9Mapper.selectGroupDriveReportList(groupReport));
+        return new ResponseEntity<>(200, step9Mapper.selectGroupDriveReportList(groupReport));
     }
 
-    public ResponseDTO<GroupDriveReportDTO> findGroupDriveReport(GroupDriveReportDTO groupReport) {
+    public ResponseEntity<GroupDriveReportDTO> findGroupDriveReport(GroupDriveReportDTO groupReport) {
         groupReport.setGroupDriverIdFk(getDriverInfo().getDriverId());
         groupReport = step9Mapper.selectGroupDriveReport(groupReport);
         groupReport.setDriveReports(step9Mapper.selectDriveReportsForGroupDTO(groupReport));
 
-        return new ResponseDTO<>(200, groupReport);
+        return new ResponseEntity<>(200, groupReport);
     }
 
-    public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
+    public ResponseEntity<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step9Mapper.selectDriveReportList(driveReport));
+        return new ResponseEntity<>(200, step9Mapper.selectDriveReportList(driveReport));
     }
 
-    public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
+    public ResponseEntity<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step9Mapper.selectDriveReport(driveReport));
+        return new ResponseEntity<>(200, step9Mapper.selectDriveReport(driveReport));
     }
 
     @Transactional
-    public ResponseDTO<String> removeGroupDriveReport(GroupDriveReportDTO groupReport) {
+    public ResponseEntity<String> removeGroupDriveReport(GroupDriveReportDTO groupReport) {
         groupReport.setGroupWriterIdFk(getUserIdFk());
 
         step9Mapper.deleteGroupDriveReport(groupReport);
         step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
 
-        return new ResponseDTO<String>(200, "삭제 완료.");
+        return new ResponseEntity<String>(200, "삭제 완료.");
     }
 
-    public ResponseDTO<List<SubmitterDTO>> findSubmitterList() {
-        return new ResponseDTO<>(200, step9Mapper.selectSubmitterList());
+    public ResponseEntity<List<SubmitterDTO>> findSubmitterList() {
+        return new ResponseEntity<>(200, step9Mapper.selectSubmitterList());
     }
 
     public Long uploadFileByGroupReportId(MultipartFile file, int groupReportId) {

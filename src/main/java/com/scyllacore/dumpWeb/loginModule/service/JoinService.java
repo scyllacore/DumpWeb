@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Service
@@ -32,15 +33,15 @@ public class JoinService {
         joinMapper.insertUserInfo(joinInfo);
         insertUserTypeInfo(joinInfo);
 
-        return ResponseType.SUCCESS_JOIN.toResponseEntity();
+        return ResponseType.SUCCESS.toResponseEntity();
     }
 
     private void insertUserTypeInfo(AuthDTO joinInfo) {
-        Consumer<AuthDTO> action = actionMap.get(joinInfo.getUserType());
-        if (action == null) {
+        Optional<Consumer<AuthDTO>> action = Optional.of(actionMap.get(joinInfo.getUserType()));
+        if (action.isEmpty()) {
             throw new IllegalArgumentException(joinInfo.getUserType());
         }
 
-        action.accept(joinInfo);
+        action.get().accept(joinInfo);
     }
 }

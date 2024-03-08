@@ -4,7 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.manageModule.service.Step9ForGroupDriveReportRegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class Step9ForGroupDriveReportRegistrationController {
 
     @PostMapping(value = "/fetch/groupDriveReportSave")
     @ResponseBody
-    public ResponseDTO<String> groupDriveReportSave(
+    public ResponseEntity<String> groupDriveReportSave(
             @RequestPart(value = "dto") GroupDriveReportDTO groupReport,
             @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
         return step9Service.saveGroupDriveReport(groupReport,imageFile);
@@ -35,38 +35,38 @@ public class Step9ForGroupDriveReportRegistrationController {
 
     @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
-    public ResponseDTO<List<GroupDriveReportDTO>> groupDriveReportList(@RequestBody GroupDriveReportDTO groupReport) {
+    public ResponseEntity<List<GroupDriveReportDTO>> groupDriveReportList(@RequestBody GroupDriveReportDTO groupReport) {
         System.out.println(groupReport);
         return step9Service.findGroupDriveReportList(groupReport);
     }
 
     @PostMapping(value = "/fetch/groupDriveReportDetails")
     @ResponseBody
-    public ResponseDTO<GroupDriveReportDTO> groupDriveReportDetails(@RequestBody GroupDriveReportDTO groupReport) {
+    public ResponseEntity<GroupDriveReportDTO> groupDriveReportDetails(@RequestBody GroupDriveReportDTO groupReport) {
         return step9Service.findGroupDriveReport(groupReport);
     }
 
     @DeleteMapping(value = "/fetch/groupDriveReportRemove")
     @ResponseBody
-    public ResponseDTO<String> groupDriveReportRemove(@RequestBody GroupDriveReportDTO groupReport) {
+    public ResponseEntity<String> groupDriveReportRemove(@RequestBody GroupDriveReportDTO groupReport) {
         return step9Service.removeGroupDriveReport(groupReport);
     }
 
     @PostMapping(value = "/fetch/driveReportList")
     @ResponseBody
-    public ResponseDTO<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<List<DriveReportDTO>> driveReportList(@RequestBody DriveReportDTO driveReport) {
         return step9Service.findDriveReportList(driveReport);
     }
 
     @PostMapping(value = "/fetch/driveReportDetails")
     @ResponseBody
-    public ResponseDTO<DriveReportDTO> driveReportDetails(@RequestBody DriveReportDTO driveReport) {
+    public ResponseEntity<DriveReportDTO> driveReportDetails(@RequestBody DriveReportDTO driveReport) {
         return step9Service.findDriveReport(driveReport);
     }
 
     @GetMapping(value = "/fetch/submitterList")
     @ResponseBody
-    public ResponseDTO<List<SubmitterDTO>> submitterList() {
+    public ResponseEntity<List<SubmitterDTO>> submitterList() {
         return step9Service.findSubmitterList();
     }
 

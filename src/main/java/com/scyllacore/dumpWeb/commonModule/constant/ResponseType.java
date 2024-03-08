@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 @Getter
 @RequiredArgsConstructor
 public enum ResponseType {
-    SUCCESS_JOIN(HttpStatus.OK, "정상적으로 처리 되었습니다."),
+    SUCCESS(HttpStatus.OK, "정상적으로 처리 되었습니다."),
 
     DUPLICATED_ID(HttpStatus.BAD_REQUEST, "이미 사용 중인 ID 입니다"),
     NOT_SUPPORT_USER_TYPE(HttpStatus.BAD_REQUEST, "지원하지 않는 유저 타입입니다."),

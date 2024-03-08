@@ -4,7 +4,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class Step3ForDriveReportRegistrationService {
 
 
     @Transactional
-    public ResponseDTO<String> saveDriveReport(DriveReportDTO driveReport) {
+    public ResponseEntity<String> saveDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
 
@@ -44,29 +44,29 @@ public class Step3ForDriveReportRegistrationService {
             step3Mapper.updateDriveReport(driveReport);
         }
 
-        return new ResponseDTO<String>(200, "저장 완료.");
+        return new ResponseEntity<String>(200, "저장 완료.");
     }
 
-    public ResponseDTO<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
+    public ResponseEntity<List<DriveReportDTO>> findDriveReportList(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step3Mapper.selectDriveReportList(driveReport));
+        return new ResponseEntity<>(200, step3Mapper.selectDriveReportList(driveReport));
     }
 
-    public ResponseDTO<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
+    public ResponseEntity<DriveReportDTO> findDriveReport(DriveReportDTO driveReport) {
         driveReport.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step3Mapper.selectDriveReport(driveReport));
+        return new ResponseEntity<>(200, step3Mapper.selectDriveReport(driveReport));
     }
 
     @Transactional
-    public ResponseDTO<String> removeDriveReport(DriveReportDTO driveReport) {
+    public ResponseEntity<String> removeDriveReport(DriveReportDTO driveReport) {
         driveReport.setWriterIdFk(getUserIdFk());
 
         step3Mapper.deleteDriveReport(driveReport);
 
-        return new ResponseDTO<String>(200, "삭제 완료.");
+        return new ResponseEntity<String>(200, "삭제 완료.");
     }
 
-    public ResponseDTO<List<SubmitterDTO>> findSubmitterList() {
-        return new ResponseDTO<>(200, step3Mapper.selectSubmitterList());
+    public ResponseEntity<List<SubmitterDTO>> findSubmitterList() {
+        return new ResponseEntity<>(200, step3Mapper.selectSubmitterList());
     }
 }

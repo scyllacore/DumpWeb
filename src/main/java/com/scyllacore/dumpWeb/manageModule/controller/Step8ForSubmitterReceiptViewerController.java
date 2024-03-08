@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.manageModule.service.Step8ForSubmitterReceiptViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,19 +23,19 @@ public class Step8ForSubmitterReceiptViewerController {
 
     @GetMapping(value = "/fetch/recommendKeywordList")
     @ResponseBody
-    public ResponseDTO<DriveReportSearchOptionDTO> recommendKeywordList() {
+    public ResponseEntity<DriveReportSearchOptionDTO> recommendKeywordList() {
         return step8Service.findRecommendKeywordList();
     }
 
     @PostMapping(value = "/fetch/driveReportList")
     @ResponseBody
-    public ResponseDTO<List<DriveReportSearchOptionDTO>> driveReportList(@RequestBody DriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<DriveReportSearchOptionDTO>> driveReportList(@RequestBody DriveReportSearchOptionDTO option) {
         return step8Service.findDriveReportListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseDTO<String> paymentInBulk(@RequestBody DriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> paymentInBulk(@RequestBody DriveReportSearchOptionDTO option) {
         return step8Service.modifyPaymentInBulk(option);
     }
 

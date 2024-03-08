@@ -5,7 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOption
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step8ForSubmitterReceiptViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class Step8ForSubmitterReceiptViewerService {
         return (SubmitterDTO) commonUtil.getInfoBySession("submitterInfo");
     }
 
-    public ResponseDTO<DriveReportSearchOptionDTO> findRecommendKeywordList() {
+    public ResponseEntity<DriveReportSearchOptionDTO> findRecommendKeywordList() {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
@@ -37,24 +37,24 @@ public class Step8ForSubmitterReceiptViewerService {
         option.setToSites(step8Mapper.selectToSiteSearchOption(getSubmitterInfo().getSubmitterId()));
         option.setItems(step8Mapper.selectItemSearchOption(getSubmitterInfo().getSubmitterId()));
 
-        return new ResponseDTO<>(200, option);
+        return new ResponseEntity<>(200, option);
     }
 
-    public ResponseDTO<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
         option.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
-        return new ResponseDTO<>(200, step8Mapper.selectDriveReportListByOption(option));
+        return new ResponseEntity<>(200, step8Mapper.selectDriveReportListByOption(option));
     }
 
     @Transactional
-    public ResponseDTO<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
         option.setSubmitterIdFk(getSubmitterInfo().getSubmitterId());
         step8Mapper.updateDriveReportPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
         }
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
     }
 
 }

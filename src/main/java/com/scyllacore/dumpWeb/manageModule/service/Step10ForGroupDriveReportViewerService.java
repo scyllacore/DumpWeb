@@ -4,7 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step10ForGroupDriveReportViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -31,32 +31,32 @@ public class Step10ForGroupDriveReportViewerService {
         return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
     }
 
-    public ResponseDTO<GroupDriveReportSearchOptionDTO> findRecommendKeywordList() {
+    public ResponseEntity<GroupDriveReportSearchOptionDTO> findRecommendKeywordList() {
 
         GroupDriveReportSearchOptionDTO option = new GroupDriveReportSearchOptionDTO();
 
         option.setTitles(step10Mapper.selectTitleSearchOption(getDriverInfo().getDriverId()));
         option.setCompanies(step10Mapper.selectCompanySearchOption(getDriverInfo().getDriverId()));
 
-        return new ResponseDTO<>(200, option);
+        return new ResponseEntity<>(200, option);
     }
 
-    public ResponseDTO<List<GroupDriveReportSearchOptionDTO>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<GroupDriveReportSearchOptionDTO>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO option) {
         option.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step10Mapper.selectGroupDriveReportListByOption(option));
+        return new ResponseEntity<>(200, step10Mapper.selectGroupDriveReportListByOption(option));
     }
 
     @Transactional
-    public ResponseDTO<String> modifyPaymentInBulk(GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> modifyPaymentInBulk(GroupDriveReportSearchOptionDTO option) {
         option.setGroupWriterIdFk(getUserIdFk());
         step10Mapper.updateGroupDriveReportPaymentChk(option);
         //step10Mapper.setDriveReportsPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
         }
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
     }
 
 }

@@ -21,6 +21,11 @@ public class ExceptionHandlerAdvice {
         return createResponseEntity(ResponseType.INTERNAL_SERVER_ERROR, e);
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity handleNullObject(NullPointerException e){
+        return createResponseEntity(ResponseType.INVALID_ARGUMENT_ERROR, e);
+    }
+
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity handleSystemException(RestApiException e) {
         return createResponseEntity(e.getErrorType(), e);

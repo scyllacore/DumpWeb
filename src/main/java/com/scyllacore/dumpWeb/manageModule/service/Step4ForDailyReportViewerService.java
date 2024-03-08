@@ -4,7 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class Step4ForDailyReportViewerService {
         return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
     }
 
-    public ResponseDTO<DriveReportSearchOptionDTO> findRecommendKeywordList() {
+    public ResponseEntity<DriveReportSearchOptionDTO> findRecommendKeywordList() {
 
         DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
 
@@ -41,24 +41,24 @@ public class Step4ForDailyReportViewerService {
         option.setToSites(step4Mapper.selectToSiteSearchOption(getDriverInfo().getDriverId()));
         option.setItems(step4Mapper.selectItemSearchOption(getDriverInfo().getDriverId()));
 
-        return new ResponseDTO<>(200, option);
+        return new ResponseEntity<>(200, option);
     }
 
-    public ResponseDTO<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
         option.setDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step4Mapper.selectDriveReportListByOption(option));
+        return new ResponseEntity<>(200, step4Mapper.selectDriveReportListByOption(option));
     }
 
     @Transactional
-    public ResponseDTO<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
         option.setWriterIdFk(getUserIdFk());
         step4Mapper.updateDriveReportPaymentChk(option);
 
         if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+            return new ResponseEntity<>(200, "일괄 결재 되었습니다");
         }
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        return new ResponseEntity<>(200, "일괄 취소 되었습니다");
     }
 
 }

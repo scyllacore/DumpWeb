@@ -3,7 +3,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
+import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     @Transactional
-    public ResponseDTO<String> saveMileage(MileageDTO mileage) {
+    public ResponseEntity<String> saveMileage(MileageDTO mileage) {
 
         mileage.setWriterIdFk(getUserIdFk());
 
@@ -40,28 +40,28 @@ public class Step5ForVehicleManageMileageRegistrationService {
             step5Mapper.updateMileage(mileage);
         }
 
-        return new ResponseDTO<>(200, "저장 완료.");
+        return new ResponseEntity<>(200, "저장 완료.");
     }
 
-    public ResponseDTO<List<MileageDTO>> findMileageList(MileageDTO mileage) {
+    public ResponseEntity<List<MileageDTO>> findMileageList(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
 
-        return new ResponseDTO<>(200,
+        return new ResponseEntity<>(200,
                 step5Mapper.selectMileageList(mileage));
     }
 
     @Transactional
-    public ResponseDTO<String> removeMileage(MileageDTO mileage) {
+    public ResponseEntity<String> removeMileage(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
 
         step5Mapper.deleteMileage(mileage);
 
-        return new ResponseDTO<>(200, "정상적으로 삭제되었습니다.");
+        return new ResponseEntity<>(200, "정상적으로 삭제되었습니다.");
     }
 
-    public ResponseDTO<MileageDTO> findMileage(MileageDTO mileage) {
+    public ResponseEntity<MileageDTO> findMileage(MileageDTO mileage) {
         mileage.setWriterIdFk(getUserIdFk());
 
-        return new ResponseDTO<>(200, step5Mapper.selectMileage(mileage));
+        return new ResponseEntity<>(200, step5Mapper.selectMileage(mileage));
     }
 }
