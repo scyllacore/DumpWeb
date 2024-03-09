@@ -7,23 +7,23 @@ import java.util.List;
 
 @Data
 public class GroupDriveReportDTO {
-    private int groupReportId;
+    private Long groupReportId;
     private String groupDate;
     private String groupReceiver;
     private String groupTitle;
     private String groupMemo;
 
-    private boolean groupPaymentChk;
-    private boolean groupSubmitChk;
-    private boolean groupSubmitterPaymentChk;
-    private boolean groupPostingChk;
+    private Boolean groupPaymentChk;
+    private Boolean groupSubmitChk;
+    private Boolean groupSubmitterPaymentChk;
+    private Boolean groupPostingChk;
 
-    private int groupDriverIdFk;
-    private int groupSubmitterIdFk;
-    private int groupWriterIdFk;
-    private long fileIdFk;
+    private Long groupDriverIdFk;
+    private Long groupSubmitterIdFk;
+    private Long groupWriterIdFk;
+    private Long fileIdFk;
 
-    private int groupUserType;
+    private Byte groupUserType;
 
     private List<DriveReportDTO> driveReports;
 }

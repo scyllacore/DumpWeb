@@ -4,30 +4,30 @@ import lombok.Data;
 
 @Data
 public class DriveReportDTO {
-    private int driveReportId;
+    private Long driveReportId;
     private String driveDate;
     private String receiver;
 
     private String fromSite;
     private String toSite;
     private String item;
-    private double unitPrice;
-    private double quantity;
+    private Double unitPrice;
+    private Double quantity;
     private String memo;
     private String progress;
 
     private String company;
     private String carNo;
 
-    private boolean paymentChk;
-    private boolean submitChk;
-    private boolean submitterPaymentChk;
-    private boolean postingChk;
+    private Boolean paymentChk;
+    private Boolean submitChk;
+    private Boolean submitterPaymentChk;
+    private Boolean postingChk;
 
-    private int driverIdFk;
-    private int submitterIdFk;
-    private int writerIdFk;
-    private int groupReportIdFk;
+    private Long driverIdFk;
+    private Long submitterIdFk;
+    private Long writerIdFk;
+    private Long groupReportIdFk;
 
-    private int userType;
+    private Byte userType;
 }

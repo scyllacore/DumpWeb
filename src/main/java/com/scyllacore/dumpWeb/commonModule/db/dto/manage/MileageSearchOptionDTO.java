@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MileageSearchOptionDTO {
-    private int writerIdFk;
+    private Long writerIdFk;
     private String startDate;
     private String endDate;
     private String item;
     private String sortingCriteria;
-    private boolean paymentBtnFlag;
+    private Boolean paymentBtnFlag;
 
-    private int pageNum;
-    private int pageAmount;
+    private Integer pageNum;
+    private Integer pageAmount;
 }

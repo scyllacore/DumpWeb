@@ -6,9 +6,9 @@ import java.util.List;
 
 @Data
 public class GroupDriveReportSearchOptionDTO {
-    private int groupDriverIdFk;
-    private int groupWriterIdFk;
-    private boolean paymentBtnFlag;
+    private Long groupDriverIdFk;
+    private Long groupWriterIdFk;
+    private Boolean paymentBtnFlag;
     private String sortingCriteria;
 
     private String title;

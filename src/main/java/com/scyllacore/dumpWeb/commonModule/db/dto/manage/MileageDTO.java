@@ -5,20 +5,20 @@ import lombok.Data;
 @Data
 public class MileageDTO {
 
-    private int mileageId;
+    private Long mileageId;
     private String carNo;
     private String driveDate;
     private String item;
-    private int lastKm;
-    private int usedAmount;
-    private int usedOil;
+    private Integer lastKm;
+    private Integer usedAmount;
+    private Integer usedOil;
     private String memo;
-    private boolean replActiveChk;
-    private boolean paymentChk;
-    private int replKm;
+    private Integer replKm;
+    private Boolean paymentChk;
+    private Boolean replActiveChk;
     private String replDate;
-    private boolean replChk;
+    private Boolean replChk;
 
-    private int writerIdFk;
+    private Long writerIdFk;
 
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class DriverDTO {
-    private int driverId;
+    private Long driverId;
     private String carNo;
     private String name;
-    private int userIdFk;
+    private Long userIdFk;
 }

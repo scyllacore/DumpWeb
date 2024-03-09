@@ -6,13 +6,13 @@ import java.util.List;
 
 @Data
 public class DriveReportSearchOptionDTO {
-    private int writerIdFk;
-    private int driverIdFk;
-    private int submitterIdFk;
+    private Long writerIdFk;
+    private Long driverIdFk;
+    private Long submitterIdFk;
     private String startDate;
     private String endDate;
     private String sortingCriteria;
-    private boolean paymentBtnFlag;
+    private Boolean paymentBtnFlag;
 
     private String fromSite;
     private String toSite;

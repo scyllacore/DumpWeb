@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PageCriteriaDTO {
-    private int pageNum;
-    private int amount;
+    private Integer pageNum;
+    private Integer amount;
 
     @Override
     public String toString() {

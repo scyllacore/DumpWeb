@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class SummaryDTO {
 
-    double totalTransportationCost;
-    double totalTrips;
-    double totalCostAmount;
+    Double totalTransportationCost;
+    Double totalTrips;
+    Double totalCostAmount;
     String lastRegistrationDate;
 }

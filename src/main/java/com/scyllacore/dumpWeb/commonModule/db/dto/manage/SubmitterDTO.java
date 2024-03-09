@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class SubmitterDTO {
-    private int submitterId;
+    private Long submitterId;
     private String company;
     private String tel;
     private String name;
-    private int userIdFk;
+    private Long userIdFk;
 }
