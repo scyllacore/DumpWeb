@@ -4,8 +4,8 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.FileDTO;
 public interface FileMapper {
     int insertFileInfoByGroupReportId(FileDTO fileDTO);
 
-    FileDTO findFileInfoByFileId(int fileId);
+    FileDTO findFileInfoByFileId(Long fileId);
 
-    void deleteFile(long fileId);
+    void deleteFile(Long fileId);
 
 }
