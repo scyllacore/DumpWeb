@@ -1,4 +1,4 @@
-package com.scyllacore.dumpWeb.commonModule.controller;
+package com.scyllacore.dumpWeb.commonModule.exception.advice;
 
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
+
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -22,28 +24,33 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity handleNullObject(NullPointerException e){
-        return createResponseEntity(ResponseType.INVALID_ARGUMENT_ERROR, e);
+    public ResponseEntity handleNullPointerException(NullPointerException e){
+        return createResponseEntity(ResponseType.INVALID_REQUEST_PARAMETER, e);
     }
 
     @ExceptionHandler(RestApiException.class)
-    public ResponseEntity handleSystemException(RestApiException e) {
+    public ResponseEntity handleRuntimeException(RestApiException e) {
         return createResponseEntity(e.getErrorType(), e);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity handleIllegalArgumentException(IllegalArgumentException e){
-        return createResponseEntity(ResponseType.ILLEGAL_ARGUMENT_ERROR, e);
+        return createResponseEntity(ResponseType.INVALID_REQUEST_PARAMETER, e);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
-        return createResponseEntity(ResponseType.INVALID_ARGUMENT_ERROR, e);
+        return createResponseEntity(ResponseType.INVALID_REQUEST_PARAMETER, e);
     }
 
     @ExceptionHandler(DuplicateMemberException.class)
-    public ResponseEntity handleHttpClientErrorException(DuplicateMemberException e){
-        return createResponseEntity(ResponseType.MEMBER_ALREADY_EXISTS_ERROR, e);
+    public ResponseEntity handleDuplicateMemberException(DuplicateMemberException e){
+        return createResponseEntity(ResponseType.DUPLICATED_ID, e);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity handleIOException(IOException e) {
+        return createResponseEntity(ResponseType.INTERNAL_SERVER_ERROR, e);
     }
 
     private ResponseEntity createResponseEntity(ResponseType errorType, Exception e) {

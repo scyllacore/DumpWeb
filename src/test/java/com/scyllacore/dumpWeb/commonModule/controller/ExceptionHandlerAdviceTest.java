@@ -10,9 +10,11 @@ class ExceptionHandlerAdviceTest {
 
     @Test
     void test1(){
-        Assertions.assertThrows(Exception.class , () ->{
+        Exception e = Assertions.assertThrows(Exception.class , () ->{
             System.out.println(5/0);
         });
+
+        Assertions.assertEquals(e.getMessage(),"test");
     }
 
 }
