@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.auth.TrialMapper">
 
-    <select id="selectTrialUserInfo" parameterType="AuthDTO" resultType="AuthDTO">
+    <select id="selectTrialUserInfo" parameterType="AuthDTO.Trial" resultType="AuthDTO.Request">
         SELECT USER_ID_IDX,
                USER_ID,
                USER_TYPE,

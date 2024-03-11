@@ -42,4 +42,10 @@ public class AuthDTO {
         private String userPwd;
     }
 
+    @Data
+    public class Trial{
+        private Long userIdIdx;
+        private String userType;
+    }
+
 }

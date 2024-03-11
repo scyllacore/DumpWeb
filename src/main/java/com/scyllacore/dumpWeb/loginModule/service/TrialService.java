@@ -1,8 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.TrialMapper;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
@@ -21,33 +20,42 @@ public class TrialService {
     private final TrialMapper trialMapper;
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO trialLoginInfo, HttpServletRequest request) {
-        setUserType(trialLoginInfo);
-        trialLoginInfo = trialMapper.selectTrialUserInfo(trialLoginInfo);
+    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO.Trial trial, HttpServletRequest request) {
+        setUserType(trial);
+        AuthDTO.Request trialLoginInfo = trialMapper.selectTrialUserInfo(trial);
+
+        if (trialLoginInfo.getUserIdIdx() == null) {
+            throw new NullPointerException();
+        }
 
         HttpSession session = request.getSession();
-        setSessionUserType(trialLoginInfo, session);
-        session.setAttribute("loginInfo", trialLoginInfo);
 
-        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + trialLoginInfo.getUserType()));
+        if (setSessionUserType(trialLoginInfo, session) == null) {
+            throw new NullPointerException();
+        }
+        session.setAttribute("loginInfo", trial);
+
+        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + trial.getUserType()));
     }
 
-    private void setUserType(AuthDTO trialLoginInfo) {
-        if (trialLoginInfo.getUserType().equals("driver")) {
-            trialLoginInfo.setUserIdIdx(1);
+    private void setUserType(AuthDTO.Trial trial) {
+        if (trial.getUserType().equals("driver")) {
+            trial.setUserIdIdx(1L);
         } else {
-            trialLoginInfo.setUserIdIdx(2);
+            trial.setUserIdIdx(2L);
         }
     }
 
-    private void setSessionUserType(AuthDTO login, HttpSession session) {
+    private Long setSessionUserType(AuthDTO.Request login, HttpSession session) {
         if (login.getUserType().equals("driver")) {
-            DriverDTO driver = loginMapper.selectDriverInfo(login);
+            UserDetailDTO.Driver driver = loginMapper.selectDriverInfo(login);
             session.setAttribute("driverInfo", driver);
-        } else {
-            SubmitterDTO submitter = loginMapper.selectSubmitterInfo(login);
-            session.setAttribute("submitterInfo", submitter);
+            return driver.getUserIdFk();
         }
+
+        UserDetailDTO.Submitter submitter = loginMapper.selectSubmitterInfo(login);
+        session.setAttribute("submitterInfo", submitter);
+        return submitter.getUserIdFk();
     }
 
 }
