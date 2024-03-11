@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class PageVO {
-    private int startPage;
-    private int endPage;
-    private boolean prev, next;
-    private int startId,pageSize;
+    private Integer startPage;
+    private Integer endPage;
+    private Boolean prev, next;
+    private Integer startId,pageSize;
 
-    private int total;
+    private Integer total;
     //현재 페이지 번호, 한 페이지에 표출할 데이터 개수
     private PageCriteriaDTO cri;
 

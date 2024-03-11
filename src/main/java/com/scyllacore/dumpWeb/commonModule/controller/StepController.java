@@ -27,7 +27,7 @@ public class StepController {
     }
 
     @RequestMapping(value = "/image/{fileId}", method = RequestMethod.GET)
-    public void getImage(HttpServletResponse response, @PathVariable int fileId) throws Exception {
+    public void getImage(HttpServletResponse response, @PathVariable Long fileId) throws Exception {
         fileUtil.getImageFile(response, fileId);
     }
 
