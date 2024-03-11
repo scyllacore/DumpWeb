@@ -1,15 +1,16 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.auth;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface LoginMapper {
-     AuthDTO selectUserInfoForIdValidCheck(AuthDTO loginInfo);
-     AuthDTO selectUserInfoForPwdValidCheck(AuthDTO loginInfo);
+    AuthDTO.Request selectUserInfoForIdValidCheck(AuthDTO.Request loginInfo);
 
-     DriverDTO selectDriverInfo(AuthDTO loginInfo);
-     SubmitterDTO selectSubmitterInfo(AuthDTO loginInfo);
+    AuthDTO.Request selectUserInfoForPwdValidCheck(AuthDTO.Request loginInfo);
+
+    UserDetailDTO.Driver selectDriverInfo(AuthDTO.Request loginInfo);
+
+    UserDetailDTO.Submitter selectSubmitterInfo(AuthDTO.Request loginInfo);
 }

@@ -1,8 +1,7 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,8 +17,8 @@ public class LoginService {
 
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<String> login(AuthDTO loginInfo, HttpServletRequest request) {
-        AuthDTO validatedUser = validateUser(loginInfo);
+    public ResponseEntity<String> login(AuthDTO.Request loginInfo, HttpServletRequest request) {
+        AuthDTO.Request validatedUser = validateUser(loginInfo);
         HttpSession session = request.getSession();
         setSessionUserType(validatedUser, session);
         session.setAttribute("loginInfo", validatedUser);
@@ -27,8 +26,8 @@ public class LoginService {
         return ResponseEntity.ok("/manage/" + loginInfo.getUserType());
     }
 
-    private AuthDTO validateUser(AuthDTO loginInfo) {
-        AuthDTO user = loginMapper.selectUserInfoForIdValidCheck(loginInfo);
+    private AuthDTO.Request validateUser(AuthDTO.Request loginInfo) {
+        AuthDTO.Request user = loginMapper.selectUserInfoForIdValidCheck(loginInfo);
         if (user == null) {
             throw new IllegalArgumentException("등록되지 않은 ID입니다.");
         }
@@ -41,12 +40,12 @@ public class LoginService {
         return user;
     }
 
-    private void setSessionUserType(AuthDTO login, HttpSession session) {
+    private void setSessionUserType(AuthDTO.Request login, HttpSession session) {
         if (login.getUserType().equals("driver")) {
-            DriverDTO driver = loginMapper.selectDriverInfo(login);
+            UserDetailDTO.Driver driver = loginMapper.selectDriverInfo(login);
             session.setAttribute("driverInfo", driver);
         } else {
-            SubmitterDTO submitter = loginMapper.selectSubmitterInfo(login);
+            UserDetailDTO.Submitter submitter = loginMapper.selectSubmitterInfo(login);
             session.setAttribute("submitterInfo", submitter);
         }
     }

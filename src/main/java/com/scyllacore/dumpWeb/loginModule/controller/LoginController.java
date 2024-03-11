@@ -29,7 +29,7 @@ public class LoginController {
 
     @PostMapping(value = "/auth/fetch/login")
     @ResponseBody
-    public ResponseEntity<String> login(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
+    public ResponseEntity<String> login(@RequestBody AuthDTO.Request loginInfo, HttpServletRequest request) {
         loginService.logout(request);
         return loginService.login(loginInfo, request);
     }
