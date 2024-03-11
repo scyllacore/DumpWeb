@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class AuthDTO {
     @Data
-    static class Request {
+    public class Request {
         private Long userIdIdx;
 
         @NotBlank(message = "Id는 비어있으면 안됩니다.")
@@ -19,18 +19,16 @@ public class AuthDTO {
         @NotBlank
         private String userType;
         private Boolean trialChk;
-        @NotBlank
         private String company;
         @NotBlank
         private String name;
         @Pattern(regexp = "^[0-9]$", message = "전화번호는 숫자로만 이루어져 있어야 합니다.")
         private String tel;
-        @NotBlank
         private String carNo;
     }
 
     @Data
-    static class Response {
+    public class Response {
         private String userId;
         private String userType;
         private LocalDate joinDate;

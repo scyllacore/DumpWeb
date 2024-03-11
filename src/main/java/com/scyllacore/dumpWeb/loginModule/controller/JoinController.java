@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.loginModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.loginModule.service.JoinService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class JoinController {
 
     @PostMapping(value = "/auth/fetch/join")
     @ResponseBody
-    public ResponseEntity<String> join(@RequestBody AuthDTO joinInfo) throws Exception {
+    public ResponseEntity<String> join(@Valid @RequestBody AuthDTO.Request joinInfo) throws Exception {
         return joinService.join(joinInfo);
     }
 }
