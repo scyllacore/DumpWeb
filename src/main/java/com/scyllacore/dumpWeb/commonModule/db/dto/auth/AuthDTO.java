@@ -34,4 +34,12 @@ public class AuthDTO {
         private LocalDate joinDate;
     }
 
+    @Data
+    public class Password{
+        private Long userIdIdx;
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{8,20}$"
+                , message = "비밀번호는 8~20자 사이의 영문,숫자 조합이어야 합니다.")
+        private String userPwd;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.scyllacore.dumpWeb.loginModule.controller;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.loginModule.service.PasswordChangeService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class PasswordChangeController {
 
     @PostMapping(value = "/auth/fetch/passwordChange")
     @ResponseBody
-    public ResponseEntity<String> passwordChange(@RequestBody AuthDTO loginInfo, HttpServletRequest request) {
-        return passwordChangeService.changePassword(request, loginInfo);
+    public ResponseEntity<String> passwordChange(@Valid @RequestBody AuthDTO.Password password, HttpServletRequest request) {
+        return passwordChangeService.changePassword(password, request);
     }
 }
