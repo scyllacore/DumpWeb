@@ -3,7 +3,9 @@ package com.scyllacore.dumpWeb.commonModule.util;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,20 +15,29 @@ public class SessionUtil {
 
     private final HttpServletRequest request;
 
-    private final String DRIVER_ATTRIBUTE = "driverInfo";
-    private final String SUBMITTER_ATTRIBUTE = "submitterInfo";
-    private final String LOGIN_ATTRIBUTE = "loginInfo";
+    @Getter
+    public enum Attribute{
+        DRIVER("driverInfo")
+        ,SUBMITTER("submitterInfo")
+        ,LOGIN("loginInfo");
 
-    public DriverDTO getDriverInfo() {
-        return (DriverDTO) getInfoBySession(DRIVER_ATTRIBUTE);
+        private String name;
+
+        Attribute(String name) {
+            this.name = name;
+        }
     }
 
-    public SubmitterDTO getSubmitterInfo() {
-        return (SubmitterDTO) getInfoBySession(SUBMITTER_ATTRIBUTE);
+    public UserDetailDTO.Driver getDriverInfo() {
+        return (UserDetailDTO.Driver) getInfoBySession(Attribute.DRIVER.getName());
     }
 
-    public AuthDTO getLoginInfo() {
-        return (AuthDTO) getInfoBySession(LOGIN_ATTRIBUTE);
+    public UserDetailDTO.Submitter getSubmitterInfo() {
+        return (UserDetailDTO.Submitter) getInfoBySession(Attribute.SUBMITTER.getName());
+    }
+
+    public AuthDTO.Request getLoginInfo() {
+        return (AuthDTO.Request) getInfoBySession(Attribute.LOGIN.getName());
     }
 
     public <T> T getInfoBySession(String name) {
