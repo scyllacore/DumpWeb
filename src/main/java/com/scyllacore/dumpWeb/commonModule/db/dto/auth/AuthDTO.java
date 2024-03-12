@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class AuthDTO {
     @Data
-    public class Request {
+    public static class Request {
         private Long userIdIdx;
 
         @NotBlank(message = "Id는 비어있으면 안됩니다.")
@@ -28,14 +28,14 @@ public class AuthDTO {
     }
 
     @Data
-    public class Response {
+    public static class Response {
         private String userId;
         private String userType;
         private LocalDate joinDate;
     }
 
     @Data
-    public class Password{
+    public static class Password{
         private Long userIdIdx;
         @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{8,20}$"
                 , message = "비밀번호는 8~20자 사이의 영문,숫자 조합이어야 합니다.")
@@ -43,7 +43,7 @@ public class AuthDTO {
     }
 
     @Data
-    public class Trial{
+    public static class Trial{
         private Long userIdIdx;
         private String userType;
     }

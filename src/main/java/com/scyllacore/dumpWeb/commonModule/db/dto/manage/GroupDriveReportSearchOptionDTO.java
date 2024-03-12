@@ -7,7 +7,7 @@ import java.util.List;
 public class GroupDriveReportSearchOptionDTO {
 
     @Data
-    static class Request {
+    public static class Request {
         private String title;
         private String company;
         private String sortingCriteria;
@@ -18,7 +18,7 @@ public class GroupDriveReportSearchOptionDTO {
     }
 
     @Data
-    static class Response {
+    public static class Response {
         private List<String> titles;
         private List<String> companies;
     }

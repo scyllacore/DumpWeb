@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DriveReportSearchOptionDTO {
     @Data
-    static class Request {
+    public static class Request {
         private LocalDate startDate;
         private LocalDate endDate;
         @NotBlank
@@ -31,7 +31,7 @@ public class DriveReportSearchOptionDTO {
     }
 
     @Data
-    static class Response{
+    public static class Response{
         private List<String> companies;
         private List<String> tels;
         private List<String> carNos;

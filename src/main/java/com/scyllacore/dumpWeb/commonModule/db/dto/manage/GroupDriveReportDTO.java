@@ -11,7 +11,7 @@ import java.util.List;
 public class GroupDriveReportDTO {
 
     @Data
-    static class Request {
+    public static class Request {
         private Long groupReportId;
         private LocalDate groupDate;
         @NotBlank
@@ -36,7 +36,7 @@ public class GroupDriveReportDTO {
     }
 
     @Data
-    static class Response{
+    public static class Response{
 
     }
 }

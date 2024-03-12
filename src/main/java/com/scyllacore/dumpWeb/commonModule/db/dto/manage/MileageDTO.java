@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class MileageDTO {
 
     @Data
-    static class Request{
+    public static class Request{
         private Long mileageId;
         @NotBlank
         private String carNo;
@@ -30,7 +30,7 @@ public class MileageDTO {
     }
 
     @Data
-    static class Response{
+    public static class Response{
 
     }
 

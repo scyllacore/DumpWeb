@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class MileageSearchOptionDTO {
 
     @Data
-    static class Request {
+    public static class Request {
         private Long writerIdFk;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -20,7 +20,7 @@ public class MileageSearchOptionDTO {
     }
 
     @Data
-    static class Response {
+    public static class Response {
 
     }
 }

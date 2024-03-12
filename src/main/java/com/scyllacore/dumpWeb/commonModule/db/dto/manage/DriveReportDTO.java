@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class DriveReportDTO {
 
     @Data
-    public class Request{
+    public static class Request{
         private Long driveReportId;
         @NotNull
         private LocalDate driveDate;
@@ -41,7 +41,7 @@ public class DriveReportDTO {
     }
 
     @Data
-    public class Response{
+    public static class Response{
         private Long driveReportId;
         private LocalDate driveDate;
         private String receiver;

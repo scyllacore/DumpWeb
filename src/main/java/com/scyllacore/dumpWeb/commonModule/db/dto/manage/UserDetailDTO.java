@@ -4,7 +4,7 @@ import lombok.Data;
 
 public class UserDetailDTO {
     @Data
-    public class Driver {
+    public static class Driver {
         private Long driverId;
         private String carNo;
         private String name;
@@ -12,7 +12,7 @@ public class UserDetailDTO {
     }
 
     @Data
-    public class Submitter {
+    public static class Submitter {
         private Long submitterId;
         private String company;
         private String tel;
