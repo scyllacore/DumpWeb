@@ -75,7 +75,7 @@ class Step3Handler {
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
-        location.href = '/manage/step3'
+        location.href = '/manage/step3';
     }
 
     checkSaveValidation() {
@@ -104,7 +104,7 @@ class Step3Handler {
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
-        location.href = defaultParams.url;
+        location.href = '/manage/step3';
     }
 
     async driveReportsRetrieval() {

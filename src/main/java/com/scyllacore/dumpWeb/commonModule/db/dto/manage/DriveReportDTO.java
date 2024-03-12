@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class DriveReportDTO {
 
     @Data
-    static class Request{
+    public class Request{
         private Long driveReportId;
         @NotNull
         private LocalDate driveDate;
@@ -41,8 +41,25 @@ public class DriveReportDTO {
     }
 
     @Data
-    static class Response{
+    public class Response{
+        private Long driveReportId;
+        private LocalDate driveDate;
+        private String receiver;
 
+        private String fromSite;
+        private String toSite;
+        private String item;
+        private Double unitPrice;
+        private Double quantity;
+        private String memo;
+        private String progress;
+
+        private Boolean paymentChk;
+        private Boolean submitChk;
+
+        private Long submitterIdFk;
+
+        private Byte userType;
     }
 
 }
