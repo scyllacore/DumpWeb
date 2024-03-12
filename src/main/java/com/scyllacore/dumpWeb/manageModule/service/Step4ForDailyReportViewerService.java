@@ -1,13 +1,12 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,47 +18,51 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class Step4ForDailyReportViewerService {
 
-    private final CommonUtil commonUtil;
+    private final SessionUtil sessionUtil;
     private final Step4ForDailyReportViewerMapper step4Mapper;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFk() {
-        return commonUtil.getLoginInfoBySession().getUserIdIdx();
+    @Getter
+    public enum Step4Flag{
+        PAYMENT_DONE("일괄 결재 되었습니다"),
+        PAYMENT_CANCEL("일괄 취소 되었습니다");
+
+        private String message;
+
+        Step4Flag(String message) {
+            this.message = message;
+        }
     }
 
-    public DriverDTO getDriverInfo() {
-        return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
+    public ResponseEntity<DriveReportSearchOptionDTO.Response> findRecommendKeywordList() {
+
+        DriveReportSearchOptionDTO.Response response = new DriveReportSearchOptionDTO.Response();
+        Long driverId = sessionUtil.getDriverInfo().getDriverId();
+
+        response.setTels(step4Mapper.selectSubmitterTelSearchOption(driverId));
+        response.setCompanies(step4Mapper.selectCompanySearchOption(driverId));
+        response.setFromSites(step4Mapper.selectFromSiteSearchOption(driverId));
+        response.setToSites(step4Mapper.selectToSiteSearchOption(driverId));
+        response.setItems(step4Mapper.selectItemSearchOption(driverId));
+
+        return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<DriveReportSearchOptionDTO> findRecommendKeywordList() {
-
-        DriveReportSearchOptionDTO option = new DriveReportSearchOptionDTO();
-
-        option.setTels(step4Mapper.selectSubmitterTelSearchOption(getDriverInfo().getDriverId()));
-        option.setCompanies(step4Mapper.selectCompanySearchOption(getDriverInfo().getDriverId()));
-        option.setFromSites(step4Mapper.selectFromSiteSearchOption(getDriverInfo().getDriverId()));
-        option.setToSites(step4Mapper.selectToSiteSearchOption(getDriverInfo().getDriverId()));
-        option.setItems(step4Mapper.selectItemSearchOption(getDriverInfo().getDriverId()));
-
-        return ResponseEntity.ok(option);
-    }
-
-    public ResponseEntity<List<DriveReportSearchOptionDTO>> findDriveReportListByOption(DriveReportSearchOptionDTO option) {
-        option.setDriverIdFk(getDriverInfo().getDriverId());
+    public ResponseEntity<List<DriveReportDTO.Response>> findDriveReportListByOption(
+            DriveReportSearchOptionDTO.Request option) {
+        option.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
         return ResponseEntity.ok(step4Mapper.selectDriveReportListByOption(option));
     }
 
     @Transactional
-    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFk());
+    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO.Request option) {
+        option.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         step4Mapper.updateDriveReportPaymentChk(option);
 
-        if (option.isPaymentBtnFlag()) {
-            return ResponseEntity.ok("일괄 결재 되었습니다");
+        if (option.getPaymentBtnFlag()) {
+            return ResponseEntity.ok(Step4Flag.PAYMENT_DONE.getMessage());
         }
 
-        return ResponseEntity.ok("일괄 취소 되었습니다");
-
+        return ResponseEntity.ok(Step4Flag.PAYMENT_CANCEL.getMessage());
     }
 
 }
