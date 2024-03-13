@@ -9,10 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface Step6ForVehicleManageMileageViewerMapper {
-    List<MileageDTO> selectMileageListByOption(PageDTO option);
+    List<MileageDTO.Response> selectMileageListByOption(PageDTO option);
 
     int countMileageListByOption(PageDTO option);
 
-    void updateMileagePaymentChk(MileageSearchOptionDTO option);
+    int updateMileagePaymentChk(MileageSearchOptionDTO.Request option);
 
 }

@@ -23,13 +23,13 @@ public class Step6ForVehicleManageMileageViewerController {
 
     @PostMapping(value = "/fetch/mileageList")
     @ResponseBody
-    public ResponseEntity<PageDTO> mileageList(@RequestBody MileageSearchOptionDTO option) {
+    public ResponseEntity<PageDTO> mileageList(@RequestBody MileageSearchOptionDTO.Request option) {
         return step6Service.findMileageListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseEntity<String> paymentInBulk(@RequestBody MileageSearchOptionDTO option) {
+    public ResponseEntity<String> paymentInBulk(@RequestBody MileageSearchOptionDTO.Request option) {
         return step6Service.modifyPaymentInBulk(option);
     }
 
