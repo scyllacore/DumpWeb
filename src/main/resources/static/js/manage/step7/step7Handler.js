@@ -48,7 +48,7 @@ class Step7Handler {
 
         const reqData = this.jsonHandler.convertObjectToJson({driveReportId: driveReportId});
         const inputData = await this.requestHandler
-            .post('/manage/step7' + '/fetch' + '/driveReportDetails', reqData);
+            .post('/manage/step7' + '/fetch' + '/driveOrderDetails', reqData);
 
         this.inputHandler.fillInput(inputData);
     }
@@ -58,7 +58,7 @@ class Step7Handler {
     }
 
     createDriveReportFormObj() {
-        return this.objHandler.createFormObj('driveReportForm');
+        return this.objHandler.createFormObj('driveOrderForm');
     }
 
     async save() {
@@ -71,7 +71,7 @@ class Step7Handler {
         const requestObj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(requestObj);
 
-        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveReportSave'
+        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveOrderSave'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
@@ -100,18 +100,18 @@ class Step7Handler {
 
         const requestObj = this.createDriveReportFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveReportRemove'
+        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveOrderRemove'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
-        location.href = defaultParams.url;
+        location.href = '/manage/step7';
     }
 
     async driveReportsRetrieval() {
         const requestObj = this.createDriveReportFormObj();
         this.objHandler.changeOnToTrue(requestObj);
 
-        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveReportList'
+        const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveOrderList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
         this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
