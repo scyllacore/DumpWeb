@@ -1,8 +1,9 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
 import org.springframework.http.ResponseEntity;
-import com.scyllacore.dumpWeb.manageModule.service.Step8ForSubmitterReceiptViewerService;
+import com.scyllacore.dumpWeb.manageModule.service.Step8ForDriveOrderViewerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,31 +13,30 @@ import java.util.List;
 @Controller
 @RequestMapping("/manage/step8")
 @RequiredArgsConstructor
-public class Step8ForSubmitterReceiptViewerController {
+public class Step8ForDriveOrderViewerController {
 
-    private final Step8ForSubmitterReceiptViewerService step8Service;
+    private final Step8ForDriveOrderViewerService step8Service;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String step8() {
         return "/manage/step8/step8_index";
     }
 
     @GetMapping(value = "/fetch/recommendKeywordList")
     @ResponseBody
-    public ResponseEntity<DriveReportSearchOptionDTO> recommendKeywordList() {
+    public ResponseEntity<DriveReportSearchOptionDTO.Response> recommendKeywordList() {
         return step8Service.findRecommendKeywordList();
     }
 
-    @PostMapping(value = "/fetch/driveReportList")
+    @PostMapping(value = "/fetch/driveOrderList")
     @ResponseBody
-    public ResponseEntity<List<DriveReportSearchOptionDTO>> driveReportList(@RequestBody DriveReportSearchOptionDTO option) {
-        return step8Service.findDriveReportListByOption(option);
+    public ResponseEntity<List<DriveReportDTO.Response>> driveOrderList(@RequestBody DriveReportSearchOptionDTO.Request option) {
+        return step8Service.findDriveOrderListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseEntity<String> paymentInBulk(@RequestBody DriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> paymentInBulk(@RequestBody DriveReportSearchOptionDTO.Request option) {
         return step8Service.modifyPaymentInBulk(option);
     }
-
 }
