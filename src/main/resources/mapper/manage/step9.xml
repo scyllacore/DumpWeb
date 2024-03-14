@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper">
 
-    <insert id="insertGroupDriveReport" parameterType="GroupDriveReportDTO"  useGeneratedKeys="true" keyProperty="groupReportId">
+    <insert id="insertGroupDriveReport" parameterType="GroupDriveReportDTO$Request"  useGeneratedKeys="true" keyProperty="groupReportId">
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
          GROUP_TITLE,
@@ -25,7 +25,7 @@
                 #{groupSubmitChk},
                 0)
 
-        <selectKey keyProperty="groupReportId" resultType="int" order="AFTER">
+        <selectKey keyProperty="groupReportId" resultType="long" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
@@ -36,7 +36,7 @@
         WHERE GROUP_REPORT_ID = #{groupReportId}
     </update>
 
-    <update id="updateGroupDriveReport" parameterType="GroupDriveReportDTO">
+    <update id="updateGroupDriveReport" parameterType="GroupDriveReportDTO$Request">
         UPDATE group_drive_report_tb
         SET GROUP_DATE            = #{groupDate},
             GROUP_TITLE           = #{groupTitle},
@@ -49,7 +49,7 @@
           AND GROUP_SUBMITTER_PAYMENT_CHK = 0
     </update>
 
-    <update id="updateGroupSubmit" parameterType="GroupDriveReportDTO">
+    <update id="updateGroupSubmit" parameterType="GroupDriveReportDTO$Request">
         UPDATE group_drive_report_tb
         SET GROUP_SUBMIT_CHK = #{groupSubmitChk}
         WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
@@ -57,7 +57,7 @@
           AND GROUP_SUBMITTER_PAYMENT_CHK = 0
     </update>
 
-    <select id="selectGroupDriveReportList" parameterType="GroupDriveReportDTO" resultType="GroupDriveReportDTO">
+    <select id="selectGroupDriveReportList" parameterType="GroupDriveReportDTO$Request" resultType="GroupDriveReportDTO$Response">
         SELECT GROUP_REPORT_ID,
                DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
                GROUP_TITLE,
@@ -82,7 +82,7 @@
     </sql>
 
 
-    <select id="selectGroupDriveReport" parameterType="GroupDriveReportDTO" resultType="GroupDriveReportDTO">
+    <select id="selectGroupDriveReport" parameterType="GroupDriveReportDTO$Request" resultType="GroupDriveReportDTO$Response">
         <include refid="groupReportForDriver">
             <property name="groupDriverIdFk" value="#{groupDriverIdFk}"/>
             <property name="groupReportId" value="#{groupReportId}"/>
@@ -188,7 +188,7 @@
         </foreach>
     </update>
 
-    <update id="updateDriveReportsGroupReportIdFk" parameterType="java.util.List">
+    <update id="updateDriveReportsIdFkToNull" parameterType="java.util.List">
         <foreach collection="driveIds" item="driveId" index="index" separator=";">
             UPDATE drive_report_tb
             SET GROUP_REPORT_ID_FK = NULL
@@ -204,7 +204,7 @@
             AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
-    <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReportList" parameterType="DriveReportDTO$Request" resultType="DriveReportDTO$Response">
         SELECT
         DRIVE_REPORT_ID,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
@@ -245,7 +245,7 @@
                                                  ON SUBMITTER_ID = writer_report.SUBMITTER_ID_FK)
     </sql>
 
-    <select id="selectDriveReportsForGroupDTO" parameterType="GroupDriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReportsForGroupDTO" parameterType="GroupDriveReportDTO$Request" resultType="DriveReportDTO$Response">
         <include refid="reportsForDriver">
             <property name="groupReportId" value="#{groupReportId}"/>
         </include>
@@ -278,7 +278,7 @@
     </sql>
 
 
-    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReport" parameterType="DriveReportDTO$Request" resultType="DriveReportDTO$Response">
         <include refid="reportForDriver">
             <property name="DRIVER_ID_FK" value="#{driverIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
@@ -300,7 +300,7 @@
         FROM join_report
     </select>
 
-    <select id="selectSubmitterList" resultType="SubmitterDTO">
+    <select id="selectSubmitterList" resultType="UserDetailDTO$Submitter">
         SELECT *
         FROM submitter_tb
     </select>

@@ -2,44 +2,44 @@ package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface Step9ForGroupDriveReportRegistrationMapper {
-    void insertGroupDriveReport(GroupDriveReportDTO groupReport);
+    long insertGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    void updateFileIdFk(int groupReportId,long fileIdFk);
+    long updateFileIdFk(Long groupReportId, Long fileIdFk);
 
-    void updateGroupDriveReport(GroupDriveReportDTO groupReport);
+    long updateGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    void updateGroupSubmit(GroupDriveReportDTO groupReport);
+    long updateGroupSubmit(GroupDriveReportDTO.Request groupReport);
 
-    List<GroupDriveReportDTO> selectGroupDriveReportList(GroupDriveReportDTO groupReport);
+    List<GroupDriveReportDTO.Response> selectGroupDriveReportList(GroupDriveReportDTO.Request groupReport);
 
-    GroupDriveReportDTO selectGroupDriveReport(GroupDriveReportDTO groupReport);
+    GroupDriveReportDTO.Response selectGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    void deleteGroupDriveReport(GroupDriveReportDTO groupReport);
+    long deleteGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    void insertDriveReports(List<DriveReportDTO> driveReports);
+    long insertDriveReports(List<DriveReportDTO.Request> driveReports);
 
-    void updateDriveReports(List<DriveReportDTO> driveReport);
+    long updateDriveReports(List<DriveReportDTO.Request> driveReport);
 
-    void updateReportsSubmit(List<DriveReportDTO> driveReports);
+    long updateReportsSubmit(List<DriveReportDTO.Request> driveReports);
 
-    void updateDriveReportsGroupReportIdFk(List<Integer> driveIds);
+    long updateDriveReportsIdFkToNull(List<Long> driveIds);
 
-    void updateAllGroupReportIdFk(int groupReportIdFk);
+    long updateAllGroupReportIdFk(Long groupReportIdFk);
 
-    List<DriveReportDTO> selectDriveReportList(DriveReportDTO driveReport);
+    List<DriveReportDTO.Response> selectDriveReportList(DriveReportDTO.Request driveReport);
 
-    List<Integer> selectDriveReportIdsByGroupReportId(int groupReportIdFk);
+    List<Long> selectDriveReportIdsByGroupReportId(Long groupReportIdFk);
 
-    List<DriveReportDTO> selectDriveReportsForGroupDTO(GroupDriveReportDTO groupReport);
+    List<DriveReportDTO.Response> selectDriveReportsForGroupDTO(GroupDriveReportDTO.Request groupReport);
 
-    DriveReportDTO selectDriveReport(DriveReportDTO driveReport);
+    DriveReportDTO.Response selectDriveReport(DriveReportDTO.Request driveReport);
 
-    List<SubmitterDTO> selectSubmitterList();
+    List<UserDetailDTO.Submitter> selectSubmitterList();
 }
