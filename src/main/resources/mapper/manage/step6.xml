@@ -27,7 +27,7 @@
     </sql>
 
 
-    <select id="countMileageListByOption" parameterType="PageDTO" resultType="int">
+    <select id="countMileageListByOption">
         <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
@@ -39,7 +39,7 @@
         FROM covering_tb1
     </select>
 
-    <select id="selectMileageListByOption" parameterType="PageDTO" resultType="MileageDTO$Response">
+    <select id="selectMileageListByOption">
         <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
@@ -69,7 +69,7 @@
         </choose>
     </select>
 
-    <update id="updateMileagePaymentChk" parameterType="MileageSearchOptionDTO$Request">
+    <update id="updateMileagePaymentChk">
         UPDATE mileage_tb
         SET PAYMENT_CHK = #{paymentBtnFlag}
         WHERE WRITER_ID_FK = #{writerIdFk}

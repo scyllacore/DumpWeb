@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper">
 
-    <insert id="insertMileage" parameterType="MileageDTO$Request">
+    <insert id="insertMileage">
         INSERT INTO mileage_tb
         (DRIVE_DATE,
         ITEM,
@@ -37,7 +37,7 @@
     </insert>
 
 
-    <update id="updateMileage" parameterType="MileageDTO$Request">
+    <update id="updateMileage">
         UPDATE mileage_tb
         SET DRIVE_DATE = #{driveDate},
         ITEM = #{item},
@@ -58,7 +58,7 @@
     </update>
 
 
-    <select id="selectMileageList" resultType="MileageDTO$Response">
+    <select id="selectMileageList">
         SELECT MILEAGE_ID,
                DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
                ITEM,
@@ -86,7 +86,7 @@
     </delete>
 
 
-    <select id="selectMileage" resultType="MileageDTO$Response">
+    <select id="selectMileage">
         SELECT MILEAGE_ID,
                DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
                ITEM,

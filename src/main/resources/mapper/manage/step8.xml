@@ -80,7 +80,7 @@
         )
     </sql>
 
-    <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO$Request" resultType="DriveReportDTO$Response">
+    <select id="selectDriveReportListByOption">
         <include refid="retrievalForSubmitter">
             <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
@@ -125,7 +125,7 @@
         </choose>
     </select>
 
-    <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO$Request">
+    <update id="updateDriveReportPaymentChk">
         UPDATE drive_report_tb
         SET SUBMITTER_PAYMENT_CHK = #{paymentBtnFlag}
         WHERE SUBMITTER_ID_FK = #{submitterIdFk}
