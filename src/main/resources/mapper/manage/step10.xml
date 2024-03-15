@@ -39,7 +39,7 @@
 
     </select>
 
-    <select id="selectGroupDriveReportListByOption" parameterType="GroupDriveReportSearchOptionDTO" resultType="GroupDriveReportDTO">
+    <select id="selectGroupDriveReportListByOption" parameterType="GroupDriveReportSearchOptionDTO$Request" resultType="GroupDriveReportDTO$Response">
         SELECT GROUP_REPORT_ID,
         DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
         GROUP_TITLE,
@@ -62,7 +62,7 @@
         </choose>
     </select>
 
-    <update id="updateGroupDriveReportPaymentChk" parameterType="GroupDriveReportSearchOptionDTO">
+    <update id="updateGroupDriveReportPaymentChk" parameterType="GroupDriveReportSearchOptionDTO$Request">
         UPDATE group_drive_report_tb
         SET GROUP_PAYMENT_CHK = #{paymentBtnFlag}
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}

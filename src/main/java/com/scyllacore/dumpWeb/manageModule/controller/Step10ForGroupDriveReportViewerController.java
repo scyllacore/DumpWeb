@@ -16,26 +16,26 @@ public class Step10ForGroupDriveReportViewerController {
 
     private final Step10ForGroupDriveReportViewerService step10Service;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String step10() {
         return "/manage/step10/step10_index";
     }
 
     @GetMapping(value = "/fetch/recommendKeywordList")
     @ResponseBody
-    public ResponseEntity<GroupDriveReportSearchOptionDTO> recommendKeywordList() {
+    public ResponseEntity<GroupDriveReportSearchOptionDTO.Response> recommendKeywordList() {
         return step10Service.findRecommendKeywordList();
     }
 
     @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
-    public ResponseEntity<List<GroupDriveReportSearchOptionDTO>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<List<GroupDriveReportSearchOptionDTO.Response>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
         return step10Service.findGroupDriveReportListByOption(option);
     }
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseEntity<String> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO option) {
+    public ResponseEntity<String> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
         return step10Service.modifyPaymentInBulk(option);
     }
 
