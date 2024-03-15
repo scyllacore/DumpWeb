@@ -26,7 +26,7 @@ public class StepController {
         return "redirect:/manage/step2";
     }
 
-    @RequestMapping(value = "/image/{fileId}", method = RequestMethod.GET)
+    @GetMapping(value = "/image/{fileId}")
     public void getImage(HttpServletResponse response, @PathVariable Long fileId) throws Exception {
         fileUtil.getImageFile(response, fileId);
     }

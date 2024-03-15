@@ -1,8 +1,6 @@
 package com.scyllacore.dumpWeb.commonModule.util;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;

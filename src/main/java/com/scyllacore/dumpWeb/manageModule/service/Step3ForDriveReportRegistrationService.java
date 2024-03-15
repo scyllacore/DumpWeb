@@ -53,7 +53,7 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     private void insertDriveReport(DriveReportDTO.Request driveReport) {
-        if (step3Mapper.insertDriveReport(driveReport) == Flag.FAIL.getValue()) {
+        if (step3Mapper.insertDriveReport(driveReport) <= Flag.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }

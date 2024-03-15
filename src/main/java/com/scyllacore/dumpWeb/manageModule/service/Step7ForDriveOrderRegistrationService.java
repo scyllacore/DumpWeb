@@ -3,17 +3,13 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.constant.Flag;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SubmitterDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForDriveOrderRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
-import lombok.Getter;
-import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,7 +73,7 @@ public class Step7ForDriveOrderRegistrationService {
 
         DriveReportDTO.Response response = step7Mapper.selectDriveOrder(driveReport);
 
-        if(response.getDriveReportId() == null){
+        if (response.getDriveReportId() == null) {
             throw new RestApiException(ResponseType.NOT_FOUND);
         }
 
