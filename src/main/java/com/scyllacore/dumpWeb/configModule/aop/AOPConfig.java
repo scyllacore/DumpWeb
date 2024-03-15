@@ -38,7 +38,7 @@ public class AOPConfig {
 
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        AuthDTO loginInfo = (AuthDTO) request.getSession().getAttribute("loginInfo");
+        AuthDTO.Request loginInfo = (AuthDTO.Request) request.getSession().getAttribute("loginInfo");
 
         if (loginInfo == null) {
             result = "redirect:/login";

@@ -33,7 +33,7 @@ public class TrialService {
         if (setSessionUserType(trialLoginInfo, session) == null) {
             throw new NullPointerException();
         }
-        session.setAttribute("loginInfo", trial);
+        session.setAttribute("loginInfo", trialLoginInfo);
 
         return ResponseEntity.ok(new ResponseDTO<>("/manage/" + trial.getUserType()));
     }
