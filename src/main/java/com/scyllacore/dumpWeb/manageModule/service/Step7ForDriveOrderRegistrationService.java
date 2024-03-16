@@ -6,6 +6,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForDriveOrderRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class Step7ForDriveOrderRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> saveDriveOrder(DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> saveDriveOrder(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         driveReport.setProgress("배차");
 
@@ -47,7 +48,7 @@ public class Step7ForDriveOrderRegistrationService {
             updateDriveOrder(driveReport);
         }
 
-        return ResponseEntity.ok("저장 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
     private void insertDriveOrder(DriveReportDTO.Request driveReport) {
@@ -81,14 +82,14 @@ public class Step7ForDriveOrderRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> removeDriveOrder(DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> removeDriveOrder(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
         if (step7Mapper.deleteDriveOrder(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 
-        return ResponseEntity.ok("삭제 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
 
     }
 

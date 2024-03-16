@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import com.scyllacore.dumpWeb.manageModule.service.Step3ForDriveReportRegistrationService;
@@ -25,7 +26,7 @@ public class Step3ForDriveReportRegistrationController {
 
     @PostMapping(value = "/fetch/driveReportSave")
     @ResponseBody
-    public ResponseEntity<String> driveReportSave(@Valid @RequestBody DriveReportDTO.Request driveReport){
+    public ResponseEntity<ResponseDTO<String>> driveReportSave(@Valid @RequestBody DriveReportDTO.Request driveReport){
         return step3Service.saveDriveReport(driveReport);
     }
 
@@ -43,7 +44,7 @@ public class Step3ForDriveReportRegistrationController {
 
     @DeleteMapping(value = "/fetch/driveReportRemove")
     @ResponseBody
-    public ResponseEntity<String> driveReportRemove(@RequestBody DriveReportDTO.Request driveReport){
+    public ResponseEntity<ResponseDTO<String>> driveReportRemove(@RequestBody DriveReportDTO.Request driveReport){
         return step3Service.removeDriveReport(driveReport);
     }
 

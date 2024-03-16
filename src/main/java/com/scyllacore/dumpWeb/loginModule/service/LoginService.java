@@ -3,12 +3,14 @@ package com.scyllacore.dumpWeb.loginModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -17,13 +19,13 @@ public class LoginService {
 
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<String> login(AuthDTO.Request loginInfo, HttpServletRequest request) {
+    public ResponseEntity<ResponseDTO<String>> login(AuthDTO.Request loginInfo, HttpServletRequest request) {
         AuthDTO.Request validatedUser = validateUser(loginInfo);
         HttpSession session = request.getSession();
         setSessionUserType(validatedUser, session);
         session.setAttribute("loginInfo", validatedUser);
 
-        return ResponseEntity.ok("/manage/" + loginInfo.getUserType());
+        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + loginInfo.getUserType()));
     }
 
     private AuthDTO.Request validateUser(AuthDTO.Request loginInfo) {

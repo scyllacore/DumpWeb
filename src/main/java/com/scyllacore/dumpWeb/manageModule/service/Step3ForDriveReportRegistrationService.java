@@ -6,10 +6,11 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
-import lombok.Getter;
-import org.springframework.http.ResponseEntity;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,7 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> saveDriveReport(DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> saveDriveReport(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         driveReport.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
@@ -49,7 +50,7 @@ public class Step3ForDriveReportRegistrationService {
             updateSubmit(driveReport);
         }
 
-        return ResponseEntity.ok("저장 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
     private void insertDriveReport(DriveReportDTO.Request driveReport) {
@@ -80,7 +81,7 @@ public class Step3ForDriveReportRegistrationService {
 
         DriveReportDTO.Response response = step3Mapper.selectDriveReport(driveReport);
 
-        if(response.getDriveReportId() == null){
+        if (response.getDriveReportId() == null) {
             throw new RestApiException(ResponseType.NOT_FOUND);
         }
 
@@ -88,15 +89,14 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> removeDriveReport(DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> removeDriveReport(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
         if (step3Mapper.deleteDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 
-        return ResponseEntity.ok("삭제 완료.");
-
+        return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
     }
 
     public ResponseEntity<List<UserDetailDTO.Submitter>> findSubmitterList() {

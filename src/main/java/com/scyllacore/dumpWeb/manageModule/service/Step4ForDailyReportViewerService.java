@@ -4,6 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class Step4ForDailyReportViewerService {
     private final Step4ForDailyReportViewerMapper step4Mapper;
 
     @Getter
-    public enum Step4Flag{
+    public enum Step4Flag {
         PAYMENT_DONE("일괄 결재 되었습니다"),
         PAYMENT_CANCEL("일괄 취소 되었습니다");
 
@@ -54,15 +55,15 @@ public class Step4ForDailyReportViewerService {
     }
 
     @Transactional
-    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<ResponseDTO<String>> modifyPaymentInBulk(DriveReportSearchOptionDTO.Request option) {
         option.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         step4Mapper.updateDriveReportPaymentChk(option);
 
         if (option.getPaymentBtnFlag()) {
-            return ResponseEntity.ok(Step4Flag.PAYMENT_DONE.getMessage());
+            return ResponseEntity.ok(new ResponseDTO<>(Step4Flag.PAYMENT_DONE.getMessage()));
         }
 
-        return ResponseEntity.ok(Step4Flag.PAYMENT_CANCEL.getMessage());
+        return ResponseEntity.ok(new ResponseDTO<>(Step4Flag.PAYMENT_CANCEL.getMessage()));
     }
 
 }

@@ -1,10 +1,11 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step5ForVehicleManageMileageRegistrationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class Step5ForVehicleManageMileageRegistrationController {
 
     @PostMapping(value = "/fetch/mileageSave")
     @ResponseBody
-    public ResponseEntity<String> mileageSave(@Valid @RequestBody MileageDTO.Request mileage) {
+    public ResponseEntity<ResponseDTO<String>> mileageSave(@Valid @RequestBody MileageDTO.Request mileage) {
         return step5Service.saveMileage(mileage);
     }
 
@@ -36,7 +37,7 @@ public class Step5ForVehicleManageMileageRegistrationController {
 
     @DeleteMapping(value = "/fetch/mileageRemove")
     @ResponseBody
-    public ResponseEntity<String> mileageRemove(@RequestBody MileageDTO.Request mileage) {
+    public ResponseEntity<ResponseDTO<String>> mileageRemove(@RequestBody MileageDTO.Request mileage) {
         return step5Service.removeMileage(mileage);
     }
 

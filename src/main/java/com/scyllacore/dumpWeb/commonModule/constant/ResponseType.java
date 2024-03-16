@@ -1,5 +1,6 @@
 package com.scyllacore.dumpWeb.commonModule.constant;
 
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,8 @@ public enum ResponseType {
     private final HttpStatus httpStatus;
     private final String message;
 
-    public ResponseEntity<String> toResponseEntity() {
-        return ResponseEntity.status(httpStatus).body(message);
+    public ResponseEntity<ResponseDTO<String>> toResponseEntity() {
+        return ResponseEntity.status(httpStatus).body(new ResponseDTO<>(message));
     }
 
 }

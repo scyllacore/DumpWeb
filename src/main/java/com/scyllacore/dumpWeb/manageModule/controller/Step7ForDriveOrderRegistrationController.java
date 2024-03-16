@@ -2,6 +2,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step7ForDriveOrderRegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class Step7ForDriveOrderRegistrationController {
 
     @PostMapping(value = "/fetch/driveOrderSave")
     @ResponseBody
-    public ResponseEntity<String> driveOrderSave(@Valid @RequestBody DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> driveOrderSave(@Valid @RequestBody DriveReportDTO.Request driveReport) {
         return step7Service.saveDriveOrder(driveReport);
     }
 
@@ -43,7 +44,7 @@ public class Step7ForDriveOrderRegistrationController {
 
     @DeleteMapping(value = "/fetch/driveOrderRemove")
     @ResponseBody
-    public ResponseEntity<String> driveOrderRemove(@RequestBody DriveReportDTO.Request driveReport) {
+    public ResponseEntity<ResponseDTO<String>> driveOrderRemove(@RequestBody DriveReportDTO.Request driveReport) {
         return step7Service.removeDriveOrder(driveReport);
     }
 

@@ -7,6 +7,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.FileUtil;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.Getter;
@@ -45,7 +46,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport, MultipartFile imageFile) throws IOException {
+    public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport, MultipartFile imageFile) throws IOException {
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
@@ -57,7 +58,7 @@ public class Step9ForGroupDriveReportRegistrationService {
             updateGroupSubmit(groupReport);
         }
 
-        return ResponseEntity.ok("저장 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
     private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
@@ -193,13 +194,13 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> removeGroupDriveReport(GroupDriveReportDTO.Request groupReport) {
+    public ResponseEntity<ResponseDTO<String>> removeGroupDriveReport(GroupDriveReportDTO.Request groupReport) {
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
         step9Mapper.deleteGroupDriveReport(groupReport);
         step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
 
-        return ResponseEntity.ok("삭제 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
     }
 
     public ResponseEntity<List<UserDetailDTO.Submitter>> findSubmitterList() {

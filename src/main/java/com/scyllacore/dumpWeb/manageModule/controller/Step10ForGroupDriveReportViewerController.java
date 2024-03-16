@@ -1,9 +1,10 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
-import org.springframework.http.ResponseEntity;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step10ForGroupDriveReportViewerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class Step10ForGroupDriveReportViewerController {
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseEntity<String> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<ResponseDTO<String>> paymentInBulk(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
         return step10Service.modifyPaymentInBulk(option);
     }
 

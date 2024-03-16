@@ -4,6 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.service;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step8ForDriveOrderViewerMapper;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,15 +41,15 @@ public class Step8ForDriveOrderViewerService {
     }
 
     @Transactional
-    public ResponseEntity<String> modifyPaymentInBulk(DriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<ResponseDTO<String>> modifyPaymentInBulk(DriveReportSearchOptionDTO.Request option) {
         option.setSubmitterIdFk(sessionUtil.getSubmitterInfo().getSubmitterId());
         step8Mapper.updateDriveReportPaymentChk(option);
 
         if (option.getPaymentBtnFlag()) {
-            return ResponseEntity.ok("일괄 결재 되었습니다");
+            return ResponseEntity.ok(new ResponseDTO<>("일괄 결재 되었습니다"));
         }
 
-        return ResponseEntity.ok("일괄 취소 되었습니다");
+        return ResponseEntity.ok(new ResponseDTO<>("일괄 취소 되었습니다"));
     }
 
 }

@@ -4,6 +4,7 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step9ForGroupDriveReportRegistrationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class Step9ForGroupDriveReportRegistrationController {
 
     @PostMapping(value = "/fetch/groupDriveReportSave")
     @ResponseBody
-    public ResponseEntity<String> groupDriveReportSave(
+    public ResponseEntity<ResponseDTO<String>> groupDriveReportSave(
             @Valid @RequestPart(value = "dto") GroupDriveReportDTO.Request groupReport,
             @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) throws IOException {
         return step9Service.saveGroupDriveReport(groupReport, imageFile);
@@ -49,7 +50,7 @@ public class Step9ForGroupDriveReportRegistrationController {
 
     @DeleteMapping(value = "/fetch/groupDriveReportRemove")
     @ResponseBody
-    public ResponseEntity<String> groupDriveReportRemove(@RequestBody GroupDriveReportDTO.Request groupReport) {
+    public ResponseEntity<ResponseDTO<String>> groupDriveReportRemove(@RequestBody GroupDriveReportDTO.Request groupReport) {
         return step9Service.removeGroupDriveReport(groupReport);
     }
 

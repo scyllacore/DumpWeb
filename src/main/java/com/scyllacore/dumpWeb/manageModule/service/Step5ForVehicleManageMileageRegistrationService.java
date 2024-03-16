@@ -3,15 +3,13 @@ package com.scyllacore.dumpWeb.manageModule.service;
 
 import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +35,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> saveMileage(MileageDTO.Request mileage) {
+    public ResponseEntity<ResponseDTO<String>> saveMileage(MileageDTO.Request mileage) {
 
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
@@ -47,7 +45,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
             updateMileage(mileage);
         }
 
-        return ResponseEntity.ok("저장 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
     private void insertMileage(MileageDTO.Request mileage) {
@@ -69,21 +67,21 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<String> removeMileage(MileageDTO.Request mileage) {
+    public ResponseEntity<ResponseDTO<String>> removeMileage(MileageDTO.Request mileage) {
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
 
         if (step5Mapper.deleteMileage(mileage) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
-        return ResponseEntity.ok("정상적으로 삭제되었습니다.");
+        return ResponseEntity.ok(new ResponseDTO<>("정상적으로 삭제되었습니다."));
     }
 
     public ResponseEntity<MileageDTO.Response> findMileage(MileageDTO.Request mileage) {
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         MileageDTO.Response response = step5Mapper.selectMileage(mileage);
 
-        if(response.getMileageId() == null){
+        if (response.getMileageId() == null) {
             throw new RestApiException(ResponseType.NOT_FOUND);
         }
 

@@ -2,9 +2,10 @@ package com.scyllacore.dumpWeb.manageModule.controller;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOptionDTO;
-import org.springframework.http.ResponseEntity;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step8ForDriveOrderViewerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class Step8ForDriveOrderViewerController {
 
     @PutMapping(value = "/fetch/paymentInBulk")
     @ResponseBody
-    public ResponseEntity<String> paymentInBulk(@RequestBody DriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<ResponseDTO<String>> paymentInBulk(@RequestBody DriveReportSearchOptionDTO.Request option) {
         return step8Service.modifyPaymentInBulk(option);
     }
 }
