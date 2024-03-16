@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.constant.Flag;
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
@@ -61,7 +61,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
-        if (step9Mapper.insertGroupDriveReport(newGroupReport) <= Flag.FAIL.getValue()) {
+        if (step9Mapper.insertGroupDriveReport(newGroupReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 
@@ -73,7 +73,7 @@ public class Step9ForGroupDriveReportRegistrationService {
             DriveReports.get(i).setGroupReportIdFk(newGroupReport.getGroupReportId());
         }
 
-        if (step9Mapper.insertDriveReports(newGroupReport.getDriveReports()) <= Flag.FAIL.getValue()) {
+        if (step9Mapper.insertDriveReports(newGroupReport.getDriveReports()) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
@@ -89,7 +89,7 @@ public class Step9ForGroupDriveReportRegistrationService {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 
-        if (step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue()) <= Flag.FAIL.getValue()) {
+        if (step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue()) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }

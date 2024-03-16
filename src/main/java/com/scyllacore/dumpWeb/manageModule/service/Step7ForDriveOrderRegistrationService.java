@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.constant.Flag;
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
@@ -51,13 +51,13 @@ public class Step7ForDriveOrderRegistrationService {
     }
 
     private void insertDriveOrder(DriveReportDTO.Request driveReport) {
-        if (step7Mapper.insertDriveOrder(driveReport) == Flag.FAIL.getValue()) {
+        if (step7Mapper.insertDriveOrder(driveReport) == OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
 
     private void updateDriveOrder(DriveReportDTO.Request driveReport) {
-        if (step7Mapper.updateDriveOrder(driveReport) <= Flag.FAIL.getValue()) {
+        if (step7Mapper.updateDriveOrder(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
@@ -84,7 +84,7 @@ public class Step7ForDriveOrderRegistrationService {
     public ResponseEntity<String> removeDriveOrder(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
-        if (step7Mapper.deleteDriveOrder(driveReport) <= Flag.FAIL.getValue()) {
+        if (step7Mapper.deleteDriveOrder(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 

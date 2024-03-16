@@ -13,7 +13,6 @@ public class DriveReportDTO {
         private Long driveReportId;
         @NotNull
         private LocalDate driveDate;
-        @NotBlank
         private String receiver;
 
         private String fromSite;

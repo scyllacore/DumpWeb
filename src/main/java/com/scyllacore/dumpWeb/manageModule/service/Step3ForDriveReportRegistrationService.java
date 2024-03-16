@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.constant.Flag;
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
@@ -53,19 +53,19 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     private void insertDriveReport(DriveReportDTO.Request driveReport) {
-        if (step3Mapper.insertDriveReport(driveReport) <= Flag.FAIL.getValue()) {
+        if (step3Mapper.insertDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
 
     private void updateSubmit(DriveReportDTO.Request driveReport) {
-        if (step3Mapper.updateSubmit(driveReport) <= Flag.FAIL.getValue()) {
+        if (step3Mapper.updateSubmit(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
 
     private void updateDriveReport(DriveReportDTO.Request driveReport) {
-        if (step3Mapper.updateDriveReport(driveReport) <= Flag.FAIL.getValue()) {
+        if (step3Mapper.updateDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
@@ -91,7 +91,7 @@ public class Step3ForDriveReportRegistrationService {
     public ResponseEntity<String> removeDriveReport(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
-        if (step3Mapper.deleteDriveReport(driveReport) <= Flag.FAIL.getValue()) {
+        if (step3Mapper.deleteDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 

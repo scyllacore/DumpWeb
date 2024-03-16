@@ -1,6 +1,6 @@
 package com.scyllacore.dumpWeb.loginModule.service;
 
-import com.scyllacore.dumpWeb.commonModule.constant.Flag;
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper;
@@ -70,12 +70,12 @@ public class JoinService {
             throw new DuplicateMemberException("중복 회원");
         }
 
-        if (joinMapper.insertUserInfo(joinInfo) == Flag.FAIL.getValue()) {
+        if (joinMapper.insertUserInfo(joinInfo) == OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
         ;
 
-        if (insertUserTypeInfo(joinInfo) == Flag.FAIL.getValue()) {
+        if (insertUserTypeInfo(joinInfo) == OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
 

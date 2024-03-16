@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
-import com.scyllacore.dumpWeb.commonModule.constant.Flag;
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
@@ -51,13 +51,13 @@ public class Step5ForVehicleManageMileageRegistrationService {
     }
 
     private void insertMileage(MileageDTO.Request mileage) {
-        if (step5Mapper.insertMileage(mileage) <= Flag.FAIL.getValue()) {
+        if (step5Mapper.insertMileage(mileage) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
 
     private void updateMileage(MileageDTO.Request mileage) {
-        if (step5Mapper.updateMileage(mileage) <= Flag.FAIL.getValue()) {
+        if (step5Mapper.updateMileage(mileage) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
     }
@@ -73,7 +73,7 @@ public class Step5ForVehicleManageMileageRegistrationService {
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
 
-        if (step5Mapper.deleteMileage(mileage) <= Flag.FAIL.getValue()) {
+        if (step5Mapper.deleteMileage(mileage) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
         return ResponseEntity.ok("정상적으로 삭제되었습니다.");
