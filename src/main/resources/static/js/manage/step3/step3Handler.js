@@ -8,7 +8,7 @@ class Step3Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+    activeInputElementNames = ['receiver','submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
 
     constructor() {
@@ -69,6 +69,7 @@ class Step3Handler {
         this.inputActiveHandler.activateInputs(this.activeInputElementNames);
 
         const requestObj = this.createDriveReportFormObj();
+
         this.objHandler.changeOnToTrue(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportSave'
@@ -109,7 +110,10 @@ class Step3Handler {
 
     async driveReportsRetrieval() {
         const requestObj = this.createDriveReportFormObj();
+
         this.objHandler.changeOnToTrue(requestObj);
+
+        console.log(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));

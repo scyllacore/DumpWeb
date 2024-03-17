@@ -14,7 +14,7 @@
         , #{userType}
         , NOW())
 
-        <selectKey keyProperty="userIdIdx" resultType="int" order="AFTER">
+        <selectKey keyProperty="userIdIdx" resultType="long" order="AFTER">
             SELECT USER_ID_IDX FROM user_info_tb WHERE USER_ID = #{userId}
         </selectKey>
     </insert>

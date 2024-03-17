@@ -94,6 +94,7 @@
         DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
         GROUP_TITLE,
         GROUP_MEMO,
+        GROUP_USER_TYPE,
         GROUP_SUBMITTER_ID_FK,
         GROUP_PAYMENT_CHK,
         GROUP_SUBMIT_CHK,
