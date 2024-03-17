@@ -74,7 +74,7 @@
     <select id="selectDriveReportList">
         SELECT
         DRIVE_REPORT_ID,
-        DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
+        DRIVE_DATE,
         FROM_SITE,
         TO_SITE,
         ITEM,
@@ -86,7 +86,7 @@
         SUBMITTER_ID_FK
         FROM drive_report_tb
         WHERE
-        <if test="driveDate != ''">
+        <if test="driveDate != null">
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>

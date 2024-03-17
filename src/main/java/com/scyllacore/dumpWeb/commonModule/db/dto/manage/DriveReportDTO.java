@@ -1,18 +1,27 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 public class DriveReportDTO {
 
     @Data
-    public static class Request{
+    public static class Request {
         private Long driveReportId;
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         @NotNull
         private LocalDate driveDate;
+        @NotBlank
         private String receiver;
 
         private String fromSite;
@@ -40,7 +49,7 @@ public class DriveReportDTO {
     }
 
     @Data
-    public static class Response{
+    public static class Response {
         private Long driveReportId;
         private LocalDate driveDate;
         private String receiver;
