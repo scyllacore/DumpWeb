@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForSubmitterOrderRegistrationMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForDriveOrderRegistrationMapper">
 
-    <insert id="insertDriveOrder" parameterType="DriveReportDTO">
+    <insert id="insertDriveOrder">
         INSERT INTO drive_report_tb
         (DRIVE_DATE,
          FROM_SITE,
@@ -35,19 +35,19 @@
     </insert>
 
 
-    <update id="updateDriveOrder" parameterType="DriveReportDTO">
+    <update id="updateDriveOrder">
         UPDATE drive_report_tb
-        SET DRIVE_DATE      = #{driveDate},
-            FROM_SITE       = #{fromSite},
-            TO_SITE         = #{toSite},
-            ITEM            = #{item},
-            UNIT_PRICE      = #{unitPrice},
-            QUANTITY        = #{quantity},
-            MEMO            = #{memo},
-            PAYMENT_CHK     = #{paymentChk},
-            PROGRESS        = #{progress},
+        SET DRIVE_DATE   = #{driveDate},
+            FROM_SITE    = #{fromSite},
+            TO_SITE      = #{toSite},
+            ITEM         = #{item},
+            UNIT_PRICE   = #{unitPrice},
+            QUANTITY     = #{quantity},
+            MEMO         = #{memo},
+            PAYMENT_CHK  = #{paymentChk},
+            PROGRESS     = #{progress},
             DRIVER_ID_FK = #{driverIdFk},
-            POSTING_CHK = #{postingChk}
+            POSTING_CHK  = #{postingChk}
         WHERE WRITER_ID_FK = #{writerIdFk}
           AND DRIVE_REPORT_ID = #{driveReportId}
           AND SUBMITTER_PAYMENT_CHK = 0
@@ -63,15 +63,15 @@
 
     <sql id="reportsForSubmitter">
         WITH writer_reports AS (SELECT *
-                    FROM drive_report_tb
-                    WHERE SUBMITTER_ID_FK = ${submitterIdFk}),
-            join_reports AS (SELECT *
-            FROM driver_tb
-            INNER JOIN writer_reports
-            ON DRIVER_ID = writer_reports.DRIVER_ID_FK)
+                                FROM drive_report_tb
+                                WHERE SUBMITTER_ID_FK = ${submitterIdFk}),
+             join_reports AS (SELECT *
+                              FROM driver_tb
+                                       INNER JOIN writer_reports
+                                                  ON DRIVER_ID = writer_reports.DRIVER_ID_FK)
     </sql>
 
-    <select id="selectDriveOrderList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveOrderList">
         <include refid="reportsForSubmitter">
             <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
@@ -94,16 +94,16 @@
 
     <sql id="reportForSubmitter">
         WITH writer_report AS (SELECT *
-                    FROM drive_report_tb
-                    WHERE SUBMITTER_ID_FK = ${submitterIdFk}
-                      AND DRIVE_REPORT_ID = ${driveReportId}),
+                               FROM drive_report_tb
+                               WHERE SUBMITTER_ID_FK = ${submitterIdFk}
+                                 AND DRIVE_REPORT_ID = ${driveReportId}),
              join_report AS (SELECT *
-                    FROM driver_tb
-                             INNER JOIN writer_report
-                                        ON DRIVER_ID = writer_report.DRIVER_ID_FK)
+                             FROM driver_tb
+                                      INNER JOIN writer_report
+                                                 ON DRIVER_ID = writer_report.DRIVER_ID_FK)
     </sql>
 
-    <select id="selectDriveOrder" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveOrder">
         <include refid="reportForSubmitter">
             <property name="submitterIdFk" value="#{submitterIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
@@ -126,7 +126,7 @@
         FROM join_report
     </select>
 
-    <select id="selectDriverList" resultType="DriverDTO">
+    <select id="selectDriverList">
         SELECT *
         FROM driver_tb
     </select>

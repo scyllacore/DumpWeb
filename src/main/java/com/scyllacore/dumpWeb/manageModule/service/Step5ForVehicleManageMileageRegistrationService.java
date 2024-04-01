@@ -1,63 +1,90 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
+import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManageMileageRegistrationMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
-import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step5ForVehicleManageMileageRegistrationService {
-    private final CommonUtil commonUtil;
+    private final SessionUtil sessionUtil;
     private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFk() {
-        return commonUtil.getLoginInfoBySession().getUserIdIdx();
+    @Getter
+    public enum Step5Flag {
+        NEW_MILEAGE(0);
+
+        int value;
+
+        Step5Flag(int value) {
+            this.value = value;
+        }
     }
 
-    public String getUserId(){
-        return commonUtil.getLoginInfoBySession().getUserId();
-    }
+    @Transactional
+    public ResponseEntity<ResponseDTO<String>> saveMileage(MileageDTO.Request mileage) {
 
-    public ResponseDTO<String> saveMileage(MileageDTO mileage) {
+        mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
-        mileage.setWriterIdFk(getUserIdFk());
-
-        if (mileage.getMileageId() == 0) {
-            step5Mapper.insertMileage(mileage);
+        if (mileage.getMileageId() == Step5Flag.NEW_MILEAGE.getValue()) {
+            insertMileage(mileage);
         } else {
-            step5Mapper.updateMileage(mileage);
+            updateMileage(mileage);
         }
 
-        return new ResponseDTO<>(200, "저장 완료.");
+        return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
-    public ResponseDTO<List<MileageDTO>> findMileageList(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFk());
-
-        return new ResponseDTO<>(200,
-                step5Mapper.selectMileageList(mileage));
+    private void insertMileage(MileageDTO.Request mileage) {
+        if (step5Mapper.insertMileage(mileage) <= OperationStatus.FAIL.getValue()) {
+            throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
+        }
     }
 
-    public ResponseDTO<String> removeMileage(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFk());
-
-        step5Mapper.deleteMileage(mileage);
-
-        return new ResponseDTO<>(200, "정상적으로 삭제되었습니다.");
+    private void updateMileage(MileageDTO.Request mileage) {
+        if (step5Mapper.updateMileage(mileage) <= OperationStatus.FAIL.getValue()) {
+            throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
+        }
     }
 
-    public ResponseDTO<MileageDTO> findMileage(MileageDTO mileage) {
-        mileage.setWriterIdFk(getUserIdFk());
+    public ResponseEntity<List<MileageDTO.Response>> findMileageList(MileageDTO.Request mileage) {
+        mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+        return ResponseEntity.ok(step5Mapper.selectMileageList(mileage));
 
-        return new ResponseDTO<>(200, step5Mapper.selectMileage(mileage));
+    }
+
+    @Transactional
+    public ResponseEntity<ResponseDTO<String>> removeMileage(MileageDTO.Request mileage) {
+        mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+
+
+        if (step5Mapper.deleteMileage(mileage) <= OperationStatus.FAIL.getValue()) {
+            throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
+        }
+        return ResponseEntity.ok(new ResponseDTO<>("정상적으로 삭제되었습니다."));
+    }
+
+    public ResponseEntity<MileageDTO.Response> findMileage(MileageDTO.Request mileage) {
+        mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+        MileageDTO.Response response = step5Mapper.selectMileage(mileage);
+
+        if (response.getMileageId() == null) {
+            throw new RestApiException(ResponseType.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step8ForSubmitterReceiptViewerMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step8ForDriveOrderViewerMapper">
 
     <sql id="detailSearchForSubmitter">
         WITH writer_reports AS (SELECT DRIVER_ID_FK,
@@ -80,7 +80,7 @@
         )
     </sql>
 
-    <select id="selectDriveReportListByOption" parameterType="DriveReportSearchOptionDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReportListByOption">
         <include refid="retrievalForSubmitter">
             <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
@@ -125,7 +125,7 @@
         </choose>
     </select>
 
-    <update id="updateDriveReportPaymentChk" parameterType="DriveReportSearchOptionDTO">
+    <update id="updateDriveReportPaymentChk">
         UPDATE drive_report_tb
         SET SUBMITTER_PAYMENT_CHK = #{paymentBtnFlag}
         WHERE SUBMITTER_ID_FK = #{submitterIdFk}

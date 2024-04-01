@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface PasswordChangeMapper {
-    int updateUserPassword(AuthDTO loginInfo);
+    int updateUserPassword(AuthDTO.Password password);
 }

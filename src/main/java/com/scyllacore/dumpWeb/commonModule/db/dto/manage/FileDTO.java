@@ -1,15 +1,26 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+//@Data
+@Getter
+@NoArgsConstructor
 public class FileDTO {
 
-    private long fileId;
+    private Long fileId;
     private String fileName;
     private String fileExt;
     private String uuid;
+    private Long groupReportIdFk;
 
-    private long groupReportIdFk;
-    //private String tableName;
+    @Builder
+    public FileDTO(Long fileId, String fileName, String fileExt, String uuid, Long groupReportIdFk) {
+        this.fileId = fileId;
+        this.fileName = fileName;
+        this.fileExt = fileExt;
+        this.uuid = uuid;
+        this.groupReportIdFk = groupReportIdFk;
+    }
 }

@@ -1,18 +1,26 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class MileageSearchOptionDTO {
-    private int writerIdFk;
-    private String startDate;
-    private String endDate;
-    private String item;
-    private String sortingCriteria;
-    private boolean paymentBtnFlag;
+import java.time.LocalDate;
 
-    private int pageNum;
-    private int pageAmount;
+public class MileageSearchOptionDTO {
+
+    @Data
+    public static class Request {
+        private Long writerIdFk;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private String item;
+        private String sortingCriteria;
+        private Boolean paymentBtnFlag;
+
+        private Integer pageNum;
+        private Integer pageAmount;
+    }
+
+    @Data
+    public static class Response {
+
+    }
 }

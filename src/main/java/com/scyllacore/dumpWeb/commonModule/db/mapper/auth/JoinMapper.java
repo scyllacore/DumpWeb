@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface JoinMapper {
 
-    void insertUserInfo(AuthDTO joinInfo);
+    int insertUserInfo(AuthDTO.Request joinInfo);
 
-    int selectUserIdForDuplicateCheck(AuthDTO joinInfo);
+    int selectUserIdForDuplicateCheck(AuthDTO.Request joinInfo);
 
-    void insertDriverInfo(AuthDTO driverInfo);
+    int insertDriverInfo(AuthDTO.Request driverInfo);
 
-    void insertSubmitterInfo(AuthDTO submitterInfo);
+    int insertSubmitterInfo(AuthDTO.Request submitterInfo);
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class PageDTO {
-    private MileageSearchOptionDTO option;
+    private MileageSearchOptionDTO.Request option;
     private PageVO pageInfo;
-    private List<MileageDTO> mileageList;
+    private List<MileageDTO.Response> mileageList;
 }

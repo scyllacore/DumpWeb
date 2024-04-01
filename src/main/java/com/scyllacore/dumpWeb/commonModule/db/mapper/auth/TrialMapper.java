@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TrialMapper {
-    AuthDTO selectTrialUserInfo(AuthDTO loginInfo);
+    AuthDTO.Request selectTrialUserInfo(AuthDTO.Trial trial);
 }

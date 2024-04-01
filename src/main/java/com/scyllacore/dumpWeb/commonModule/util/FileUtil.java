@@ -1,14 +1,17 @@
 package com.scyllacore.dumpWeb.commonModule.util;
 
 
+import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.FileDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.file.FileMapper;
+import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -19,62 +22,52 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class FileUtil {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final FileMapper fileMapper;
 
-
     @Value("${file.upload.path}")
     private String UPLOAD_PATH;
 
-    public Long uploadFile(MultipartFile file, long groupReportId) {
-        try {
-            String fileName = file.getOriginalFilename();
-            String uuid = UUID.randomUUID().toString();
-            String ext = this.getExtension(fileName);
-            String uploadFilePath = UPLOAD_PATH + uuid;
+    public Long uploadFile(MultipartFile file, long groupReportId) throws IOException {
+        String fileName = file.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String ext = getExtension(fileName);
+        String uploadFilePath = UPLOAD_PATH + uuid;
 
-            File uploadFile = new File(uploadFilePath);
-            FileDTO fileDTO = new FileDTO();
+        File uploadFile = new File(uploadFilePath);
+        file.transferTo(uploadFile);
 
-            file.transferTo(uploadFile);
+        FileDTO fileDTO = FileDTO.builder()
+                .fileName(fileName)
+                .uuid(uuid)
+                .fileExt(ext)
+                .groupReportIdFk(groupReportId)
+                .build();
 
-            fileDTO.setFileName(fileName);
-            fileDTO.setUuid(uuid);
-            fileDTO.setFileExt(ext);
-            fileDTO.setGroupReportIdFk(groupReportId);
+        fileMapper.insertFileInfoByGroupReportId(fileDTO);
+        log.info(fileName);
 
-            fileMapper.insertFileInfoByGroupReportId(fileDTO);
-            log.info(fileName);
-
-            return fileDTO.getFileId();
-
-        } catch (IOException e) {
-            log.error("Excepetion [" + e.getMessage() + "]");
-            return null; // 수정할 것
-        }
-
+        return fileDTO.getFileId();
     }
 
-    private String getMimeType(File file) throws IOException {
-        FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        return fileNameMap.getContentTypeFor(file.getName());
+    public String getExtension(String fileName) {
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-
-    public void getImageFile(HttpServletResponse response, int fileId) throws IOException {
+    public void getImageFile(HttpServletResponse response, Long fileId) throws IOException {
 
         FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
-
         File storedFile = new File(UPLOAD_PATH + fileInfo.getUuid());
 
         log.info(fileInfo.getFileName());
 
         try (InputStream is = new FileInputStream(storedFile)) {
-            //String mime = this.getMimeType(storedFile);
-            //System.out.println("확인 : " + mime);
-            //response.setContentType(mime);
+            String mime = this.getMimeType(storedFile);
+            System.out.println("확인 : " + mime);
+            response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
             int len;
@@ -86,55 +79,39 @@ public class FileUtil {
 
             os.flush();
             os.close();
-
-        } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_BAD_GATEWAY);
-            log.error("Excepetion [" + e.getMessage() + "]");
         }
 
     }
 
-    public void deleteFile(int fileId) {
-        this.deleteImageFile(fileId);
-        this.deleteFileColumn(fileId);
+    private String getMimeType(File file) {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        return fileNameMap.getContentTypeFor(file.getName());
+    }
+
+    public void deleteFile(Long fileId) {
+        if (deleteImageFile(fileId)) {
+            throw new RestApiException(ResponseType.FILE_NOT_FOUND);
+        }
+
+        deleteFileRecord(fileId);
     }
 
 
-    public boolean deleteImageFile(int fileId) {
-
-        boolean result = false;
+    public boolean deleteImageFile(Long fileId) {
+        boolean result = true;
 
         FileDTO fileInfo = fileMapper.findFileInfoByFileId(fileId);
-
         File file = new File(UPLOAD_PATH + fileInfo.getUuid());
 
-        log.info(fileInfo.getFileName());
-
-        System.out.println(fileInfo.getUuid());
-
-        try {
-
-            if (file.delete()) {
-                result = true;
-            } else {
-                result = false;
-            }
-            System.out.println("삭제 결과 : " + result);
-
-        } catch (Exception e) {
-            log.error("Excepetion [" + e.getMessage() + "]");
+        if (file.delete()) {
+            log.info(fileInfo.getFileName());
+            result = false;
         }
 
         return result;
-
     }
 
-    public void deleteFileColumn(long fileId) {
+    public void deleteFileRecord(Long fileId) {
         fileMapper.deleteFile(fileId);
     }
-
-    public String getExtension(String fileName) {
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
-    }
-
 }

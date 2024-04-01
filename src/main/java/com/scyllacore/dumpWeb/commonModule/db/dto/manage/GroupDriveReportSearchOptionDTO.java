@@ -4,16 +4,23 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
 public class GroupDriveReportSearchOptionDTO {
-    private int groupDriverIdFk;
-    private int groupWriterIdFk;
-    private boolean paymentBtnFlag;
-    private String sortingCriteria;
 
-    private String title;
-    private String company;
-    private List<String> titles;
-    private List<String> companies;
+    @Data
+    public static class Request {
+        private String title;
+        private String company;
+        private String sortingCriteria;
+        private Boolean paymentBtnFlag;
+
+        private Long groupDriverIdFk;
+        private Long groupWriterIdFk;
+    }
+
+    @Data
+    public static class Response {
+        private List<String> titles;
+        private List<String> companies;
+    }
 
 }

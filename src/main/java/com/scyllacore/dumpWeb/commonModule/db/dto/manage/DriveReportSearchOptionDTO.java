@@ -1,33 +1,43 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
-@Data
 public class DriveReportSearchOptionDTO {
-    private int writerIdFk;
-    private int driverIdFk;
-    private int submitterIdFk;
-    private String startDate;
-    private String endDate;
-    private String sortingCriteria;
-    private boolean paymentBtnFlag;
+    @Data
+    public static class Request {
+        private LocalDate startDate;
+        private LocalDate endDate;
+        @NotBlank
+        private String sortingCriteria;
+        private Boolean paymentBtnFlag;
 
-    private String fromSite;
-    private String toSite;
-    private String item;
-    private String progress;
+        private String fromSite;
+        private String toSite;
+        private String item;
+        private String progress;
 
-    private String company;
-    private String tel;
-    private String carNo;
+        private Long writerIdFk;
+        private Long driverIdFk;
+        private Long submitterIdFk;
 
-    private List<String> companies;
-    private List<String> tels;
-    private List<String> carNos;
-    private List<String> fromSites;
-    private List<String> toSites;
-    private List<String> items;
+        private String company;
+        private String tel;
+        private String carNo;
+    }
+
+    @Data
+    public static class Response{
+        private List<String> companies;
+        private List<String> tels;
+        private List<String> carNos;
+        private List<String> fromSites;
+        private List<String> toSites;
+        private List<String> items;
+    }
 
 }

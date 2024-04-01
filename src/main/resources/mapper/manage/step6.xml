@@ -22,12 +22,12 @@
         SELECT MILEAGE_ID
         FROM covering_tb1
         ORDER BY MILEAGE_ID DESC
-        <![CDATA[ LIMIT ${startPage},${endPage} ]]>
+        <![CDATA[ LIMIT ${startId},${pageSize} ]]>
         )
     </sql>
 
 
-    <select id="countMileageListByOption" parameterType="PageDTO" resultType="int">
+    <select id="countMileageListByOption">
         <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
@@ -39,7 +39,7 @@
         FROM covering_tb1
     </select>
 
-    <select id="selectMileageListByOption" parameterType="PageDTO" resultType="MileageDTO">
+    <select id="selectMileageListByOption">
         <include refid="covering1">
             <property name="writerIdFk" value="#{option.writerIdFk}"/>
             <property name="startDate" value="#{option.startDate}"/>
@@ -47,8 +47,8 @@
             <property name="item" value="#{option.item}"/>
         </include>,
         <include refid="covering2">
-            <property name="startPage" value="#{pageInfo.start}"/>
-            <property name="endPage" value="#{pageInfo.end}"/>
+            <property name="startId" value="#{pageInfo.startId}"/>
+            <property name="pageSize" value="#{pageInfo.pageSize}"/>
         </include>
 
         SELECT mileage_tb.MILEAGE_ID as MILEAGE_ID,
@@ -69,7 +69,7 @@
         </choose>
     </select>
 
-    <update id="updateMileagePaymentChk" parameterType="MileageSearchOptionDTO">
+    <update id="updateMileagePaymentChk">
         UPDATE mileage_tb
         SET PAYMENT_CHK = #{paymentBtnFlag}
         WHERE WRITER_ID_FK = #{writerIdFk}

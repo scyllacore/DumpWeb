@@ -5,59 +5,49 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.MileageSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageCriteriaDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.PageDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
-import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import com.scyllacore.dumpWeb.commonModule.vo.pagination.PageVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step6ForVehicleManageMileageViewerService {
     private final Step6ForVehicleManageMileageViewerMapper step6Mapper;
-    private final CommonUtil commonUtil;
+    private final SessionUtil sessionUtil;
 
-    public int getUserIdFk() {
-        return commonUtil.getLoginInfoBySession().getUserIdIdx();
-    }
-
-    public ResponseDTO<PageDTO> findMileageListByOption(MileageSearchOptionDTO option) {
-
-        option.setWriterIdFk(getUserIdFk());
+    public ResponseEntity<PageDTO> findMileageListByOption(MileageSearchOptionDTO.Request option) {
+        option.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
         PageDTO pageDTO = new PageDTO();
         pageDTO.setOption(option);
-
         int totalAmount = step6Mapper.countMileageListByOption(pageDTO);
 
-        System.out.println(option.getPageNum());
-
-        PageCriteriaDTO criteria = new PageCriteriaDTO(option.getPageNum(),option.getPageAmount());
-        PageVO pageInfo =  new PageVO(criteria,totalAmount);
+        PageCriteriaDTO criteria = new PageCriteriaDTO(option.getPageNum(), option.getPageAmount());
+        PageVO pageInfo = new PageVO(criteria, totalAmount);
         pageDTO.setPageInfo(pageInfo);
-
-        System.out.println(pageInfo.getStartPage() + " " + pageInfo.getEndPage());
-
-        System.out.println(pageInfo.getStart() + " " + pageInfo.getEnd());
-
-        List<MileageDTO> mileageList = step6Mapper.selectMileageListByOption(pageDTO);
-        System.out.println(mileageList);
+        List<MileageDTO.Response> mileageList = step6Mapper.selectMileageListByOption(pageDTO);
 
         pageDTO.setMileageList(mileageList);
 
-        return new ResponseDTO<>(200, pageDTO);
+        return ResponseEntity.ok(pageDTO);
     }
 
-    public ResponseDTO<String> modifyPaymentInBulk(MileageSearchOptionDTO option) {
-        option.setWriterIdFk(getUserIdFk());
+    @Transactional
+    public ResponseEntity<ResponseDTO<String>> modifyPaymentInBulk(MileageSearchOptionDTO.Request option) {
+        option.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         step6Mapper.updateMileagePaymentChk(option);
 
-        if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
-        }
+        if (option.getPaymentBtnFlag()) {
+            return ResponseEntity.ok(new ResponseDTO<>("일괄 결재 되었습니다"));
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        }
+        return ResponseEntity.ok(new ResponseDTO<>("일괄 취소 되었습니다"));
     }
 }

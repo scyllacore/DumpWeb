@@ -1,59 +1,52 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
-import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriverDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step10ForGroupDriveReportViewerMapper;
-import com.scyllacore.dumpWeb.commonModule.http.dto.ResponseDTO;
-import com.scyllacore.dumpWeb.commonModule.util.CommonUtil;
+import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class Step10ForGroupDriveReportViewerService {
 
-    private final CommonUtil commonUtil;
+    private final SessionUtil sessionUtil;
     private final Step10ForGroupDriveReportViewerMapper step10Mapper;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public int getUserIdFk() {
-        return commonUtil.getLoginInfoBySession().getUserIdIdx();
+    public ResponseEntity<GroupDriveReportSearchOptionDTO.Response> findRecommendKeywordList() {
+
+        GroupDriveReportSearchOptionDTO.Response option = new GroupDriveReportSearchOptionDTO.Response();
+
+        Long driverId = sessionUtil.getDriverInfo().getDriverId();
+
+        option.setTitles(step10Mapper.selectTitleSearchOption(driverId));
+        option.setCompanies(step10Mapper.selectCompanySearchOption(driverId));
+
+        return ResponseEntity.ok(option);
     }
 
-    public DriverDTO getDriverInfo() {
-        return (DriverDTO) commonUtil.getInfoBySession("driverInfo");
+    public ResponseEntity<List<GroupDriveReportSearchOptionDTO.Response>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO.Request option) {
+        option.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
+        return ResponseEntity.ok(step10Mapper.selectGroupDriveReportListByOption(option));
     }
 
-    public ResponseDTO<GroupDriveReportSearchOptionDTO> findRecommendKeywordList() {
-
-        GroupDriveReportSearchOptionDTO option = new GroupDriveReportSearchOptionDTO();
-
-        option.setTitles(step10Mapper.selectTitleSearchOption(getDriverInfo().getDriverId()));
-        option.setCompanies(step10Mapper.selectCompanySearchOption(getDriverInfo().getDriverId()));
-
-        return new ResponseDTO<>(200, option);
-    }
-
-    public ResponseDTO<List<GroupDriveReportSearchOptionDTO>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO option) {
-        option.setGroupDriverIdFk(getDriverInfo().getDriverId());
-        return new ResponseDTO<>(200, step10Mapper.selectGroupDriveReportListByOption(option));
-    }
-
-    public ResponseDTO<String> modifyPaymentInBulk(GroupDriveReportSearchOptionDTO option) {
-        option.setGroupWriterIdFk(getUserIdFk());
+    @Transactional
+    public ResponseEntity<ResponseDTO<String>> modifyPaymentInBulk(GroupDriveReportSearchOptionDTO.Request option) {
+        option.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         step10Mapper.updateGroupDriveReportPaymentChk(option);
-        //step10Mapper.setDriveReportsPaymentChk(option);
 
-        if (option.isPaymentBtnFlag()) {
-            return new ResponseDTO<>(200, "일괄 결재 되었습니다");
+        if (option.getPaymentBtnFlag()) {
+            return ResponseEntity.ok(new ResponseDTO<>("일괄 결재 되었습니다"));
         }
 
-        return new ResponseDTO<>(200, "일괄 취소 되었습니다");
+        return ResponseEntity.ok(new ResponseDTO<>("일괄 취소 되었습니다"));
     }
 
 }

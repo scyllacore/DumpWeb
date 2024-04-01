@@ -8,7 +8,7 @@ class Step9GroupHandler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['groupSubmitterRetrievalBtn', 'groupReportRetrievalBtn', 'groupTitle', 'groupMemo', 'newDriveReport']
+    activeInputElementNames = ['groupReceiver', 'groupSubmitterRetrievalBtn', 'groupReportRetrievalBtn', 'groupTitle', 'groupMemo', 'newDriveReport']
 
     groupList = [];
 
@@ -55,7 +55,7 @@ class Step9GroupHandler {
         const inputData = await this.requestHandler
             .post('/manage/step9' + '/fetch' + '/groupDriveReportDetails', reqData);
 
-        if(inputData['fileIdFk'] !== null) {
+        if (inputData['fileIdFk'] !== null) {
             const photoViewEle = objHandler.selectElementByClass('photo-view');
             photoViewEle.src = '/image/' + inputData['fileIdFk'];
             photoViewEle.style.display = 'flex';
@@ -89,8 +89,8 @@ class Step9GroupHandler {
         requestObj['driveReports'] = this.groupList;
 
         const requestForm = new FormData();
-        requestForm.append('dto', new Blob([this.jsonHandler.convertObjectToJson(requestObj)], { type: 'application/json' }));
-        requestForm.append('imageFile',objHandler.selectElementByName('imageFile').files[0]);
+        requestForm.append('dto', new Blob([this.jsonHandler.convertObjectToJson(requestObj)], {type: 'application/json'}));
+        requestForm.append('imageFile', objHandler.selectElementByName('imageFile').files[0]);
 
         const responseData = await this.requestHandler.postFormData('/manage/step9' + '/fetch' + '/groupDriveReportSave'
             , requestForm);
@@ -186,12 +186,12 @@ class Step9GroupHandler {
         })
     }
 
-    inputDriveReport(){
+    inputDriveReport() {
         const tableBody = objHandler.selectElementByClass('group-table-tuple');
         tableBody.addEventListener("click", (event) => {
             const idx = event.target.parentElement.children[0].innerHTML;
-            const driveReport = this.groupList[parseInt(idx)-1];
-            objHandler.selectElementByName('driveReportIdx').value = parseInt(idx)-1;
+            const driveReport = this.groupList[parseInt(idx) - 1];
+            objHandler.selectElementByName('driveReportIdx').value = parseInt(idx) - 1;
             const inputHandler = new InputHandler();
 
             inputHandler.fillInput(driveReport);

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportRegistrationMapper">
 
-    <insert id="insertDriveReport" parameterType="DriveReportDTO">
+    <insert id="insertDriveReport">
         INSERT INTO drive_report_tb
         (DRIVE_DATE,
          FROM_SITE,
@@ -35,7 +35,7 @@
     </insert>
 
 
-    <update id="updateDriveReport" parameterType="DriveReportDTO">
+    <update id="updateDriveReport">
         UPDATE drive_report_tb
         SET DRIVE_DATE      = #{driveDate},
             FROM_SITE       = #{fromSite},
@@ -53,7 +53,7 @@
           AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
-    <update id="updateSubmit" parameterType="DriveReportDTO">
+    <update id="updateSubmit">
         UPDATE drive_report_tb
         SET PROGRESS   = #{progress},
             SUBMIT_CHK = #{submitChk}
@@ -71,10 +71,10 @@
           AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 
-    <select id="selectDriveReportList" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReportList">
         SELECT
         DRIVE_REPORT_ID,
-        DATE_FORMAT(DRIVE_DATE, '%Y.%m.%d') AS driveDate,
+        DRIVE_DATE,
         FROM_SITE,
         TO_SITE,
         ITEM,
@@ -86,7 +86,7 @@
         SUBMITTER_ID_FK
         FROM drive_report_tb
         WHERE
-        <if test="driveDate != ''">
+        <if test="driveDate != null">
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>
@@ -105,7 +105,7 @@
     </sql>
 
 
-    <select id="selectDriveReport" parameterType="DriveReportDTO" resultType="DriveReportDTO">
+    <select id="selectDriveReport">
         <include refid="reportForDriver">
             <property name="driverIdFk" value="#{driverIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
@@ -127,7 +127,7 @@
         FROM join_report
     </select>
 
-    <select id="selectSubmitterList" resultType="SubmitterDTO">
+    <select id="selectSubmitterList">
         SELECT *
         FROM submitter_tb
     </select>

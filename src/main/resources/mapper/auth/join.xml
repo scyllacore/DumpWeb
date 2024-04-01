@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper">
 
-    <insert id="insertUserInfo" parameterType="AuthDTO">
+    <insert id="insertUserInfo">
         INSERT INTO user_info_tb( USER_ID
         , USER_PWD
         , USER_TYPE
@@ -14,19 +14,19 @@
         , #{userType}
         , NOW())
 
-        <selectKey keyProperty="userIdIdx" resultType="int" order="AFTER">
+        <selectKey keyProperty="userIdIdx" resultType="long" order="AFTER">
             SELECT USER_ID_IDX FROM user_info_tb WHERE USER_ID = #{userId}
         </selectKey>
     </insert>
 
-    <select id="selectUserIdForDuplicateCheck" parameterType="AuthDTO">
+    <select id="selectUserIdForDuplicateCheck">
         SELECT COUNT(*)
         FROM user_info_tb
         WHERE USER_ID = #{userId}
     </select>
 
 
-    <insert id="insertDriverInfo" parameterType="AuthDTO">
+    <insert id="insertDriverInfo">
         INSERT INTO driver_tb( CAR_NO
                              , NAME
                              , TEL
@@ -37,7 +37,7 @@
                , #{userIdIdx})
     </insert>
 
-    <insert id="insertSubmitterInfo" parameterType="AuthDTO">
+    <insert id="insertSubmitterInfo">
         INSERT INTO submitter_tb( COMPANY
                                 , NAME
                                 , TEL

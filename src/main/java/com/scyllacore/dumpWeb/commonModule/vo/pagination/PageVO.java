@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class PageVO {
-    private int startPage;
-    private int endPage;
-    private boolean prev, next;
-    private int start,end;
+    private Integer startPage;
+    private Integer endPage;
+    private Boolean prev, next;
+    private Integer startId,pageSize;
 
-    private int total;
+    private Integer total;
     //현재 페이지 번호, 한 페이지에 표출할 데이터 개수
     private PageCriteriaDTO cri;
 
@@ -28,8 +28,8 @@ public class PageVO {
             this.endPage = realEnd;
         }
 
-        this.start = cri.getPageNum()  * cri.getAmount() - 1;
-        this.end = cri.getAmount();
+        this.startId = cri.getPageNum()  * cri.getAmount() - 1;
+        this.pageSize = cri.getAmount();
 
         //이전, 다음 버튼 표출 여부 결정
         this.prev = this.startPage > 1;

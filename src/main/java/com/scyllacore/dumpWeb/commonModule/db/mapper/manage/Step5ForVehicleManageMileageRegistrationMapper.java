@@ -7,13 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface Step5ForVehicleManageMileageRegistrationMapper {
-    void insertMileage(MileageDTO mileage);
+    int insertMileage(MileageDTO.Request mileage);
 
-    void updateMileage(MileageDTO mileage);
+    int updateMileage(MileageDTO.Request mileage);
 
-    void deleteMileage(MileageDTO mileage);
+    int deleteMileage(MileageDTO.Request mileage);
 
-    List<MileageDTO> selectMileageList(MileageDTO mileage);
+    List<MileageDTO.Response> selectMileageList(MileageDTO.Request mileage);
 
-    MileageDTO selectMileage(MileageDTO mileage);
+    MileageDTO.Response selectMileage(MileageDTO.Request mileage);
 }

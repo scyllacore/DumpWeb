@@ -7,7 +7,7 @@ class Step9BaseHandler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+    activeInputElementNames = ['receiver', 'submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
     constructor() {
         this.run();
@@ -113,10 +113,10 @@ class Step9BaseHandler {
             , this.jsonHandler.convertObjectToJson(requestObj));
 
 
-        for(let i=0; i<responseData.length; i++){
-            for(let j=0; j<groupList.length; j++){
-                if(i!==j && responseData[i].driveReportId === parseInt(groupList[j].driveReportId)){
-                    responseData.splice(i,1);
+        for (let i = 0; i < responseData.length; i++) {
+            for (let j = 0; j < groupList.length; j++) {
+                if (i !== j && responseData[i].driveReportId === parseInt(groupList[j].driveReportId)) {
+                    responseData.splice(i, 1);
                 }
             }
         }
