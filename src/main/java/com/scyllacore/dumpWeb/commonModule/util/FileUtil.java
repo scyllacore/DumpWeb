@@ -64,20 +64,18 @@ public class FileUtil {
 
         log.info(fileInfo.getFileName());
 
-        try (InputStream is = new FileInputStream(storedFile)) {
-            String mime = getMimeType(fileInfo.getFileName());
-            response.setContentType(mime);
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
+        String mime = getMimeType(fileInfo.getFileName());
+        response.setContentType(mime);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
+        try (InputStream is = new FileInputStream(storedFile);
+             OutputStream os = response.getOutputStream();) {
             int len;
             byte[] buffer = new byte[1024];
-            OutputStream os = response.getOutputStream();
+
             while ((len = is.read(buffer)) > -1) {
                 os.write(buffer, 0, len);
             }
-
-            os.flush();
-            os.close();
         }
     }
 
