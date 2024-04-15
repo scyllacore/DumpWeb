@@ -25,7 +25,7 @@ public class LoginService {
         setSessionUserType(validatedUser, session);
         session.setAttribute("loginInfo", validatedUser);
 
-        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + loginInfo.getUserType()));
+        return ResponseEntity.ok(new ResponseDTO<>("/manage/" + validatedUser.getUserType()));
     }
 
     private AuthDTO.Request validateUser(AuthDTO.Request loginInfo) {
