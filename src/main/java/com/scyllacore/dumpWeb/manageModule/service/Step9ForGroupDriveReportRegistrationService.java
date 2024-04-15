@@ -80,7 +80,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     private void uploadFile(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
-        if (imageFile.isEmpty()) {
+        if (imageFile == null) {
             return;
         }
 
@@ -101,7 +101,7 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     public void updateGroupDriveReport(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
-        if (!imageFile.isEmpty()) {
+        if (imageFile != null) {
             changeImage(newGroupReport, imageFile);
         }
 
