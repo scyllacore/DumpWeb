@@ -31,14 +31,14 @@ public class LoginController {
 
     @PostMapping(value = "/auth/fetch/login")
     @ResponseBody
-    public ResponseEntity<ResponseDTO<String>> login(@RequestBody AuthDTO.Request loginInfo, HttpServletRequest request) {
-        loginService.logout(request);
-        return loginService.login(loginInfo, request);
+    public ResponseEntity<ResponseDTO<String>> login(@RequestBody AuthDTO.Request loginInfo) {
+        loginService.logout();
+        return loginService.login(loginInfo);
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        loginService.logout(request);
+    public String logout() {
+        loginService.logout();
 
         return "redirect:/login";
     }

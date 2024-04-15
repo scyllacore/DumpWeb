@@ -4,6 +4,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,11 @@ public class LoginService {
 
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<ResponseDTO<String>> login(AuthDTO.Request loginInfo, HttpServletRequest request) {
+    private final SessionUtil sessionUtil;
+
+    public ResponseEntity<ResponseDTO<String>> login(AuthDTO.Request loginInfo) {
         AuthDTO.Request validatedUser = validateUser(loginInfo);
-        HttpSession session = request.getSession();
+        HttpSession session = sessionUtil.getSession(true);
         setSessionUserType(validatedUser, session);
         session.setAttribute("loginInfo", validatedUser);
 
@@ -53,8 +56,8 @@ public class LoginService {
     }
 
 
-    public void logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+    public void logout() {
+        HttpSession session = sessionUtil.getSession(false);
 
         if (session != null) {
             session.invalidate();

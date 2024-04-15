@@ -27,7 +27,7 @@ public class PasswordChangeController {
 
     @PostMapping(value = "/auth/fetch/passwordChange")
     @ResponseBody
-    public ResponseEntity<ResponseDTO<String>> passwordChange(@Valid @RequestBody AuthDTO.Password password, HttpServletRequest request) {
-        return passwordChangeService.changePassword(password, request);
+    public ResponseEntity<ResponseDTO<String>> passwordChange(@Valid @RequestBody AuthDTO.Password password) {
+        return passwordChangeService.changePassword(password);
     }
 }

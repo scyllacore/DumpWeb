@@ -27,8 +27,8 @@ public class TrialController {
 
     @PostMapping("/auth/fetch/trialLogin")
     @ResponseBody
-    public ResponseEntity<ResponseDTO<String>> trialLogin(@RequestBody AuthDTO.Trial trial, HttpServletRequest request) {
-        loginService.logout(request);
-        return trialService.loginForTrial(trial, request);
+    public ResponseEntity<ResponseDTO<String>> trialLogin(@RequestBody AuthDTO.Trial trial) {
+        loginService.logout();
+        return trialService.loginForTrial(trial);
     }
 }
