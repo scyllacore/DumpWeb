@@ -65,7 +65,7 @@ public class FileUtil {
         log.info(fileInfo.getFileName());
 
         try (InputStream is = new FileInputStream(storedFile)) {
-            String mime = this.getMimeType(storedFile);
+            String mime = getMimeType(fileInfo.getFileName());
             response.setContentType(mime);
             response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
@@ -79,12 +79,11 @@ public class FileUtil {
             os.flush();
             os.close();
         }
-
     }
 
-    private String getMimeType(File file) {
+    private String getMimeType(String fileName) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        return fileNameMap.getContentTypeFor(file.getName());
+        return fileNameMap.getContentTypeFor(fileName);
     }
 
     public void deleteFile(Long fileId) {
