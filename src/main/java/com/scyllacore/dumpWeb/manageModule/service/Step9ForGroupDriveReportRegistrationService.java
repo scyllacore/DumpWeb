@@ -46,7 +46,8 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     @Transactional
-    public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport, MultipartFile imageFile) throws IOException {
+    public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport
+            , MultipartFile imageFile) throws IOException {
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
@@ -61,7 +62,8 @@ public class Step9ForGroupDriveReportRegistrationService {
         return ResponseEntity.ok(new ResponseDTO<>("저장 완료."));
     }
 
-    private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
+    private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport
+            , MultipartFile imageFile) throws IOException {
         if (step9Mapper.insertGroupDriveReport(newGroupReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
@@ -93,11 +95,6 @@ public class Step9ForGroupDriveReportRegistrationService {
         if (step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue()) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
-    }
-
-    public void updateGroupSubmit(GroupDriveReportDTO.Request groupReport) {
-        step9Mapper.updateGroupSubmit(groupReport);
-        step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
     }
 
     public void updateGroupDriveReport(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
@@ -169,6 +166,25 @@ public class Step9ForGroupDriveReportRegistrationService {
         }
     }
 
+    public void updateGroupSubmit(GroupDriveReportDTO.Request groupReport) {
+        step9Mapper.updateGroupSubmit(groupReport);
+        step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
+    }
+
+    @Transactional
+    public ResponseEntity<ResponseDTO<String>> removeGroupDriveReport(GroupDriveReportDTO.Request groupReport) {
+        groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+
+        step9Mapper.deleteGroupDriveReport(groupReport);
+        step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
+
+        return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
+    }
+
+    public void deleteFile(Long fileIdFk) {
+        fileUtil.deleteFile(fileIdFk);
+    }
+
     public ResponseEntity<List<GroupDriveReportDTO.Response>> findGroupDriveReportList(GroupDriveReportDTO.Request groupReport) {
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
         return ResponseEntity.ok(step9Mapper.selectGroupDriveReportList(groupReport));
@@ -185,7 +201,6 @@ public class Step9ForGroupDriveReportRegistrationService {
     public ResponseEntity<List<DriveReportDTO.Response>> findDriveReportList(DriveReportDTO.Request driveReport) {
         driveReport.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
         return ResponseEntity.ok(step9Mapper.selectDriveReportList(driveReport));
-
     }
 
     public ResponseEntity<DriveReportDTO.Response> findDriveReport(DriveReportDTO.Request driveReport) {
@@ -193,22 +208,8 @@ public class Step9ForGroupDriveReportRegistrationService {
         return ResponseEntity.ok(step9Mapper.selectDriveReport(driveReport));
     }
 
-    @Transactional
-    public ResponseEntity<ResponseDTO<String>> removeGroupDriveReport(GroupDriveReportDTO.Request groupReport) {
-        groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
-
-        step9Mapper.deleteGroupDriveReport(groupReport);
-        step9Mapper.updateAllGroupReportIdFk(groupReport.getGroupReportId());
-
-        return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
-    }
 
     public ResponseEntity<List<UserDetailDTO.Submitter>> findSubmitterList() {
         return ResponseEntity.ok(step9Mapper.selectSubmitterList());
     }
-
-    public void deleteFile(Long fileIdFk) {
-        fileUtil.deleteFile(fileIdFk);
-    }
-
 }

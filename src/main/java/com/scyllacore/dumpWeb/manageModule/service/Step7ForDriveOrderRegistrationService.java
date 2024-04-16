@@ -65,8 +65,8 @@ public class Step7ForDriveOrderRegistrationService {
 
     public ResponseEntity<List<DriveReportDTO.Response>> findDriveOrderList(DriveReportDTO.Request driveReport) {
         driveReport.setSubmitterIdFk(sessionUtil.getSubmitterInfo().getSubmitterId());
-        return ResponseEntity.ok(step7Mapper.selectDriveOrderList(driveReport));
 
+        return ResponseEntity.ok(step7Mapper.selectDriveOrderList(driveReport));
     }
 
     public ResponseEntity<DriveReportDTO.Response> findDriveOrder(DriveReportDTO.Request driveReport) {
@@ -90,7 +90,6 @@ public class Step7ForDriveOrderRegistrationService {
         }
 
         return ResponseEntity.ok(new ResponseDTO<>("삭제 완료."));
-
     }
 
     public ResponseEntity<List<UserDetailDTO.Driver>> findDriverList() {
