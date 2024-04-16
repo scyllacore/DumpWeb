@@ -16,6 +16,6 @@ public interface Step4ForDailyReportViewerMapper {
 
     List<DriveReportDTO.Response> selectDriveReportListByOption(DriveReportSearchOptionDTO.Request option);
 
-    int updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
+    long updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
 
 }

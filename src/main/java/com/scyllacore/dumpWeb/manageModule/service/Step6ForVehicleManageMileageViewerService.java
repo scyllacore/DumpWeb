@@ -27,7 +27,7 @@ public class Step6ForVehicleManageMileageViewerService {
 
         PageDTO pageDTO = new PageDTO();
         pageDTO.setOption(option);
-        int totalAmount = step6Mapper.countMileageListByOption(pageDTO);
+        long totalAmount = step6Mapper.countMileageListByOption(pageDTO);
 
         PageCriteriaDTO criteria = new PageCriteriaDTO(option.getPageNum(), option.getPageAmount());
         PageVO pageInfo = new PageVO(criteria, totalAmount);

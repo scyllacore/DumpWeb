@@ -8,15 +8,15 @@ import java.util.List;
 
 @Mapper
 public interface Step7ForDriveOrderRegistrationMapper {
-    int insertDriveOrder(DriveReportDTO.Request driveReport);
+    long insertDriveOrder(DriveReportDTO.Request driveReport);
 
-    int updateDriveOrder(DriveReportDTO.Request driveReport);
+    long updateDriveOrder(DriveReportDTO.Request driveReport);
 
     List<DriveReportDTO.Response> selectDriveOrderList(DriveReportDTO.Request driveReport);
 
     DriveReportDTO.Response selectDriveOrder(DriveReportDTO.Request driveReport);
 
-    int deleteDriveOrder(DriveReportDTO.Request driveReport);
+    long deleteDriveOrder(DriveReportDTO.Request driveReport);
 
     List<UserDetailDTO.Driver> selectDriverList();
 

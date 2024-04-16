@@ -18,6 +18,6 @@ public interface Step8ForDriveOrderViewerMapper {
 
     List<DriveReportDTO.Response> selectDriveReportListByOption(DriveReportSearchOptionDTO.Request option);
 
-    int updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
+    long updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
 
 }

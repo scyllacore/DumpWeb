@@ -9,13 +9,13 @@ import java.util.List;
 
 @Mapper
 public interface Step9ForGroupDriveReportRegistrationMapper {
-    long insertGroupDriveReport(GroupDriveReportDTO.Request groupReport);
+    int insertGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    long updateFileIdFk(Long groupReportId, Long fileIdFk);
+    int updateFileIdFk(Long groupReportId, Long fileIdFk);
 
-    long updateGroupDriveReport(GroupDriveReportDTO.Request groupReport);
+    int updateGroupDriveReport(GroupDriveReportDTO.Request groupReport);
 
-    long updateGroupSubmit(GroupDriveReportDTO.Request groupReport);
+    int updateGroupSubmit(GroupDriveReportDTO.Request groupReport);
 
     List<GroupDriveReportDTO.Response> selectGroupDriveReportList(GroupDriveReportDTO.Request groupReport);
 

@@ -14,6 +14,5 @@ public interface Step10ForGroupDriveReportViewerMapper {
     List<GroupDriveReportSearchOptionDTO.Response> selectGroupDriveReportListByOption(
             GroupDriveReportSearchOptionDTO.Request option);
 
-    void updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO.Request option);
-
+    long updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO.Request option);
 }
