@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.commonModule.util;
 
 
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.FileDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.file.FileMapper;
@@ -89,7 +90,9 @@ public class FileUtil {
             throw new RestApiException(ResponseType.FILE_NOT_FOUND);
         }
 
-        deleteFileRecord(fileId);
+        if (deleteFileRecord(fileId) <= OperationStatus.FAIL.getValue()) {
+            throw new RestApiException(ResponseType.NOT_FOUND);
+        }
     }
 
 
@@ -107,7 +110,7 @@ public class FileUtil {
         return result;
     }
 
-    public void deleteFileRecord(Long fileId) {
-        fileMapper.deleteFile(fileId);
+    public int deleteFileRecord(Long fileId) {
+        return fileMapper.deleteFile(fileId);
     }
 }

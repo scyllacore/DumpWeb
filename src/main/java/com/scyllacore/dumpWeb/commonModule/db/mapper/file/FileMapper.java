@@ -9,6 +9,6 @@ public interface FileMapper {
 
     FileDTO findFileInfoByFileId(Long fileId);
 
-    void deleteFile(Long fileId);
+    int deleteFile(Long fileId);
 
 }
