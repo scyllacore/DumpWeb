@@ -4,7 +4,6 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface LoginMapper {
     AuthDTO.Request selectUserInfoForIdValidCheck(AuthDTO.Request loginInfo);
 
