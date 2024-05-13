@@ -71,5 +71,8 @@ input[type=checkbox] {
 .step1 .step1_wrapper .driver-menu-wrapper .mileage-registration, .step1 .step1_wrapper .driver-menu-wrapper .mileage-retrieval {
   background: #e5d9a6;
 }
+.step1 .step1_wrapper .driver-menu-wrapper .group-registration, .step1 .step1_wrapper .driver-menu-wrapper .group-retrieval {
+  background: #f9c5c4;
+}
 
 /*# sourceMappingURL=step1Index.css.map */
