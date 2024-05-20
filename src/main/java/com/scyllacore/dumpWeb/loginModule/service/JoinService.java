@@ -50,18 +50,22 @@ public class JoinService {
         }
 
         enum Method {
-            DRIVER {
-                public int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper) {
-                    return joinMapper.insertDriverInfo(joinInfo);
-                }
-            },
-            SUBMITTER {
-                public int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper) {
-                    return joinMapper.insertSubmitterInfo(joinInfo);
-                }
-            };
+            DRIVER((joinInfo, joinMapper) -> joinMapper.insertDriverInfo(joinInfo)),
+            SUBMITTER((joinInfo, joinMapper) -> joinMapper.insertSubmitterInfo(joinInfo));
 
-            public abstract int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper);
+            private final JoinFunction insertFunction;
+
+            Method(JoinFunction insertFunction) {
+                this.insertFunction = insertFunction;
+            }
+
+            public int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper) {
+                return insertFunction.insert(joinInfo, joinMapper);
+            }
+
+            interface JoinFunction {
+                int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper);
+            }
         }
     }
 

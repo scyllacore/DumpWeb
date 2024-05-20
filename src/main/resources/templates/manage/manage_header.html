@@ -28,7 +28,13 @@
             </div>
         </div>
 
-        <th:block th:replace="/manage/manage_menu :: menuFragment"></th:block>
+        <container th:if="${session.driverInfo} != null">
+            <th:block th:replace="/manage/driver_manage_menu :: menuFragment"></th:block>
+        </container>
+
+        <container th:if="${session.submitterInfo} != null">
+            <th:block th:replace="/manage/submitter_manage_menu :: menuFragment"></th:block>
+        </container>
 
     </header>
 

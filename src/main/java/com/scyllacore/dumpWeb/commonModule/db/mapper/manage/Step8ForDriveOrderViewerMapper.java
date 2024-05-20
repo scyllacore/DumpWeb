@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface Step8ForDriveOrderViewerMapper {
     List<String> selectCarNoSearchOption(Long submitterId);
 
@@ -18,6 +17,6 @@ public interface Step8ForDriveOrderViewerMapper {
 
     List<DriveReportDTO.Response> selectDriveReportListByOption(DriveReportSearchOptionDTO.Request option);
 
-    int updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
+    long updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
 
 }

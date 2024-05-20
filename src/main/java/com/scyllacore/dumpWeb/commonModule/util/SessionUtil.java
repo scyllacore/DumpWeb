@@ -3,6 +3,7 @@ package com.scyllacore.dumpWeb.commonModule.util;
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,8 @@ public class SessionUtil {
     private final HttpServletRequest request;
 
     @Getter
-    public enum Attribute{
-        DRIVER("driverInfo")
-        ,SUBMITTER("submitterInfo")
-        ,LOGIN("loginInfo");
+    public enum Attribute {
+        DRIVER("driverInfo"), SUBMITTER("submitterInfo"), LOGIN("loginInfo");
 
         private String name;
 
@@ -39,6 +38,10 @@ public class SessionUtil {
     }
 
     public <T> T getInfoBySession(String name) {
-        return (T) request.getSession(true).getAttribute(name);
+        return (T) getSession(true).getAttribute(name);
+    }
+
+    public HttpSession getSession(Boolean flag) {
+        return request.getSession(flag);
     }
 }

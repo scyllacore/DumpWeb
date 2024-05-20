@@ -1,7 +1,7 @@
 package com.scyllacore.dumpWeb.configModule.aop;
 
 import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
-import jakarta.servlet.http.HttpServletRequest;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,8 +9,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 @Component
@@ -18,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class AOPConfig {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final SessionUtil sessionUtil;
 
     @Around("execution (* com.scyllacore.dumpWeb..controller.*Controller.*(..))")
     public Object loginChk(ProceedingJoinPoint pjp) throws Throwable {
@@ -36,9 +35,7 @@ public class AOPConfig {
             return pjp.proceed();
         }
 
-        HttpServletRequest request =
-                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        AuthDTO.Request loginInfo = (AuthDTO.Request) request.getSession().getAttribute("loginInfo");
+        AuthDTO.Request loginInfo = sessionUtil.getLoginInfo();
 
         if (loginInfo == null) {
             result = "redirect:/login";

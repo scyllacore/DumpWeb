@@ -10,11 +10,11 @@ public class PageVO {
     private Boolean prev, next;
     private Integer startId,pageSize;
 
-    private Integer total;
+    private Long total;
     //현재 페이지 번호, 한 페이지에 표출할 데이터 개수
     private PageCriteriaDTO cri;
 
-    public PageVO(PageCriteriaDTO cri, int total) {
+    public PageVO(PageCriteriaDTO cri, long total) {
         this.cri = cri;
         this.total = total;
 

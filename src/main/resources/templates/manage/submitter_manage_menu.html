@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="menuFragment">
+
+    <link rel="stylesheet" type="text/css" href="/css/manage/manageMenu.css">
+
+
+    <div class="menu-wrap">
+        <nav class="manage-menu">
+
+            <div class="top-area">
+                <span th:if="${session.loginInfo} != null">[[${session.loginInfo.userId}]]</span>
+                <span class="bar"></span>
+                <button class="change-password-btn" onclick="location.href='/passwordChange'">
+                    암호변경
+                </button>
+                <span class="bar"></span>
+                <button class="logout-btn" onclick="location.href='/logout'">로그아웃</button>
+
+                <button class="close-btn" title="메뉴창 닫힘" onclick="popUpHandler.closePopUp('menu-wrap')">
+                    <img src="/image/icons/ico_close.png" alt="닫기">
+                </button>
+            </div>
+
+            <ul class="category">
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step2">
+                            <span>2.</span> 제출처용 메뉴
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step7">
+                            <span>7.</span> 제출처 주문 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step8">
+                            <span>8.</span> 제출처 전표 조회
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step11">
+                            <span>11.</span> 제출용 운행 일보 그룹 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="category-item" href="/manage/step12">
+                            <span>12.</span> 제출용 운행 일보 그룹 조회
+                        </a>
+                    </p>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</th:block>
+</html>

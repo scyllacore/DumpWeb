@@ -7,12 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface Step6ForVehicleManageMileageViewerMapper {
     List<MileageDTO.Response> selectMileageListByOption(PageDTO option);
 
-    int countMileageListByOption(PageDTO option);
+    long countMileageListByOption(PageDTO option);
 
-    int updateMileagePaymentChk(MileageSearchOptionDTO.Request option);
+    long updateMileagePaymentChk(MileageSearchOptionDTO.Request option);
 
 }

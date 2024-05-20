@@ -99,7 +99,7 @@
         </include>
 
         SELECT DRIVE_REPORT_ID,
-        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
+        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
         COMPANY,
         FROM_SITE,
         TO_SITE,

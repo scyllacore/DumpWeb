@@ -5,6 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.UserDetailDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.LoginMapper;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.TrialMapper;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,9 @@ public class TrialService {
     private final TrialMapper trialMapper;
     private final LoginMapper loginMapper;
 
-    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO.Trial trial, HttpServletRequest request) {
+    private final SessionUtil sessionUtil;
+
+    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO.Trial trial) {
         setUserType(trial);
         AuthDTO.Request trialLoginInfo = trialMapper.selectTrialUserInfo(trial);
 
@@ -28,7 +31,7 @@ public class TrialService {
             throw new NullPointerException();
         }
 
-        HttpSession session = request.getSession();
+        HttpSession session = sessionUtil.getSession(true);
 
         if (setSessionUserType(trialLoginInfo, session) == null) {
             throw new NullPointerException();

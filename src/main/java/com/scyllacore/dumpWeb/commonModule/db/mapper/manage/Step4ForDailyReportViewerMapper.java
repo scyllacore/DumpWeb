@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface Step4ForDailyReportViewerMapper {
     List<String> selectCompanySearchOption(Long driverId);
     List<String> selectFromSiteSearchOption(Long driverId);
@@ -16,6 +15,6 @@ public interface Step4ForDailyReportViewerMapper {
 
     List<DriveReportDTO.Response> selectDriveReportListByOption(DriveReportSearchOptionDTO.Request option);
 
-    int updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
+    long updateDriveReportPaymentChk(DriveReportSearchOptionDTO.Request option);
 
 }

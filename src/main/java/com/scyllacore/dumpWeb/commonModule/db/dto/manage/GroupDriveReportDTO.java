@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class GroupDriveReportDTO {
     @Data
     public static class Request {
         private Long groupReportId;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDate groupDate;
         @NotBlank
         private String groupReceiver;
@@ -36,7 +38,7 @@ public class GroupDriveReportDTO {
     }
 
     @Data
-    public static class Response{
+    public static class Response {
         private Long groupReportId;
         private LocalDate groupDate;
         private String groupReceiver;

@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface Step10ForGroupDriveReportViewerMapper {
     List<String> selectCompanySearchOption(Long groupDriverIdFk);
 
@@ -14,6 +13,5 @@ public interface Step10ForGroupDriveReportViewerMapper {
     List<GroupDriveReportSearchOptionDTO.Response> selectGroupDriveReportListByOption(
             GroupDriveReportSearchOptionDTO.Request option);
 
-    void updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO.Request option);
-
+    long updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO.Request option);
 }

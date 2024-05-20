@@ -63,17 +63,16 @@ public class Step5ForVehicleManageMileageRegistrationService {
     public ResponseEntity<List<MileageDTO.Response>> findMileageList(MileageDTO.Request mileage) {
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         return ResponseEntity.ok(step5Mapper.selectMileageList(mileage));
-
     }
 
     @Transactional
     public ResponseEntity<ResponseDTO<String>> removeMileage(MileageDTO.Request mileage) {
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
-
         if (step5Mapper.deleteMileage(mileage) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
+
         return ResponseEntity.ok(new ResponseDTO<>("정상적으로 삭제되었습니다."));
     }
 

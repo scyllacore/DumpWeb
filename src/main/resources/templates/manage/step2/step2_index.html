@@ -30,16 +30,21 @@
             </div>
 
             <div class="drive-order-wrapper">
-                <button class="drive-order-registration">주문 등록</button>
-                <button class="drive-order-retrieval">전표 조회</button>
+                <button class="drive-order-registration" onclick="location.href = '/manage/step7'">주문 등록</button>
+                <button class="drive-order-retrieval" onclick="location.href = '/manage/step8'">전표 조회</button>
             </div>
+
+            <div class="group-wrapper">
+                <button class="group-registration" onclick="location.href = '/manage/step11'">제출용 운행 일보 그룹 등록</button>
+                <button class="group-retrieval" onclick="location.href = '/manage/step12'">제출용 운행 일보 그룹 조회</button>
+            </div>
+
         </div>
 
 
     </div>
 </container>
 
-<script src="/js/manage/step2/params.js"></script>
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
 <script src="/js/manage/step2/loading.js"></script>
 

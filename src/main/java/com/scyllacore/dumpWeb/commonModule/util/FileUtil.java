@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.commonModule.util;
 
 
+import com.scyllacore.dumpWeb.commonModule.constant.OperationStatus;
 import com.scyllacore.dumpWeb.commonModule.constant.ResponseType;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.FileDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.file.FileMapper;
@@ -64,28 +65,24 @@ public class FileUtil {
 
         log.info(fileInfo.getFileName());
 
-        try (InputStream is = new FileInputStream(storedFile)) {
-            String mime = this.getMimeType(storedFile);
-            System.out.println("확인 : " + mime);
-            response.setContentType(mime);
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
+        String mime = getMimeType(fileInfo.getFileName());
+        response.setContentType(mime);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileInfo.getFileName(), "UTF-8") + "\"");
 
+        try (InputStream is = new FileInputStream(storedFile);
+             OutputStream os = response.getOutputStream();) {
             int len;
             byte[] buffer = new byte[1024];
-            OutputStream os = response.getOutputStream();
+
             while ((len = is.read(buffer)) > -1) {
                 os.write(buffer, 0, len);
             }
-
-            os.flush();
-            os.close();
         }
-
     }
 
-    private String getMimeType(File file) {
+    private String getMimeType(String fileName) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        return fileNameMap.getContentTypeFor(file.getName());
+        return fileNameMap.getContentTypeFor(fileName);
     }
 
     public void deleteFile(Long fileId) {
@@ -93,7 +90,9 @@ public class FileUtil {
             throw new RestApiException(ResponseType.FILE_NOT_FOUND);
         }
 
-        deleteFileRecord(fileId);
+        if (deleteFileRecord(fileId) <= OperationStatus.FAIL.getValue()) {
+            throw new RestApiException(ResponseType.NOT_FOUND);
+        }
     }
 
 
@@ -111,7 +110,7 @@ public class FileUtil {
         return result;
     }
 
-    public void deleteFileRecord(Long fileId) {
-        fileMapper.deleteFile(fileId);
+    public int deleteFileRecord(Long fileId) {
+        return fileMapper.deleteFile(fileId);
     }
 }

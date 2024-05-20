@@ -5,6 +5,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.PasswordChangeMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class PasswordChangeService {
 
     private final PasswordChangeMapper passwordChangeMapper;
+    private final SessionUtil sessionUtil;
 
-    public ResponseEntity<ResponseDTO<String>> changePassword(AuthDTO.Password password, HttpServletRequest request) {
-        AuthDTO.Request sessionLoginInfo = (AuthDTO.Request) request.getSession().getAttribute("loginInfo");
+    public ResponseEntity<ResponseDTO<String>> changePassword(AuthDTO.Password password) {
+        AuthDTO.Request sessionLoginInfo = (AuthDTO.Request) sessionUtil.getLoginInfo();
         password.setUserIdIdx(sessionLoginInfo.getUserIdIdx());
 
         if (passwordChangeMapper.updateUserPassword(password) <= 0) {

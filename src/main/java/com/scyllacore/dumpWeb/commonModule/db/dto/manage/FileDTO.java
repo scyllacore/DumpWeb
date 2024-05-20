@@ -1,12 +1,12 @@
 package com.scyllacore.dumpWeb.commonModule.db.dto.manage;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//@Data
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FileDTO {
 
     private Long fileId;

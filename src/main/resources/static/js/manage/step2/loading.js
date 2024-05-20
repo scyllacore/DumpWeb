@@ -1,0 +1,1 @@
+const popUpHandler = new PopUpHandler();
