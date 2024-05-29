@@ -49,12 +49,10 @@
         GROUP_SUBMIT_CHK
         FROM group_drive_report_tb
         WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
-        <if test="title !=''">
-            AND GROUP_TITLE = #{title}
-        </if>
+        AND GROUP_TITLE LIKE CONCAT(#{title},'%')
         <choose>
             <when test="sortingCriteria == 'title'">
-                ORDER BY TITLE DESC
+                ORDER BY GROUP_TITLE DESC
             </when>
             <when test="sortingCriteria == 'company'">
                 ORDER BY COMPANY ASC

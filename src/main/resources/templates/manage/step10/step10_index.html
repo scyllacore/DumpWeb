@@ -20,7 +20,7 @@
 
         <form class="group-search-option-form" name="groupSearchOptionForm">
 
-            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+            <input type="hidden" name="groupDriverIdFk" th:value="${session.driverInfo.driverId}" required>
 
             <div class="title-wrapper">
                 <h3>제목</h3>
@@ -58,7 +58,7 @@
 </container>
 
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
-<script src="/js/manage/step10/step10Handler.js"></script>
+<script src="/js/manage/step10/step10GroupHandler.js"></script>
 <script src="/js/manage/step10/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

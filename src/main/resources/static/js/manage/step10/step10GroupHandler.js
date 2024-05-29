@@ -1,4 +1,4 @@
-class Step10Handler {
+class Step10GroupHandler {
 
     requestHandler = new RequestHandler();
     jsonHandler = new JsonHandler();
@@ -58,6 +58,7 @@ class Step10Handler {
         }
 
         this.setDisplayToNone();
+        
     }
 
     inputSearchOption(listData, name) {
@@ -106,6 +107,13 @@ class Step10Handler {
     }
 
     setDisplayToNone() {
+        document.addEventListener("click",(event) =>{
+            for (const name of this.tagNames) {
+                const divElement = this.objHandler.selectElementByName(name);
+                divElement.style.display = 'none';
+            }
+        })
+
         for (const name of this.tagNames) {
             const divElement = this.objHandler.selectElementByName(name);
             divElement.addEventListener("click", (event) => {

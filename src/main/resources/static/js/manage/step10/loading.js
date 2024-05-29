@@ -2,7 +2,7 @@ let step10Handler;
 const popUpHandler = new PopUpHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
-    step10Handler = new Step10Handler();
+    step10Handler = new Step10GroupHandler();
 })
 
 const func = {
