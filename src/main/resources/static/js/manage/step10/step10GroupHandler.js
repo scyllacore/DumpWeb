@@ -9,7 +9,7 @@ class Step10GroupHandler {
     tagNames = ['titles', 'companies'];
     groupReportKey = `
                         <th>No</th>
-                        <th class="groupReceiver">제출처</th>
+                        <th class="groupCompany">제출처</th>
                         <th class="groupTitle">제목</th>
     `;
 
