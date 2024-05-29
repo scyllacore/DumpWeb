@@ -7,6 +7,7 @@
     <insert id="insertGroupDriveReport" useGeneratedKeys="true" keyProperty="groupReportId">
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
+         GROUP_COMPANY,
          GROUP_TITLE,
          GROUP_MEMO,
          GROUP_DRIVER_ID_FK,
@@ -16,6 +17,7 @@
          GROUP_SUBMIT_CHK,
          GROUP_USER_TYPE)
         VALUES (#{groupDate},
+                #{groupCompany},
                 #{groupTitle},
                 #{groupMemo},
                 #{groupDriverIdFk},

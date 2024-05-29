@@ -48,6 +48,9 @@ public class Step9ForGroupDriveReportRegistrationService {
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport
             , MultipartFile imageFile) throws IOException {
+
+        System.out.println(groupReport);
+
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
@@ -64,8 +67,6 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport
             , MultipartFile imageFile) throws IOException {
-
-        newGroupReport.setGroupCompany(sessionUtil.getSubmitterInfo().getCompany());
 
         if (step9Mapper.insertGroupDriveReport(newGroupReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
