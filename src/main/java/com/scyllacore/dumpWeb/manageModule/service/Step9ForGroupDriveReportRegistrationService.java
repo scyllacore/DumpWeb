@@ -64,6 +64,9 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport
             , MultipartFile imageFile) throws IOException {
+
+        newGroupReport.setGroupCompany(sessionUtil.getSubmitterInfo().getCompany());
+
         if (step9Mapper.insertGroupDriveReport(newGroupReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }

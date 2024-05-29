@@ -20,7 +20,9 @@ public class GroupDriveReportDTO {
         private String groupReceiver;
         @NotBlank
         private String groupTitle;
+        private String groupCompany;
         private String groupMemo;
+
 
         private Boolean groupPaymentChk;
         private Boolean groupSubmitChk;
@@ -43,6 +45,7 @@ public class GroupDriveReportDTO {
         private LocalDate groupDate;
         private String groupReceiver;
         private String groupTitle;
+        private String groupCompany;
         private String groupMemo;
 
         private Boolean groupPaymentChk;
