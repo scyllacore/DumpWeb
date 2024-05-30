@@ -9,7 +9,6 @@ import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
 import com.scyllacore.dumpWeb.manageModule.constants.Step3Flags;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -65,8 +64,6 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseEntity<DriveReportDTO.Response> findDriveReport(DriveReportDTO.Request driveReport) {
-        driveReport.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
-
         DriveReportDTO.Response response = step3Mapper.selectDriveReport(driveReport);
 
         if (response.getDriveReportId() == null) {

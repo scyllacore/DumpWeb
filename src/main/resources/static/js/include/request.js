@@ -7,8 +7,6 @@ class Request {
     async tryRequest() {
         const jsonData = await this.runFetch();
 
-        console.log(jsonData);
-
         if(typeof jsonData['data'] !== 'undefined'){
             return jsonData.data;
         }

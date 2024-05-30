@@ -86,8 +86,6 @@ class Step9GroupHandler {
 
         const requestObj = this.createGroupDriveReportFormObj();
 
-        console.log(requestObj);
-
         this.objHandler.changeOnToTrue(requestObj);
         requestObj['driveReports'] = this.groupList;
 
@@ -169,8 +167,6 @@ class Step9GroupHandler {
             const submitterId = parentEle.getAttribute('data-' + 'submitterId');
             const submitterTel = parentEle.children[2].innerHTML;
             const submitterCompany = parentEle.children[1].innerHTML;
-
-            console.log(submitterCompany);
 
             this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
             this.objHandler.selectElementByName('receiver').value = submitterTel;

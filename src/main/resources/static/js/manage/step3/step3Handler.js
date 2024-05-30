@@ -8,7 +8,7 @@ class Step3Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['receiver','submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+    activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
 
     constructor() {
@@ -87,7 +87,7 @@ class Step3Handler {
             requiredNames.push(input.name);
         })
 
-        for(let name of requiredNames){
+        for (let name of requiredNames) {
             if (this.inputHandler.checkValidInput(name)) {
                 return true;
             }
@@ -112,8 +112,6 @@ class Step3Handler {
         const requestObj = this.createDriveReportFormObj();
 
         this.objHandler.changeOnToTrue(requestObj);
-
-        console.log(requestObj);
 
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
@@ -140,19 +138,19 @@ class Step3Handler {
         })
     }
 
-     inputSubmitter() {
-         const tableEle = this.objHandler.selectElementByClass('submitter-tuple');
+    inputSubmitter() {
+        const tableEle = this.objHandler.selectElementByClass('submitter-tuple');
 
-         tableEle.addEventListener("click", (event) => {
-             const parentEle = event.target.parentElement;
-             const submitterId = parentEle.getAttribute('data-' + 'submitterId');
-             const submitterTel = parentEle.children[2].innerHTML;
+        tableEle.addEventListener("click", (event) => {
+            const parentEle = event.target.parentElement;
+            const submitterId = parentEle.getAttribute('data-' + 'submitterId');
+            const submitterTel = parentEle.children[2].innerHTML;
 
-             this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
-             this.objHandler.selectElementByName('receiver').value = submitterTel;
+            this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
+            this.objHandler.selectElementByName('receiver').value = submitterTel;
 
-             popUpHandler.closePopUp('submitter-search-result');
-         });
+            popUpHandler.closePopUp('submitter-search-result');
+        });
     }
 
 }
