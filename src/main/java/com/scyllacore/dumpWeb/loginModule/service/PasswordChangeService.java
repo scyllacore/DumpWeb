@@ -21,7 +21,7 @@ public class PasswordChangeService {
     private final PasswordChangeMapper passwordChangeMapper;
     private final SessionUtil sessionUtil;
 
-    public ResponseEntity<ResponseDTO<String>> changePassword(AuthDTO.Password password) {
+    public ResponseEntity<ResponseDTO<String>> changePassword(AuthDTO.pwdChangeRequest password) {
         AuthDTO.Request sessionLoginInfo = (AuthDTO.Request) sessionUtil.getLoginInfo();
         password.setUserIdIdx(sessionLoginInfo.getUserIdIdx());
 

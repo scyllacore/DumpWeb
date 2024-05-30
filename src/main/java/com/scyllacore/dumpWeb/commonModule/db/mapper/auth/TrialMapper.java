@@ -4,5 +4,5 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 public interface TrialMapper {
-    AuthDTO.Request selectTrialUserInfo(AuthDTO.Trial trial);
+    AuthDTO.Request selectTrialUserInfo(AuthDTO.TrialChkRequest trial);
 }

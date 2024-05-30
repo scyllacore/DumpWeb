@@ -23,7 +23,7 @@ public class TrialService {
 
     private final SessionUtil sessionUtil;
 
-    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO.Trial trial) {
+    public ResponseEntity<ResponseDTO<String>> loginForTrial(AuthDTO.TrialChkRequest trial) {
         setUserType(trial);
         AuthDTO.Request trialLoginInfo = trialMapper.selectTrialUserInfo(trial);
 
@@ -41,7 +41,7 @@ public class TrialService {
         return ResponseEntity.ok(new ResponseDTO<>("/manage/" + trial.getUserType()));
     }
 
-    private void setUserType(AuthDTO.Trial trial) {
+    private void setUserType(AuthDTO.TrialChkRequest trial) {
         if (trial.getUserType().equals("driver")) {
             trial.setUserIdIdx(1L);
         } else {
