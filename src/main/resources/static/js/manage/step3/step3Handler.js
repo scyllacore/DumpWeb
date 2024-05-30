@@ -116,7 +116,7 @@ class Step3Handler {
         const responseData = await this.requestHandler.post('/manage/step3' + '/fetch' + '/driveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData, 'driveReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
