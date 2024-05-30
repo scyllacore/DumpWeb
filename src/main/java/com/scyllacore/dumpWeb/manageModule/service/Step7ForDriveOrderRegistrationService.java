@@ -8,6 +8,7 @@ import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step7ForDriveOrderRe
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import com.scyllacore.dumpWeb.manageModule.constants.Step7Flags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,27 +25,14 @@ public class Step7ForDriveOrderRegistrationService {
     private final SessionUtil sessionUtil;
     private final Step7ForDriveOrderRegistrationMapper step7Mapper;
 
-    @Getter
-    public enum Step7Flag {
-        NEW_ORDER_REPORT(0),
-        ONLY_CHANGE_BY_SUBMITTER(1),
-        ;
-
-        int value;
-
-        Step7Flag(int value) {
-            this.value = value;
-        }
-    }
-
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveDriveOrder(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         driveReport.setProgress("배차");
 
-        if (driveReport.getDriveReportId() == Step7Flag.NEW_ORDER_REPORT.getValue()) {
+        if (driveReport.getDriveReportId() == Step7Flags.NEW_ORDER_REPORT.getValue()) {
             insertDriveOrder(driveReport);
-        } else if (driveReport.getUserType() == Step7Flag.ONLY_CHANGE_BY_SUBMITTER.getValue()) {
+        } else if (driveReport.getUserType() == Step7Flags.ONLY_CHANGE_BY_SUBMITTER.getValue()) {
             updateDriveOrder(driveReport);
         }
 
