@@ -38,6 +38,7 @@ public class DriveReportDTO {
         private Long driveReportId;
         private LocalDate driveDate;
         private String receiver;
+        private String company;
 
         private String fromSite;
         private String toSite;
