@@ -16,10 +16,17 @@ class Step3Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         await this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
         this.handleInputActiveByPaymentChk();
         this.inputSubmitter()
+    }
+
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('driveDate').value = today;
     }
 
     handleInputActiveByPaymentChk() {

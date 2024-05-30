@@ -23,9 +23,18 @@ class Step4Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         this.redirectByDriveReportId();
         await this.recommendKeywordRetrieval();
     }
+
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('startDate').value = today;
+        this.objHandler.selectElementByName('endDate').value = today;
+    }
+
 
 
     redirectByDriveReportId() {
@@ -40,7 +49,7 @@ class Step4Handler {
 
         this.objHandler.selectElementByClass('drive-report-key').innerHTML = this.driveReportKey;
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData,'driveReportId');
         this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
