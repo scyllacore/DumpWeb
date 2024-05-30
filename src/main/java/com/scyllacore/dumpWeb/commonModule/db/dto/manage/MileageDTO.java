@@ -11,8 +11,6 @@ public class MileageDTO {
     @Data
     public static class Request{
         private Long mileageId;
-        @NotBlank
-        private String carNo;
         @NotNull
         private LocalDate driveDate;
         private String item;
@@ -32,7 +30,6 @@ public class MileageDTO {
     @Data
     public static class Response{
         private Long mileageId;
-        private String carNo;
         private LocalDate driveDate;
         private String item;
         private Integer lastKm;

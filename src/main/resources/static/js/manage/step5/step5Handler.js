@@ -17,9 +17,16 @@ class Step5Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         await this.loadInputDataByUrlParams();
         this.redirectByMileageId();
         this.handleInputActiveByPaymentChk();
+    }
+
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('driveDate').value = today;
     }
 
     handleInputActiveByPaymentChk() {
@@ -127,7 +134,7 @@ class Step5Handler {
         const responseData = await this.requestHandler.post('/manage/step5' + '/fetch' + '/mileageList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.htmlModifier.printList('mileage-key', 'mileage-tuple', responseData);
+        this.htmlModifier.printList('mileage-key', 'mileage-tuple', responseData,'mileageId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('mileage-tuple').children;
 
