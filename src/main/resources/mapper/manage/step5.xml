@@ -81,9 +81,8 @@
         USED_AMOUNT = #{usedAmount},
         USED_OIL = #{usedOil},
         MEMO = #{memo},
-        PAYMENT_CHK = #{paymentChk},
-
-        REPL_ACTIVE_CHK = #{replActiveChk},
+        PAYMENT_CHK = IFNULL(#{paymentChk},0),
+        REPL_ACTIVE_CHK = IFNULL(#{replActiveChk},0),
         REPL_KM = #{replKm},
         <if test="replDate != ''">
             REPL_DATE = #{replDate},
