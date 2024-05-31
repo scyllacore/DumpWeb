@@ -28,13 +28,12 @@ class Step4Handler {
         await this.recommendKeywordRetrieval();
     }
 
-    setDefaultDate(){
+    setDefaultDate() {
         const today = new Date().toISOString().slice(0, 10);
 
         this.objHandler.selectElementByName('startDate').value = today;
         this.objHandler.selectElementByName('endDate').value = today;
     }
-
 
 
     redirectByDriveReportId() {
@@ -49,7 +48,7 @@ class Step4Handler {
 
         this.objHandler.selectElementByClass('drive-report-key').innerHTML = this.driveReportKey;
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData,'driveReportId');
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData, 'driveReportId');
         this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
@@ -67,7 +66,7 @@ class Step4Handler {
         const responseData = await new RequestHandler()
             .get('/manage/step4' + '/fetch' + '/recommendKeywordList');
 
-        responseData['progressType'] = ['전체', '배차', '제출', '취소'];
+        responseData['progressType'] = ['배차', '상차', '하차', '제출', '취소'];
 
         for (const name of this.tagNames) {
             this.inputSearchOption(responseData[name], name);

@@ -28,7 +28,6 @@ public class Step7ForDriveOrderRegistrationService {
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveDriveOrder(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
-        driveReport.setProgress("배차");
 
         if (driveReport.getDriveReportId() == Step7Flags.NEW_ORDER_REPORT.getValue()) {
             insertDriveOrder(driveReport);

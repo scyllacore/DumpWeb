@@ -50,6 +50,7 @@ public class DriveReportDTO {
 
         private Boolean paymentChk;
         private Boolean submitChk;
+        private Boolean submitterPaymentChk;
 
         private Long submitterIdFk;
         private Long driverIdFk;

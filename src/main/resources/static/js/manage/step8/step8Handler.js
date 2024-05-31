@@ -10,7 +10,7 @@ class Step8Handler {
     driveReportKey = `
                         <th>No</th>
                         <th class="driveDate">날짜</th>
-                        <th class="carNo">차량번호</th>
+                        <th class="receiver">차량번호</th>
                         <th class="fromSite">상차지</th>
                         <th class="toSite">하차지</th>
                         <th class="item">품목</th>
@@ -24,10 +24,17 @@ class Step8Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         this.redirectByDriveReportId();
         await this.recommendKeywordRetrieval();
     }
 
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('startDate').value = today;
+        this.objHandler.selectElementByName('endDate').value = today;
+    }
 
     redirectByDriveReportId() {
         this.urlHandler.redirectByElementData('/manage/step7', 'drive-report-tuple', 'driveReportId');
@@ -36,12 +43,14 @@ class Step8Handler {
     async driveReportsRetrieval() {
         const requestObj = this.createSearchOptionObj();
 
-        const responseData = await this.requestHandler.post('/manage/step8' + '/fetch' + '/driveReportList'
+        const responseData = await this.requestHandler.post('/manage/step8' + '/fetch' + '/driveOrderList'
             , this.jsonHandler.convertObjectToJson(requestObj));
+
+        console.log(responseData);
 
         this.objHandler.selectElementByClass('drive-report-key').innerHTML = this.driveReportKey;
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData, 'driveReportId');
         this.htmlModifier.addRedLineToTableByDifferentValue('drive-report-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
@@ -59,7 +68,7 @@ class Step8Handler {
         const responseData = await new RequestHandler()
             .get('/manage/step8' + '/fetch' + '/recommendKeywordList');
 
-        responseData['progressType'] = ['전체', '배차', '제출', '취소'];
+        responseData['progressType'] = ['배차', '상차', '하차', '제출' , '취소'];
 
         for (const name of this.tagNames) {
             this.inputSearchOption(responseData[name], name);

@@ -86,8 +86,8 @@
         </include>
 
         SELECT DRIVE_REPORT_ID,
-        DATE_FORMAT(DRIVE_DATE, '%m.%d') AS driveDate,
-        CAR_NO,
+        DRIVE_DATE,
+        CAR_NO AS receiver,
         FROM_SITE,
         TO_SITE,
         ITEM,
@@ -117,7 +117,7 @@
                 ORDER BY CAR_NO ASC
             </when>
             <when test="sortingCriteria == 'driveDate'">
-                ORDER BY driveDate DESC
+                ORDER BY DRIVE_DATE DESC
             </when>
             <when test="sortingCriteria == 'item'">
                 ORDER BY ITEM ASC
