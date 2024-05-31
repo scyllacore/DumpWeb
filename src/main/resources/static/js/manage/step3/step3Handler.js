@@ -136,7 +136,7 @@ class Step3Handler {
         const responseData = await this.requestHandler
             .get('/manage/step3' + '/fetch' + '/submitterList');
 
-        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData);
+        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData,'submitterId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('submitter-tuple').children;
 

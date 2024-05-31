@@ -53,6 +53,7 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     private void updateDriveReport(DriveReportDTO.Request driveReport) {
+
         if (step3Mapper.updateDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
@@ -64,6 +65,8 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     public ResponseEntity<DriveReportDTO.Response> findDriveReport(DriveReportDTO.Request driveReport) {
+        driveReport.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
+
         DriveReportDTO.Response response = step3Mapper.selectDriveReport(driveReport);
 
         if (response.getDriveReportId() == null) {
