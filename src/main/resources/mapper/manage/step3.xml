@@ -117,8 +117,8 @@
             QUANTITY        = #{quantity},
             MEMO            = #{memo},
             PROGRESS        = #{progress},
-            PAYMENT_CHK     = #{paymentChk},
-            SUBMIT_CHK      = #{submitChk},
+            PAYMENT_CHK     = IFNULL(#{paymentChk},0),
+            SUBMIT_CHK      = IFNULL(#{submitChk},0),
             SUBMITTER_ID_FK = #{submitterIdFk}
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND SUBMITTER_PAYMENT_CHK = 0
