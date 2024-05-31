@@ -33,7 +33,7 @@
             <div class="submitter-wrapper">
                 <h3>차량번호</h3>
                 <input type="hidden" name="driverIdFk" required>
-                <input name="receiver" disabled required>
+                <input name="receiver" disabled>
                 <button type="button" name="driverRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('driver-search-result'); func.driverListRetrieval()" required>조회</button>
             </div>
 
@@ -75,7 +75,7 @@
 
             <div class="progress-wrapper">
                 <h3>진행</h3>
-                <select class="progress-inner" name="progress" disabled required>
+                <select class="progress-inner" name="progress" required>
                     <option value="배차" selected>배차</option>
                     <option value="상차">상차</option>
                     <option value="하차">하차</option>

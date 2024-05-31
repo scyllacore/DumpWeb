@@ -52,6 +52,7 @@ public class DriveReportDTO {
         private Boolean submitChk;
 
         private Long submitterIdFk;
+        private Long driverIdFk;
 
         private Byte userType;
     }

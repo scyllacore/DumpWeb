@@ -8,7 +8,7 @@ class Step7Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['receiver', 'driverRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'memo', 'postingChk'];
+    activeInputElementNames = ['driverRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'memo', 'postingChk'];
 
 
     constructor() {
@@ -16,10 +16,17 @@ class Step7Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         await this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
         this.handleInputActiveByPaymentChk();
         this.inputDriver()
+    }
+
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('driveDate').value = today;
     }
 
     handleInputActiveByPaymentChk() {
@@ -114,7 +121,7 @@ class Step7Handler {
         const responseData = await this.requestHandler.post('/manage/step7' + '/fetch' + '/driveOrderList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData,'driveReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
@@ -127,7 +134,7 @@ class Step7Handler {
         const responseData = await this.requestHandler
             .get('/manage/step7' + '/fetch' + '/driverList');
 
-        this.htmlModifier.printList('driver-key', 'driver-tuple', responseData);
+        this.htmlModifier.printList('driver-key', 'driver-tuple', responseData,'driverId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('driver-tuple').children;
 
