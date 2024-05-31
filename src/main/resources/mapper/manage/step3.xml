@@ -70,7 +70,8 @@
                                       SUBMITTER_ID_FK,
                                       USER_TYPE
                                FROM drive_report_tb
-                               WHERE DRIVE_REPORT_ID = ${driveReportId}),
+                               WHERE DRIVE_REPORT_ID = ${driveReportId}
+                                 AND DRIVER_ID_FK = #{driverIdFk}),
              submitter_tel AS (SELECT SUBMITTER_ID
                                     , TEL
                                FROM submitter_tb),
@@ -83,6 +84,7 @@
     <select id="selectDriveReport">
         <include refid="reportForDriver">
             <property name="driveReportId" value="#{driveReportId}"/>
+            <property name="driverIdFk" value="#{driverIdFk}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
@@ -117,10 +119,11 @@
             QUANTITY        = #{quantity},
             MEMO            = #{memo},
             PROGRESS        = #{progress},
-            PAYMENT_CHK     = IFNULL(#{paymentChk},0),
-            SUBMIT_CHK      = IFNULL(#{submitChk},0),
+            PAYMENT_CHK     = IFNULL(#{paymentChk}, 0),
+            SUBMIT_CHK      = IFNULL(#{submitChk}, 0),
             SUBMITTER_ID_FK = #{submitterIdFk}
         WHERE DRIVE_REPORT_ID = #{driveReportId}
+          AND WRITER_ID_FK = #{writerIdFk}
           AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
@@ -129,6 +132,7 @@
         SET PROGRESS   = #{progress},
             SUBMIT_CHK = #{submitChk}
         WHERE DRIVE_REPORT_ID = #{driveReportId}
+          AND DRIVER_ID_FK = #{driverIdFk}
           AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
@@ -137,6 +141,7 @@
         DELETE
         FROM drive_report_tb
         WHERE DRIVE_REPORT_ID = #{driveReportId}
+          AND WRITER_ID_FK = #{writerIdFk}
           AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 

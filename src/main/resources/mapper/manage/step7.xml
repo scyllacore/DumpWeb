@@ -68,7 +68,8 @@
     <sql id="reportForSubmitter">
         WITH writer_report AS (SELECT *
                                FROM drive_report_tb
-                               WHERE DRIVE_REPORT_ID = ${driveReportId}),
+                               WHERE DRIVE_REPORT_ID = ${driveReportId}
+                                 AND SUBMITTER_ID_FK = ${submitterIdFk}),
              join_report AS (SELECT *
                              FROM driver_tb
                                       INNER JOIN writer_report
@@ -77,8 +78,8 @@
 
     <select id="selectDriveOrder">
         <include refid="reportForSubmitter">
-            <property name="submitterIdFk" value="#{submitterIdFk}"/>
             <property name="driveReportId" value="#{driveReportId}"/>
+            <property name="submitterIdFk" value="#{submitterIdFk}"/>
         </include>
 
         SELECT DRIVE_REPORT_ID,
@@ -113,9 +114,10 @@
             QUANTITY     = #{quantity},
             MEMO         = #{memo},
             PROGRESS     = #{progress},
-            PAYMENT_CHK  = IFNULL(#{paymentChk},0),
+            PAYMENT_CHK  = IFNULL(#{paymentChk}, 0),
             DRIVER_ID_FK = #{driverIdFk}
         WHERE DRIVE_REPORT_ID = #{driveReportId}
+          AND WRITER_ID_FK = #{writerIdFk}
           AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
@@ -123,6 +125,7 @@
         DELETE
         FROM drive_report_tb
         WHERE DRIVE_REPORT_ID = #{driveReportId}
+          AND WRITER_ID_FK = #{writerIdFk}
           AND SUBMITTER_PAYMENT_CHK = 0
     </delete>
 

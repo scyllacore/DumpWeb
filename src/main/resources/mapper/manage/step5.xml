@@ -70,6 +70,7 @@
                REPL_CHK
         FROM mileage_tb
         WHERE MILEAGE_ID = #{mileageId}
+          AND WRITER_ID_FK = #{writerIdFk}
     </select>
 
 
@@ -89,14 +90,15 @@
         </if>
         REPL_CHK = #{replChk}
         WHERE MILEAGE_ID = #{mileageId}
+        AND WRITER_ID_FK = #{writerIdFk}
     </update>
 
 
     <delete id="deleteMileage">
         DELETE
         FROM mileage_tb
-        WHERE WRITER_ID_FK = #{writerIdFk}
-          AND MILEAGE_ID = #{mileageId}
+        WHERE MILEAGE_ID = #{mileageId}
+          AND WRITER_ID_FK = #{writerIdFk}
     </delete>
 
 </mapper>
