@@ -28,7 +28,7 @@ public class PageVO {
             this.endPage = realEnd;
         }
 
-        this.startId = cri.getPageNum()  * cri.getAmount() - 1;
+        this.startId = (cri.getPageNum() - 1) * cri.getAmount();
         this.pageSize = cri.getAmount();
 
         //이전, 다음 버튼 표출 여부 결정

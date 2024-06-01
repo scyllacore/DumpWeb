@@ -1,4 +1,4 @@
-class Step10Handler {
+class Step10GroupHandler {
 
     requestHandler = new RequestHandler();
     jsonHandler = new JsonHandler();
@@ -9,7 +9,7 @@ class Step10Handler {
     tagNames = ['titles', 'companies'];
     groupReportKey = `
                         <th>No</th>
-                        <th class="groupReceiver">제출처</th>
+                        <th class="groupCompany">제출처</th>
                         <th class="groupTitle">제목</th>
     `;
 
@@ -40,7 +40,7 @@ class Step10Handler {
 
 
         this.objHandler.selectElementByClass('group-report-key').innerHTML = this.groupReportKey;
-        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData);
+        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData,'groupReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('group-report-tuple').children;
 
@@ -58,6 +58,7 @@ class Step10Handler {
         }
 
         this.setDisplayToNone();
+        
     }
 
     inputSearchOption(listData, name) {
@@ -106,6 +107,13 @@ class Step10Handler {
     }
 
     setDisplayToNone() {
+        document.addEventListener("click",(event) =>{
+            for (const name of this.tagNames) {
+                const divElement = this.objHandler.selectElementByName(name);
+                divElement.style.display = 'none';
+            }
+        })
+
         for (const name of this.tagNames) {
             const divElement = this.objHandler.selectElementByName(name);
             divElement.addEventListener("click", (event) => {

@@ -1,5 +1,6 @@
 package com.scyllacore.dumpWeb.commonModule.db.mapper.manage;
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +11,7 @@ public interface Step10ForGroupDriveReportViewerMapper {
 
     List<String> selectTitleSearchOption(Long groupDriverIdFk);
 
-    List<GroupDriveReportSearchOptionDTO.Response> selectGroupDriveReportListByOption(
+    List<GroupDriveReportDTO.Response> selectGroupDriveReportListByOption(
             GroupDriveReportSearchOptionDTO.Request option);
 
     long updateGroupDriveReportPaymentChk(GroupDriveReportSearchOptionDTO.Request option);

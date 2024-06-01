@@ -25,7 +25,15 @@ class Step6Handler {
     }
 
     async run() {
+        this.setDefaultDate();
         this.redirectByMileageId();
+    }
+
+    setDefaultDate(){
+        const today = new Date().toISOString().slice(0, 10);
+
+        this.objHandler.selectElementByName('startDate').value = today;
+        this.objHandler.selectElementByName('endDate').value = today;
     }
 
     redirectByMileageId() {
@@ -53,11 +61,12 @@ class Step6Handler {
         this.printMileageTable(requestObj, responseData['mileageList']);
     }
 
+
     async printMileageTable(requestObj, mileageList) {
 
         this.objHandler.selectElementByClass('mileage-key').innerHTML = this.mileageKey;
         this.htmlModifier.moveColumnToTheFront(requestObj.sortingCriteria);
-        this.htmlModifier.printList('mileage-key', 'mileage-tuple', mileageList);
+        this.htmlModifier.printList('mileage-key', 'mileage-tuple', mileageList,'mileageId');
         this.htmlModifier.addRedLineToTableByDifferentValue('mileage-tuple');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('mileage-tuple').children;

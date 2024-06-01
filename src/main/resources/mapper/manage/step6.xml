@@ -4,6 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step6ForVehicleManageMileageViewerMapper">
 
+    <update id="updateMileagePaymentChk">
+        UPDATE mileage_tb
+        SET PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE WRITER_ID_FK = #{writerIdFk}
+        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
+        <if test="item != '전체'">
+            AND ITEM = #{item}
+        </if>
+        AND PAYMENT_CHK = !#{paymentBtnFlag}
+    </update>
+
     <sql id="covering1">
         WITH covering_tb1 AS (
         SELECT MILEAGE_ID
@@ -68,17 +79,6 @@
             </otherwise>
         </choose>
     </select>
-
-    <update id="updateMileagePaymentChk">
-        UPDATE mileage_tb
-        SET PAYMENT_CHK = #{paymentBtnFlag}
-        WHERE WRITER_ID_FK = #{writerIdFk}
-        AND DRIVE_DATE BETWEEN #{startDate} AND #{endDate}
-        <if test="item != '전체'">
-            AND ITEM = #{item}
-        </if>
-        AND PAYMENT_CHK = !#{paymentBtnFlag}
-    </update>
 
 
 </mapper>

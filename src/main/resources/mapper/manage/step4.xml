@@ -87,7 +87,7 @@
                         drive_report_tb
                         INNER JOIN
                         submitter_tb
-                        on drive_report_tb.SUBMITTER_ID_FK = submitter_tb.SUBMITTER_ID
+                        on submitter_tb.SUBMITTER_ID = drive_report_tb.SUBMITTER_ID_FK
                     WHERE DRIVER_ID_FK = ${driverIdFk}
                     ORDER BY DRIVE_REPORT_ID DESC
             )

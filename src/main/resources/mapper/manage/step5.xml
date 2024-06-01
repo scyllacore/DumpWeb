@@ -22,41 +22,19 @@
         WRITER_ID_FK)
         VALUES (#{driveDate},
         #{item},
-        #{lastKm},
-        #{usedAmount},
+        IFNULL(#{lastKm},0),
+        IFNULL(#{usedAmount},0),
         #{usedOil},
         #{memo},
-        #{paymentChk},
-        #{replActiveChk},
+        IFNULL(#{paymentChk},0),
+        IFNULL(#{replActiveChk},0),
         #{replKm},
         <if test="replDate != ''">
             #{replDate},
         </if>
-        #{replChk},
+        IFNULL(#{replChk},0),
         #{writerIdFk})
     </insert>
-
-
-    <update id="updateMileage">
-        UPDATE mileage_tb
-        SET DRIVE_DATE = #{driveDate},
-        ITEM = #{item},
-        LAST_KM = #{lastKm},
-        USED_AMOUNT = #{usedAmount},
-        USED_OIL = #{usedOil},
-        MEMO = #{memo},
-        PAYMENT_CHK = #{paymentChk},
-
-        REPL_ACTIVE_CHK = #{replActiveChk},
-        REPL_KM = #{replKm},
-        <if test="replDate != ''">
-            REPL_DATE = #{replDate},
-        </if>
-        REPL_CHK = #{replChk}
-        WHERE WRITER_ID_FK = #{writerIdFk}
-        AND MILEAGE_ID = #{mileageId}
-    </update>
-
 
     <select id="selectMileageList">
         SELECT MILEAGE_ID,
@@ -77,15 +55,6 @@
         ORDER BY DRIVE_DATE ASC
     </select>
 
-
-    <delete id="deleteMileage">
-        DELETE
-        FROM mileage_tb
-        WHERE WRITER_ID_FK = #{writerIdFk}
-          AND MILEAGE_ID = #{mileageId}
-    </delete>
-
-
     <select id="selectMileage">
         SELECT MILEAGE_ID,
                DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
@@ -100,8 +69,36 @@
                REPL_KM,
                REPL_CHK
         FROM mileage_tb
-        WHERE WRITER_ID_FK = #{writerIdFk}
-          AND MILEAGE_ID = #{mileageId}
+        WHERE MILEAGE_ID = #{mileageId}
+          AND WRITER_ID_FK = #{writerIdFk}
     </select>
+
+
+    <update id="updateMileage">
+        UPDATE mileage_tb
+        SET DRIVE_DATE = #{driveDate},
+        ITEM = #{item},
+        LAST_KM = #{lastKm},
+        USED_AMOUNT = #{usedAmount},
+        USED_OIL = #{usedOil},
+        MEMO = #{memo},
+        PAYMENT_CHK = IFNULL(#{paymentChk},0),
+        REPL_ACTIVE_CHK = IFNULL(#{replActiveChk},0),
+        REPL_KM = #{replKm},
+        <if test="replDate != ''">
+            REPL_DATE = #{replDate},
+        </if>
+        REPL_CHK = #{replChk}
+        WHERE MILEAGE_ID = #{mileageId}
+        AND WRITER_ID_FK = #{writerIdFk}
+    </update>
+
+
+    <delete id="deleteMileage">
+        DELETE
+        FROM mileage_tb
+        WHERE MILEAGE_ID = #{mileageId}
+          AND WRITER_ID_FK = #{writerIdFk}
+    </delete>
 
 </mapper>

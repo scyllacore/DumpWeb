@@ -4,5 +4,5 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 public interface PasswordChangeMapper {
-    int updateUserPassword(AuthDTO.Password password);
+    int updateUserPassword(AuthDTO.pwdChangeRequest password);
 }

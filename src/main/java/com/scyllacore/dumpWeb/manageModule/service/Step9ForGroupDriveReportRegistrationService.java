@@ -10,6 +10,7 @@ import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.FileUtil;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import com.scyllacore.dumpWeb.manageModule.constants.Step9Flags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,28 +33,18 @@ public class Step9ForGroupDriveReportRegistrationService {
     private final Step9ForGroupDriveReportRegistrationMapper step9Mapper;
     private final FileUtil fileUtil;
 
-    @Getter
-    public enum Step9Flag {
-        NEW_GROUP_DRIVE_REPORT(0),
-        ONLY_CHANGE_BY_DRIVER(0),
-        NEW_DRIVE_REPORT(0);
-
-        int value;
-
-        Step9Flag(int value) {
-            this.value = value;
-        }
-    }
-
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport
             , MultipartFile imageFile) throws IOException {
+
+        System.out.println(groupReport);
+
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
-        if (groupReport.getGroupReportId() == Step9Flag.NEW_GROUP_DRIVE_REPORT.getValue()) {
+        if (groupReport.getGroupReportId() == Step9Flags.NEW_GROUP_DRIVE_REPORT.getValue()) {
             insertGroupDriveReport(groupReport, imageFile);
-        } else if (groupReport.getGroupUserType() == Step9Flag.ONLY_CHANGE_BY_DRIVER.getValue()) {
+        } else if (groupReport.getGroupUserType() == Step9Flags.ONLY_CHANGE_BY_DRIVER.getValue()) {
             updateGroupDriveReport(groupReport, imageFile);
         } else {
             updateGroupSubmit(groupReport);
@@ -64,6 +55,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     private void insertGroupDriveReport(GroupDriveReportDTO.Request newGroupReport
             , MultipartFile imageFile) throws IOException {
+
         if (step9Mapper.insertGroupDriveReport(newGroupReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }
@@ -142,7 +134,9 @@ public class Step9ForGroupDriveReportRegistrationService {
             , Long GroupReportId) {
         for (DriveReportDTO.Request driveReport : newDriveReports) {
             driveReport.setGroupReportIdFk(GroupReportId);
-            if (driveReport.getDriveReportId() == Step9Flag.NEW_DRIVE_REPORT.getValue()) {
+            driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+
+            if (driveReport.getDriveReportId() == Step9Flags.NEW_DRIVE_REPORT.getValue()) {
                 driveReportsForInsert.add(driveReport);
             } else {
                 driveReportsForUpdate.add(driveReport);

@@ -8,6 +8,7 @@ import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step5ForVehicleManag
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import com.scyllacore.dumpWeb.manageModule.constants.Step5Flags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,23 +24,12 @@ public class Step5ForVehicleManageMileageRegistrationService {
     private final SessionUtil sessionUtil;
     private final Step5ForVehicleManageMileageRegistrationMapper step5Mapper;
 
-    @Getter
-    public enum Step5Flag {
-        NEW_MILEAGE(0);
-
-        int value;
-
-        Step5Flag(int value) {
-            this.value = value;
-        }
-    }
-
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveMileage(MileageDTO.Request mileage) {
 
         mileage.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
-        if (mileage.getMileageId() == Step5Flag.NEW_MILEAGE.getValue()) {
+        if (mileage.getMileageId() == Step5Flags.NEW_MILEAGE.getValue()) {
             insertMileage(mileage);
         } else {
             updateMileage(mileage);

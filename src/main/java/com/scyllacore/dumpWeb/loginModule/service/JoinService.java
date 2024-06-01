@@ -6,6 +6,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.auth.AuthDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.auth.JoinMapper;
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
+import com.scyllacore.dumpWeb.loginModule.method.Insert;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
@@ -25,49 +26,6 @@ import java.util.stream.Stream;
 public class JoinService {
 
     private final JoinMapper joinMapper;
-
-    @Getter
-    public enum Insert {
-        DRIVER("driver", Method.DRIVER),
-        SUBMITTER("submitter", Method.SUBMITTER);
-
-        private final String key;
-        private final Method method;
-
-        Insert(String key, Method method) {
-            this.key = key;
-            this.method = method;
-        }
-
-        private static final Map<String, Method> actionMap =
-                Collections.unmodifiableMap(Stream.of(values())
-                        .collect(Collectors.toMap(Insert::getKey, Insert::getMethod)));
-
-
-        public static int find(AuthDTO.Request joinInfo, JoinMapper joinMapper) {
-            Method m = Optional.ofNullable(actionMap.get(joinInfo.getUserType())).orElse(Method.DRIVER);
-            return m.insert(joinInfo, joinMapper);
-        }
-
-        enum Method {
-            DRIVER((joinInfo, joinMapper) -> joinMapper.insertDriverInfo(joinInfo)),
-            SUBMITTER((joinInfo, joinMapper) -> joinMapper.insertSubmitterInfo(joinInfo));
-
-            private final JoinFunction insertFunction;
-
-            Method(JoinFunction insertFunction) {
-                this.insertFunction = insertFunction;
-            }
-
-            public int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper) {
-                return insertFunction.insert(joinInfo, joinMapper);
-            }
-
-            interface JoinFunction {
-                int insert(AuthDTO.Request joinInfo, JoinMapper joinMapper);
-            }
-        }
-    }
 
     public ResponseEntity<ResponseDTO<String>> join(AuthDTO.Request joinInfo) throws Exception {
         if (joinMapper.selectUserIdForDuplicateCheck(joinInfo) > 0) {

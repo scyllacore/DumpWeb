@@ -45,6 +45,7 @@
                 <h3>제출처</h3>
                 <input type="hidden" name="groupSubmitterIdFk" required>
                 <input type="number" name="groupReceiver" disabled required>
+                <input type="hidden" name="groupCompany" required>
                 <button type="button" name="groupSubmitterRetrievalBtn" class="retrieval-btn"
                         onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrievalForGroup()"
                         required>조회
@@ -69,7 +70,7 @@
             <div class="upload-file-wrapper">
                 <div>
                     <h3>전표 사진 등록</h3>
-                    <button type="button" class="file-upload-btn" onclick="func.uploadImageFile()">사진 등록</button>
+                    <button type="button" name ="imageUploadBtn" class="file-upload-btn" onclick="func.uploadImageFile()">사진 등록</button>
                 </div>
 
                 <img class="photo-view" src="" alt="Uploaded Photo">

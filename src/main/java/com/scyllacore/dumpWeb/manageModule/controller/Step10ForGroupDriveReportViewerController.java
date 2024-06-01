@@ -1,5 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.controller;
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.manageModule.service.Step10ForGroupDriveReportViewerService;
@@ -30,7 +31,7 @@ public class Step10ForGroupDriveReportViewerController {
 
     @PostMapping(value = "/fetch/groupDriveReportList")
     @ResponseBody
-    public ResponseEntity<List<GroupDriveReportSearchOptionDTO.Response>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<List<GroupDriveReportDTO.Response>> groupDriveReportList(@RequestBody GroupDriveReportSearchOptionDTO.Request option) {
         return step10Service.findGroupDriveReportListByOption(option);
     }
 

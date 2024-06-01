@@ -1,6 +1,7 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportSearchOptionDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step10ForGroupDriveReportViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
@@ -32,7 +33,7 @@ public class Step10ForGroupDriveReportViewerService {
         return ResponseEntity.ok(option);
     }
 
-    public ResponseEntity<List<GroupDriveReportSearchOptionDTO.Response>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO.Request option) {
+    public ResponseEntity<List<GroupDriveReportDTO.Response>> findGroupDriveReportListByOption(GroupDriveReportSearchOptionDTO.Request option) {
         option.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
         return ResponseEntity.ok(step10Mapper.selectGroupDriveReportListByOption(option));
     }

@@ -8,7 +8,7 @@ import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step3ForDriveReportR
 import com.scyllacore.dumpWeb.commonModule.exception.RestApiException;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
-import lombok.Getter;
+import com.scyllacore.dumpWeb.manageModule.constants.Step3Flags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,27 +24,14 @@ public class Step3ForDriveReportRegistrationService {
     private final SessionUtil sessionUtil;
     private final Step3ForDriveReportRegistrationMapper step3Mapper;
 
-    @Getter
-    public enum Step3Flag {
-        NEW_DRIVE_REPORT(0),
-        ONLY_CHANGE_BY_DRIVER(0),
-        ;
-
-        int value;
-
-        Step3Flag(int value) {
-            this.value = value;
-        }
-    }
-
     @Transactional
     public ResponseEntity<ResponseDTO<String>> saveDriveReport(DriveReportDTO.Request driveReport) {
         driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         driveReport.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
-        if (driveReport.getDriveReportId() == Step3Flag.NEW_DRIVE_REPORT.getValue()) {
+        if (driveReport.getDriveReportId() == Step3Flags.NEW_DRIVE_REPORT.getValue()) {
             insertDriveReport(driveReport);
-        } else if (driveReport.getUserType() == Step3Flag.ONLY_CHANGE_BY_DRIVER.getValue()) {
+        } else if (driveReport.getUserType() == Step3Flags.ONLY_CHANGE_BY_DRIVER.getValue()) {
             updateDriveReport(driveReport);
         } else {
             updateSubmit(driveReport);
@@ -66,6 +53,7 @@ public class Step3ForDriveReportRegistrationService {
     }
 
     private void updateDriveReport(DriveReportDTO.Request driveReport) {
+
         if (step3Mapper.updateDriveReport(driveReport) <= OperationStatus.FAIL.getValue()) {
             throw new RestApiException(ResponseType.SERVICE_UNAVAILABLE);
         }

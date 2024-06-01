@@ -6,6 +6,7 @@ import com.scyllacore.dumpWeb.commonModule.db.dto.manage.DriveReportSearchOption
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step4ForDailyReportViewerMapper;
 import com.scyllacore.dumpWeb.commonModule.http.ResponseDTO;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
+import com.scyllacore.dumpWeb.manageModule.constants.Step4Flags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +22,6 @@ public class Step4ForDailyReportViewerService {
 
     private final SessionUtil sessionUtil;
     private final Step4ForDailyReportViewerMapper step4Mapper;
-
-    @Getter
-    public enum Step4Flag {
-        PAYMENT_DONE("일괄 결재 되었습니다"),
-        PAYMENT_CANCEL("일괄 취소 되었습니다");
-
-        private String message;
-
-        Step4Flag(String message) {
-            this.message = message;
-        }
-    }
 
     public ResponseEntity<DriveReportSearchOptionDTO.Response> findRecommendKeywordList() {
 
@@ -60,10 +49,10 @@ public class Step4ForDailyReportViewerService {
         step4Mapper.updateDriveReportPaymentChk(option);
 
         if (option.getPaymentBtnFlag()) {
-            return ResponseEntity.ok(new ResponseDTO<>(Step4Flag.PAYMENT_DONE.getMessage()));
+            return ResponseEntity.ok(new ResponseDTO<>(Step4Flags.PAYMENT_DONE.getMessage()));
         }
 
-        return ResponseEntity.ok(new ResponseDTO<>(Step4Flag.PAYMENT_CANCEL.getMessage()));
+        return ResponseEntity.ok(new ResponseDTO<>(Step4Flags.PAYMENT_CANCEL.getMessage()));
     }
 
 }
