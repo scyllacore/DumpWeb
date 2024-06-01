@@ -40,7 +40,7 @@ class Step10GroupHandler {
 
 
         this.objHandler.selectElementByClass('group-report-key').innerHTML = this.groupReportKey;
-        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData);
+        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData,'groupReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('group-report-tuple').children;
 
