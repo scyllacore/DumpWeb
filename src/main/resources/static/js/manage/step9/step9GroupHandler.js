@@ -8,7 +8,7 @@ class Step9GroupHandler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['groupReceiver', 'groupSubmitterRetrievalBtn', 'groupReportRetrievalBtn', 'groupTitle', 'groupMemo', 'newDriveReport']
+    activeInputElementNames = ['groupReceiver', 'groupSubmitterRetrievalBtn', 'groupReportRetrievalBtn', 'groupTitle', 'groupMemo', 'imageUploadBtn', 'newDriveReport']
 
     groupList = [];
 
@@ -66,7 +66,13 @@ class Step9GroupHandler {
         this.inputHandler.fillInput(inputData);
 
         this.htmlModifier
-            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList, 'driveReportId');
+
+        const tBodyEleChild = this.objHandler.selectElementByClass('group-table-tuple').children;
+
+        this.groupList.forEach((data, idx) => {
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'idx', idx);
+        })
     }
 
     redirectByDriveReportId() {
@@ -137,25 +143,12 @@ class Step9GroupHandler {
         const responseData = await this.requestHandler.post('/manage/step9' + '/fetch' + '/groupDriveReportList'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
-        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData);
+        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData, 'groupReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('group-report-tuple').children;
 
         responseData.forEach((data, idx) => {
             this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'groupReportId', data['groupReportId']);
-        })
-    }
-
-    async receiverListRetrieval() {
-        const responseData = await this.requestHandler
-            .get('/manage/step9' + '/fetch' + '/submitterList');
-
-        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData);
-
-        const tBodyEleChild = this.objHandler.selectElementByClass('submitter-tuple').children;
-
-        responseData.forEach((data, idx) => {
-            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'submitterId', data['submitterId']);
         })
     }
 
@@ -181,21 +174,22 @@ class Step9GroupHandler {
         const responseData = await this.requestHandler
             .get('/manage/step9' + '/fetch' + '/submitterList');
 
-        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData);
+        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData, 'submitterId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('submitter-tuple').children;
 
         responseData.forEach((data, idx) => {
-            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'groupSubmitterId', data['groupSubmitterId']);
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'submitterId', data['submitterId']);
         })
     }
 
     inputDriveReport() {
         const tableBody = objHandler.selectElementByClass('group-table-tuple');
         tableBody.addEventListener("click", (event) => {
-            const idx = event.target.parentElement.children[0].innerHTML;
-            const driveReport = this.groupList[parseInt(idx) - 1];
-            objHandler.selectElementByName('driveReportIdx').value = parseInt(idx) - 1;
+            const idx = event.target.parentElement.getAttribute('data-' + 'idx');
+
+            const driveReport = this.groupList[parseInt(idx)];
+            objHandler.selectElementByName('driveReportIdx').value = parseInt(idx);
             const inputHandler = new InputHandler();
 
             inputHandler.fillInput(driveReport);

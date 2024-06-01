@@ -134,6 +134,8 @@ public class Step9ForGroupDriveReportRegistrationService {
             , Long GroupReportId) {
         for (DriveReportDTO.Request driveReport : newDriveReports) {
             driveReport.setGroupReportIdFk(GroupReportId);
+            driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
+
             if (driveReport.getDriveReportId() == Step9Flags.NEW_DRIVE_REPORT.getValue()) {
                 driveReportsForInsert.add(driveReport);
             } else {

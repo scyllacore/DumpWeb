@@ -34,13 +34,27 @@ const func = {
         }
         popUpHandler.closePopUp('drive-report');
         step9GroupHandler.htmlModifier
-            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
-    },
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList, 'driveReportId');
+
+        const tBodyEleChild = step9GroupHandler.objHandler.selectElementByClass('group-table-tuple').children;
+
+        step9GroupHandler.groupList.forEach((data, idx) => {
+            step9GroupHandler.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'idx', idx);
+        })
+
+        },
     removeGroupReport() {
         step9BaseHandler.removeDriveReport(step9GroupHandler.groupList);
         popUpHandler.closePopUp('drive-report');
         step9GroupHandler.htmlModifier
-            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList);
+            .printList('group-table-key', 'group-table-tuple', step9GroupHandler.groupList, 'driveReportId');
+
+        const tBodyEleChild = step9GroupHandler.objHandler.selectElementByClass('group-table-tuple').children;
+
+        step9GroupHandler.groupList.forEach((data, idx) => {
+            step9GroupHandler.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'idx', idx);
+        })
+
     },
     openPopUpAndInit() {
         objHandler.selectElementByName('driveReportIdx').value = '-1';
@@ -54,7 +68,7 @@ const func = {
         await step9BaseHandler.driveReportsRetrieval(step9GroupHandler.groupList);
     },
 
-    uploadImageFile(){
+    uploadImageFile() {
         objHandler.selectElementByName('imageFile').click();
     }
 }

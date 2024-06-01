@@ -23,8 +23,8 @@
                 #{groupDriverIdFk},
                 #{groupSubmitterIdFk},
                 #{groupWriterIdFk},
-                #{groupPaymentChk},
-                #{groupSubmitChk},
+                IFNULL(#{groupPaymentChk},0),
+                IFNULL(#{groupSubmitChk},0),
                 0)
 
         <selectKey keyProperty="groupReportId" resultType="long" order="AFTER">
@@ -93,6 +93,7 @@
         SELECT
         GROUP_REPORT_ID,
         TEL AS groupReceiver,
+        GROUP_COMPANY,
         DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
         GROUP_TITLE,
         GROUP_MEMO,
@@ -134,10 +135,10 @@
             #{driveReport.fromSite},
             #{driveReport.toSite},
             #{driveReport.item},
-            #{driveReport.unitPrice},
-            #{driveReport.quantity},
+            IFNULL(#{driveReport.unitPrice},0),
+            IFNULL(#{driveReport.quantity},0),
             #{driveReport.memo},
-            #{driveReport.paymentChk},
+            IFNULL(#{driveReport.paymentChk},0),
             #{driveReport.progress},
             #{driveReport.driverIdFk},
             #{driveReport.submitterIdFk},
@@ -153,7 +154,7 @@
         <foreach collection="list" item="driveReport" separator=";">
             UPDATE drive_report_tb
             SET
-            <if test="driveReport.driveDate != ''">
+            <if test="driveReport.driveDate != null">
                 DRIVE_DATE = #{driveReport.driveDate},
             </if>
             <if test="driveReport.fromSite != ''">
@@ -222,7 +223,7 @@
         SUBMITTER_ID_FK
         FROM drive_report_tb
         WHERE
-        <if test="driveDate != ''">
+        <if test="driveDate != null">
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>

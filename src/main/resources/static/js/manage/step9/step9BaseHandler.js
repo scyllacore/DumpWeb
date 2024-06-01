@@ -134,7 +134,7 @@ class Step9BaseHandler {
         const responseData = await this.requestHandler
             .get('/manage/step9' + '/fetch' + '/submitterList');
 
-        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData);
+        this.htmlModifier.printList('submitter-key', 'submitter-tuple', responseData,'submitterId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('submitter-tuple').children;
 
@@ -163,6 +163,7 @@ class Step9BaseHandler {
 
         tableBody.addEventListener("click", async (event) => {
             const driveReportId = event.target.parentElement.getAttribute('data-' + 'driveReportId');
+
             const reqData = this.jsonHandler.convertObjectToJson({driveReportId: driveReportId});
 
             const inputData = await this.requestHandler
