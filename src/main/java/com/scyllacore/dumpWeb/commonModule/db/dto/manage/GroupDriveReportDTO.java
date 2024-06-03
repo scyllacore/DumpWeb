@@ -46,6 +46,7 @@ public class GroupDriveReportDTO {
         private String groupReceiver;
         private String groupTitle;
         private String groupCompany;
+        private String groupCarNo;
         private String groupMemo;
 
         private Boolean groupPaymentChk;

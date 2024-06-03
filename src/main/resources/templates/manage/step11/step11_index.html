@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step11/step11Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step11">
+    <div class="step11_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 그룹 등록
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <input
+                id="imageFileInput"
+                type="file"
+                name="imageFile"
+                accept="image/*"
+                capture="environment"
+                style="display: none;"
+        />
+
+
+        <form class="group-order-report-form" name="groupOrderReportForm">
+            <input type="hidden" name="fileIdFk" value="0" >
+            <input type="hidden" name="groupReportId" value="0" required>
+            <input type="hidden" name="groupSubmitterIdFk" th:value="${session.submitterInfo.getSubmitterId()}" required>
+
+            <input type="hidden" name="groupSubmitChk" value="false">
+            <input type="hidden" name="groupUserType">
+
+            <div class="group-payment-chk-wrapper">
+                <h3>결재</h3>
+                <input type="checkbox" name="groupPaymentChk">
+            </div>
+
+            <div class="group-driver-wrapper">
+                <h3>기사</h3>
+                <input type="hidden" name="groupDriverIdFk">
+                <input name="groupReceiver" disabled>
+                <button type="button" name="groupDriverRetrievalBtn" class="retrieval-btn"
+                        onclick="popUpHandler.openPopUp('driver-search-result'); func.driverListRetrievalForGroup()"
+                        required>조회
+                </button>
+            </div>
+
+            <div class="memo-wrapper">
+                <h3>제목</h3>
+                <input name="groupTitle" placeholder="검색할 때 사용">
+                <button type="button" name="groupReportRetrievalBtn" class="retrieval-btn"
+                        onclick="popUpHandler.openPopUp('group-search-result'); func.groupDriveReportsRetrieval()"
+                        required>조회
+                </button>
+            </div>
+
+
+            <div class="memo-wrapper">
+                <h3>설명</h3>
+                <textarea name="groupMemo"></textarea>
+            </div>
+
+            <div class="upload-file-wrapper">
+                <div>
+                    <h3>전표 사진 등록</h3>
+                    <button type="button" name ="imageUploadBtn" class="file-upload-btn" onclick="func.uploadImageFile()">사진 등록</button>
+                </div>
+
+                <img class="photo-view" src="" alt="Uploaded Photo">
+            </div>
+
+
+            <div class="drive-reports-wrapper">
+                <div class="edit-header">
+                    <span>
+                        일보 등록 리스트
+                    </span>
+
+                    <container>
+                        <button name="newDriveReport" type="button" onclick="func.openPopUpAndInit();">
+                            추가
+                        </button>
+                    </container>
+                </div>
+
+                <div class="group-table-wrapper">
+                    <table>
+                        <thead>
+                        <tr class="group-table-key">
+                            <th>No</th>
+                            <th class="driveDate">날짜</th>
+                            <th class="fromSite">상차지</th>
+                            <th class="toSite">하차지</th>
+                            <th class="item">품목</th>
+                            <th class="quantity">대수</th>
+                        </tr>
+                        </thead>
+                        <tbody class="group-table-tuple">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div class="bottom-btn-wrapper">
+                <button type="button" class="save-btn" onclick="func.submit()">제출</button>
+                <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
+                <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step11/step11_group_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step11/step11_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step11/step11_driver_retrieval :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step11/step11_order_report :: formFragment"></th:block>
+
+    </div>
+</container>
+
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step11/step11BaseHandler.js"></script>
+<script src="/js/manage/step11/step11GroupHandler.js"></script>
+<script src="/js/manage/step11/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+</html>
