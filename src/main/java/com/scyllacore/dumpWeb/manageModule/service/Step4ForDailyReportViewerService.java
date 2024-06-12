@@ -28,8 +28,6 @@ public class Step4ForDailyReportViewerService {
         DriveReportSearchOptionDTO.Response response = new DriveReportSearchOptionDTO.Response();
         Long driverId = sessionUtil.getDriverInfo().getDriverId();
 
-        response.setTels(step4Mapper.selectSubmitterTelSearchOption(driverId));
-        response.setCompanies(step4Mapper.selectCompanySearchOption(driverId));
         response.setFromSites(step4Mapper.selectFromSiteSearchOption(driverId));
         response.setToSites(step4Mapper.selectToSiteSearchOption(driverId));
         response.setItems(step4Mapper.selectItemSearchOption(driverId));
