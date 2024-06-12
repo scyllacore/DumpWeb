@@ -27,15 +27,6 @@
                 <input type="checkbox" name="paymentChk">
             </div>
 
-            <div class="submitter-wrapper">
-                <h3>제출처</h3>
-                <input type="number" name="receiver" disabled>
-                <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
-                        onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrieval()"
-                        required>조회
-                </button>
-            </div>
-
             <div class="period-wrapper">
                 <h3>운행일</h3>
                 <input type="date" name="driveDate" required>
@@ -84,21 +75,20 @@
                 <textarea name="memo"></textarea>
             </div>
 
-            <input type="hidden" name="submitChk" value="false">
-            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
-            <input type="hidden" name="submitterIdFk" required>
-            <input type="hidden" name="userType">
-
             <div class="bottom-btn-wrapper">
                 <button type="button" class="save-btn" onclick="func.save()">등록</button>
                 <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
                 <button type="button" class="input-init-btn" onclick="history.go(0)">입력 초기화</button>
                 <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
             </div>
+
+
+            <input type="hidden" name="submitChk" value="false">
+            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+            <input type="hidden" name="userType">
         </form>
 
         <th:block th:replace="/manage/step3/step3_retrieval :: resultFragment"></th:block>
-        <th:block th:replace="/manage/step3/step3_submitter_retrieval :: resultFragment"></th:block>
 
     </div>
 </container>
