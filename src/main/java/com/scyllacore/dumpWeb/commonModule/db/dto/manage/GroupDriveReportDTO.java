@@ -51,8 +51,8 @@ public class GroupDriveReportDTO {
 
         private Boolean groupPaymentChk;
         private Boolean groupSubmitChk;
-        private Boolean groupSubmitterPaymentChk;
         private Boolean groupPostingChk;
+        private Boolean groupDoneChk;
 
         private Long groupDriverIdFk;
         private Long groupSubmitterIdFk;

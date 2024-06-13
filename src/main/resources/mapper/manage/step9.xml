@@ -14,7 +14,6 @@
          GROUP_SUBMITTER_ID_FK,
          GROUP_WRITER_ID_FK,
          GROUP_PAYMENT_CHK,
-         GROUP_SUBMIT_CHK,
          GROUP_USER_TYPE)
         VALUES (#{groupDate},
                 #{groupCompany},
@@ -24,7 +23,6 @@
                 #{groupSubmitterIdFk},
                 #{groupWriterIdFk},
                 IFNULL(#{groupPaymentChk},0),
-                IFNULL(#{groupSubmitChk},0),
                 0)
 
         <selectKey keyProperty="groupReportId" resultType="long" order="AFTER">
@@ -44,19 +42,19 @@
             GROUP_TITLE           = #{groupTitle},
             GROUP_MEMO            = #{groupMemo},
             GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk},
-            GROUP_PAYMENT_CHK     = #{groupPaymentChk},
-            GROUP_SUBMIT_CHK      = #{groupSubmitChk}
+            GROUP_PAYMENT_CHK     = IFNULL(#{groupPaymentChk},0),
+            GROUP_POSTING_CHK      = IFNULL(#{groupPostingChk},0)
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
           AND GROUP_REPORT_ID = #{groupReportId}
-          AND GROUP_SUBMITTER_PAYMENT_CHK = 0
+          AND GROUP_DONE = 0
     </update>
 
     <update id="updateGroupSubmit">
         UPDATE group_drive_report_tb
-        SET GROUP_SUBMIT_CHK = #{groupSubmitChk}
+        SET GROUP_POSTING_CHK = IFNULL(#{groupPostingChk},0)
         WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
           AND GROUP_REPORT_ID = #{groupReportId}
-          AND GROUP_SUBMITTER_PAYMENT_CHK = 0
+          AND GROUP_DONE = 0
     </update>
 
     <select id="selectGroupDriveReportList">
@@ -66,7 +64,7 @@
                GROUP_MEMO,
                GROUP_SUBMITTER_ID_FK,
                GROUP_PAYMENT_CHK,
-               GROUP_SUBMIT_CHK
+               GROUP_POSTING_CHK
         FROM group_drive_report_tb
         WHERE GROUP_TITLE LIKE CONCAT(#{groupTitle},'%')
          AND GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
@@ -100,7 +98,6 @@
         GROUP_USER_TYPE,
         GROUP_SUBMITTER_ID_FK,
         GROUP_PAYMENT_CHK,
-        GROUP_SUBMIT_CHK,
         FILE_ID_FK
         FROM join_group_report
     </select>
@@ -110,7 +107,7 @@
         FROM group_drive_report_tb
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
           AND GROUP_REPORT_ID = #{groupReportId}
-          AND GROUP_SUBMITTER_PAYMENT_CHK = 0
+          AND GROUP_DONE = 0
     </delete>
 
     <insert id="insertDriveReports" parameterType="java.util.List">
@@ -174,21 +171,17 @@
             PAYMENT_CHK = #{driveReport.paymentChk},
             PROGRESS = #{driveReport.progress},
             SUBMITTER_ID_FK = #{driveReport.submitterIdFk},
-            SUBMIT_CHK = #{driveReport.submitChk},
             GROUP_REPORT_ID_FK = #{driveReport.groupReportIdFk}
             WHERE DRIVE_REPORT_ID = #{driveReport.driveReportId}
-            AND SUBMITTER_PAYMENT_CHK = 0
         </foreach>
     </update>
 
     <update id="updateReportsSubmit" parameterType="java.util.List">
         <foreach collection="list" item="driveReport" separator=";">
             UPDATE drive_report_tb
-            SET PROGRESS   = #{progress},
-            SUBMIT_CHK = #{submitChk}
+            SET PROGRESS   = #{progress}
             WHERE DRIVER_ID_FK = #{driveReport.driverIdFk}
             AND DRIVE_REPORT_ID = #{driveReport.driveReportId}
-            AND SUBMITTER_PAYMENT_CHK = 0
         </foreach>
     </update>
 
@@ -197,7 +190,6 @@
             UPDATE drive_report_tb
             SET GROUP_REPORT_ID_FK = NULL
             WHERE DRIVE_REPORT_ID = #{driveId}
-            AND SUBMITTER_PAYMENT_CHK = 0
         </foreach>
     </update>
 
@@ -205,7 +197,6 @@
             UPDATE drive_report_tb
             SET GROUP_REPORT_ID_FK = NULL
             WHERE GROUP_REPORT_ID_FK = #{groupReportIdFk}
-            AND SUBMITTER_PAYMENT_CHK = 0
     </update>
 
     <select id="selectDriveReportList">
