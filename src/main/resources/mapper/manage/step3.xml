@@ -46,8 +46,7 @@
         PROGRESS,
         PAYMENT_CHK
         FROM drive_report_tb
-        WHERE
-        DRIVER_ID_FK = #{driverIdFk}
+        WHERE DRIVER_ID_FK = #{driverIdFk}
         <if test="driveDate != null">
             AND DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
         </if>
@@ -85,7 +84,7 @@
             SUBMIT_CHK  = IFNULL(#{submitChk}, 0)
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND WRITER_ID_FK = #{writerIdFk}
-          AND SUBMITTER_PAYMENT_CHK = 0
+          AND SUBMITTER_ID_FK = null
     </update>
 
     <update id="updateSubmit">
@@ -94,7 +93,7 @@
             SUBMIT_CHK = #{submitChk}
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND DRIVER_ID_FK = #{driverIdFk}
-          AND SUBMITTER_PAYMENT_CHK = 0
+          AND SUBMITTER_ID_FK IS NULL
     </update>
 
 
@@ -103,7 +102,7 @@
         FROM drive_report_tb
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND WRITER_ID_FK = #{writerIdFk}
-          AND SUBMITTER_PAYMENT_CHK = 0
+          AND SUBMITTER_ID_FK IS NULL
     </delete>
 
 </mapper>
