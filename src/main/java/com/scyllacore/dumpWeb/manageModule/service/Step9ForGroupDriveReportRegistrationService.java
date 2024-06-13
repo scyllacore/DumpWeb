@@ -64,6 +64,8 @@ public class Step9ForGroupDriveReportRegistrationService {
         for (int i = 0; i < newGroupReport.getDriveReports().size(); i++) {
             DriveReports.get(i).setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
             DriveReports.get(i).setGroupReportIdFk(newGroupReport.getGroupReportId());
+            DriveReports.get(i).setSubmitterIdFk(newGroupReport.getGroupSubmitterIdFk());
+
         }
 
         if (step9Mapper.insertDriveReports(newGroupReport.getDriveReports()) <= OperationStatus.FAIL.getValue()) {
@@ -103,7 +105,7 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<DriveReportDTO.Request> driveReportsForUpdate = new ArrayList<>();
 
         classifyAndPrepareDriveReports(
-                newDriveReports, driveReportsForInsert, driveReportsForUpdate, newGroupReport.getGroupReportId());
+                newDriveReports, driveReportsForInsert, driveReportsForUpdate, newGroupReport);
 
         insertOrUpdateDriveReports(driveReportsForInsert, driveReportsForUpdate);
         updateDriveReportsIdFkToNull(driveIds.stream().toList());
@@ -131,9 +133,10 @@ public class Step9ForGroupDriveReportRegistrationService {
     private void classifyAndPrepareDriveReports(List<DriveReportDTO.Request> newDriveReports
             , List<DriveReportDTO.Request> driveReportsForInsert
             , List<DriveReportDTO.Request> driveReportsForUpdate
-            , Long GroupReportId) {
+            , GroupDriveReportDTO.Request newGroupReport) {
         for (DriveReportDTO.Request driveReport : newDriveReports) {
-            driveReport.setGroupReportIdFk(GroupReportId);
+            driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
+            driveReport.setSubmitterIdFk(newGroupReport.getGroupSubmitterIdFk());
             driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
             if (driveReport.getDriveReportId() == Step9Flags.NEW_DRIVE_REPORT.getValue()) {

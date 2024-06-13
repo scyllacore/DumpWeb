@@ -7,23 +7,26 @@
     <insert id="insertGroupDriveReport" useGeneratedKeys="true" keyProperty="groupReportId">
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
-         GROUP_COMPANY,
-         GROUP_TITLE,
-         GROUP_MEMO,
-         GROUP_DRIVER_ID_FK,
-         GROUP_SUBMITTER_ID_FK,
-         GROUP_WRITER_ID_FK,
-         GROUP_PAYMENT_CHK,
-         GROUP_USER_TYPE)
+        GROUP_COMPANY,
+        GROUP_TITLE,
+        GROUP_MEMO,
+        GROUP_DRIVER_ID_FK,
+        GROUP_SUBMITTER_ID_FK,
+        GROUP_WRITER_ID_FK,
+        GROUP_PAYMENT_CHK,
+        GROUP_POSTING_CHK,
+        GROUP_USER_TYPE,
+        )
         VALUES (#{groupDate},
-                #{groupCompany},
-                #{groupTitle},
-                #{groupMemo},
-                #{groupDriverIdFk},
-                #{groupSubmitterIdFk},
-                #{groupWriterIdFk},
-                IFNULL(#{groupPaymentChk},0),
-                0)
+        #{groupCompany},
+        #{groupTitle},
+        #{groupMemo},
+        #{groupDriverIdFk},
+        #{groupSubmitterIdFk},
+        #{groupWriterIdFk},
+        IFNULL(#{groupPaymentChk},0),
+        IFNULL(#{groupPostingChk},0),
+        0)
 
         <selectKey keyProperty="groupReportId" resultType="long" order="AFTER">
             SELECT LAST_INSERT_ID()
