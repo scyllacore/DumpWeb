@@ -27,7 +27,6 @@ public class Step8ForDriveOrderViewerService {
 
         Long submitterId = sessionUtil.getSubmitterInfo().getSubmitterId();
 
-        option.setCarNos(step8Mapper.selectCarNoSearchOption(submitterId));
         option.setFromSites(step8Mapper.selectFromSiteSearchOption(submitterId));
         option.setToSites(step8Mapper.selectToSiteSearchOption(submitterId));
         option.setItems(step8Mapper.selectItemSearchOption(submitterId));

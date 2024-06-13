@@ -6,17 +6,15 @@ class Step8Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    tagNames = ['carNos', 'fromSites', 'toSites', 'items', 'progressType'];
+    tagNames = ['fromSites', 'toSites', 'items', 'progressType'];
     driveReportKey = `
                         <th>No</th>
                         <th class="driveDate">날짜</th>
-                        <th class="receiver">차량번호</th>
                         <th class="fromSite">상차지</th>
                         <th class="toSite">하차지</th>
                         <th class="item">품목</th>
                         <th class="quantity">대수</th>
                         <th class="progress">상태</th>
-                        <th class="submitterPaymentChk">제출처 확인</th>
     `;
 
     constructor() {
