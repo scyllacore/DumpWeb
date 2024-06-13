@@ -132,4 +132,8 @@ class Step10GroupHandler {
 
         alert(responseData);
     }
+
+    createSearchOptionObj() {
+        return this.objHandler.createFormObj('groupSearchOptionForm');
+    }
 }
