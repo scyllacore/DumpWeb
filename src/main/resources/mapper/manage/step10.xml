@@ -46,10 +46,10 @@
         GROUP_COMPANY,
         GROUP_MEMO,
         GROUP_SUBMITTER_ID_FK,
-        GROUP_PAYMENT_CHK,
-        GROUP_SUBMIT_CHK
+        GROUP_PAYMENT_CHK
         FROM group_drive_report_tb
         WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
+        AND GROUP_DONE = 0
         <if test="title !=''">
         AND GROUP_TITLE LIKE CONCAT('%',#{title},'%')
         </if>
@@ -77,6 +77,7 @@
             AND GROUP_COMPANY = #{company}
         </if>
         AND GROUP_PAYMENT_CHK = !#{paymentBtnFlag}
+        AND GROUP_DONE = 0
     </update>
 
 </mapper>
