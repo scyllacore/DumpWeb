@@ -37,8 +37,6 @@ public class Step9ForGroupDriveReportRegistrationService {
     public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport
             , MultipartFile imageFile) throws IOException {
 
-        System.out.println(groupReport);
-
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
 
@@ -112,7 +110,9 @@ public class Step9ForGroupDriveReportRegistrationService {
     }
 
     void changeImage(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
-        deleteFile(newGroupReport.getFileIdFk());
+        if(newGroupReport.getFileIdFk() != Step9Flags.NEW_FILE.getValue()) {
+            deleteFile(newGroupReport.getFileIdFk());
+        }
 
         Long fileIdFk = fileUtil.uploadFile(imageFile, newGroupReport.getGroupReportId());
         step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue());
