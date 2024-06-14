@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step9ForGroupDriveReportRegistrationMapper">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step11ForGroupOrderReportRegistrationMapper">
 
-    <insert id="insertGroupDriveReport" useGeneratedKeys="true" keyProperty="groupReportId">
+    <insert id="insertGroupOrderReport" useGeneratedKeys="true" keyProperty="groupReportId">
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
-        GROUP_COMPANY,
+        GROUP_CAR_NO,
         GROUP_TITLE,
         GROUP_MEMO,
         GROUP_DRIVER_ID_FK,
@@ -18,10 +18,10 @@
         GROUP_USER_TYPE
         )
         VALUES (#{groupDate},
-        #{groupCompany},
+        #{groupCarNo},
         #{groupTitle},
         #{groupMemo},
-        #{groupDriverIdFk},
+        IFNULL(#{groupDriverIdFk},0),
         #{groupSubmitterIdFk},
         #{groupWriterIdFk},
         IFNULL(#{groupPaymentChk},0),
@@ -39,12 +39,12 @@
         WHERE GROUP_REPORT_ID = #{groupReportId}
     </update>
 
-    <update id="updateGroupDriveReport">
+    <update id="updateGroupOrderReport">
         UPDATE group_drive_report_tb
         SET GROUP_DATE            = #{groupDate},
             GROUP_TITLE           = #{groupTitle},
             GROUP_MEMO            = #{groupMemo},
-            GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk},
+            GROUP_DRIVER_ID_FK = #{groupDriverIdFk},
             GROUP_PAYMENT_CHK     = IFNULL(#{groupPaymentChk},0),
             GROUP_POSTING_CHK      = IFNULL(#{groupPostingChk},0)
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
@@ -52,60 +52,65 @@
           AND GROUP_DONE = 0
     </update>
 
-    <update id="updateGroupSubmit">
+    <update id="updateGroupPayment">
         UPDATE group_drive_report_tb
-        SET GROUP_POSTING_CHK = IFNULL(#{groupPostingChk},0)
-        WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
-          AND GROUP_REPORT_ID = #{groupReportId}
+        SET GROUP_PAYMENT_CHK = IFNULL(#{groupPaymentChk}, 0)
+        WHERE GROUP_REPORT_ID = #{groupReportId}
+          AND GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}
           AND GROUP_DONE = 0
     </update>
 
-    <select id="selectGroupDriveReportList">
+    <update id="updateGroupPosting">
+        UPDATE group_drive_report_tb
+        SET GROUP_POSTING_CHK = IFNULL(#{groupPostingChk}, 0)
+        WHERE GROUP_REPORT_ID = #{groupReportId}
+          AND GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}
+          AND GROUP_DONE = 0
+    </update>
+
+    <select id="selectGroupOrderReportList">
         SELECT GROUP_REPORT_ID,
                DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
                GROUP_TITLE,
-               GROUP_MEMO,
-               GROUP_SUBMITTER_ID_FK,
-               GROUP_PAYMENT_CHK,
-               GROUP_POSTING_CHK
+               GROUP_MEMO
         FROM group_drive_report_tb
-        WHERE GROUP_TITLE LIKE CONCAT(#{groupTitle},'%')
-         AND GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
+        WHERE GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}
+          AND GROUP_TITLE LIKE CONCAT(#{groupTitle}, '%')
+          AND GROUP_POSTING_CHK = 0
     </select>
 
     <sql id="groupReportForDriver">
         WITH writer_group_report AS (SELECT *
-                               FROM group_drive_report_tb
-                               WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
-                                 AND GROUP_REPORT_ID = ${groupReportId}),
+                                     FROM group_drive_report_tb
+                                     WHERE GROUP_REPORT_ID = ${groupReportId}
+                                       AND GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}),
              join_group_report AS (SELECT *
-                             FROM submitter_tb
-                                      INNER JOIN writer_group_report
-                                                 ON SUBMITTER_ID = writer_group_report.GROUP_SUBMITTER_ID_FK)
+                                   FROM driver_tb
+                                            INNER JOIN writer_group_report
+                                                       ON DRIVER_ID = writer_group_report.GROUP_DRIVER_ID_FK)
     </sql>
 
 
-    <select id="selectGroupDriveReport">
+    <select id="selectGroupOrderReport">
         <include refid="groupReportForDriver">
-            <property name="groupDriverIdFk" value="#{groupDriverIdFk}"/>
+            <property name="groupSubmitterIdFk" value="#{groupSubmitterIdFk}"/>
             <property name="groupReportId" value="#{groupReportId}"/>
         </include>
 
         SELECT
         GROUP_REPORT_ID,
-        TEL AS groupReceiver,
-        GROUP_COMPANY,
+        GROUP_CAR_NO AS groupReceiver,
         DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
         GROUP_TITLE,
         GROUP_MEMO,
         GROUP_USER_TYPE,
-        GROUP_SUBMITTER_ID_FK,
+        GROUP_DRIVER_ID_FK,
         GROUP_PAYMENT_CHK,
         FILE_ID_FK
         FROM join_group_report
     </select>
 
-    <delete id="deleteGroupDriveReport">
+    <delete id="deleteGroupOrderReport">
         DELETE
         FROM group_drive_report_tb
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
@@ -113,7 +118,7 @@
           AND GROUP_DONE = 0
     </delete>
 
-    <insert id="insertDriveReports" parameterType="java.util.List">
+    <insert id="insertOrderReports" parameterType="java.util.List">
         INSERT INTO drive_report_tb
         (DRIVE_DATE,
         FROM_SITE,
@@ -150,7 +155,7 @@
     </insert>
 
 
-    <update id="updateDriveReports" parameterType="java.util.List">
+    <update id="updateOrderReports" parameterType="java.util.List">
         <foreach collection="list" item="driveReport" separator=";">
             UPDATE drive_report_tb
             SET
@@ -173,22 +178,13 @@
             </if>
             PAYMENT_CHK = #{driveReport.paymentChk},
             PROGRESS = #{driveReport.progress},
-            SUBMITTER_ID_FK = #{driveReport.submitterIdFk},
+            DRIVER_ID_FK = #{driveReport.driverIdFk},
             GROUP_REPORT_ID_FK = #{driveReport.groupReportIdFk}
             WHERE DRIVE_REPORT_ID = #{driveReport.driveReportId}
         </foreach>
     </update>
 
-    <update id="updateReportsSubmit" parameterType="java.util.List">
-        <foreach collection="list" item="driveReport" separator=";">
-            UPDATE drive_report_tb
-            SET PROGRESS   = #{progress}
-            WHERE DRIVER_ID_FK = #{driveReport.driverIdFk}
-            AND DRIVE_REPORT_ID = #{driveReport.driveReportId}
-        </foreach>
-    </update>
-
-    <update id="updateDriveReportsIdFkToNull" parameterType="java.util.List">
+    <update id="updateOrderReportsIdFkToNull" parameterType="java.util.List">
         <foreach collection="driveIds" item="driveId" index="index" separator=";">
             UPDATE drive_report_tb
             SET GROUP_REPORT_ID_FK = NULL
@@ -202,7 +198,7 @@
             WHERE GROUP_REPORT_ID_FK = #{groupReportIdFk}
     </update>
 
-    <select id="selectDriveReportList">
+    <select id="selectOrderReportList">
         SELECT
         DRIVE_REPORT_ID,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
@@ -220,11 +216,11 @@
             DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
             AND
         </if>
-        DRIVER_ID_FK = #{driverIdFk}
+        SUBMITTER_ID_FK = #{submitterIdFk}
         AND GROUP_REPORT_ID_FK IS NULL
     </select>
 
-    <select id="selectDriveReportIdsByGroupReportId" >
+    <select id="selectOrderReportIdsByGroupReportId" >
         SELECT
         DRIVE_REPORT_ID
         FROM drive_report_tb
@@ -232,7 +228,7 @@
         GROUP_REPORT_ID_FK = #{groupReportIdFk}
     </select>
 
-    <select id="selectDriveReportsForGroupDTO">
+    <select id="selectOrderReportsForGroupDTO">
         SELECT DRIVE_REPORT_ID,
         PAYMENT_CHK,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
@@ -248,26 +244,26 @@
         WHERE GROUP_REPORT_ID_FK = ${groupReportId}
     </select>
 
-    <select id="selectDriveReport">
+    <select id="selectOrderReport">
         SELECT DRIVE_REPORT_ID,
-        PAYMENT_CHK,
-        DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
-        FROM_SITE,
-        TO_SITE,
-        ITEM,
-        QUANTITY,
-        UNIT_PRICE,
-        PROGRESS,
-        MEMO,
-        USER_TYPE
+               PAYMENT_CHK,
+               DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
+               FROM_SITE,
+               TO_SITE,
+               ITEM,
+               QUANTITY,
+               UNIT_PRICE,
+               PROGRESS,
+               MEMO,
+               USER_TYPE
         FROM drive_report_tb
         WHERE DRIVE_REPORT_ID = ${driveReportId}
-        AND DRIVER_ID_FK = #{driverIdFk}
+          AND SUBMITTER_ID_FK = #{submitterIdFk}
     </select>
 
-    <select id="selectSubmitterList">
+    <select id="selectDriverList">
         SELECT *
-        FROM submitter_tb
+        FROM driver_tb
     </select>
 
 </mapper>

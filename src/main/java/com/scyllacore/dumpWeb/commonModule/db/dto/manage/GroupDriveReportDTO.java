@@ -22,6 +22,7 @@ public class GroupDriveReportDTO {
         private String groupTitle;
         @NotBlank
         private String groupCompany;
+        private String groupCarNo;
         private String groupMemo;
 
         private Boolean groupPaymentChk;
