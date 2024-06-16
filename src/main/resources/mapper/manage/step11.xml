@@ -41,12 +41,13 @@
 
     <update id="updateGroupOrderReport">
         UPDATE group_drive_report_tb
-        SET GROUP_DATE            = #{groupDate},
-            GROUP_TITLE           = #{groupTitle},
-            GROUP_MEMO            = #{groupMemo},
+        SET GROUP_DATE         = #{groupDate},
+            GROUP_CAR_NO       = #{groupCarNo},
+            GROUP_TITLE        = #{groupTitle},
+            GROUP_MEMO         = #{groupMemo},
             GROUP_DRIVER_ID_FK = #{groupDriverIdFk},
-            GROUP_PAYMENT_CHK     = IFNULL(#{groupPaymentChk},0),
-            GROUP_POSTING_CHK      = IFNULL(#{groupPostingChk},0)
+            GROUP_PAYMENT_CHK  = IFNULL(#{groupPaymentChk}, 0),
+            GROUP_POSTING_CHK  = IFNULL(#{groupPostingChk}, 0)
         WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
           AND GROUP_REPORT_ID = #{groupReportId}
           AND GROUP_DONE = 0
@@ -79,24 +80,7 @@
           AND GROUP_POSTING_CHK = 0
     </select>
 
-    <sql id="groupReportForDriver">
-        WITH writer_group_report AS (SELECT *
-                                     FROM group_drive_report_tb
-                                     WHERE GROUP_REPORT_ID = ${groupReportId}
-                                       AND GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}),
-             join_group_report AS (SELECT *
-                                   FROM driver_tb
-                                            INNER JOIN writer_group_report
-                                                       ON DRIVER_ID = writer_group_report.GROUP_DRIVER_ID_FK)
-    </sql>
-
-
     <select id="selectGroupOrderReport">
-        <include refid="groupReportForDriver">
-            <property name="groupSubmitterIdFk" value="#{groupSubmitterIdFk}"/>
-            <property name="groupReportId" value="#{groupReportId}"/>
-        </include>
-
         SELECT
         GROUP_REPORT_ID,
         GROUP_CAR_NO AS groupReceiver,
@@ -107,7 +91,9 @@
         GROUP_DRIVER_ID_FK,
         GROUP_PAYMENT_CHK,
         FILE_ID_FK
-        FROM join_group_report
+        FROM group_drive_report_tb
+        WHERE GROUP_REPORT_ID = ${groupReportId}
+          AND GROUP_SUBMITTER_ID_FK = #{groupSubmitterIdFk}
     </select>
 
     <delete id="deleteGroupOrderReport">
