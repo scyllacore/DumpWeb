@@ -134,7 +134,7 @@
             #{driveReport.driverIdFk},
             #{driveReport.submitterIdFk},
             #{driveReport.writerIdFk},
-            0,
+            1,
             #{driveReport.groupReportIdFk})
         </foreach>
 
