@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<th:block th:replace="/manage/manage_header :: headerFragment"></th:block>
+
+<head>
+    <link href="/css/manage/step12/step12Index.css" rel="stylesheet" type="text/css">
+</head>
+
+<container class="step12">
+    <div class="step12_wrapper">
+        <div class="sub_title">
+            <h2>
+                운행 일보 그룹 조회
+                <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
+            </h2>
+        </div>
+
+        <div class="line"></div>
+
+        <form class="group-search-option-form" name="groupSearchOptionForm">
+
+            <input type="hidden" name="groupSubmitterIdFk" th:value="${session.submitterInfo.submitterId}" required>
+
+            <div class="title-wrapper">
+                <h3>제목</h3>
+                <container class="title-inner">
+                    <input name="title" placeholder="제목" autocomplete="off">
+                    <div name="titles"></div>
+                </container>
+            </div>
+
+            <div class="driver-wrapper">
+                <h3>기사</h3>
+                <container class="driver-inner">
+                    <input name="carNo" placeholder="기사" autocomplete="off">
+                    <div name="carNos"></div>
+                </container>
+            </div>
+
+            <div class="sorting-wrapper">
+                <h3>정렬<br>기준</h3>
+                <select class="sorting-inner" name="sortingCriteria">
+                    <option value="desc" selected>최신순</option>
+                    <option value="carNo">기사순</option>
+                </select>
+            </div>
+
+            <div class="search-btn-wrapper">
+                <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.groupOrderReportsRetrieval()">검색
+                </button>
+            </div>
+        </form>
+
+        <th:block th:replace="/manage/step12/step12_retrieval :: resultFragment"></th:block>
+
+    </div>
+</container>
+
+<th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step12/step12GroupHandler.js"></script>
+<script src="/js/manage/step12/loading.js"></script>
+
+<th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>
+
+</html>
+

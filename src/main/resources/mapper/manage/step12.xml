@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step12ForGroupOrderReportViewerMapper">
+
+    <select id="selectCarNoSearchOption">
+        SELECT GROUP_CAR_NO
+        FROM group_drive_report_tb
+        WHERE GROUP_SUBMITTER_ID_FK = ${groupSubmitterIdFk}
+        GROUP BY GROUP_CAR_NO
+        LIMIT 10
+    </select>
+
+    <select id="selectTitleSearchOption">
+        SELECT GROUP_TITLE
+        FROM group_drive_report_tb
+        WHERE GROUP_SUBMITTER_ID_FK = ${groupSubmitterIdFk}
+        GROUP BY GROUP_TITLE
+        HAVING GROUP_TITLE != ''
+        LIMIT 10
+
+    </select>
+
+    <select id="selectGroupOrderReportListByOption">
+        SELECT GROUP_REPORT_ID,
+        DATE_FORMAT(GROUP_DATE, '%Y-%m-%d') AS groupDate,
+        GROUP_TITLE,
+        GROUP_CAR_NO,
+        GROUP_MEMO,
+        GROUP_DRIVER_ID_FK,
+        GROUP_PAYMENT_CHK
+        FROM group_drive_report_tb
+        WHERE GROUP_SUBMITTER_ID_FK = ${groupSubmitterIdFk}
+        AND GROUP_DONE = 0
+        <if test="title !=''">
+        AND GROUP_TITLE LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="company !=''">
+        AND GROUP_CAR_NO LIKE CONCAT('%',#{carNo},'%')
+        </if>
+        <choose>
+            <when test="sortingCriteria == 'title'">
+                ORDER BY GROUP_TITLE ASC
+            </when>
+            <when test="sortingCriteria == 'carNo'">
+                ORDER BY GROUP_CAR_NO ASC
+            </when>
+        </choose>
+    </select>
+
+    <update id="updateGroupOrderReportPaymentChk">
+        UPDATE group_drive_report_tb
+        SET GROUP_PAYMENT_CHK = #{paymentBtnFlag}
+        WHERE GROUP_WRITER_ID_FK = #{groupWriterIdFk}
+        <if test="title !=''">
+            AND GROUP_TITLE = #{title}
+        </if>
+        <if test="carNo !=''">
+            AND GROUP_CAR_NO = #{carNo}
+        </if>
+        AND GROUP_PAYMENT_CHK = !#{paymentBtnFlag}
+        AND GROUP_DONE = 0
+    </update>
+
+</mapper>
