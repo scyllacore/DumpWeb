@@ -1,5 +1,6 @@
 package com.scyllacore.dumpWeb.manageModule.service;
 
+import com.scyllacore.dumpWeb.commonModule.db.dto.manage.GroupDriveReportDTO;
 import com.scyllacore.dumpWeb.commonModule.db.dto.manage.SummaryDTO;
 import com.scyllacore.dumpWeb.commonModule.db.mapper.manage.Step1ForDriverMenuMapper;
 import com.scyllacore.dumpWeb.commonModule.util.SessionUtil;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +30,11 @@ public class Step1ForDriverMenuService {
 
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<List<GroupDriveReportDTO.Response>> findPostingList(SummaryDTO.Request date){
+        date.setDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
+        return ResponseEntity.ok(step1Mapper.selectPostingList(date));
+    }
+
 
 }

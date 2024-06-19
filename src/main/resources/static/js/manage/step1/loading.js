@@ -8,5 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const func = {
     async summaryRetrieval() {
         await step1Handler.summaryRetrieval();
+    },
+    async postingRetrieval(){
+        await step1Handler.postingRetrieval();
     }
 }

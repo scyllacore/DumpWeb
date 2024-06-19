@@ -11,15 +11,22 @@ class Step1Handler {
     }
 
     async run() {
-        //this.redirectByDriveReportId();
+        this.redirectByDriveReportId();
         this.setDefaultDate();
     }
 
     setDefaultDate() {
         const today = new Date().toISOString().slice(0, 10);
 
-        this.objHandler.selectElementByName('startDate').value = today;
-        this.objHandler.selectElementByName('endDate').value = today;
+        this.objHandler.selectAllElementsByClass('start-date').forEach((v) =>{
+            v.value = today
+        })
+
+        this.objHandler.selectAllElementsByClass('end-date').forEach((v) =>{
+            v.value = today
+        })
+
+
     }
 
 
@@ -44,25 +51,23 @@ class Step1Handler {
     }
 
     redirectByDriveReportId() {
-        this.urlHandler.redirectByElementData('/manage/step9', 'group-report-tuple', 'groupReportId');
+        this.urlHandler.redirectByElementData('/manage/step9', 'posting-tuple', 'groupReportId');
     }
 
-    createGroupDriveReportFormObj() {
-        return this.objHandler.createFormObj('groupSearchOptionForm');
+    createPostingFormObj() {
+        return this.objHandler.createFormObj('postingSearchOptionForm');
     }
 
-    async groupReportsRetrieval() {
-        const requestObj = this.createGroupDriveReportFormObj();
-        this.objHandler.changeOnToTrue(requestObj);
+    async postingRetrieval() {
+        const requestObj = this.createPostingFormObj();
 
-        const responseData = await this.requestHandler.post('/manage/step10' + '/fetch' + '/groupDriveReportList'
+        const responseData = await this.requestHandler.post('/manage/step1' + '/fetch' + '/postingRetrieval'
             , this.jsonHandler.convertObjectToJson(requestObj));
 
 
-        this.objHandler.selectElementByClass('group-report-key').innerHTML = this.groupReportKey;
-        this.htmlModifier.printList('group-report-key', 'group-report-tuple', responseData,'groupReportId');
+        this.htmlModifier.printList('posting-key', 'posting-tuple', responseData,'groupReportId');
 
-        const tBodyEleChild = this.objHandler.selectElementByClass('group-report-tuple').children;
+        const tBodyEleChild = this.objHandler.selectElementByClass('posting-tuple').children;
 
         responseData.forEach((data, idx) => {
             this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'groupReportId', data['groupReportId']);

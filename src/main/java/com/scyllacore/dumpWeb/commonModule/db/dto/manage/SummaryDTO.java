@@ -15,6 +15,7 @@ public class SummaryDTO {
 
         private Long driverIdFk;
         private Long submitterIdFk;
+
     }
 
     @Data

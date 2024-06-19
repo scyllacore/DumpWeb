@@ -25,7 +25,7 @@
 
             <div class="base-wrapper">
                 <button class="summary-retrieval"  onclick="popUpHandler.openPopUp('summary-result'); func.summaryRetrieval()">요약 내역 조회</button>
-                <button class="car-recruitment-notice-retrieval">차량 모집 공고 조회</button>
+                <button class="car-recruitment-notice-retrieval" onclick="popUpHandler.openPopUp('search-result'); func.postingRetrieval()">차량 모집 공고 조회</button>
             </div>
 
             <div class="group-wrapper">
@@ -46,6 +46,7 @@
         </div>
 
         <th:block th:replace="/manage/step1/step1_summary :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step1/step1_posting_retrieval :: resultFragment"></th:block>
 
     </div>
 </container>
