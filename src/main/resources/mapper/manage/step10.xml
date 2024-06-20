@@ -46,7 +46,8 @@
         GROUP_COMPANY,
         GROUP_MEMO,
         GROUP_SUBMITTER_ID_FK,
-        GROUP_PAYMENT_CHK
+        GROUP_PAYMENT_CHK,
+        GROUP_USER_TYPE
         FROM group_drive_report_tb
         WHERE GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
         AND GROUP_DONE = 0

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .search-result {
   z-index: 999;
   width: 100%;
@@ -77,6 +78,13 @@
   text-align: center;
   font-size: 11px;
   background: #f2f2f2;
+}
+
+.user-type-background {
+  background-color: #f0f0f0; /* 회색 배경색 */
+  color: #333; /* 글자색은 짙은 회색 */
+  font-family: Arial, sans-serif; /* 폰트 설정 */
+  padding: 20px; /* 내용과의 여백 설정 */
 }
 
 /*# sourceMappingURL=step10Retrieval.css.map */

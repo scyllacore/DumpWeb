@@ -42,7 +42,7 @@
                GROUP_TITLE
         FROM group_drive_report_tb
         WHERE GROUP_DATE BETWEEN #{startDate} AND #{endDate}
-          AND GROUP_DRIVER_ID_FK = ${driverIdFk}
+          AND GROUP_USER_TYPE = 1
           AND GROUP_POSTING_CHK = 1
         ORDER BY GROUP_REPORT_ID DESC
         LIMIT 10

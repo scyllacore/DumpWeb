@@ -11,7 +11,7 @@
     <div class="step9_wrapper">
         <div class="sub_title">
             <h2>
-                운행 일보 그룹 등록
+                운행 등록
                 <img src="/image/icons/ico_que.png" alt="도움말" class="info"/>
             </h2>
         </div>
@@ -29,6 +29,8 @@
 
 
         <form class="group-drive-report-form" name="groupDriveReportForm">
+
+            <input type="hidden" name="groupDate">
 
             <div class="group-payment-chk-wrapper">
                 <h3>결재</h3>
@@ -105,8 +107,8 @@
 
 
             <div class="bottom-btn-wrapper">
-                <button type="button" class="save-btn" onclick="func.save()">등록</button>
-                <button type="button" class="save-btn" onclick="func.submit()">제출</button>
+
+                <button type="button" class="save-btn" onclick="func.submit()">등록</button>
                 <button type="button" class="delete-btn" onclick="func.remove()">삭제</button>
                 <button type="button" class="prev-page-btn" onclick="history.go(-1)">이전 화면</button>
             </div>

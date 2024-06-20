@@ -6,6 +6,8 @@ const popUpHandler = new PopUpHandler();
 document.addEventListener("DOMContentLoaded", () => {
     step9BaseHandler = new Step9BaseHandler();
     step9GroupHandler = new Step9GroupHandler();
+
+    objHandler.selectElementByName('groupDate').value = new Date().toISOString().slice(0, 10);
 })
 
 const objHandler = new ObjectHandler();

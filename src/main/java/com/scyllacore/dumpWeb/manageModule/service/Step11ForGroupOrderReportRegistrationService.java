@@ -39,6 +39,7 @@ public class Step11ForGroupOrderReportRegistrationService {
 
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupSubmitterIdFk(sessionUtil.getSubmitterInfo().getSubmitterId());
+        groupReport.setGroupCompany(sessionUtil.getSubmitterInfo().getCompany());
 
         if (groupReport.getGroupReportId() == Step11Flags.NEW_GROUP_ORDER_REPORT.getValue()) {
             insertGroupDriveReport(groupReport, imageFile);

@@ -39,6 +39,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
+        groupReport.setGroupCarNo(sessionUtil.getDriverInfo().getCarNo());
 
         if (groupReport.getGroupReportId() == Step9Flags.NEW_GROUP_DRIVE_REPORT.getValue()) {
             insertGroupDriveReport(groupReport, imageFile);

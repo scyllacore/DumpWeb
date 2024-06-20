@@ -8,6 +8,7 @@
         INSERT INTO group_drive_report_tb
         (GROUP_DATE,
         GROUP_COMPANY,
+        GROUP_CAR_NO,
         GROUP_TITLE,
         GROUP_MEMO,
         GROUP_DRIVER_ID_FK,
@@ -19,6 +20,7 @@
         )
         VALUES (#{groupDate},
         #{groupCompany},
+        #{groupCarNo},
         #{groupTitle},
         #{groupMemo},
         #{groupDriverIdFk},
@@ -71,6 +73,7 @@
         FROM group_drive_report_tb
         WHERE GROUP_TITLE LIKE CONCAT(#{groupTitle},'%')
          AND GROUP_DRIVER_ID_FK = #{groupDriverIdFk}
+        LIMIT 10
     </select>
 
     <sql id="groupReportForDriver">
