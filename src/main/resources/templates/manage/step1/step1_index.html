@@ -24,13 +24,18 @@
         <div class="driver-menu-wrapper">
 
             <div class="base-wrapper">
-                <button class="summary-retrieval">요약 내역 조회</button>
-                <button class="car-recruitment-notice-retrieval">차량 모집 공고 조회</button>
+                <button class="summary-retrieval"  onclick="popUpHandler.openPopUp('summary-result'); func.summaryRetrieval()">요약 내역 조회</button>
+                <button class="car-recruitment-notice-retrieval" onclick="popUpHandler.openPopUp('search-result'); func.postingRetrieval()">차량 모집 공고 조회</button>
+            </div>
+
+            <div class="group-wrapper">
+                <button class="group-registration" onclick="location.href = '/manage/step9'">운행 등록</button>
+                <button class="group-retrieval" onclick="location.href = '/manage/step10'">운행 내역 조회</button>
             </div>
 
             <div class="drive-report-wrapper">
-                <button class="drive-report-registration" onclick="location.href = '/manage/step3'">일보 등록</button>
-                <button class="drive-report-retrieval" onclick="location.href = '/manage/step4'">일보 조회</button>
+                <button class="drive-report-registration" onclick="location.href = '/manage/step3'">운행 일보 저장</button>
+                <button class="drive-report-retrieval" onclick="location.href = '/manage/step4'">운행 일보 조회</button>
             </div>
 
             <div class="mileage-wrapper">
@@ -38,18 +43,16 @@
                 <button class="mileage-retrieval" onclick="location.href = '/manage/step6'">차계부 조회</button>
             </div>
 
-            <div class="group-wrapper">
-                <button class="group-registration" onclick="location.href = '/manage/step9'">운행 일보 그룹 등록</button>
-                <button class="group-retrieval" onclick="location.href = '/manage/step10'">운행 일보 그룹 조회</button>
-            </div>
-
         </div>
 
+        <th:block th:replace="/manage/step1/step1_summary :: resultFragment"></th:block>
+        <th:block th:replace="/manage/step1/step1_posting_retrieval :: resultFragment"></th:block>
 
     </div>
 </container>
 
 <th:block th:replace="/include/manage_script :: scriptFragment"></th:block>
+<script src="/js/manage/step1/step1Handler.js"></script>
 <script src="/js/manage/step1/loading.js"></script>
 
 <th:block th:replace="/manage/manage_footer :: footerFragment"></th:block>

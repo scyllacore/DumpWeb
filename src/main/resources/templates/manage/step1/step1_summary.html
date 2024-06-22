@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="resultFragment">
+
+    <head>
+        <link href="/css/manage/step1/step1Summary.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <div class="summary-result">
+        <div class="summary-result-wrapper">
+
+            <div class="pop-up-close-wrapper">
+                <button class="pop-up-close" type="button" onclick="popUpHandler.closePopUp('summary-result')">
+                    <i class="close-icon"></i>
+                    <span class="screen-off"></span>
+                </button>
+            </div>
+
+            <form name="summaryForm">
+                <div class="period-wrapper">
+                    <label class="period-inner">
+                        <input type="date" class="start-date" name="startDate">
+                        <span>~</span>
+                        <input type="date" class="end-date" name="endDate">
+                    </label>
+                    <button type="button" name="summaryRetrievalBtn" class="retrieval-btn"
+                            onclick="func.summaryRetrieval()"
+                            required>조회
+                    </button>
+                </div>
+            </form>
+
+            <div class="line"></div>
+
+            <div class="summary-wrapper">
+            </div>
+
+        </div>
+    </div>
+
+</th:block>
+</html>

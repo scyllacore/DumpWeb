@@ -22,7 +22,7 @@ class Step9GroupHandler {
         await this.loadInputDataByUrlParams();
         this.redirectByDriveReportId();
         this.handleInputActiveByGroupPaymentChk();
-        this.inputSubmitter()
+        this.inputSubmitter();
         this.inputDriveReport();
         this.uploadFile();
     }
@@ -161,8 +161,8 @@ class Step9GroupHandler {
             const submitterTel = parentEle.children[2].innerHTML;
             const submitterCompany = parentEle.children[1].innerHTML;
 
-            this.objHandler.selectElementByName('submitterIdFk').value = submitterId;
-            this.objHandler.selectElementByName('receiver').value = submitterTel;
+            this.objHandler.selectElementByName('groupSubmitterIdFk').value = submitterId;
+            this.objHandler.selectElementByName('groupReceiver').value = submitterTel;
             this.objHandler.selectElementByName('groupCompany').value = submitterCompany;
 
 

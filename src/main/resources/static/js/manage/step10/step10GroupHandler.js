@@ -46,7 +46,14 @@ class Step10GroupHandler {
 
         responseData.forEach((data, idx) => {
             this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'groupReportId', data['groupReportId']);
+            this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'groupUserType', data['groupUserType']);
+
+            if(tBodyEleChild[idx].getAttribute('data-' + 'groupUserType') === '1'){
+                tBodyEleChild[idx].classList.add("user-type-background");
+                console.log(tBodyEleChild[idx]);
+            };
         })
+
     }
 
     async recommendKeywordRetrieval() {
@@ -131,5 +138,9 @@ class Step10GroupHandler {
             .put('/manage/step10' + '/fetch' + '/paymentInBulk', this.jsonHandler.convertObjectToJson(requestObj));
 
         alert(responseData);
+    }
+
+    createSearchOptionObj() {
+        return this.objHandler.createFormObj('groupSearchOptionForm');
     }
 }

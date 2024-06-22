@@ -1,0 +1,155 @@
+.line {
+  width: 100%;
+  height: 1.5px;
+  margin: 15px 0px;
+  background: #0068b7;
+}
+
+input[type=checkbox] {
+  zoom: 1.5;
+}
+
+.step11 {
+  display: flex;
+  justify-content: center;
+  background: #d1d1d1;
+  color: #333536;
+}
+.step11 .step11_wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px 10px 10px;
+  background: #ffffff;
+}
+.step11 .step11_wrapper .sub_title h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  font-weight: bold;
+  gap: 5px;
+}
+.step11 .step11_wrapper .group-order-report-form {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background-color: #fafafa;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+}
+.step11 .step11_wrapper .group-order-report-form div {
+  padding: 10px 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px 0px 1px 0px;
+  background-color: #ffffff;
+}
+.step11 .step11_wrapper .group-order-report-form div h3 {
+  width: 80px;
+  font-size: 13px;
+}
+.step11 .step11_wrapper .group-order-report-form div input, .step11 .step11_wrapper .group-order-report-form div .progress-inner, .step11 .step11_wrapper .group-order-report-form div textarea {
+  position: relative;
+  width: 65%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin: 0 15px;
+  text-align: center;
+  cursor: pointer;
+}
+.step11 .step11_wrapper .group-order-report-form .upload-file-wrapper {
+  display: block;
+}
+.step11 .step11_wrapper .group-order-report-form .upload-file-wrapper .file-upload-btn {
+  width: 65px;
+  height: 30px;
+  border-radius: 3px;
+}
+.step11 .step11_wrapper .group-order-report-form .upload-file-wrapper .photo-view {
+  height: 450px;
+  width: 400px;
+  display: none;
+  shadow: none;
+  border: 2px solid #d1d1d1;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper {
+  display: block;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .edit-header {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: none;
+  border-bottom: 2px dotted #0068b7;
+  margin-top: 0;
+  padding-top: 5px;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .edit-header span {
+  font-weight: bold;
+  font-size: 14px;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .edit-header button {
+  width: 65px;
+  height: 30px;
+  border: 1px solid #0068b7;
+  margin-left: 13px;
+  border-radius: 5px;
+  text-align: center;
+  color: #555;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: #0068b7;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .group-table-wrapper {
+  display: flex;
+  justify-content: center;
+  box-shadow: none;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .group-table-wrapper table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.step11 .step11_wrapper .group-order-report-form .order-reports-wrapper .group-table-wrapper table .group-table-key th {
+  padding: 8px 7px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 11px;
+  background: #f2f2f2;
+}
+.step11 .step11_wrapper .group-order-report-form .retrieval-btn {
+  width: 35px;
+  margin: 0 12px;
+}
+.step11 .step11_wrapper .group-order-report-form .bottom-btn-wrapper {
+  padding: 25px 15px;
+  margin-top: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px, rgba(0, 0, 0, 0.1) 1.5px 1.5px 1.5px 1.5px;
+}
+.step11 .step11_wrapper .group-order-report-form .bottom-btn-wrapper button {
+  width: 65px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  color: #555;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.step11 .step11_wrapper .group-order-report-form .bottom-btn-wrapper .save-btn {
+  border-color: #0068b7;
+  background: #0068b7;
+  color: #fff;
+}
+.step11 .step11_wrapper .group-order-report-form .bottom-btn-wrapper .delete-btn {
+  border-color: #ff3636;
+  background: #ff3636;
+  color: #fff;
+}
+
+/*# sourceMappingURL=step11Index.css.map */

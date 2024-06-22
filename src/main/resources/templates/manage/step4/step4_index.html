@@ -21,8 +21,6 @@
 
         <form class="search-option-form" name="searchOptionForm">
 
-            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
-
             <div class="period-wrapper">
                 <h3>기간</h3>
                 <label class="period-inner">
@@ -36,7 +34,6 @@
                 <h3>정렬<br>기준</h3>
                 <select class="sorting-inner" name="sortingCriteria">
                     <option value="driveDate" selected>날짜순</option>
-                    <option value="company">제출처순</option>
                     <option value="fromSite">상차지순</option>
                     <option value="toSite">하차지순</option>
                     <option value="item">품목순</option>
@@ -49,14 +46,6 @@
                 </button>
 
                 <div class="detail-search-inner">
-                    <div class="submitter-tel-wrapper">
-                        <input name="tel" placeholder="휴대폰 번호" autocomplete="off">
-                        <div name="tels"></div>
-                    </div>
-                    <div class="company-name-wrapper">
-                        <input name="company" placeholder="제출처" autocomplete="off">
-                        <div name="companies"></div>
-                    </div>
                     <div class="from-site-wrapper">
                         <input name="fromSite" placeholder="상차지" autocomplete="off">
                         <div name="fromSites"></div>
@@ -87,6 +76,8 @@
                 <button type="button" class="search-btn" onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()">검색
                 </button>
             </div>
+
+            <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
         </form>
 
         <th:block th:replace="/manage/step4/step4_retrieval :: resultFragment"></th:block>

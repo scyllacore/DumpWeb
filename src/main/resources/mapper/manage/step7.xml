@@ -15,7 +15,6 @@
          MEMO,
          PROGRESS,
          PAYMENT_CHK,
-         DRIVER_ID_FK,
          SUBMITTER_ID_FK,
          WRITER_ID_FK,
          USER_TYPE)
@@ -28,63 +27,30 @@
                 #{memo},
                 #{progress},
                 IFNULL(#{paymentChk},0),
-                #{driverIdFk},
                 #{submitterIdFk},
                 #{writerIdFk},
                 1)
     </insert>
 
-    <sql id="reportsForSubmitter">
-        WITH writer_reports AS (SELECT *
-                                FROM drive_report_tb
-                                WHERE SUBMITTER_ID_FK = ${submitterIdFk}),
-             join_reports AS (SELECT *
-                              FROM driver_tb
-                                       INNER JOIN writer_reports
-                                                  ON DRIVER_ID = writer_reports.DRIVER_ID_FK)
-    </sql>
-
     <select id="selectDriveOrderList">
-        <include refid="reportsForSubmitter">
-            <property name="submitterIdFk" value="#{submitterIdFk}"/>
-        </include>
-
         SELECT
         DRIVE_REPORT_ID,
-        CAR_NO AS receiver,
         DRIVE_DATE,
         FROM_SITE,
         TO_SITE,
         ITEM,
         QUANTITY,
         DRIVER_ID_FK
-        FROM join_reports
+        FROM drive_report_tb
+        WHERE SUBMITTER_ID_FK = ${submitterIdFk}
         <if test="driveDate != null">
-            WHERE DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
+            AND DRIVE_DATE BETWEEN #{driveDate} AND #{driveDate}
         </if>
     </select>
 
-
-    <sql id="reportForSubmitter">
-        WITH writer_report AS (SELECT *
-                               FROM drive_report_tb
-                               WHERE DRIVE_REPORT_ID = ${driveReportId}
-                                 AND SUBMITTER_ID_FK = ${submitterIdFk}),
-             join_report AS (SELECT *
-                             FROM driver_tb
-                                      INNER JOIN writer_report
-                                                 ON DRIVER_ID = writer_report.DRIVER_ID_FK)
-    </sql>
-
     <select id="selectDriveOrder">
-        <include refid="reportForSubmitter">
-            <property name="driveReportId" value="#{driveReportId}"/>
-            <property name="submitterIdFk" value="#{submitterIdFk}"/>
-        </include>
-
         SELECT DRIVE_REPORT_ID,
         DRIVER_ID_FK,
-        CAR_NO AS receiver,
         DATE_FORMAT(DRIVE_DATE, '%Y-%m-%d') AS driveDate,
         FROM_SITE,
         TO_SITE,
@@ -95,14 +61,15 @@
         PAYMENT_CHK,
         PROGRESS,
         USER_TYPE
-        FROM join_report
+        FROM drive_report_tb
+        WHERE DRIVE_REPORT_ID = ${driveReportId}
+        AND SUBMITTER_ID_FK = ${submitterIdFk}
     </select>
 
     <select id="selectDriverList">
         SELECT *
         FROM driver_tb
     </select>
-
 
     <update id="updateDriveOrder">
         UPDATE drive_report_tb
@@ -114,11 +81,10 @@
             QUANTITY     = #{quantity},
             MEMO         = #{memo},
             PROGRESS     = #{progress},
-            PAYMENT_CHK  = IFNULL(#{paymentChk}, 0),
-            DRIVER_ID_FK = #{driverIdFk}
+            PAYMENT_CHK  = IFNULL(#{paymentChk}, 0)
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND WRITER_ID_FK = #{writerIdFk}
-          AND SUBMITTER_PAYMENT_CHK = 0
+          AND DRIVER_ID_FK IS NULL
     </update>
 
     <delete id="deleteDriveOrder">
@@ -126,7 +92,7 @@
         FROM drive_report_tb
         WHERE DRIVE_REPORT_ID = #{driveReportId}
           AND WRITER_ID_FK = #{writerIdFk}
-          AND SUBMITTER_PAYMENT_CHK = 0
+          AND DRIVER_ID_FK IS NULL
     </delete>
 
 </mapper>

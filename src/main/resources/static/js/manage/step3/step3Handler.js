@@ -8,7 +8,7 @@ class Step3Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+    activeInputElementNames = [ 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
 
     constructor() {

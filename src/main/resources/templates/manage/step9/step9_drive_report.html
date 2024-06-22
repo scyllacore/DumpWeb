@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="formFragment">
 
     <head>
@@ -20,33 +20,18 @@
                 일보 리스트 추가
             </div>
             <div class="line"></div>
-
-            <input type="hidden" name="driveReportIdx" value='-1'>
-
             <form class="drive-report-form" name="driveReportForm">
-                <input type="hidden" name="driveReportId" value="0" required>
-                <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
-                <!--<input type="hidden" name="submitChk" value="false"> 백엔드에서 처리할 것-->
-                <input type="hidden" name="userType">
-
                 <div class="payment-chk-wrapper">
                     <h3>결재</h3>
                     <input type="checkbox" name="paymentChk">
                 </div>
 
-                <div class="submitter-wrapper">
-                    <h3>제출처</h3>
-                    <input type="hidden" name="submitterIdFk" required>
-                    <input type="number" name="receiver" disabled required>
-                    <button type="button" name="submitterRetrievalBtn" class="retrieval-btn"
-                            onclick="popUpHandler.openPopUp('submitter-search-result'); func.submitterListRetrieval()" required>조회
-                    </button>
-                </div>
-
                 <div class="period-wrapper">
                     <h3>운행일</h3>
                     <input type="date" name="driveDate" required>
-                    <button type="button" name="driveReportRetrievalBtn" class="retrieval-btn" onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()" required>조회</button>
+                    <button type="button" name="driveReportRetrievalBtn" class="retrieval-btn"
+                            onclick="popUpHandler.openPopUp('search-result'); func.driveReportsRetrieval()" required>조회
+                    </button>
                 </div>
 
                 <div class="from-site-wrapper">
@@ -89,14 +74,21 @@
                     <textarea name="memo"></textarea>
                 </div>
 
-
                 <div class="bottom-btn-wrapper">
                     <button type="button" class="save-btn" onclick="func.addGroupReport()">추가</button>
                     <button type="button" class="delete-btn" onclick="func.removeGroupReport()">제거</button>
                     <button type="button" class="input-init-btn" onclick="">입력 초기화</button>
-                    <button type="button" class="prev-page-btn" onclick="popUpHandler.closePopUp('drive-report')">닫기</button>
+                    <button type="button" class="prev-page-btn" onclick="popUpHandler.closePopUp('drive-report')">닫기
+                    </button>
                 </div>
+
+                <input type="hidden" name="driveReportId" value="0" required>
+                <input type="hidden" name="driverIdFk" th:value="${session.driverInfo.driverId}" required>
+                <!--<input type="hidden" name="submitChk" value="false"> 백엔드에서 처리할 것-->
+                <input type="hidden" name="userType">
             </form>
+
+            <input type="hidden" name="driveReportIdx" value='-1'>
         </div>
     </div>
 

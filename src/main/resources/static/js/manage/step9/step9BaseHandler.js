@@ -7,7 +7,7 @@ class Step9BaseHandler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    activeInputElementNames = ['receiver', 'submitterRetrievalBtn', 'driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
+    activeInputElementNames = ['driveReportRetrievalBtn', 'driveDate', 'fromSite', 'toSite', 'item', 'quantity', 'unitPrice', 'progress', 'memo']
 
     constructor() {
         this.run();
@@ -16,7 +16,6 @@ class Step9BaseHandler {
     async run() {
         await this.loadInputDataByUrlParams();
         this.handleInputActiveByPaymentChk();
-        this.inputSubmitter()
         this.inputDriveReport();
     }
 
@@ -121,7 +120,7 @@ class Step9BaseHandler {
             }
         }
 
-        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData);
+        this.htmlModifier.printList('drive-report-key', 'drive-report-tuple', responseData,'driveReportId');
 
         const tBodyEleChild = this.objHandler.selectElementByClass('drive-report-tuple').children;
 
@@ -141,21 +140,6 @@ class Step9BaseHandler {
         responseData.forEach((data, idx) => {
             this.htmlModifier.addDataPropertyToTag(tBodyEleChild[idx], 'submitterId', data['submitterId']);
         })
-    }
-
-    inputSubmitter() {
-        const tableEle = this.objHandler.selectElementByClass('submitter-tuple');
-
-        tableEle.addEventListener("click", (event) => {
-            const parentEle = event.target.parentElement;
-            const submitterId = parentEle.getAttribute('data-' + 'submitterId');
-            const submitterTel = parentEle.children[2].innerHTML;
-
-            this.objHandler.selectElementByName('groupSubmitterIdFk').value = submitterId;
-            this.objHandler.selectElementByName('groupReceiver').value = submitterTel;
-
-            popUpHandler.closePopUp('submitter-search-result');
-        });
     }
 
     inputDriveReport() {

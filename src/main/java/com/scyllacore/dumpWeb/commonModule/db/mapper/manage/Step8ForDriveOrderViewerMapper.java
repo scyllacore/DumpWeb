@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 public interface Step8ForDriveOrderViewerMapper {
-    List<String> selectCarNoSearchOption(Long submitterId);
 
     List<String> selectFromSiteSearchOption(Long submitterId);
 

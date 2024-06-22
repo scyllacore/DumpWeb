@@ -37,10 +37,9 @@ public class Step9ForGroupDriveReportRegistrationService {
     public ResponseEntity<ResponseDTO<String>> saveGroupDriveReport(GroupDriveReportDTO.Request groupReport
             , MultipartFile imageFile) throws IOException {
 
-        System.out.println(groupReport);
-
         groupReport.setGroupWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
         groupReport.setGroupDriverIdFk(sessionUtil.getDriverInfo().getDriverId());
+        groupReport.setGroupCarNo(sessionUtil.getDriverInfo().getCarNo());
 
         if (groupReport.getGroupReportId() == Step9Flags.NEW_GROUP_DRIVE_REPORT.getValue()) {
             insertGroupDriveReport(groupReport, imageFile);
@@ -66,6 +65,8 @@ public class Step9ForGroupDriveReportRegistrationService {
         for (int i = 0; i < newGroupReport.getDriveReports().size(); i++) {
             DriveReports.get(i).setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
             DriveReports.get(i).setGroupReportIdFk(newGroupReport.getGroupReportId());
+            DriveReports.get(i).setSubmitterIdFk(newGroupReport.getGroupSubmitterIdFk());
+
         }
 
         if (step9Mapper.insertDriveReports(newGroupReport.getDriveReports()) <= OperationStatus.FAIL.getValue()) {
@@ -105,14 +106,16 @@ public class Step9ForGroupDriveReportRegistrationService {
         List<DriveReportDTO.Request> driveReportsForUpdate = new ArrayList<>();
 
         classifyAndPrepareDriveReports(
-                newDriveReports, driveReportsForInsert, driveReportsForUpdate, newGroupReport.getGroupReportId());
+                newDriveReports, driveReportsForInsert, driveReportsForUpdate, newGroupReport);
 
         insertOrUpdateDriveReports(driveReportsForInsert, driveReportsForUpdate);
         updateDriveReportsIdFkToNull(driveIds.stream().toList());
     }
 
     void changeImage(GroupDriveReportDTO.Request newGroupReport, MultipartFile imageFile) throws IOException {
-        deleteFile(newGroupReport.getFileIdFk());
+        if(newGroupReport.getFileIdFk() != Step9Flags.NEW_FILE.getValue()) {
+            deleteFile(newGroupReport.getFileIdFk());
+        }
 
         Long fileIdFk = fileUtil.uploadFile(imageFile, newGroupReport.getGroupReportId());
         step9Mapper.updateFileIdFk(newGroupReport.getGroupReportId(), fileIdFk.longValue());
@@ -131,9 +134,10 @@ public class Step9ForGroupDriveReportRegistrationService {
     private void classifyAndPrepareDriveReports(List<DriveReportDTO.Request> newDriveReports
             , List<DriveReportDTO.Request> driveReportsForInsert
             , List<DriveReportDTO.Request> driveReportsForUpdate
-            , Long GroupReportId) {
+            , GroupDriveReportDTO.Request newGroupReport) {
         for (DriveReportDTO.Request driveReport : newDriveReports) {
-            driveReport.setGroupReportIdFk(GroupReportId);
+            driveReport.setGroupReportIdFk(newGroupReport.getGroupReportId());
+            driveReport.setSubmitterIdFk(newGroupReport.getGroupSubmitterIdFk());
             driveReport.setWriterIdFk(sessionUtil.getLoginInfo().getUserIdIdx());
 
             if (driveReport.getDriveReportId() == Step9Flags.NEW_DRIVE_REPORT.getValue()) {
@@ -162,6 +166,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     public void updateGroupSubmit(GroupDriveReportDTO.Request groupReport) {
         step9Mapper.updateGroupSubmit(groupReport);
+        System.out.println(groupReport.getDriveReports());
         step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
     }
 

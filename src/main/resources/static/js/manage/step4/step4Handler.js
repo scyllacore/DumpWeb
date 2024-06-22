@@ -6,11 +6,10 @@ class Step4Handler {
     objHandler = new ObjectHandler();
     htmlModifier = new HtmlModifier();
 
-    tagNames = ['tels', 'companies', 'fromSites', 'toSites', 'items', 'progressType'];
+    tagNames = [ 'fromSites', 'toSites', 'items', 'progressType'];
     driveReportKey = `
                         <th>No</th>
                         <th class="driveDate">날짜</th>
-                        <th class="company">제출처</th>
                         <th class="fromSite">상차지</th>
                         <th class="toSite">하차지</th>
                         <th class="item">품목</th>
