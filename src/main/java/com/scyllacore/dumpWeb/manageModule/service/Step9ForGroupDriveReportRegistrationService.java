@@ -166,6 +166,7 @@ public class Step9ForGroupDriveReportRegistrationService {
 
     public void updateGroupSubmit(GroupDriveReportDTO.Request groupReport) {
         step9Mapper.updateGroupSubmit(groupReport);
+        System.out.println(groupReport.getDriveReports());
         step9Mapper.updateReportsSubmit(groupReport.getDriveReports());
     }
 
